@@ -98,6 +98,19 @@ h2.sec small { font: 500 13px var(--font-body); color: var(--muted); }
 .chip { height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; font-weight: 500; font-size: 14px; }
 .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .chip .n { opacity: .6; margin-left: 4px; font-variant-numeric: tabular-nums; }
+.book.pile .art { box-shadow: 5px -5px 0 -1px var(--raised), 9px -9px 0 -2px color-mix(in srgb, var(--raised) 70%, transparent); }
+.badge.cnt { background: var(--ink); color: var(--bg); }
+.serhead { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
+.serhead b { display: block; font: 700 19px var(--font-display); }
+.serhead small { color: var(--muted); font-size: 13px; }
+.facets { display: grid; gap: 8px; margin: -4px 0 18px; }
+.facet { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.facet .fl { flex: none; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); width: 58px; }
+.chiprail { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; min-width: 0; padding: 2px 0; mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); }
+.chiprail::-webkit-scrollbar { display: none; }
+.chiprail .chip { flex: none; white-space: nowrap; }
+.chip.pub[aria-pressed="true"] { background: var(--accent); color: var(--on-accent, #0b1210); border-color: var(--accent); }
+@media (max-width: 560px) { .facet { flex-direction: column; align-items: stretch; gap: 4px; } .facet .fl { width: auto; } }
 .filters select { height: 34px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); padding: 0 12px; max-width: 200px; }
 .filters .sp { flex: 1; }
 
@@ -454,6 +467,11 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
         <option value="serie">Série e volume</option>
       </select>
     </div>
+    <div class="facets" id="facets" hidden>
+      <div class="facet" id="pubRow"><span class="fl">Editora</span><div class="chiprail" id="pubChips"></div></div>
+      <div class="facet" id="serRow"><span class="fl">Série</span><div class="chiprail" id="serChips"></div></div>
+    </div>
+    <div class="serhead" id="serHead" hidden><button class="btn icon ghost" id="serBack" aria-label="Voltar para todas"><svg class="i"><use href="#i-back"/></svg></button><div><b id="serHeadT"></b><small id="serHeadM"></small></div></div>
     <div class="grid" id="grid"></div>
     <p class="hint" id="noRes" hidden>Nada encontrado com esses filtros.</p>
   </section>
@@ -588,7 +606,11 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
       <label class="f" for="eVol" style="flex:0 1 130px">Vol. ou capítulo<input id="eVol" inputmode="decimal"></label>
     </div>
     <datalist id="serieList"></datalist>
-    <label class="f" for="eAuthor">Autor<input id="eAuthor"></label>
+    <div class="row">
+      <label class="f" for="ePub">Editora<input id="ePub" list="pubList" placeholder="Marvel, DC…"></label>
+      <label class="f" for="eAuthor">Autor<input id="eAuthor"></label>
+    </div>
+    <datalist id="pubList"></datalist>
     <label class="f" for="eTags">Categorias <span style="font-weight:400">(separe por vírgula: ação, terror, romance)</span><input id="eTags" list="tagList"></label>
     <datalist id="tagList"></datalist>
     <div class="srow">Tipo <div class="seg" id="eKind"><button type="button" data-v="manga">Mangá</button><button type="button" data-v="hq">HQ</button><button type="button" data-v="livro">Livro</button></div></div>
@@ -723,6 +745,12 @@ function parseName(name, folder = '') {
   if (!series && m) series = base.slice(0, m.index).replace(/[-–—:,.(\[\s]+$/, '').trim();
   return { title: base, series, volume };
 }
+// editora e série a partir das pastas do Drive (ex.: HQs/Marvel/Homem-Aranha)
+const KIND_DIR = /^(shikai|acervo|minhas?|hqs?|quadrinhos|comics?|gibis?|mang[aá]s?|livros?|e-?books?|biblioteca)$/i;
+const KNOWN_PUB = /^(marvel|dc|dc comics|image|dark horse|idw|vertigo|boom!?( studios)?|panini|mythos|abril|pipoca (e|&) nanquim|devir|jbc|newpop|conrad|darkside|shueisha|kodansha|shogakukan|viz|yen press|seven seas|valiant|dynamite|archie|wildstorm|top cow|mauricio de sousa)$/i;
+function pathParts(path) { return String(path || '').split('/').map(x => x.trim()).filter(x => x && !KIND_DIR.test(x)); }
+function pubFromPath(path) { const r = pathParts(path); if (r.length >= 2) return r[0]; if (r.length === 1 && KNOWN_PUB.test(r[0])) return r[0]; return ''; }
+function pubOf(b) { return b.publisher || pubFromPath(b.path) || ''; }
 function guessKind(name, folder) {
   if (S.kind !== 'auto') return S.kind;
   const s = (folder + ' ' + name).toLowerCase();
@@ -868,13 +896,14 @@ async function importBlob(blob, name, meta = {}, j = job(name)) {
       coverBlob = await makeCover(doc).catch(() => null);
       count = doc.count; doc.close();
     }
-    const p = parseName(name, meta.folder || '');
+    const pubGuess = pubFromPath(meta.path);
+    const p = parseName(name, meta.folder && meta.folder !== pubGuess ? meta.folder : '');
     if (epMeta) { if (epMeta.title) p.title = epMeta.title; if (!meta.folder) p.series = ''; }
     const b = {
       id: uid(), title: meta.title || p.title, series: meta.series ?? p.series, volume: p.volume,
       kind: meta.kind || (fmt === 'epub' ? 'livro' : guessKind(name, (meta.path || '') + ' ' + (meta.folder || ''))), author: epMeta?.author || '', tags: [], fav: false, pos: 0, format: fmt, size: blob.size, pages: count,
       cover: coverBlob, addedAt: Date.now(), lastReadAt: 0, page: 0, finished: false,
-      source: meta.source || { type: 'local', name }, sample: !!meta.sample, orig: meta.orig || '', prefs: {}
+      source: meta.source || { type: 'local', name }, path: meta.path || '', publisher: '', sample: !!meta.sample, orig: meta.orig || '', prefs: {}
     };
     await dbPut('files', { id: b.id, blob });
     await saveBook(b);
@@ -1001,6 +1030,17 @@ async function syncDrive({ quiet = false } = {}) {
       }
       link.err = ''; link.count = list.length; saveS(); renderLinks();
       found += list.length;
+      let moved = 0;
+      for (const f of list) {
+        const old = books.find(b => b.source?.type === 'drive' && b.source.fileId === f.id);
+        if (old && (old.path || '') !== (f.path || '')) {
+          old.path = f.path || '';
+          const pg = pubFromPath(old.path);
+          if (pg && old.series === pg) old.series = parseName(old.source.name || old.title, '').series;
+          await saveBook(old); moved++;
+        }
+      }
+      if (moved) scheduleRender();
       for (const f of list.sort((a, b) => natural(a.name, b.name))) {
         if (have.has(f.id)) continue;
         have.add(f.id); fresh++;
@@ -1066,7 +1106,7 @@ async function makeSample() {
 }
 
 /* ---------------- estante ---------------- */
-let F = 'tudo', serie = '', query = '', tagF = '';
+let F = 'tudo', serie = '', query = '', tagF = '', pubF = '';
 let renderT;
 function scheduleRender() { clearTimeout(renderT); renderT = setTimeout(render, 60); }
 function progress(b) { if (!b.pages) return 0; if (b.format === 'epub') return Math.min(1, ((b.page || 0) + (b.pos || 0)) / b.pages); return Math.min(1, (b.page + 1) / b.pages); }
@@ -1199,17 +1239,58 @@ function renderGrid() {
   $('#sortSel').value = S.sort;
 
   const q = query.toLowerCase();
-  let list = books.filter(b => (F === 'tudo' || b.kind === F || state(b) === F || (F === 'fav' && b.fav)) && (!serie || b.series === serie) && (!tagF || (b.tags || []).includes(tagF)) && (!q || [b.title, b.series, b.author, KL[b.kind], ...(b.tags || [])].join(' ').toLowerCase().includes(q)));
+  // caixinhas: editora e, ao escolher, as séries dela (contam só o que passa nos outros filtros)
+  const base = books.filter(b => (F === 'tudo' || b.kind === F || state(b) === F || (F === 'fav' && b.fav)) && (!tagF || (b.tags || []).includes(tagF)) && (!q || [b.title, b.series, b.author, pubOf(b), KL[b.kind], ...(b.tags || [])].join(' ').toLowerCase().includes(q)));
+  const pubs = new Map(); base.forEach(b => { const p = pubOf(b); if (p) pubs.set(p, (pubs.get(p) || 0) + 1); });
+  if (pubF && !pubs.has(pubF)) pubF = '';
+  const inPub = pubF ? base.filter(b => pubOf(b) === pubF) : base;
+  const sers = new Map(); inPub.forEach(b => { if (b.series) sers.set(b.series, (sers.get(b.series) || 0) + 1); });
+  if (serie && !sers.has(serie)) serie = '';
+  const showPub = pubs.size > 0, showSer = sers.size > 1 && (pubF || !showPub);
+  $('#facets').hidden = !(showPub || showSer);
+  $('#pubRow').hidden = !showPub; $('#serRow').hidden = !showSer;
+  const chip = (cls, attr, val, label, n, on) => `<button class="chip ${cls}" ${attr}="${esc(val)}" aria-pressed="${on}">${esc(label)}${n != null ? `<span class="n">${n}</span>` : ''}</button>`;
+  if (showPub) $('#pubChips').innerHTML = chip('pub', 'data-pub', '', 'Todas', base.length, !pubF) + [...pubs.entries()].sort((a, b) => b[1] - a[1] || natural(a[0], b[0])).map(([p, n]) => chip('pub', 'data-pub', p, p, n, p === pubF)).join('');
+  if (showSer) $('#serChips').innerHTML = chip('ser', 'data-ser', '', 'Todas', inPub.length, !serie) + [...sers.entries()].sort((a, b) => natural(a[0], b[0])).map(([x, n]) => chip('ser', 'data-ser', x, x, n, x === serie)).join('');
+  sel.hidden = !series.length || showSer || showPub;
+  let list = inPub.filter(b => !serie || b.series === serie);
   const sorters = {
     added: (a, b) => b.addedAt - a.addedAt,
     read: (a, b) => (b.lastReadAt || 0) - (a.lastReadAt || 0) || b.addedAt - a.addedAt,
     title: (a, b) => natural(a.title, b.title),
     serie: (a, b) => natural(a.series || a.title, b.series || b.title) || (+a.volume || 0) - (+b.volume || 0) || natural(a.title, b.title)
   };
-  list.sort(sorters[S.sort] || sorters.added);
+  list.sort(serie ? sorters.serie : (sorters[S.sort] || sorters.added));
+  // sagas: volumes da mesma série viram uma pilha só; tocar nela abre a série em ordem
+  const grouped = ['manga', 'hq', 'livro', 'tudo'].includes(F) && !serie && !q;
+  let items = list.map(b => ({ b }));
+  if (grouped) {
+    const bySer = new Map(); list.forEach(b => { if (b.series) bySer.set(b.series, (bySer.get(b.series) || []).concat(b)); });
+    const seen = new Set(); items = [];
+    list.forEach(b => {
+      const l = b.series && bySer.get(b.series);
+      if (l && l.length > 1) { if (seen.has(b.series)) return; seen.add(b.series); items.push({ s: b.series, l: [...l].sort(sorters.serie) }); }
+      else items.push({ b });
+    });
+  }
   $('#libCount').textContent = `${books.length} volume${books.length === 1 ? '' : 's'}`;
   $('#noRes').hidden = list.length > 0;
-  $('#grid').innerHTML = list.map(b => {
+  $('#serHead').hidden = !serie;
+  if (serie) { const l = list; $('#serHeadT').textContent = serie; $('#serHeadM').textContent = [pubOf(l[0] || {}), `${l.length} ${l[0]?.kind === 'manga' ? 'capítulos/volumes' : 'volumes'}`, seriesProgress(l)].filter(Boolean).join(' · '); }
+  $('#grid').innerHTML = items.map(({ b, s: sn, l }) => {
+    if (sn) {
+      const done = l.filter(x => x.finished).length, cur = l.find(x => x.lastReadAt && !x.finished), c = l.find(x => x.cover) || l[0];
+      return `<div class="book pile">
+      <button class="cv" data-series="${esc(sn)}" aria-label="Abrir a série ${esc(sn)}, ${l.length} volumes">
+        <div class="art">${c.cover ? `<img src="${cover(c)}" alt="" loading="lazy">` : `<div class="ph">${esc(sn)}</div>`}
+          <span class="badge cnt">${l.length} vol.</span>
+          ${done ? `<div class="prog"><i style="width:${done / l.length * 100}%"></i></div>` : ''}
+        </div>
+        <div class="t">${esc(sn)}</div>
+        <div class="m">${esc(cur ? 'Lendo vol. ' + (cur.volume || l.indexOf(cur) + 1) : done ? `${done} de ${l.length} lidos` : `${l.length} volumes`)}</div>
+      </button>
+    </div>`;
+    }
     const s = state(b);
     return `<div class="book">
       <button class="cv" data-open="${b.id}" aria-label="Ler ${esc(b.title)}">
@@ -1245,6 +1326,12 @@ document.addEventListener('click', e => {
 });
 $('#filters').addEventListener('click', e => { const c = e.target.closest('.chip'); if (!c) return; F = c.dataset.f; render(); });
 $('#serieSel').onchange = e => { serie = e.target.value; render(); };
+$('#serBack').onclick = () => { serie = ''; render(); };
+$('#grid').addEventListener('click', e => { const sc = e.target.closest('[data-series]'); if (sc) { serie = sc.dataset.series; render(); $('#libSec').scrollIntoView({ block: 'start' }); } });
+$('#facets').addEventListener('click', e => {
+  const p = e.target.closest('[data-pub]'); if (p) { const v = p.dataset.pub; pubF = pubF === v ? '' : v; serie = ''; render(); return; }
+  const c = e.target.closest('[data-ser]'); if (c) { const v = c.dataset.ser; serie = serie === v ? '' : v; render(); }
+});
 $('#tagSel').onchange = e => { tagF = e.target.value; render(); };
 async function toggleFav(id) {
   const b = books.find(x => x.id === id); if (!b) return;
@@ -1257,7 +1344,7 @@ async function toggleFav(id) {
 $('#sortSel').onchange = e => { S.sort = e.target.value; saveS(); render(); };
 $('#q').addEventListener('input', e => { query = e.target.value; scheduleRender(); });
 function setView(v) {
-  view = v; F = ['manga', 'hq', 'livro', 'fav'].includes(v) ? v : 'tudo'; serie = ''; tagF = ''; query = ''; $('#q').value = ''; $('#top').classList.remove('searching');
+  view = v; F = ['manga', 'hq', 'livro', 'fav'].includes(v) ? v : 'tudo'; serie = ''; tagF = ''; pubF = ''; query = ''; $('#q').value = ''; $('#top').classList.remove('searching');
   render(); scrollTo({ top: 0 });
 }
 $('#home').onclick = e => { e.preventDefault(); setView('inicio'); };
@@ -1282,7 +1369,7 @@ function segBind(el, fn) { el.addEventListener('click', e => { const b = e.targe
 segBind($('#eKind'));
 function openEdit(id) {
   editing = books.find(b => b.id === id); if (!editing) return;
-  $('#eTitle').value = editing.title; $('#eSerie').value = editing.series || ''; $('#eVol').value = editing.volume || ''; $('#eAuthor').value = editing.author || ''; $('#eTags').value = (editing.tags || []).join(', '); syncEditFav();
+  $('#eTitle').value = editing.title; $('#eSerie').value = editing.series || ''; $('#eVol').value = editing.volume || ''; $('#eAuthor').value = editing.author || ''; $('#ePub').value = pubOf(editing); $('#pubList').innerHTML = [...new Set(books.map(pubOf).filter(Boolean))].sort(natural).map(x => `<option value="${esc(x)}">`).join(''); $('#eTags').value = (editing.tags || []).join(', '); syncEditFav();
   segSet($('#eKind'), editing.kind);
   const src = editing.source?.type === 'drive' ? 'Veio do Google Drive' : editing.source?.type === 'url' ? 'Veio de um link' : 'Adicionado do aparelho';
   $('#eInfo').textContent = `${(editing.orig || editing.format).toUpperCase()} · ${editing.pages} ${editing.format === 'epub' ? 'capítulos' : 'páginas'} · ${fmtSize(editing.size)} · ${src}`;
@@ -1292,7 +1379,7 @@ function openEdit(id) {
 }
 $('#editForm').onsubmit = async e => {
   e.preventDefault(); if (!editing) return;
-  Object.assign(editing, { title: $('#eTitle').value.trim() || editing.title, series: $('#eSerie').value.trim(), volume: $('#eVol').value.trim(), kind: segVal($('#eKind')) || editing.kind, author: $('#eAuthor').value.trim(), tags: [...new Set($('#eTags').value.split(',').map(t => t.trim()).filter(Boolean).map(t => t[0].toUpperCase() + t.slice(1)))] });
+  Object.assign(editing, { title: $('#eTitle').value.trim() || editing.title, series: $('#eSerie').value.trim(), volume: $('#eVol').value.trim(), kind: segVal($('#eKind')) || editing.kind, author: $('#eAuthor').value.trim(), publisher: (v => v === pubFromPath(editing.path) ? '' : v)($('#ePub').value.trim()), tags: [...new Set($('#eTags').value.split(',').map(t => t.trim()).filter(Boolean).map(t => t[0].toUpperCase() + t.slice(1)))] });
   await saveBook(editing); $('#editDlg').close(); render(); toast('Salvo.');
 };
 $('#eToggleRead').onclick = async () => {
