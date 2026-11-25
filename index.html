@@ -44,11 +44,11 @@
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #0B0E0D; --surface: #151A18; --raised: #1D2321; --ink: #EEF2EE; --muted: #97A39D; --line: #263030;
   --accent: #74C4B2; --accent-ink: #0E1A17; --mark: #F2C24C; --seal: #D9483B; --seal-ink: #FBF1E6; --danger: #E5866F; --tone: rgba(231,236,231,.09);
-  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); --hero-filter: blur(28px) saturate(1.3) brightness(.62); --hero-ink: #F3F6F3; --glass: rgba(255,255,255,.14); color-scheme: dark; } }
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); --hero-filter: blur(64px) saturate(.95) brightness(.42); --hero-ink: #F3F6F3; --glass: rgba(255,255,255,.14); color-scheme: dark; } }
 :root[data-theme="dark"] {
   --bg: #0B0E0D; --surface: #151A18; --raised: #1D2321; --ink: #EEF2EE; --muted: #97A39D; --line: #263030;
   --accent: #74C4B2; --accent-ink: #0E1A17; --mark: #F2C24C; --seal: #D9483B; --seal-ink: #FBF1E6; --danger: #E5866F; --tone: rgba(231,236,231,.09);
-  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); --hero-filter: blur(28px) saturate(1.3) brightness(.62); --hero-ink: #F3F6F3; --glass: rgba(255,255,255,.14); color-scheme: dark; }
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); --hero-filter: blur(64px) saturate(.95) brightness(.42); --hero-ink: #F3F6F3; --glass: rgba(255,255,255,.14); color-scheme: dark; }
 
 [hidden] { display: none !important; }
 * { box-sizing: border-box; }
@@ -88,6 +88,11 @@ svg.i { width: 20px; height: 20px; flex: none; stroke: currentColor; fill: none;
 .btn:hover { border-color: var(--muted); }
 .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
 .btn.primary:hover { filter: brightness(1.08); }
+#addBtn { background: #F4EDE2; color: #121212; border-color: transparent; font-weight: 700; transition: background .18s, color .18s, transform .12s; }
+#addBtn svg { color: var(--seal); stroke-width: 2.6; transition: color .18s, transform .25s cubic-bezier(.3,1.6,.5,1); }
+#addBtn:hover { background: var(--seal); color: #fff; filter: none; }
+#addBtn:hover svg { color: #fff; transform: rotate(90deg); }
+#addBtn:active { transform: scale(.97); }
 .btn.ghost { background: transparent; border-color: transparent; }
 .btn.danger { color: var(--danger); }
 .btn.icon { width: 40px; padding: 0; }
@@ -185,6 +190,8 @@ body.sidelock { overflow: hidden; }
 .pc-n { position: absolute; right: 8px; bottom: 26px; z-index: 1; font: 800 clamp(26px, 2.4vw + 10px, 44px)/1 var(--font-display); color: var(--pb); letter-spacing: -.04em; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--pa) 50%, #000); paint-order: stroke fill; }
 .pc-dots { position: absolute; inset: 42% -20% -20% 30%; border-radius: 50%; background-image: radial-gradient(var(--pb) 1.6px, transparent 1.8px); background-size: 7px 7px; opacity: .55; mask-image: radial-gradient(closest-side, #000 30%, transparent); }
 .hero-cover .ph.pc .pc-t { font-size: 28px; }
+.pc-t.l { font-size: clamp(13px, .95vw + 7px, 17px); -webkit-line-clamp: 6; }
+.pc-t.xl { font-size: clamp(12px, .8vw + 6px, 15px); -webkit-line-clamp: 7; line-height: 1.02; }
 .dl { position: absolute; inset: auto 0 0 0; height: 4px; z-index: 3; background: rgba(0,0,0,.35); }
 .dl i { display: block; height: 100%; width: calc(var(--p, 0) * 100%); background: var(--mark); transition: width .2s linear; }
 .art.loading-dl::after { content: ""; position: absolute; inset: 0; z-index: 2; background: rgba(8,11,10,.35); }
@@ -210,7 +217,8 @@ body.sidelock { overflow: hidden; }
 .book img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ph { width: 100%; height: 100%; display: grid; place-items: center; padding: 10px; text-align: center; font: 700 14px/1.2 var(--font-display);
   background-color: var(--surface); background-image: radial-gradient(var(--tone) 1.2px, transparent 1.3px); background-size: 7px 7px; color: var(--muted); }
-.book .t { font-weight: 600; font-size: 14px; line-height: 1.3; margin-top: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.book .t .tsub { font-weight: 500; color: var(--muted); font-size: 12.5px; }
+.book .t { font-weight: 600; font-size: 14px; line-height: 1.3; margin-top: 10px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .book .m { font-size: 12.5px; color: var(--muted); margin-top: 2px; font-variant-numeric: tabular-nums; }
 .badge { position: absolute; top: 8px; left: 12px; z-index: 2; font: 700 10.5px/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; padding: 5px 7px; border-radius: 4px; background: var(--mark); color: #1A1A12; }
 .badge.done { background: var(--accent); color: var(--accent-ink); }
@@ -380,19 +388,22 @@ body:has(.top.over:not(.solid))::before { background: transparent; }
 #qBtn { display: none; }
 
 .hero { position: relative; margin-top: calc(-1 * var(--toph, 68px) - env(safe-area-inset-top, 0px)); overflow: hidden; isolation: isolate; color: var(--hero-ink); }
-.hero-bg { position: absolute; inset: -60px; z-index: -2; background-color: var(--surface); background-size: cover; background-position: center 30%; filter: var(--hero-filter); transform: scale(1.08); transition: background-image .5s ease; }
+.hero-bg { position: absolute; inset: -120px; z-index: -2; opacity: .8; background-color: var(--surface); background-size: cover; background-position: center 30%; filter: var(--hero-filter); transform: scale(1.08); transition: background-image .5s ease; }
 .hero-bg.tone { background-image: radial-gradient(var(--tone) 1.4px, transparent 1.5px) !important; background-size: 9px 9px; filter: none; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background-image: radial-gradient(color-mix(in srgb, var(--hero-ink) 9%, transparent) 1.1px, transparent 1.3px); background-size: 7px 7px; mask-image: linear-gradient(100deg, transparent 35%, #000 70%, transparent 98%); opacity: .7; }
 .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 55%, transparent) 42%, transparent 75%), linear-gradient(0deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 0%, transparent) 48%); }
+  background: radial-gradient(120% 90% at 78% 40%, transparent 30%, color-mix(in srgb, var(--bg) 70%, transparent) 100%), linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 70%, transparent) 40%, transparent 78%), linear-gradient(0deg, var(--bg) 0%, transparent 45%), linear-gradient(180deg, color-mix(in srgb, var(--bg) 60%, transparent) 0%, transparent 30%); }
 .hero-in { max-width: 1240px; margin: 0 auto; min-height: clamp(440px, 64vh, 620px); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 48px; align-items: end;
   padding-block: calc(var(--toph, 68px) + env(safe-area-inset-top, 0px) + 36px) 40px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .hero .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
-.hero .eyebrow::before { content: ""; width: 18px; height: 3px; border-radius: 3px; background: var(--mark); }
-.hero h1 { font: 800 clamp(36px, 5.6vw, 72px)/.98 var(--font-display); letter-spacing: -.035em; margin: 14px 0 14px; max-width: 13ch; text-wrap: balance; }
+.hero .eyebrow { color: color-mix(in srgb, var(--hero-ink) 78%, transparent); }
+.hero .eyebrow::before { content: ""; width: 22px; height: 3px; border-radius: 0; background: var(--seal); clip-path: polygon(0 45%, 100% 0, 96% 100%, 0 100%); }
+.hero h1 { font: 800 clamp(32px, 4.3vw, 60px)/1.02 var(--font-display); letter-spacing: -.03em; margin: 14px 0 16px; max-width: 16ch; text-wrap: balance; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.hero h1 .hn { color: var(--seal); white-space: nowrap; }
 .hero .meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 14.5px; opacity: .85; font-variant-numeric: tabular-nums; }
 .hero .meta span + span::before { content: "·"; margin-right: 14px; opacity: .6; }
 .hero .hbar { width: min(320px, 100%); height: 4px; border-radius: 4px; background: color-mix(in srgb, var(--hero-ink) 22%, transparent); margin-top: 16px; overflow: hidden; }
-.hero .hbar i { display: block; height: 100%; background: var(--mark); }
+.hero .hbar i { display: block; height: 100%; background: var(--seal); }
 .hero .acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 .btn.big { height: 50px; padding: 0 24px; font-size: 16px; border-radius: 12px; }
 .btn.play { background: var(--hero-ink); color: var(--bg); border-color: transparent; }
@@ -400,11 +411,20 @@ body:has(.top.over:not(.solid))::before { background: transparent; }
 .btn.glass { background: var(--glass); color: var(--hero-ink); border-color: transparent; backdrop-filter: blur(10px); }
 .btn.glass:hover { background: color-mix(in srgb, var(--hero-ink) 22%, transparent); }
 .btn.play svg.fill, .ov svg { fill: currentColor; stroke: none; }
-.hero-cover { width: clamp(160px, 19vw, 240px); aspect-ratio: 2/3; border-radius: 8px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.06); transform: rotate(2.5deg); cursor: pointer; padding: 0; border: 0; background: var(--surface); }
+.hero-stage { position: relative; align-self: center; margin-right: clamp(0px, 4vw, 56px); perspective: 1400px; }
+.hero-stage::before { content: ""; position: absolute; inset: 34% -38% 30% -38%; background: linear-gradient(90deg, transparent, var(--seal) 18%, var(--seal) 82%, transparent); clip-path: polygon(0 78%, 100% 0, 100% 22%, 0 100%); opacity: .85; z-index: -1; }
+.hero-stage::after { content: ""; position: absolute; left: 6%; right: 6%; bottom: -26px; height: 30px; background: radial-gradient(closest-side, rgba(0,0,0,.55), transparent); filter: blur(4px); z-index: -1; animation: heroShadow 7s ease-in-out infinite; }
+.hero-cover { position: relative; display: block; width: clamp(180px, 20vw, 262px); aspect-ratio: 2/3; border-radius: 4px 8px 8px 4px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,.3), 0 18px 40px rgba(0,0,0,.45), 0 50px 90px rgba(0,0,0,.35); transform: rotateY(-14deg) rotateZ(1.5deg); transform-style: preserve-3d; cursor: pointer; padding: 0; border: 0; background: var(--surface); animation: heroFloat 7s ease-in-out infinite; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+.hero-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0,0,0,.35) 0, rgba(255,255,255,.18) 2.5%, rgba(0,0,0,.12) 5%, transparent 9%), linear-gradient(115deg, rgba(255,255,255,.14) 0%, transparent 32%); }
+.hero-cover:hover { transform: rotateY(-4deg) rotateZ(0deg) translateY(-6px); animation-play-state: paused; }
+@keyframes heroFloat { 50% { translate: 0 -8px; } }
+@keyframes heroShadow { 50% { transform: scaleX(.88); opacity: .75; } }
+@media (prefers-reduced-motion: reduce) { .hero-cover, .hero-stage::after { animation: none; } }
 .hero-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .dots { display: flex; gap: 6px; margin-top: 26px; }
 .dots button { width: 22px; height: 4px; border-radius: 4px; border: 0; padding: 0; background: color-mix(in srgb, var(--hero-ink) 30%, transparent); }
-.dots button[aria-current="true"] { background: var(--mark); width: 34px; }
+.dots button { transition: width .25s ease, background .25s; }
+.dots button[aria-current="true"] { background: var(--seal); width: 34px; }
 .hero-txt { min-width: 0; animation: heroIn .45s ease both; }
 @keyframes heroIn { from { opacity: .3; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
@@ -431,7 +451,9 @@ body:has(.top.over:not(.solid))::before { background: transparent; }
 
 @media (max-width: 760px) {
   .hero-in { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 22px; min-height: 0; padding-block: calc(var(--toph, 68px) + env(safe-area-inset-top, 0px) + 18px) 26px; }
-  .hero-cover { order: -1; width: min(40vw, 170px); transform: none; }
+  .hero-stage { order: -1; margin: 0; }
+  .hero-cover { width: min(42vw, 176px); transform: rotateY(-8deg) rotateZ(1deg); }
+  .hero-stage::before { inset: 36% -60% 32% -60%; }
   .hero h1 { margin-inline: auto; font-size: clamp(30px, 8.5vw, 44px); }
   .hero .meta, .hero .acts, .dots { justify-content: center; }
   .hero .eyebrow { justify-content: center; }
@@ -449,6 +471,22 @@ body:has(.top.over:not(.solid))::before { background: transparent; }
 
 
 /* ---------- favoritos, categorias ---------- */
+.off { position: absolute; top: 6px; right: 40px; z-index: 3; width: 30px; height: 30px; border-radius: 50%; border: 0; display: grid; place-items: center; background: rgba(15,20,18,.6); color: #fff; opacity: 0; transition: opacity .15s, background .15s, transform .15s; cursor: pointer; }
+.off svg { width: 16px; height: 16px; }
+.book:hover .off, .off:focus-visible, .off.on, .off.busy { opacity: 1; }
+.off.on { background: var(--accent); color: var(--accent-ink, #0b1210); }
+.off.busy svg { animation: offPulse 1s ease-in-out infinite; }
+@keyframes offPulse { 50% { transform: translateY(2px); opacity: .5; } }
+.off:active { transform: scale(.9); }
+@media (hover: none) { .off { opacity: .9; } .off:not(.on):not(.busy) { display: none; } }
+.fav ~ .off { right: 74px; }
+.offtag { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent); border-radius: 4px; padding: 0 5px; margin-right: 6px; line-height: 16px; vertical-align: 1px; }
+#rOff.on svg { color: var(--accent); }
+.serhead .sh-t { flex: 1; min-width: 0; }
+#serOff.on { border-color: var(--accent); color: var(--accent); }
+.netbar { position: sticky; top: var(--toph, 64px); z-index: 20; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 16px; background: color-mix(in srgb, var(--mark) 18%, var(--surface)); color: var(--ink); font-size: 13.5px; border-bottom: 1px solid var(--line); }
+.netbar .i { width: 16px; height: 16px; flex: none; }
+body.nonet .book:has(.m .i[aria-label="No Drive"]) .art { filter: grayscale(.8) brightness(.6); }
 .fav { position: absolute; top: 6px; left: auto; right: 40px; z-index: 3; width: 30px; height: 30px; border-radius: 50%; border: 0; display: grid; place-items: center; background: rgba(15,20,18,.6); color: #fff; opacity: 0; transition: opacity .15s; }
 .book:hover .fav, .fav.on, .fav:focus-visible { opacity: 1; }
 .fav svg { width: 16px; height: 16px; }
@@ -526,6 +564,8 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
   <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
   <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M5 19.5h14"/></symbol>
+  <symbol id="i-saved" viewBox="0 0 24 24"><path d="M12 4v8.5m-3.5-3.5L12 12.5 15.5 9"/><path d="M5 15.5v1A3.5 3.5 0 0 0 8.5 20h7a3.5 3.5 0 0 0 3.5-3.5v-1"/></symbol>
   <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 0 1-.5-9 6 6 0 0 1 11.5 1.5A4 4 0 0 1 17.5 18z"/><path d="M12 11v5m-2.2-2.2L12 16l2.2-2.2"/></symbol>
   <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
   <symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
@@ -555,6 +595,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-in" id="heroIn"></div>
 </section>
+<div class="netbar" id="netBar" hidden><svg class="i"><use href="#i-cloud"/></svg><span>Sem internet. Os volumes com <b>Offline</b> abrem normalmente.</span></div>
 <main id="main">
   <div id="rows" hidden></div>
   <section id="libSec" hidden>
@@ -578,7 +619,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
             <option value="serie">Série e volume</option>
           </select>
         </div>
-    <div class="serhead" id="serHead" hidden><button class="btn icon ghost" id="serBack" aria-label="Voltar para todas"><svg class="i"><use href="#i-back"/></svg></button><div><b id="serHeadT"></b><small id="serHeadM"></small></div></div>
+    <div class="serhead" id="serHead" hidden><button class="btn icon ghost" id="serBack" aria-label="Voltar para todas"><svg class="i"><use href="#i-back"/></svg></button><div class="sh-t"><b id="serHeadT"></b><small id="serHeadM"></small></div><button class="btn sm" id="serOff"><svg class="i"><use href="#i-dl"/></svg><span>Salvar série offline</span></button></div>
     <div class="grid" id="grid"></div>
     <p class="hint" id="noRes" hidden>Nada encontrado com esses filtros.</p>
       </div>
@@ -753,6 +794,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
   <div class="rtop rchrome">
     <button class="rbtn" id="rClose" aria-label="Voltar à estante"><svg class="i"><use href="#i-back"/></svg></button>
     <div class="tt"><b id="rTitle"></b><small id="rSub"></small></div>
+    <button class="rbtn" id="rOff" aria-label="Salvar para ler offline" aria-pressed="false"><svg class="i"><use href="#i-dl"/></svg></button>
     <button class="rbtn" id="rFav" aria-label="Favoritar"><svg class="i"><use href="#i-heart"/></svg></button>
     <button class="rbtn" id="rFull" aria-label="Tela cheia"><svg class="i"><use href="#i-full"/></svg></button>
     <button class="rbtn" id="rOptBtn" aria-label="Opções de leitura" aria-pressed="false"><svg class="i"><use href="#i-sliders"/></svg></button>
@@ -864,9 +906,10 @@ function hashStr(t) { let h = 2166136261; for (const c of String(t)) h = Math.im
 function phCover(b, name) {
   const key = name || b.series || b.title || '', pal = PH_PAL[hashStr(key) % PH_PAL.length];
   const num = !name && b.volume ? (b.kind === 'manga' ? 'Vol.' : '#') + String(b.volume).padStart(b.kind === 'manga' ? 1 : 2, '0') : '';
-  const title = name || (b.series && b.series !== b.title ? b.series : b.title.replace(/\s*[#nº]*\s*\d+\s*$/i, '') || b.title);
+  const title = cleanTitle(name || (b.series && b.series !== b.title ? b.series : b.title.replace(/\s*[#nº]*\s*\d+\s*$/i, '') || b.title));
+  const long = title.length > 34 ? ' xl' : title.length > 20 ? ' l' : '';
   const pub = pubOf(b) || KL[b.kind] || '';
-  return `<div class="ph pc" style="--pa:${pal[0]};--pb:${pal[1]};--pi:${pal[2]}" aria-hidden="true"><span class="pc-pub">${esc(pub)}</span><span class="pc-t">${esc(title)}</span>${num ? `<span class="pc-n">${esc(num)}</span>` : ''}<i class="pc-dots"></i></div>`;
+  return `<div class="ph pc" style="--pa:${pal[0]};--pb:${pal[1]};--pi:${pal[2]}" aria-hidden="true"><span class="pc-pub">${esc(pub)}</span><span class="pc-t${long}">${esc(title)}</span>${num ? `<span class="pc-n">${esc(num)}</span>` : ''}<i class="pc-dots"></i></div>`;
 }
 async function saveBook(b) { await dbPut('books', b); const i = books.findIndex(x => x.id === b.id); if (i >= 0) books[i] = b; else books.push(b); }
 
@@ -875,6 +918,27 @@ let toastT;
 function toast(msg, ms = 3200) { const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, ms); }
 
 /* ---------------- nomes e tipos ---------------- */
+// limpa marcas de scan/arquivo: [..], (Digital), (Cdl-Era), HdAV1, sublinhados
+const JUNK = /digital|scan|c2c|cdl|\bera\b|-ed\b|\bed\b|webrip|empire|minutemen|zone|\bhq\b|\bbr\b|pt-?br|\bcbr\b|\bcbz\b|\bhd\b|\bsd\b|v\d+\s*$/i;
+function cleanTitle(t) {
+  let x = String(t || '').replace(/\.(cbr|cbz|pdf|zip|rar|epub)$/i, '').replace(/[_]+/g, ' ');
+  x = x.replace(/\[[^\]]*\]/g, ' ').replace(/\(([^)]*)\)/g, (m, inner) => JUNK.test(inner) ? ' ' : m);
+  x = x.replace(/\b[A-Z][a-z]?[A-Z]{1,4}\d?\b(?=[^()]*$)/g, w => /^(HQ|DC|EUA|USA|II|III|IV|VI|XI|XX)$/.test(w) ? w : ' ');
+  return x.replace(/\s+/g, ' ').replace(/^[-–—:,.\s]+|[-–—:,.\s]+$/g, '').trim() || String(t || '');
+}
+const normT = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\(\d{4}(-\d{4})?\)/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+// nome mostrado: o que o Vitor digitou fica; título bom fica; título de arquivo cru vira "Série #01"
+function nice(b) {
+  if (!b) return '';
+  if (b.titleSet || b.kind === 'livro') return b.title;
+  const t = cleanTitle(b.title), ser = b.series ? cleanTitle(serParts(b.series).name) : '';
+  if (!ser) return t;
+  const ns = normT(ser), nt = normT(t);
+  if (ns && (nt.includes(ns) || (nt.length > 6 && ns.includes(nt)))) return t;
+  const numM = b.volume ? [0, b.volume] : (t.match(/(?:cap[ií]tulo|cap\.?|ch(?:apter)?|edi[cç][aã]o|ed\.|n[ºo°]\.?|#)\s*(\d{1,4})/i) || t.match(/^(\d{1,4})\b/));
+  const num = numM ? String(parseInt(numM[1], 10)) : '';
+  return num ? `${ser} #${num.padStart(2, '0')}` : ser;
+}
 function parseName(name, folder = '') {
   let base = name.replace(/\.[^.]+$/, '').replace(/[_]+/g, ' ').replace(/\s+/g, ' ').trim();
   let volume = '';
@@ -1208,7 +1272,7 @@ function ensureLocal(b) {
     const paint = () => $$(`[data-open="${b.id}"] .art`).forEach(a => { a.classList.add('loading-dl'); let d = a.querySelector('.dl'); if (!d) { d = document.createElement('span'); d.className = 'dl'; d.innerHTML = '<i></i>'; a.appendChild(d); } d.style.setProperty('--p', j.pct || 0); });
     const unpaint = () => $$(`[data-open="${b.id}"] .art`).forEach(a => { a.classList.remove('loading-dl'); const d = a.querySelector('.dl'); if (d) d.outerHTML = ''; });
     const tick = setInterval(paint, 150); paint();
-    toast(`Baixando ${b.title}${b.size ? ' (' + fmtSize(b.size) + ')' : ''}…`, 4000);
+    toast(`Baixando ${nice(b)}${b.size ? ' (' + fmtSize(b.size) + ')' : ''}…`, 4000);
     try {
       const blob = await fetchWithProgress(driveURL(b.source.fileId), j);
       let r;
@@ -1373,15 +1437,16 @@ function recommend(n) {
 function bookCard(b) {
   const s = state(b);
   return `<div class="book">
-      <button class="cv" data-open="${b.id}" aria-label="Ler ${esc(b.title)}">
+      <button class="cv" data-open="${b.id}" aria-label="Ler ${esc(nice(b))}">
         <div class="art">${cover(b) ? `<img src="${cover(b)}" alt="" loading="lazy">` : phCover(b)}
           ${s === 'novos' ? '<span class="badge">Novo</span>' : s === 'lidos' ? '<span class="badge done">Lido</span>' : `<div class="prog"><i style="width:${progress(b) * 100}%"></i></div>`}
           <span class="ov"><i><svg class="i"><use href="#i-play"/></svg></i></span>
         </div>
-        <div class="t">${esc(b.title)}</div>
-        <div class="m">${b.remote ? '<svg class="i" aria-label="No Drive"><use href="#i-cloud"/></svg>' : ''}${esc(metaLine(b))}</div>
+        <div class="t">${esc(nice(b))}</div>
+        <div class="m">${saved(b) ? '<span class="offtag">Offline</span>' : b.remote ? '<svg class="i" aria-label="No Drive"><use href="#i-cloud"/></svg>' : ''}${esc(metaLine(b))}</div>
       </button>
       <button class="fav${b.fav ? ' on' : ''}" data-fav="${b.id}" aria-label="${b.fav ? 'Tirar dos favoritos' : 'Favoritar'}" aria-pressed="${!!b.fav}"><svg class="i"><use href="#i-heart"/></svg></button>
+      <button class="off${saved(b) ? ' on' : ''}${fetching.has(b.id) ? ' busy' : ''}" data-off="${b.id}" aria-pressed="${saved(b)}" aria-label="${saved(b) ? 'Salvo para ler offline. Tocar para liberar' : 'Salvar para ler offline'}" title="${saved(b) ? 'Salvo para ler offline' : 'Salvar para ler offline'}"><svg class="i"><use href="#i-${saved(b) ? 'saved' : 'dl'}"/></svg></button>
       <button class="more" data-edit="${b.id}" aria-label="Detalhes de ${esc(b.title)}"><svg class="i"><use href="#i-dots"/></svg></button>
     </div>`;
 }
@@ -1422,6 +1487,7 @@ function renderHome() {
 
   const rows = [];
   if (reading.length) rows.push({ t: 'Continuar lendo', list: reading });
+  { const off = newest.filter(saved); if (off.length) rows.push({ t: navigator.onLine ? 'Salvos para ler offline' : 'Sem internet: dá para ler estes', list: off }); }
   { const more = recommend(24).filter(b => !heroList.includes(b)); if (more.length > 2) rows.push({ t: 'Recomendados para hoje', list: more }); }
   rows.push({ t: 'Chegaram na estante', list: newest.slice(0, 24) });
   const bySerie = new Map();
@@ -1464,10 +1530,10 @@ function showHero(i) {
   if (cover(b)) { bg.classList.remove('tone'); bg.style.backgroundImage = `url("${cover(b)}")`; } else { bg.style.backgroundImage = ''; bg.classList.add('tone'); }
   const reading = b.lastReadAt && !b.finished;
   const eyebrow = heroWhy[b.id] || (reading ? 'Continue de onde parou' : b.finished ? 'Para ler de novo' : 'Recomendado para você');
-  const meta = [KL[b.kind], b.author || '', b.series && b.series !== b.title ? b.series : '', b.volume ? (b.kind === 'manga' ? 'Cap. ' : 'Vol. ') + b.volume : '', !b.pages ? (b.size ? fmtSize(b.size) + ' no Drive' : 'No Drive') : b.format === 'epub' ? `${b.pages} capítulos` : `${b.pages} páginas`].filter(Boolean);
+  const meta = [KL[b.kind], pubOf(b), b.author || '', b.series && b.series !== b.title && !nice(b).startsWith(cleanTitle(serParts(b.series).name)) ? cleanTitle(serParts(b.series).name) : '', b.volume ? (b.kind === 'manga' ? 'Cap. ' : 'Vol. ') + b.volume : '', !b.pages ? (b.size ? fmtSize(b.size) + ' no Drive' : 'No Drive') : b.format === 'epub' ? `${b.pages} capítulos` : `${b.pages} páginas`].filter(Boolean);
   $('#heroIn').innerHTML = `<div class="hero-txt">
       <span class="eyebrow">${eyebrow}</span>
-      <h1>${esc(b.title)}</h1>
+      <h1>${(() => { const t = nice(b), m = t.match(/^(.*?)(\s*(?:#|n[ºo°]\.?)\s*\d+)$/i); return m ? `${esc(m[1])} <span class="hn">${esc(m[2].trim().replace(/^#\s+/, '#'))}</span>` : esc(t); })()}</h1>
       <div class="meta">${meta.map(m => `<span>${esc(m)}</span>`).join('')}</div>
       ${(b.tags || []).length ? `<div class="tags">${b.tags.map(t => `<button class="tag" data-tag="${esc(t)}">${esc(t)}</button>`).join('')}</div>` : ''}
       ${reading ? `<div class="hbar"><i style="width:${progress(b) * 100}%"></i></div>` : ''}
@@ -1478,7 +1544,7 @@ function showHero(i) {
       </div>
       ${heroList.length > 1 ? `<div class="dots">${heroList.map((_, k) => `<button data-hero="${k}" aria-label="Destaque ${k + 1}" aria-current="${k === i}"></button>`).join('')}</div>` : ''}
     </div>
-    <button class="hero-cover" data-open="${b.id}" aria-label="Ler ${esc(b.title)}">${cover(b) ? `<img src="${cover(b)}" alt="">` : phCover(b)}</button>`;
+    <div class="hero-stage"><button class="hero-cover" data-open="${b.id}" aria-label="Ler ${esc(nice(b))}">${cover(b) ? `<img src="${cover(b)}" alt="">` : phCover(b)}</button></div>`;
   clearTimeout(heroT);
   if (heroList.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches)
     heroT = setTimeout(() => { if (!$('#hero').hidden && rd.hidden && document.visibilityState === 'visible') showHero((heroIdx + 1) % heroList.length); }, 9000);
@@ -1497,7 +1563,7 @@ function renderGrid() {
     { k: 'ser', t: 'Série', of: b => [b.series || ''], lab: v => v || 'Volumes avulsos', search: 'série', top: 12, thumbs: true },
     { k: 'tag', t: 'Categoria', of: b => b.tags || [], lab: v => v },
     { k: 'st', t: 'Leitura', of: b => [state(b)], lab: v => ({ novos: 'Não lidos', lendo: 'Lendo', lidos: 'Lidos' })[v], order: ['lendo', 'novos', 'lidos'] },
-    { k: 'loc', t: 'Onde está', of: b => [b.remote ? 'nuvem' : 'aparelho'], lab: v => ({ aparelho: 'Baixados no aparelho', nuvem: 'Só no Drive' })[v], order: ['aparelho', 'nuvem'] }
+    { k: 'loc', t: 'Ler offline', of: b => [saved(b) ? 'salvo' : b.remote ? 'nuvem' : 'aparelho'], lab: v => ({ salvo: 'Salvos para offline', aparelho: 'Baixados (temporário)', nuvem: 'Só no Drive' })[v], order: ['salvo', 'aparelho', 'nuvem'] }
   ];
   const pass = (b, except) => FD.every(f => f.k === except || !SEL[f.k].size || f.of(b).some(v => SEL[f.k].has(v)));
   let html = '', active = 0, pills = [];
@@ -1565,35 +1631,37 @@ function renderGrid() {
   $('#libCount').textContent = `${books.length} volume${books.length === 1 ? '' : 's'}`;
   $('#noRes').hidden = list.length > 0;
   $('#serHead').hidden = !serie || !list.length;
-  if (serie) { const l = list; $('#serHeadT').textContent = serie; $('#serHeadM').textContent = [pubOf(l[0] || {}), `${l.length} ${l[0]?.kind === 'manga' ? 'capítulos/volumes' : 'volumes'}`, seriesProgress(l)].filter(Boolean).join(' · '); }
+  if (serie) { const l = list; const all = books.filter(x => x.series === serie), k = all.filter(saved).length; $('#serOff').classList.toggle('on', k === all.length); $('#serOff span').textContent = k === all.length ? 'Série salva offline' : k ? `Salvar o resto offline (${k}/${all.length})` : 'Salvar série offline'; $('#serOff use').setAttribute('href', k === all.length ? '#i-saved' : '#i-dl'); $('#serHeadT').textContent = cleanTitle(serParts(serie).name); $('#serHeadM').textContent = [pubOf(l[0] || {}), `${l.length} ${l[0]?.kind === 'manga' ? 'capítulos/volumes' : 'volumes'}`, seriesProgress(l)].filter(Boolean).join(' · '); }
   $('#grid').innerHTML = items.map(({ b, s: sn, l }) => {
     if (sn) {
-      const done = l.filter(x => x.finished).length, cur = l.find(x => x.lastReadAt && !x.finished), c = l.find(x => x.cover) || l[0];
+      const done = l.filter(x => x.finished).length, cur = l.find(x => x.lastReadAt && !x.finished), c = l.find(x => cover(x)) || l[0];
       return `<div class="book pile">
       <button class="cv" data-series="${esc(sn)}" aria-label="Abrir a série ${esc(sn)}, ${l.length} volumes">
-        <div class="art">${cover(c) ? `<img src="${cover(c)}" alt="" loading="lazy">` : phCover(c, sn)}
+        <div class="art">${cover(c) ? `<img src="${cover(c)}" alt="" loading="lazy">` : phCover(c, cleanTitle(serParts(sn).name))}
           <span class="badge cnt">${l.length} vol.</span>
           ${done ? `<div class="prog"><i style="width:${done / l.length * 100}%"></i></div>` : ''}
         </div>
-        <div class="t">${esc(sn)}</div>
+        <div class="t">${esc(cleanTitle(serParts(sn).name))}${serParts(sn).sub ? ` <span class="tsub">${esc(serParts(sn).sub)}</span>` : ''}</div>
         <div class="m">${esc(cur ? 'Lendo vol. ' + (cur.volume || l.indexOf(cur) + 1) : done ? `${done} de ${l.length} lidos` : `${l.length} volumes`)}</div>
       </button>
     </div>`;
     }
     const s = state(b);
     return `<div class="book">
-      <button class="cv" data-open="${b.id}" aria-label="Ler ${esc(b.title)}">
+      <button class="cv" data-open="${b.id}" aria-label="Ler ${esc(nice(b))}">
         <div class="art">${cover(b) ? `<img src="${cover(b)}" alt="" loading="lazy">` : phCover(b)}
           ${s === 'novos' ? '<span class="badge">Novo</span>' : s === 'lidos' ? '<span class="badge done">Lido</span>' : `<div class="prog"><i style="width:${progress(b) * 100}%"></i></div>`}
         </div>
-        <div class="t">${esc(b.title)}</div>
-        <div class="m">${b.remote ? '<svg class="i" aria-label="No Drive"><use href="#i-cloud"/></svg>' : ''}${esc(metaLine(b))}</div>
+        <div class="t">${esc(nice(b))}</div>
+        <div class="m">${saved(b) ? '<span class="offtag">Offline</span>' : b.remote ? '<svg class="i" aria-label="No Drive"><use href="#i-cloud"/></svg>' : ''}${esc(metaLine(b))}</div>
       </button>
+      <button class="off${saved(b) ? ' on' : ''}${fetching.has(b.id) ? ' busy' : ''}" data-off="${b.id}" aria-pressed="${saved(b)}" aria-label="${saved(b) ? 'Salvo para ler offline. Tocar para liberar' : 'Salvar para ler offline'}" title="${saved(b) ? 'Salvo para ler offline' : 'Salvar para ler offline'}"><svg class="i"><use href="#i-${saved(b) ? 'saved' : 'dl'}"/></svg></button>
       <button class="more" data-edit="${b.id}" aria-label="Detalhes de ${esc(b.title)}"><svg class="i"><use href="#i-dots"/></svg></button>
     </div>`;
   }).join('');
 }
 document.addEventListener('click', e => {
+  const of = e.target.closest('[data-off]'); if (of) { toggleOff(of.dataset.off); return; }
   const o = e.target.closest('[data-open]'); if (o) { openReader(o.dataset.open); return; }
   const ed = e.target.closest('[data-edit]'); if (ed) { openEdit(ed.dataset.edit); return; }
   const fv = e.target.closest('[data-fav]'); if (fv) { toggleFav(fv.dataset.fav); return; }
@@ -1632,7 +1700,47 @@ $('#facetBox').addEventListener('click', e => {
 });
 $('#pills').addEventListener('click', e => { const p = e.target.closest('[data-unf]'); if (!p) return; SEL[p.dataset.unf].delete(p.dataset.v); render(); });
 $('#serBack').onclick = () => { SEL.ser.clear(); render(); };
+$('#serOff').onclick = () => serie && saveSeriesOffline(books.filter(x => x.series === serie).sort((a, b) => (+a.volume || 0) - (+b.volume || 0)));
 $('#grid').addEventListener('click', e => { const sc = e.target.closest('[data-series]'); if (sc) { SEL.ser.clear(); SEL.ser.add(sc.dataset.series); render(); $('#libSec').scrollIntoView({ block: 'start' }); } });
+// ler sem internet: "salvo" = arquivo no aparelho e marcado para não sair na limpeza automática
+const saved = b => !!(b && b.keep && !b.remote);
+async function toggleOff(id, quiet) {
+  const b = books.find(x => x.id === id); if (!b) return false;
+  if (saved(b)) {
+    b.keep = false; await saveBook(b); render(); syncOffBtn();
+    if (!quiet) toast('Não fica mais salvo. Continua no aparelho até precisar de espaço.', 3200);
+    return false;
+  }
+  b.keep = true; await saveBook(b); render(); syncOffBtn();
+  if (b.remote) {
+    const ok = await ensureLocal(b);
+    if (!ok) { b.keep = false; await saveBook(b); render(); syncOffBtn(); return false; }
+  }
+  render(); syncOffBtn(); updateUsage();
+  if (!quiet) toast('Salvo! Dá para ler este volume sem internet.', 2600);
+  return true;
+}
+async function saveSeriesOffline(list) {
+  const todo = list.filter(b => !saved(b));
+  if (!todo.length) { for (const b of list) { b.keep = false; await saveBook(b); } render(); toast('A série não fica mais salva para offline.', 3000); return; }
+  const need = todo.filter(b => b.remote).reduce((t, b) => t + (b.size || 0), 0);
+  if (need > await limitBytes()) { toast(`Essa série tem ${fmtSize(need)} para baixar, mais do que o espaço reservado. Aumente o limite em Configurações.`, 6000); return; }
+  if (!navigator.onLine && todo.some(b => b.remote)) { toast('Sem internet agora. Tente salvar a série quando estiver conectado.', 4000); return; }
+  toast(`Salvando ${todo.length} volume${todo.length > 1 ? 's' : ''} para ler offline${need ? ` (${fmtSize(need)})` : ''}…`, 4000);
+  let n = 0;
+  for (const b of todo) { if (await toggleOff(b.id, true)) n++; else if (b.remote) break; }
+  toast(n === todo.length ? 'Série salva! Dá para ler tudo sem internet.' : `Salvei ${n} de ${todo.length}. Veja o aviso na lista de envios.`, 4000);
+}
+function syncOffBtn() {
+  const btn = $('#rOff'); if (!btn || !R.book) return;
+  const on = saved(R.book); btn.setAttribute('aria-pressed', String(on)); btn.classList.toggle('on', on);
+  btn.setAttribute('aria-label', on ? 'Salvo para ler offline' : 'Salvar para ler offline'); btn.title = on ? 'Salvo para ler offline' : 'Salvar para ler offline';
+  btn.querySelector('use').setAttribute('href', on ? '#i-saved' : '#i-dl');
+  const sb = $('#serOff'); if (sb && serie) { const l = books.filter(x => x.series === serie); const k = l.filter(saved).length; sb.classList.toggle('on', k === l.length); }
+}
+function netState() { $('#netBar').hidden = navigator.onLine; document.body.classList.toggle('nonet', !navigator.onLine); }
+addEventListener('online', () => { netState(); render(); }); addEventListener('offline', () => { netState(); render(); });
+setTimeout(netState, 0);
 async function toggleFav(id) {
   const b = books.find(x => x.id === id); if (!b) return;
   b.fav = !b.fav; await saveBook(b);
@@ -1678,7 +1786,7 @@ function segBind(el, fn) { el.addEventListener('click', e => { const b = e.targe
 segBind($('#eKind'));
 function openEdit(id) {
   editing = books.find(b => b.id === id); if (!editing) return;
-  $('#eTitle').value = editing.title; $('#eSerie').value = editing.series || ''; $('#eVol').value = editing.volume || ''; $('#eAuthor').value = editing.author || ''; $('#ePub').value = pubOf(editing); $('#pubList').innerHTML = [...new Set(books.map(pubOf).filter(Boolean))].sort(natural).map(x => `<option value="${esc(x)}">`).join(''); $('#eTags').value = (editing.tags || []).join(', '); syncEditFav();
+  $('#eTitle').value = nice(editing); $('#eSerie').value = editing.series || ''; $('#eVol').value = editing.volume || ''; $('#eAuthor').value = editing.author || ''; $('#ePub').value = pubOf(editing); $('#pubList').innerHTML = [...new Set(books.map(pubOf).filter(Boolean))].sort(natural).map(x => `<option value="${esc(x)}">`).join(''); $('#eTags').value = (editing.tags || []).join(', '); syncEditFav();
   segSet($('#eKind'), editing.kind);
   const src = editing.source?.type === 'drive' ? 'Veio do Google Drive' : editing.source?.type === 'url' ? 'Veio de um link' : 'Adicionado do aparelho';
   $('#eInfo').textContent = editing.remote ? `${(editing.orig || editing.format).toUpperCase()} · ${editing.size ? fmtSize(editing.size) : ''} · No Drive, baixa quando você abrir` : `${(editing.orig || editing.format).toUpperCase()} · ${editing.pages} ${editing.format === 'epub' ? 'capítulos' : 'páginas'} · ${fmtSize(editing.size)} · ${src}${editing.keep ? ' · Fica sempre no aparelho' : ''}`;
@@ -1689,6 +1797,7 @@ function openEdit(id) {
 }
 $('#editForm').onsubmit = async e => {
   e.preventDefault(); if (!editing) return;
+  if ($('#eTitle').value.trim() && $('#eTitle').value.trim() !== nice(editing)) editing.titleSet = true;
   Object.assign(editing, { title: $('#eTitle').value.trim() || editing.title, series: $('#eSerie').value.trim(), volume: $('#eVol').value.trim(), kind: segVal($('#eKind')) || editing.kind, author: $('#eAuthor').value.trim(), publisher: (v => v === pubFromPath(editing.path) ? '' : v)($('#ePub').value.trim()), tags: [...new Set($('#eTags').value.split(',').map(t => t.trim()).filter(Boolean).map(t => t[0].toUpperCase() + t.slice(1)))] });
   await saveBook(editing); $('#editDlg').close(); render(); toast('Salvo.');
 };
@@ -2003,8 +2112,8 @@ async function openReader(id) {
   try { R.doc = await openDoc(b.format, rec.blob); }
   catch (e) { toast(e.message || 'Não consegui abrir este arquivo.', 5000); return; }
   if (b.format === 'pdf' && R.doc.count <= 600) Promise.all(Array.from({ length: R.doc.count }, (_, i) => R.doc.ratio(i))).then(r => { R.ratios = r; }).catch(() => {});
-  $('#rTitle').textContent = b.title;
-  $('#rSub').textContent = [b.series && b.series !== b.title ? b.series : '', b.volume ? (b.kind === 'manga' ? 'Cap. ' : 'Vol. ') + b.volume : '', KL[b.kind]].filter(Boolean).join(' · '); syncFavBtn();
+  $('#rTitle').textContent = nice(b);
+  $('#rSub').textContent = [b.series && b.series !== b.title && !nice(b).startsWith(cleanTitle(b.series)) ? cleanTitle(b.series) : '', b.volume ? (b.kind === 'manga' ? 'Cap. ' : 'Vol. ') + b.volume : '', KL[b.kind]].filter(Boolean).join(' · '); syncFavBtn();
   rd.hidden = false; $('#endCard').hidden = true; $('#rOpts').hidden = true; $('#rOptBtn').setAttribute('aria-pressed', 'false');
   document.body.style.overflow = 'hidden';
   R.page = b.finished ? 0 : Math.min(b.page || 0, R.doc.count - 1);
@@ -2017,8 +2126,9 @@ async function openReader(id) {
 }
 async function keepAwake() { if (!S.awake) return; try { R.lock = await navigator.wakeLock?.request('screen'); } catch (e) {} }
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && !rd.hidden) keepAwake(); });
-function syncFavBtn() { const f = $('#rFav'); if (!R.book) return; f.setAttribute('aria-pressed', String(!!R.book.fav)); f.setAttribute('aria-label', R.book.fav ? 'Tirar dos favoritos' : 'Favoritar'); }
+function syncFavBtn() { const f = $('#rFav'); if (!R.book) return; syncOffBtn(); f.setAttribute('aria-pressed', String(!!R.book.fav)); f.setAttribute('aria-label', R.book.fav ? 'Tirar dos favoritos' : 'Favoritar'); }
 $('#rFav').onclick = () => R.book && toggleFav(R.book.id);
+$('#rOff').onclick = () => R.book && toggleOff(R.book.id);
 function closeDoc() {
   R.io && R.io.disconnect();
   for (const pr of R.cache.values()) pr.then(u => u && URL.revokeObjectURL(u));
