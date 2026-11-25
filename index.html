@@ -274,7 +274,7 @@ label.f textarea { height: auto; min-height: 84px; padding: 10px 12px; resize: v
 .reader[data-bg="preto"] { --rbg: #000; }
 .reader[data-bg="grafite"] { --rbg: #1E2221; }
 .reader[data-bg="papel"] { --rbg: #EEEBE3; }
-.stage { position: absolute; inset: 0; overflow: auto; display: flex; touch-action: pan-x pan-y pinch-zoom; overscroll-behavior: contain; }
+.stage { position: absolute; inset: 0; overflow: auto; display: flex; touch-action: pan-x pan-y; overscroll-behavior: contain; }
 .spread { margin: auto; display: flex; align-items: center; justify-content: center; gap: 0; }
 .reader[data-dir="rtl"] .spread { flex-direction: row-reverse; }
 .spread img { display: block; background: #fff; }
@@ -282,6 +282,7 @@ label.f textarea { height: auto; min-height: 84px; padding: 10px 12px; resize: v
 .reader[data-fit="altura"] .spread img { height: calc(100dvh * var(--z, 1)); width: auto; max-width: none; }
 .reader[data-fit="largura"] .spread { margin: 0 auto; align-items: flex-start; }
 .reader[data-fit="largura"] .spread img { width: calc(var(--maxw, 100vw) * var(--z, 1)); height: auto; max-width: none; }
+.reader.zoomed[data-fit="tela"] .spread img { max-height: none; max-width: none; height: calc(var(--fh, 100dvh) * var(--z, 1)); width: auto; }
 .reader.zoomed .stage { cursor: grab; }
 .reader.zoomed.panning .stage { cursor: grabbing; }
 .reader.idle, .reader.idle * { cursor: none !important; }
@@ -2065,8 +2066,21 @@ function dragFx(el, dx, dy, end) {
 }
 function bindGestures(el) {
   let st = null;
+  let pz = null;
+  const pinchInfo = e => { const [a, b] = e.touches, r = el.getBoundingClientRect(); return { d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), x: (a.clientX + b.clientX) / 2 - r.left, y: (a.clientY + b.clientY) / 2 - r.top }; };
+  if (el.id === 'stage') {
+    el.addEventListener('touchmove', e => {
+      if (e.touches.length !== 2 || R.mode === 'epub') return;
+      e.preventDefault();
+      const i = pinchInfo(e);
+      if (!pz) { pz = { d: i.d, z: zoom }; return; }
+      setZoom(pz.z * i.d / pz.d, i.x, i.y);
+    }, { passive: false });
+    el.addEventListener('touchend', e => { if (e.touches.length < 2 && pz) { pz = null; el._pinchEnd = Date.now(); } });
+  }
   el.addEventListener('touchstart', e => {
     if (e.touches.length > 1) { if (st) dragFx(el, 0, 0, true); st = null; return; }
+    if (el._pinchEnd && Date.now() - el._pinchEnd < 350) return;
     el._cs = { x: canScroll(el, 'x'), y: canScroll(el, 'y') }; const t = e.touches[0]; st = { x: t.clientX, y: t.clientY, t: Date.now(), sx: el.scrollLeft, sy: el.scrollTop, target: e.target, moved: false };
   }, { passive: true });
   el.addEventListener('touchmove', e => {
@@ -2104,6 +2118,7 @@ function setZoom(z, cx, cy) {
   const st = $('#stage'), old = zoom;
   zoom = Math.max(1, Math.min(4, Math.round(z * 100) / 100));
   const fx = cx == null ? .5 : (st.scrollLeft + cx) / Math.max(1, st.scrollWidth), fy = cy == null ? .5 : (st.scrollTop + cy) / Math.max(1, st.scrollHeight);
+  if (old === 1 && zoom > 1) $$('#spread img').forEach(im => im.style.setProperty('--fh', im.offsetHeight + 'px'));
   rd.style.setProperty('--z', zoom); rd.classList.toggle('zoomed', zoom > 1);
   $('#zTxt').textContent = Math.round(zoom * 100) + '%';
   if (old !== zoom) requestAnimationFrame(() => { st.scrollLeft = fx * st.scrollWidth - (cx == null ? st.clientWidth / 2 : cx); st.scrollTop = fy * st.scrollHeight - (cy == null ? st.clientHeight / 2 : cy); });
