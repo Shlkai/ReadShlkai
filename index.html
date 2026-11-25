@@ -1148,7 +1148,7 @@ function importFiles(list, picked = false) {
 async function ensurePersist() { try { if (navigator.storage?.persist) await navigator.storage.persist(); } catch (e) {} }
 
 async function fetchWithProgress(url, j, init) {
-  const r = await fetch(url, init);
+  const r = await gfetch(url, init);
   if (!r.ok) { const err = new Error(`HTTP ${r.status}`); err.status = r.status; throw err; }
   const total = +r.headers.get('content-length') || 0;
   if (!r.body || !r.body.getReader) return await r.blob();
@@ -1188,11 +1188,27 @@ const OKMIME = /^application\/(pdf|epub\+zip|zip|x-zip-compressed|x-cbz|x-cbr|vn
 // lista vazia pode ser pasta privada: o Google não avisa, então perguntamos pela própria pasta
 async function driveFolderCheck(id, key) {
   try {
-    const r = await fetch(`https://www.googleapis.com/drive/v3/files/${id}?fields=id,name,mimeType&supportsAllDrives=true&key=${encodeURIComponent(key)}`);
+    const r = await gfetch(`https://www.googleapis.com/drive/v3/files/${id}?fields=id,name,mimeType&supportsAllDrives=true&key=${encodeURIComponent(key)}`);
     if (r.status === 404) return 'Não consigo ver essa pasta. No Drive, toque nela > Compartilhar > Acesso geral: "Qualquer pessoa com o link".';
     if (r.ok) { const d = await r.json(); if (d.mimeType !== FOLDER) return 'Esse link é de um arquivo, não de uma pasta.'; }
   } catch (e) {}
   return '';
+}
+// "Failed to fetch" = o navegador nem conseguiu falar com o Google. Tenta de novo e explica o porquê.
+function netWhy() {
+  const site = 'https://shlkai.github.io/ReadShlkai/';
+  if (!/^https?:$/.test(location.protocol)) return `Este Shikai foi aberto como arquivo no aparelho, e assim o navegador bloqueia o Google Drive. Abra pelo site: ${site}`;
+  if (/claude|anthropic/i.test(location.host)) return `A prévia não consegue acessar o Drive. Abra pelo site: ${site}`;
+  if (!navigator.onLine) return 'Sem internet neste aparelho. Conecte e tente de novo.';
+  return 'Não consegui falar com o Google Drive: a conexão foi bloqueada antes de chegar lá. Confira se tem bloqueador de anúncios, VPN ou "DNS privado" ligado (desative para este site) e, no navegador Samsung, desligue o "bloqueio de conteúdo". Se continuar, tente pelo Chrome.';
+}
+async function gfetch(u, init) {
+  let last;
+  for (let i = 0; i < 3; i++) {
+    try { return await fetch(u, init); }
+    catch (e) { last = e; if (init && init.signal && init.signal.aborted) throw e; await new Promise(r => setTimeout(r, 700 * (i + 1))); }
+  }
+  const err = new Error(netWhy()); err.net = true; err.cause = last; throw err;
 }
 async function driveList(id, key, folderName, out, depth = 0, path = '') {
   let token = '';
@@ -1205,7 +1221,7 @@ async function driveList(id, key, folderName, out, depth = 0, path = '') {
     u.searchParams.set('includeItemsFromAllDrives', 'true');
     u.searchParams.set('key', key);
     if (token) u.searchParams.set('pageToken', token);
-    const r = await fetch(u);
+    const r = await gfetch(u);
     if (!r.ok) {
       let detail = ''; try { detail = (await r.json()).error.message; } catch (e) {}
       if (r.status === 400 && /key/i.test(detail)) throw new Error('A chave da API parece inválida. Copie de novo do Google Cloud.');
@@ -1287,7 +1303,7 @@ function ensureLocal(b) {
       updateUsage();
       return true;
     } catch (e) {
-      upd(j, { state: 'err', msg: e.status === 403 ? 'O Google não liberou o download (sem permissão ou limite do dia). Tente mais tarde.' : e.status === 404 ? 'Arquivo não encontrado no Drive.' : 'O download falhou. Confira a internet.' });
+      upd(j, { state: 'err', msg: e.status === 403 ? 'O Google não liberou o download (sem permissão ou limite do dia). Tente mais tarde.' : e.status === 404 ? 'Arquivo não encontrado no Drive.' : e.net ? e.message : 'O download falhou. Confira a internet.' });
       clearInterval(tick); unpaint();
       toast('Não consegui baixar este volume. Veja o aviso na lista de envios.', 5000);
       return false;
