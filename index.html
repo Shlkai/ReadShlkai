@@ -68,15 +68,15 @@ svg.i { width: 20px; height: 20px; flex: none; stroke: currentColor; fill: none;
 .brand { align-items: center !important; gap: 9px !important; }
 .brand .mark { width: 34px; height: 34px; flex: none; overflow: visible; transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
 .brand:hover .mark { transform: rotate(-6deg) scale(1.06); }
-.mk-bg { fill: var(--seal); }
-.mk-ln { fill: none; stroke: var(--seal-ink); stroke-width: 1.1; }
-.mk-s, .mk-dot { fill: var(--seal-ink); }
+.mk-bg { fill: #121212; stroke: color-mix(in srgb, var(--seal) 55%, #121212); stroke-width: 1; }
+.mk-s { fill: #F4EDE2; }
+.mk-cut { fill: var(--seal); }
 .brand .kanji { display: inline-block; writing-mode: vertical-rl; font: 700 11px/1 "Shippori Mincho", "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", serif; letter-spacing: .12em; color: var(--seal); text-transform: none; padding: 1px 0 1px 7px; margin-left: -2px; border-left: 1px solid color-mix(in srgb, var(--seal) 45%, transparent); align-self: center; }
 .brand .wm span, .brand .wm { font-size: inherit; color: inherit; letter-spacing: inherit; text-transform: none; }
 @media (pointer: fine) { #tapHint { display: none !important; } }
 .brand .wm { position: relative; font: 800 25px/1 var(--font-display); letter-spacing: -.035em; color: var(--ink); white-space: nowrap; }
 .wm-b { position: relative; z-index: 0; }
-.wm-b::before { content: ""; position: absolute; z-index: -1; left: -2px; right: -3px; bottom: 1px; height: .42em; background: var(--seal); opacity: .42; border-radius: 2px 6px 3px 7px; transform: skewX(-12deg) rotate(-1.5deg); transform-origin: left; transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+.wm-b::before { content: ""; position: absolute; z-index: -1; left: -2px; right: -3px; bottom: 1px; height: .42em; background: var(--seal); opacity: .9; height: .2em; bottom: -1px; border-radius: 0; clip-path: polygon(0 55%, 100% 0, 96% 100%, 0 100%); transform: skewX(-12deg) rotate(-1.5deg); transform-origin: left; transition: transform .4s cubic-bezier(.2,.8,.2,1); }
 .brand:hover .wm-b::before { transform: skewX(-12deg) rotate(-1.5deg) scaleX(1.06); }
 .tagline { align-self: center; font: 600 10px/1.15 var(--font-body) !important; letter-spacing: .16em !important; text-transform: uppercase; color: var(--muted); border-left: 1px solid var(--line); padding-left: 10px; margin-left: 2px; max-width: 84px; }
 @media (max-width: 1180px) { .tagline { display: none !important; } }
@@ -349,7 +349,7 @@ body:has(.top.over:not(.solid))::before { background: transparent; }
 .tabs { position: relative; }
 .tabs button { position: relative; transition: color .18s ease; }
 .tabs button[aria-current="page"] { color: var(--ink); font-weight: 700; }
-.tabink { position: absolute; left: 0; bottom: 1px; height: 4px; width: 10px; border-radius: 2px 5px 2px 5px; background: var(--seal); transform-origin: left; pointer-events: none; opacity: 0;
+.tabink { position: absolute; left: 0; bottom: 1px; height: 4px; width: 10px; border-radius: 0; clip-path: polygon(0 45%, 100% 0, 97% 100%, 0 100%); background: var(--seal); transform-origin: left; pointer-events: none; opacity: 0;
   transition: transform .32s cubic-bezier(.2,.9,.25,1), width .32s cubic-bezier(.2,.9,.25,1), opacity .2s; }
 .tabink.on { opacity: 1; }
 .tabs button:not([aria-current="page"])::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 3px; height: 2px; border-radius: 2px; background: currentColor; opacity: 0; transform: scaleX(.4); transition: opacity .18s, transform .22s ease; }
@@ -528,7 +528,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <header class="top" id="top">
   <div class="top-in">
-    <a class="brand" href="#" id="home" aria-label="Shikai, início"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><defs><filter id="mkInk" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.5"/></filter></defs><g class="mk-seal" transform="rotate(-4 20 20)" filter="url(#mkInk)"><rect class="mk-bg" x="4" y="4" width="32" height="32" rx="4.5"/><rect class="mk-ln" x="6.8" y="6.8" width="26.4" height="26.4" rx="2.6"/><path class="mk-s" transform="translate(20 20.2) scale(1.32) translate(-19.85 -18.1)" d="M25.6 12.6c-1.2-1.3-2.9-1.9-4.8-1.9-3 0-5.2 1.6-5.2 4 0 2.3 1.8 3.2 4.6 3.8 2 .4 2.6.8 2.6 1.6 0 .9-.9 1.5-2.4 1.5-1.6 0-2.9-.6-3.9-1.7l-2.1 2.4c1.4 1.6 3.5 2.4 5.9 2.4 3.4 0 5.7-1.7 5.7-4.3 0-2.4-1.7-3.3-4.6-3.9-1.9-.4-2.6-.7-2.6-1.5 0-.7.8-1.2 2-1.2 1.2 0 2.3.4 3.2 1.2z"/><circle class="mk-dot" cx="29.6" cy="10.4" r="1.6"/></g></svg><span class="wm"><span class="wm-a">shi</span><span class="wm-b">kai</span></span><span class="kanji" aria-hidden="true">始解</span><span class="tagline">leitor de quadrinhos</span></a>
+    <a class="brand" href="#" id="home" aria-label="Shikai, início"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><defs><filter id="mkInk" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.1"/></filter><clipPath id="mkUp"><path d="M0 0H40V12.2L0 27.2Z"/></clipPath><clipPath id="mkDn"><path d="M0 27.2L40 12.2V40H0Z"/></clipPath></defs><g filter="url(#mkInk)"><rect class="mk-bg" x="4" y="4" width="32" height="32" rx="3"/></g><g clip-path="url(#mkDn)"><path class="mk-s" transform="translate(20 20) scale(1.3) translate(-19.85 -18.1)" d="M25.6 12.6c-1.2-1.3-2.9-1.9-4.8-1.9-3 0-5.2 1.6-5.2 4 0 2.3 1.8 3.2 4.6 3.8 2 .4 2.6.8 2.6 1.6 0 .9-.9 1.5-2.4 1.5-1.6 0-2.9-.6-3.9-1.7l-2.1 2.4c1.4 1.6 3.5 2.4 5.9 2.4 3.4 0 5.7-1.7 5.7-4.3 0-2.4-1.7-3.3-4.6-3.9-1.9-.4-2.6-.7-2.6-1.5 0-.7.8-1.2 2-1.2 1.2 0 2.3.4 3.2 1.2z"/></g><g transform="translate(1.25 -.47)"><g clip-path="url(#mkUp)"><path class="mk-s" transform="translate(20 20) scale(1.3) translate(-19.85 -18.1)" d="M25.6 12.6c-1.2-1.3-2.9-1.9-4.8-1.9-3 0-5.2 1.6-5.2 4 0 2.3 1.8 3.2 4.6 3.8 2 .4 2.6.8 2.6 1.6 0 .9-.9 1.5-2.4 1.5-1.6 0-2.9-.6-3.9-1.7l-2.1 2.4c1.4 1.6 3.5 2.4 5.9 2.4 3.4 0 5.7-1.7 5.7-4.3 0-2.4-1.7-3.3-4.6-3.9-1.9-.4-2.6-.7-2.6-1.5 0-.7.8-1.2 2-1.2 1.2 0 2.3.4 3.2 1.2z"/></g></g><path class="mk-cut" d="M2.6 27.4 L37.6 13.4 L36.2 14.9 Z"/></svg><span class="wm"><span class="wm-a">shi</span><span class="wm-b">kai</span></span><span class="kanji" aria-hidden="true">始解</span><span class="tagline">leitor de quadrinhos</span></a>
     <nav class="tabs" id="tabs" aria-label="Seções"><button data-view="inicio">Início</button><button data-view="manga">Mangás</button><button data-view="hq">HQs</button><button data-view="livro">Livros</button><button data-view="fav">Favoritos</button><button data-view="tudo">Estante</button><span class="tabink" id="tabInk" aria-hidden="true"></span></nav>
     <button class="btn icon ghost" id="qBtn" aria-label="Buscar"><svg class="i"><use href="#i-search"/></svg></button>
     <label class="search" for="q"><svg class="i"><use href="#i-search"/></svg><input id="q" type="search" placeholder="Buscar título, autor, série ou categoria" autocomplete="off"></label>
