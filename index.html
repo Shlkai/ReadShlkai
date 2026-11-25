@@ -1204,11 +1204,22 @@ function netWhy() {
 }
 async function gfetch(u, init) {
   let last;
-  for (let i = 0; i < 3; i++) {
-    try { return await fetch(u, init); }
-    catch (e) { last = e; if (init && init.signal && init.signal.aborted) throw e; await new Promise(r => setTimeout(r, 700 * (i + 1))); }
+  for (let i = 0; i < 4; i++) {
+    try {
+      const r = await fetch(u, init);
+      if ((r.status === 429 || r.status >= 500) && i < 3) { last = new Error('HTTP ' + r.status); await new Promise(res => setTimeout(res, 1000 * 2 ** i)); continue; }
+      return r;
+    }
+    catch (e) { last = e; if (init && init.signal && init.signal.aborted) throw e; await new Promise(res => setTimeout(res, 800 * 2 ** i)); }
   }
-  const err = new Error(netWhy()); err.net = true; err.cause = last; throw err;
+  let msg = netWhy();
+  if (/^https?:$/.test(location.protocol) && navigator.onLine && /googleapis\.com/.test(String(u))) {
+    let probe = false;
+    try { probe = (await fetch('https://www.googleapis.com/discovery/v1/apis?name=drive&preferred=true', { cache: 'no-store' })).ok; } catch (e) {}
+    if (probe) msg = `O Google responde neste aparelho, mas recusou o pedido com a sua chave sem explicar (código D1). No Google Cloud, abra Credenciais, clique na chave e, em "Restrições de aplicativos", escolha "Nenhuma" ou adicione ${location.origin}/* em "Sites". Salve e espere 5 minutos.`;
+    else msg += ' (código D2)';
+  }
+  const err = new Error(msg); err.net = true; err.cause = last; throw err;
 }
 async function driveList(id, key, folderName, out, depth = 0, path = '') {
   let token = '';
@@ -1234,7 +1245,7 @@ async function driveList(id, key, folderName, out, depth = 0, path = '') {
     }
     const data = await r.json();
     for (const f of data.files || []) {
-      if (f.mimeType === FOLDER) { if (depth < 6) await driveList(f.id, key, f.name, out, depth + 1, path ? path + '/' + f.name : f.name); }
+      if (f.mimeType === FOLDER) { if (depth < 6) { try { await driveList(f.id, key, f.name, out, depth + 1, path ? path + '/' + f.name : f.name); } catch (e) { out.failed = (out.failed || 0) + 1; out.failErr = e.message; } } }
       else if (/\.(pdf|epub|cbz|zip|cbr|rar)$/i.test(f.name) || OKMIME.test(f.mimeType || '')) out.push({ ...f, folder: depth ? folderName : '', path });
       else out.skipped = (out.skipped || 0) + 1;
     }
@@ -1331,7 +1342,8 @@ async function syncDrive({ quiet = false } = {}) {
         const msg = why || (list.skipped ? `A pasta tem ${list.skipped} arquivo${list.skipped > 1 ? 's' : ''}, mas nenhum é PDF, CBZ, CBR ou EPUB.` : 'A pasta está vazia (ou ainda não está pública por link).');
         bad++; toast(msg, 7000); link.err = msg; link.count = 0; saveS(); renderLinks(); continue;
       }
-      link.err = ''; link.count = list.length; saveS(); renderLinks();
+      link.err = list.failed ? `${list.failed} subpasta${list.failed > 1 ? 's' : ''} não abriu agora. Sincronize de novo daqui a pouco. (${list.failErr})` : ''; link.count = list.length; saveS(); renderLinks();
+      if (list.failed) { bad++; toast(link.err, 7000); }
       found += list.length;
       let moved = 0;
       for (const f of list) {
