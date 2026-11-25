@@ -1,5 +1,5 @@
 // Shikai: guarda o app e as bibliotecas para abrir sem internet.
-const CACHE = 'shikai-v2';
+const CACHE = 'shikai-v3';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './lib/unrar.bundle.js',
   'lib/pdf.min.js',
   'lib/pdf.worker.min.js',
@@ -14,7 +14,7 @@ self.addEventListener('fetch', e => {
   if (!isApp && !isLib) return;
   if (isApp && e.request.mode === 'navigate') {
     // página: tenta a versão nova, cai para a guardada se estiver offline
-    e.respondWith(fetch(e.request).then(r => { const c = r.clone(); caches.open(CACHE).then(k => k.put('./index.html', c)); return r; }).catch(() => caches.match('./index.html')));
+    e.respondWith(fetch(e.request, { cache: 'no-cache' }).then(r => { const c = r.clone(); caches.open(CACHE).then(k => k.put('./index.html', c)); return r; }).catch(() => caches.match('./index.html')));
     return;
   }
   e.respondWith(caches.match(e.request).then(hit => hit || fetch(e.request).then(r => { if (r.ok || r.type === 'opaque') { const c = r.clone(); caches.open(CACHE).then(k => k.put(e.request, c)); } return r; })));

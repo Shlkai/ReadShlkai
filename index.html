@@ -486,6 +486,7 @@ body:has(.top.over:not(.solid))::before { background: transparent; }
 #rOff.on svg { color: var(--accent); }
 .serhead .sh-t { flex: 1; min-width: 0; }
 #serOff.on { border-color: var(--accent); color: var(--accent); }
+.appver { color: var(--muted); font-size: 11.5px; margin-left: 8px; margin-right: auto; align-self: center; font-variant-numeric: tabular-nums; }
 .netbar { position: sticky; top: var(--toph, 64px); z-index: 20; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 16px; background: color-mix(in srgb, var(--mark) 18%, var(--surface)); color: var(--ink); font-size: 13.5px; border-bottom: 1px solid var(--line); }
 .netbar .i { width: 16px; height: 16px; flex: none; }
 body.nonet .book:has(.m .i[aria-label="No Drive"]) .art { filter: grayscale(.8) brightness(.6); }
@@ -678,7 +679,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 25.11 · 3</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -2705,7 +2706,10 @@ bindGestures($('#bkview'));
   if (S.gauto && S.gkey && S.glinks.length && navigator.onLine) setTimeout(() => syncDrive({ quiet: true }), 1200);
 })();
 if ('serviceWorker' in navigator && document.querySelector('link[rel="manifest"]')) {
-  addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  addEventListener('load', () => navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(r => { r.update().catch(() => {}); }).catch(() => {}));
+  // quando chega uma versão nova do app, recarrega uma vez sozinho
+  let swReloaded = false; const hadCtrl = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', () => { if (swReloaded || !hadCtrl) return; swReloaded = true; if (rd.hidden) location.reload(); });
 }
 })();
 </script>
