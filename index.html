@@ -679,7 +679,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 25.11 · 3</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 25.11 · 4</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -1217,7 +1217,7 @@ async function gfetch(u, init) {
   if (/^https?:$/.test(location.protocol) && navigator.onLine && /googleapis\.com/.test(String(u))) {
     let probe = false;
     try { probe = (await fetch('https://www.googleapis.com/discovery/v1/apis?name=drive&preferred=true', { cache: 'no-store' })).ok; } catch (e) {}
-    if (probe) msg = `O Google responde neste aparelho, mas recusou o pedido com a sua chave sem explicar (código D1). No Google Cloud, abra Credenciais, clique na chave e, em "Restrições de aplicativos", escolha "Nenhuma" ou adicione ${location.origin}/* em "Sites". Salve e espere 5 minutos.`;
+    if (probe) msg = `O Google está recusando os pedidos com a sua chave agora (código D1). O mais comum é um bloqueio temporário por muitas buscas seguidas: espere uns 15 minutos e toque em Sincronizar de novo. Se continuar depois disso, no Google Cloud abra Credenciais, clique na chave e, em "Restrições de aplicativos", escolha "Nenhuma" (ou adicione ${location.origin}/* em "Sites").`;
     else msg += ' (código D2)';
   }
   const err = new Error(msg); err.net = true; err.cause = last; throw err;
@@ -1328,7 +1328,7 @@ let syncing = false;
 async function syncDrive({ quiet = false } = {}) {
   if (syncing) { toast('Já estou buscando no Drive.'); return; }
   if (!S.gkey || !S.glinks.length) { if (!quiet) { toast('Primeiro configure a chave e uma pasta do Drive.'); openSettings(); } return; }
-  syncing = true;
+  syncing = true; S.gtry = Date.now(); saveS();
   const have = new Set(books.filter(b => b.source?.type === 'drive').map(b => b.source.fileId));
   let found = 0, fresh = 0, bad = 0;
   try {
@@ -2703,7 +2703,8 @@ bindGestures($('#bkview'));
   }
   render();
   checkInvite();
-  if (S.gauto && S.gkey && S.glinks.length && navigator.onLine) setTimeout(() => syncDrive({ quiet: true }), 1200);
+  // busca automática no máximo a cada 3 horas (cada busca percorre todas as pastas; muitas seguidas fazem o Google bloquear por um tempo)
+  if (S.gauto && S.gkey && S.glinks.length && navigator.onLine && Date.now() - (S.gtry || 0) > 3 * 3600e3) setTimeout(() => syncDrive({ quiet: true }), 1500);
 })();
 if ('serviceWorker' in navigator && document.querySelector('link[rel="manifest"]')) {
   addEventListener('load', () => navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(r => { r.update().catch(() => {}); }).catch(() => {}));
