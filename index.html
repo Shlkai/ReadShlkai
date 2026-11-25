@@ -1919,7 +1919,9 @@ const b64d = t => JSON.parse(decodeURIComponent(escape(atob(t.replace(/-/g, '+')
 $('#invBtn').onclick = () => {
   if (!S.gkey || !S.glinks.length) { toast('Primeiro ligue uma pasta do Drive aqui em cima. O convite compartilha essas pastas.', 5000); return; }
   const code = b64e({ k: S.gkey, l: S.glinks.map(l => l.url) });
-  $('#invLink').value = location.origin + location.pathname + '#convite=' + code;
+  // o convite sempre leva ao site oficial (se for criado na prévia, num arquivo ou no endereço antigo, o link não funcionaria)
+  const okHere = /^https:$/.test(location.protocol) && !/claude|anthropic|netlify|localhost|127\.0\.0\.1/i.test(location.host);
+  $('#invLink').value = (okHere ? location.origin + location.pathname : 'https://shlkai.github.io/ReadShlkai/') + '#convite=' + code;
   $('#invBox').hidden = false; $('#invLink').select();
 };
 $('#invCopy').onclick = () => {
