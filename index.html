@@ -63,8 +63,20 @@ svg.i { width: 20px; height: 20px; flex: none; stroke: currentColor; fill: none;
   padding-block: 14px 12px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .top-in { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
 .brand { display: flex; align-items: baseline; gap: 8px; margin-right: auto; text-decoration: none; color: var(--ink); }
-.brand b { font: 800 26px/1 var(--font-display); letter-spacing: -.02em; }
-.brand b i { font-style: normal; color: var(--accent); }
+.brand { align-items: center !important; gap: 9px !important; }
+.brand .mark { width: 34px; height: 34px; flex: none; overflow: visible; transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
+.brand:hover .mark { transform: rotate(-6deg) scale(1.06); }
+.mk-bub { fill: var(--mark); stroke: #141816; stroke-width: 1.6; stroke-linejoin: round; }
+.mk-shadow { fill: var(--accent); }
+.mk-s { fill: #141816; }
+.brand .wm span, .brand .wm { font-size: inherit; color: inherit; letter-spacing: inherit; text-transform: none; }
+@media (pointer: fine) { #tapHint { display: none !important; } }
+.brand .wm { position: relative; font: 800 25px/1 var(--font-display); letter-spacing: -.035em; color: var(--ink); white-space: nowrap; }
+.wm-b { position: relative; z-index: 0; }
+.wm-b::before { content: ""; position: absolute; z-index: -1; left: -2px; right: -3px; bottom: 1px; height: .42em; background: var(--accent); opacity: .55; border-radius: 2px 6px 3px 7px; transform: skewX(-12deg) rotate(-1.5deg); transform-origin: left; transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+.brand:hover .wm-b::before { transform: skewX(-12deg) rotate(-1.5deg) scaleX(1.06); }
+.tagline { align-self: center; font: 600 10px/1.15 var(--font-body) !important; letter-spacing: .16em !important; text-transform: uppercase; color: var(--muted); border-left: 1px solid var(--line); padding-left: 10px; margin-left: 2px; max-width: 84px; }
+@media (max-width: 1180px) { .tagline { display: none !important; } }
 .brand span { font-size: 12px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
 .search { position: relative; flex: 0 1 320px; min-width: 0; }
 .search input { width: 100%; height: 40px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); padding: 0 14px 0 38px; }
@@ -266,10 +278,21 @@ label.f textarea { height: auto; min-height: 84px; padding: 10px 12px; resize: v
 .spread { margin: auto; display: flex; align-items: center; justify-content: center; gap: 0; }
 .reader[data-dir="rtl"] .spread { flex-direction: row-reverse; }
 .spread img { display: block; background: #fff; }
-.reader[data-fit="tela"] .spread img { max-height: 100dvh; max-width: var(--maxw, 100vw); object-fit: contain; }
-.reader[data-fit="altura"] .spread img { height: 100dvh; width: auto; max-width: none; }
+.reader[data-fit="tela"] .spread img { max-height: calc(100dvh * var(--z, 1)); max-width: calc(var(--maxw, 100vw) * var(--z, 1)); object-fit: contain; }
+.reader[data-fit="altura"] .spread img { height: calc(100dvh * var(--z, 1)); width: auto; max-width: none; }
 .reader[data-fit="largura"] .spread { margin: 0 auto; align-items: flex-start; }
-.reader[data-fit="largura"] .spread img { width: var(--maxw, 100vw); height: auto; max-width: 100%; }
+.reader[data-fit="largura"] .spread img { width: calc(var(--maxw, 100vw) * var(--z, 1)); height: auto; max-width: none; }
+.reader.zoomed .stage { cursor: grab; }
+.reader.zoomed.panning .stage { cursor: grabbing; }
+.reader.idle, .reader.idle * { cursor: none !important; }
+.zoombox { display: none; align-items: center; gap: 2px; margin-left: 6px; }
+@media (pointer: fine) { .zoombox { display: inline-flex; } }
+.zoombox .rbtn { width: 34px; height: 34px; font: 600 16px var(--font-body); }
+#zTxt { min-width: 46px; text-align: center; font-size: 12.5px; font-variant-numeric: tabular-nums; opacity: .85; background: none; border: 0; color: inherit; cursor: pointer; }
+.rbtn.side { position: absolute; top: 50%; transform: translateY(-50%); z-index: 6; width: 52px; height: 96px; border-radius: 12px; display: none; place-items: center; background: rgba(12,14,13,.38); color: #fff; border: 0; opacity: 0; transition: opacity .2s; }
+@media (pointer: fine) { .rbtn.side { display: grid; } .reader:not(.calm) .rbtn.side, .rbtn.side:hover { opacity: 1; } }
+.rbtn.side.l { left: 14px; } .rbtn.side.r { right: 14px; }
+.reader[data-mode="epub"] .rbtn.side { display: none; }
 .reader[data-fit="largura"] .stage { display: block; }
 .reader[data-layout="dupla"] { --maxw: 50vw; }
 .reader .loading { width: min(60vw, 420px); aspect-ratio: 2/3; max-height: 90dvh; display: grid; place-items: center; color: #8a8f8c; font-size: 14px; }
@@ -319,8 +342,22 @@ body:has(.top.over:not(.solid))::before { background: transparent; }
 .tabs { display: flex; gap: 2px; margin-left: 18px; margin-right: auto; }
 .tabs button { border: 0; background: none; height: 36px; padding: 0 12px; border-radius: 8px; font-weight: 500; font-size: 14.5px; color: var(--muted); }
 .tabs button:hover { color: var(--ink); }
+.tabs { position: relative; }
+.tabs button { position: relative; transition: color .18s ease; }
 .tabs button[aria-current="page"] { color: var(--ink); font-weight: 700; }
-.tabs button[aria-current="page"]::after { content: ""; display: block; height: 3px; border-radius: 3px; background: var(--mark); margin-top: 2px; }
+.tabink { position: absolute; left: 0; bottom: 1px; height: 4px; width: 10px; border-radius: 2px 5px 2px 5px; background: var(--mark); transform-origin: left; pointer-events: none; opacity: 0;
+  transition: transform .32s cubic-bezier(.2,.9,.25,1), width .32s cubic-bezier(.2,.9,.25,1), opacity .2s; }
+.tabink.on { opacity: 1; }
+.tabs button:not([aria-current="page"])::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 3px; height: 2px; border-radius: 2px; background: currentColor; opacity: 0; transform: scaleX(.4); transition: opacity .18s, transform .22s ease; }
+.tabs button:not([aria-current="page"]):hover::after { opacity: .35; transform: none; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .2s; animation-timing-function: cubic-bezier(.2,.8,.2,1); }
+::view-transition-old(root) { animation-name: vtOut; }
+::view-transition-new(root) { animation-name: vtIn; }
+@keyframes vtOut { to { opacity: 0; } }
+@keyframes vtIn { from { opacity: 0; transform: translateY(6px); } }
+.top { view-transition-name: topbar; }
+::view-transition-group(topbar), ::view-transition-old(topbar), ::view-transition-new(topbar) { animation: none; }
+@media (prefers-reduced-motion: reduce) { .tabink { transition: none; } ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
 .brand { margin-right: 0; }
 #qBtn { display: none; }
 
@@ -385,7 +422,7 @@ body:has(.top.over:not(.solid))::before { background: transparent; }
 }
 @media (max-width: 640px) {
   .tabs { order: 4; flex: 1 1 100%; margin: 4px 0 0 -12px; overflow-x: auto; scrollbar-width: none; }
-  .tabs button[aria-current="page"]::after { margin-top: 0; }
+  .tabink { bottom: 2px; }
   .top .search { display: none; }
   .top.searching .search { display: block; order: 5; flex: 1 1 100%; }
   #qBtn { display: inline-flex; margin-left: auto; }
@@ -454,7 +491,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 @media (prefers-reduced-motion: reduce) { *, *::before { transition: none !important; animation: none !important; } }
 @media (max-width: 640px) {
-  .brand span { display: none; }
+  .brand .tagline { display: none; } .wm { font-size: 22px !important; }
   .top-in { flex-wrap: wrap; }
   .search { order: 5; flex: 1 1 100%; }
   .hide-sm { display: none; }
@@ -487,8 +524,8 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <header class="top" id="top">
   <div class="top-in">
-    <a class="brand" href="#" id="home"><b>shik<i>ai</i></b></a>
-    <nav class="tabs" id="tabs" aria-label="Seções"><button data-view="inicio">Início</button><button data-view="manga">Mangás</button><button data-view="hq">HQs</button><button data-view="livro">Livros</button><button data-view="fav">Favoritos</button><button data-view="tudo">Estante</button></nav>
+    <a class="brand" href="#" id="home" aria-label="Shikai, início"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><defs><pattern id="mkDots" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="2" cy="2" r=".9" fill="#141816" opacity=".28"/></pattern></defs><path class="mk-shadow" d="M9 6.5h22a5 5 0 0 1 5 5v13a5 5 0 0 1-5 5H19l-7.5 6.2 1.6-6.2H9a5 5 0 0 1-5-5v-13a5 5 0 0 1 5-5z" transform="translate(2.2 2.2)"/><path class="mk-bub" d="M9 6.5h22a5 5 0 0 1 5 5v13a5 5 0 0 1-5 5H19l-7.5 6.2 1.6-6.2H9a5 5 0 0 1-5-5v-13a5 5 0 0 1 5-5z"/><path d="M22 7.5h9a4 4 0 0 1 4 4v13a4 4 0 0 1-4 4h-9z" fill="url(#mkDots)"/><path class="mk-s" d="M25.6 12.6c-1.2-1.3-2.9-1.9-4.8-1.9-3 0-5.2 1.6-5.2 4 0 2.3 1.8 3.2 4.6 3.8 2 .4 2.6.8 2.6 1.6 0 .9-.9 1.5-2.4 1.5-1.6 0-2.9-.6-3.9-1.7l-2.1 2.4c1.4 1.6 3.5 2.4 5.9 2.4 3.4 0 5.7-1.7 5.7-4.3 0-2.4-1.7-3.3-4.6-3.9-1.9-.4-2.6-.7-2.6-1.5 0-.7.8-1.2 2-1.2 1.2 0 2.3.4 3.2 1.2z"/></svg><span class="wm"><span class="wm-a">shi</span><span class="wm-b">kai</span></span><span class="tagline">leitor de quadrinhos</span></a>
+    <nav class="tabs" id="tabs" aria-label="Seções"><button data-view="inicio">Início</button><button data-view="manga">Mangás</button><button data-view="hq">HQs</button><button data-view="livro">Livros</button><button data-view="fav">Favoritos</button><button data-view="tudo">Estante</button><span class="tabink" id="tabInk" aria-hidden="true"></span></nav>
     <button class="btn icon ghost" id="qBtn" aria-label="Buscar"><svg class="i"><use href="#i-search"/></svg></button>
     <label class="search" for="q"><svg class="i"><use href="#i-search"/></svg><input id="q" type="search" placeholder="Buscar título, autor, série ou categoria" autocomplete="off"></label>
     <button class="btn primary" id="addBtn"><svg class="i"><use href="#i-plus"/></svg><span class="hide-sm">Adicionar</span></button>
@@ -717,13 +754,18 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
     <div class="bOpt"><div class="lb">Tema da página</div><div class="seg" id="bkTheme"><button data-v="papel">Papel</button><button data-v="sepia">Sépia</button><button data-v="noite">Noite</button><button data-v="preto">Preto</button></div></div>
     <div class="bOpt"><div class="lb">Colunas</div><div class="seg" id="bkCols"><button data-v="auto">Automático</button><button data-v="1">Uma</button><button data-v="2">Duas</button></div></div>
     <div class="bOpt" id="tocWrap"><div class="lb">Sumário</div><div class="toc" id="toc"></div></div>
-    <p class="hint">Atalhos: setas ou espaço viram a página, F para tela cheia, Esc para sair. No celular, toque nas bordas ou deslize.</p>
+    <p class="hint">No computador: setas, espaço ou a rodinha do mouse viram a página; Ctrl + rodinha, + e − dão zoom (0 volta ao normal); duplo clique amplia onde você clicou e, com zoom, é só arrastar a página. F para tela cheia, Esc para sair. No celular, toque nas bordas ou deslize.</p>
   </div>
   <div class="rbot rchrome">
     <button class="rbtn" id="rPrevBtn" aria-label="Página anterior"><svg class="i"><use href="#i-back"/></svg></button>
     <input type="range" id="rRange" min="1" max="1" value="1" aria-label="Ir para a página">
     <span class="pn" id="rPn">1 / 1</span>
     <button class="rbtn" id="rNextBtn" aria-label="Próxima página"><svg class="i"><use href="#i-next"/></svg></button>
+    <span class="zoombox cOpt" aria-label="Zoom"><button class="rbtn" id="zOut" aria-label="Diminuir zoom">−</button><button id="zTxt" title="Voltar ao tamanho normal (0)">100%</button><button class="rbtn" id="zIn" aria-label="Aumentar zoom">+</button></span>
+  </div>
+  <button class="rbtn side l rchrome" id="sideL" aria-label="Virar para a esquerda"><svg class="i"><use href="#i-back"/></svg></button>
+  <button class="rbtn side r rchrome" id="sideR" aria-label="Virar para a direita"><svg class="i"><use href="#i-next"/></svg></button>
+  <div hidden>
   </div>
   <div class="endcard" id="endCard" hidden>
     <div>
@@ -1280,7 +1322,29 @@ function metaLine(b) {
   else if (b.lastReadAt && !b.finished) bits.push(`p. ${b.page + 1} de ${b.pages}`); else bits.push(`${b.pages} p.`);
   return bits.join(' · ');
 }
-let view = 'inicio', heroList = [], heroIdx = 0, heroT;
+let view = 'inicio', heroList = [], heroIdx = 0, heroT, heroWhy = {};
+// recomendações: começo de séries que você ainda não abriu, avulsos não lidos e o que é parecido com o que você lê;
+// a ordem muda a cada dia, mas fica estável durante o dia
+function recommend(n) {
+  const day = Math.floor(Date.now() / 864e5), rnd = x => (hashStr(x + ':' + day) % 1000) / 1000;
+  const readSeries = new Set(books.filter(b => b.lastReadAt && b.series).map(b => b.series));
+  const likePub = new Map(); books.filter(b => b.lastReadAt || b.fav).forEach(b => { const p = pubOf(b); if (p) likePub.set(p, (likePub.get(p) || 0) + 1); });
+  const likeKind = new Map(); books.filter(b => b.lastReadAt || b.fav).forEach(b => likeKind.set(b.kind, (likeKind.get(b.kind) || 0) + 1));
+  const firsts = new Map();
+  books.filter(b => !b.lastReadAt && !b.finished).forEach(b => {
+    const k = b.series || b.id; if (b.series && readSeries.has(b.series)) return;
+    const cur = firsts.get(k); if (!cur || (+b.volume || 1e9) < (+cur.volume || 1e9)) firsts.set(k, b);
+  });
+  const why = {};
+  const scored = [...firsts.values()].map(b => {
+    const p = pubOf(b), lp = likePub.get(p) || 0, lk = likeKind.get(b.kind) || 0;
+    why[b.id] = b.fav ? 'Dos seus favoritos' : lp ? `Porque você lê ${p}` : b.series ? 'Comece uma série nova' : Date.now() - b.addedAt < 7 * 864e5 ? 'Chegou agora na estante' : 'Recomendado para você';
+    return { b, sc: (b.fav ? 3 : 0) + Math.min(lp, 5) * .5 + Math.min(lk, 5) * .2 + (b.cover || b.thumb ? .4 : 0) + rnd(b.id) * 2 };
+  }).sort((a, b) => b.sc - a.sc).map(x => x.b);
+  let out = scored.slice(0, n);
+  if (!out.length) out = [...books].sort((a, b) => rnd(a.id) - rnd(b.id)).slice(0, n).map(b => (why[b.id] = b.finished ? 'Para ler de novo' : 'Da sua estante', b));
+  out.why = why; return out;
+}
 function bookCard(b) {
   const s = state(b);
   return `<div class="book">
@@ -1303,12 +1367,22 @@ function render() {
   $('#hero').hidden = !home; $('#rows').hidden = !home; $('#libSec').hidden = !has || home;
   const top = $('#top'); top.classList.toggle('over', home); top.classList.toggle('solid', !home || scrollY > 30);
   $$('#tabs button').forEach(b => b.setAttribute('aria-current', !query && b.dataset.view === view ? 'page' : 'false'));
+  requestAnimationFrame(moveInk);
   $('#tabs').hidden = !has;
   measureTop();
   if (!has) return;
   if (home) { renderHome(); return; }
   renderGrid();
 }
+function moveInk() {
+  const ink = $('#tabInk'), cur = $('#tabs button[aria-current="page"]');
+  if (!cur || $('#tabs').hidden) { ink.classList.remove('on'); return; }
+  const pad = 12, w = Math.max(12, cur.offsetWidth - pad * 2);
+  ink.style.width = w + 'px'; ink.style.transform = `translateX(${cur.offsetLeft + pad}px)`; ink.classList.add('on');
+  if (cur.scrollIntoViewIfNeeded) cur.scrollIntoViewIfNeeded(false);
+}
+addEventListener('resize', () => requestAnimationFrame(moveInk));
+document.fonts && document.fonts.ready.then(() => moveInk());
 function measureTop() { document.documentElement.style.setProperty('--toph', $('#top').offsetHeight + 'px'); }
 addEventListener('resize', measureTop);
 addEventListener('scroll', () => { const t = $('#top'); if (t.classList.contains('over')) t.classList.toggle('solid', scrollY > 30); }, { passive: true });
@@ -1317,13 +1391,13 @@ function renderHome() {
   const reading = books.filter(b => b.lastReadAt && !b.finished).sort((a, b) => b.lastReadAt - a.lastReadAt);
   const newest = [...books].sort((a, b) => b.addedAt - a.addedAt);
   const unread = newest.filter(b => !b.lastReadAt && !b.finished);
-  const ids = new Set(); heroList = [];
-  [...reading.slice(0, 3), ...unread.slice(0, 3), ...newest].forEach(b => { if (heroList.length < 5 && !ids.has(b.id)) { ids.add(b.id); heroList.push(b); } });
+  heroList = recommend(6); heroWhy = heroList.why || {};
   if (heroIdx >= heroList.length) heroIdx = 0;
   showHero(heroIdx);
 
   const rows = [];
   if (reading.length) rows.push({ t: 'Continuar lendo', list: reading });
+  { const more = recommend(24).filter(b => !heroList.includes(b)); if (more.length > 2) rows.push({ t: 'Recomendados para hoje', list: more }); }
   rows.push({ t: 'Chegaram na estante', list: newest.slice(0, 24) });
   const bySerie = new Map();
   books.forEach(b => { if (b.series) { if (!bySerie.has(b.series)) bySerie.set(b.series, []); bySerie.get(b.series).push(b); } });
@@ -1364,7 +1438,7 @@ function showHero(i) {
   const bg = $('#heroBg');
   if (cover(b)) { bg.classList.remove('tone'); bg.style.backgroundImage = `url("${cover(b)}")`; } else { bg.style.backgroundImage = ''; bg.classList.add('tone'); }
   const reading = b.lastReadAt && !b.finished;
-  const eyebrow = reading ? 'Continue de onde parou' : b.finished ? 'Para ler de novo' : 'Novo na estante';
+  const eyebrow = heroWhy[b.id] || (reading ? 'Continue de onde parou' : b.finished ? 'Para ler de novo' : 'Recomendado para você');
   const meta = [KL[b.kind], b.author || '', b.series && b.series !== b.title ? b.series : '', b.volume ? (b.kind === 'manga' ? 'Cap. ' : 'Vol. ') + b.volume : '', !b.pages ? (b.size ? fmtSize(b.size) + ' no Drive' : 'No Drive') : b.format === 'epub' ? `${b.pages} capítulos` : `${b.pages} páginas`].filter(Boolean);
   $('#heroIn').innerHTML = `<div class="hero-txt">
       <span class="eyebrow">${eyebrow}</span>
@@ -1531,6 +1605,15 @@ async function toggleFav(id) {
 $('#sortSel').onchange = e => { S.sort = e.target.value; saveS(); render(); };
 $('#q').addEventListener('input', e => { query = e.target.value; scheduleRender(); });
 function setView(v) {
+  if (document.startViewTransition && v !== view && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('vt');
+    const t = document.startViewTransition(() => setViewNow(v));
+    t.finished.finally(() => document.documentElement.classList.remove('vt'));
+    return;
+  }
+  setViewNow(v);
+}
+function setViewNow(v) {
   view = v; F = ['manga', 'hq', 'livro', 'fav'].includes(v) ? v : 'tudo'; serie = ''; clearSel(); query = ''; $('#q').value = ''; $('#top').classList.remove('searching');
   render(); scrollTo({ top: 0 });
 }
@@ -1718,13 +1801,14 @@ const R = { book: null, doc: null, page: 0, cache: new Map(), ratios: [], io: nu
 const rd = $('#reader');
 function prefs() {
   const b = R.book, p = b.prefs || {};
-  return { layout: p.layout || S.layout, dir: p.dir || (b.kind === 'manga' ? S.mangaDir : b.kind === 'hq' ? S.hqDir : 'ltr'), fit: p.fit || S.fit, bg: S.bg };
+  const wide = innerWidth >= 1100 && innerWidth > innerHeight * 1.2;
+  return { layout: p.layout || (S.layoutSet ? S.layout : (wide && b.kind !== 'livro' ? 'dupla' : S.layout)), dir: p.dir || (b.kind === 'manga' ? S.mangaDir : b.kind === 'hq' ? S.hqDir : 'ltr'), fit: p.fit || S.fit, bg: S.bg };
 }
 function setPref(k, v) {
   if (k === 'bg') { S.bg = v; saveS(); }
   else {
     R.book.prefs = { ...(R.book.prefs || {}), [k]: v };
-    if (k === 'layout' || k === 'fit') { S[k] = v; saveS(); }
+    if (k === 'layout' || k === 'fit') { S[k] = v; if (k === 'layout') S.layoutSet = true; saveS(); }
     saveBook(R.book);
   }
   applyPrefs(true);
@@ -1775,6 +1859,7 @@ async function showPage(i, from) {
   const pages = spreadOf(i); R.page = pages[0];
   const tok = ++showToken;
   const sp = $('#spread');
+  if (zoom !== 1) setZoom(1);
   if (!R.cache.has(pages[0])) sp.innerHTML = '<div class="loading">Carregando página…</div>';
   const urls = await Promise.all(pages.map(pageURL));
   if (tok !== showToken) return;
@@ -2005,16 +2090,48 @@ function bindGestures(el) {
   el.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse' || e.button !== 0) return; md = { x: e.clientX, y: e.clientY, t: Date.now(), sx: el.scrollLeft, sy: el.scrollTop }; el._cs = { x: canScroll(el, 'x'), y: canScroll(el, 'y') }; });
   el.addEventListener('pointerup', e => {
     if (e.pointerType !== 'mouse' || !md) return; const m = md; md = null;
+    if (el.id === 'stage' && zoom > 1) return; // com zoom, o mouse move a página
+
     const scrolled = Math.abs(el.scrollLeft - m.sx) + Math.abs(el.scrollTop - m.sy) > 4;
     gestureEnd(el, e.clientX, e.clientY, e.clientX - m.x, e.clientY - m.y, Date.now() - m.t, e.target, scrolled); el._cs = null;
   });
 }
 ['stage', 'vscroll'].forEach(id => bindGestures($('#' + id)));
 // rodinha do mouse / touchpad: um passo por gesto; se a página estiver ampliada, rola até a borda antes de virar
+// zoom no computador: Ctrl + rodinha, + e −, duplo clique; com zoom, arraste a página com o mouse
+let zoom = 1;
+function setZoom(z, cx, cy) {
+  const st = $('#stage'), old = zoom;
+  zoom = Math.max(1, Math.min(4, Math.round(z * 100) / 100));
+  const fx = cx == null ? .5 : (st.scrollLeft + cx) / Math.max(1, st.scrollWidth), fy = cy == null ? .5 : (st.scrollTop + cy) / Math.max(1, st.scrollHeight);
+  rd.style.setProperty('--z', zoom); rd.classList.toggle('zoomed', zoom > 1);
+  $('#zTxt').textContent = Math.round(zoom * 100) + '%';
+  if (old !== zoom) requestAnimationFrame(() => { st.scrollLeft = fx * st.scrollWidth - (cx == null ? st.clientWidth / 2 : cx); st.scrollTop = fy * st.scrollHeight - (cy == null ? st.clientHeight / 2 : cy); });
+}
+$('#zIn').onclick = () => setZoom(zoom + .25);
+$('#zOut').onclick = () => setZoom(zoom - .25);
+$('#zTxt').onclick = () => setZoom(1);
+$('#sideL').onclick = () => visualStep('left');
+$('#sideR').onclick = () => visualStep('right');
+$('#stage').addEventListener('dblclick', e => { if (e.pointerType === 'touch') return; const r = $('#stage').getBoundingClientRect(); setZoom(zoom > 1 ? 1 : 2, e.clientX - r.left, e.clientY - r.top); });
+{ // arrastar para mover com zoom
+  let pan = null;
+  $('#stage').addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse' || e.button !== 0 || zoom <= 1) return; pan = { x: e.clientX, y: e.clientY, sl: $('#stage').scrollLeft, st: $('#stage').scrollTop, moved: false }; });
+  addEventListener('pointermove', e => {
+    if (!pan) return; const dx = e.clientX - pan.x, dy = e.clientY - pan.y;
+    if (!pan.moved && Math.abs(dx) + Math.abs(dy) < 5) return;
+    pan.moved = true; rd.classList.add('panning'); const st = $('#stage'); st.scrollLeft = pan.sl - dx; st.scrollTop = pan.st - dy;
+  });
+  addEventListener('pointerup', () => { if (pan && pan.moved) { window.__panEnd = Date.now(); } pan = null; rd.classList.remove('panning'); });
+}
+// esconde o cursor quando o mouse fica parado
+{ let idleT; addEventListener('mousemove', () => { if (rd.hidden) return; rd.classList.remove('idle'); clearTimeout(idleT); idleT = setTimeout(() => { if (rd.classList.contains('calm')) rd.classList.add('idle'); }, 1800); }); }
 let whAcc = 0, whT = 0, whLock = 0;
 function onWheel(e) {
-  if (e.ctrlKey || S.wheel === false) return;
   const el = e.currentTarget;
+  if (e.ctrlKey && el.id === 'stage') { e.preventDefault(); const r = el.getBoundingClientRect(); setZoom(zoom * (e.deltaY < 0 ? 1.12 : 1 / 1.12), e.clientX - r.left, e.clientY - r.top); return; }
+  if (e.ctrlKey || S.wheel === false) return;
+  if (el.id === 'stage' && zoom > 1) return;
   if (el.id === 'stage' && prefs().layout === 'rolagem') return;
   const d = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
   if (el.id === 'stage' && canScroll(el, 'y')) {
@@ -2036,6 +2153,11 @@ addEventListener('keydown', e => {
   const k = e.key;
   if (k === 'Escape' && !$('#bub').hidden) { closeBubble(); return; }
   if (k === 'Escape') { if (!$('#rOpts').hidden) { $('#rOpts').hidden = true; } else if (!document.fullscreenElement) closeReader(); return; }
+  if (R.mode !== 'epub' && (k === '+' || k === '=')) { e.preventDefault(); setZoom(zoom + .25); return; }
+  if (R.mode !== 'epub' && (k === '-' || k === '_')) { e.preventDefault(); setZoom(zoom - .25); return; }
+  if (R.mode !== 'epub' && k === '0') { e.preventDefault(); setZoom(1); return; }
+  if (R.mode !== 'epub' && zoom > 1 && (k === 'ArrowUp' || k === 'ArrowDown')) { return; }
+  if (R.mode !== 'epub' && prefs().layout !== 'rolagem' && (k === 'ArrowDown' || k === 'ArrowUp')) { const st = $('#stage'); if (!canScroll(st, 'y') || (k === 'ArrowDown' ? st.scrollTop + st.clientHeight >= st.scrollHeight - 2 : st.scrollTop <= 1)) { e.preventDefault(); step(k === 'ArrowDown' ? 1 : -1); } return; }
   if (k === 'ArrowLeft') { e.preventDefault(); visualStep('left'); }
   else if (k === 'ArrowRight') { e.preventDefault(); visualStep('right'); }
   else if (R.mode === 'epub' && (k === ' ' || k === 'PageDown')) { e.preventDefault(); bkStep(e.shiftKey ? -1 : 1); }
