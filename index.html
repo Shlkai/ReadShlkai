@@ -693,7 +693,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 1</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 2</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -1249,7 +1249,8 @@ async function gfetch(u, init) {
   }
   const err = new Error(msg); err.net = true; err.cause = last; throw err;
 }
-async function driveList(id, key, folderName, out, depth = 0, path = '') {
+async function driveFolder(id, key, folderName, depth = 0, path = '') {
+  const res = { files: [], subs: [], skipped: 0 };
   let token = '';
   do {
     const u = new URL('https://www.googleapis.com/drive/v3/files');
@@ -1274,13 +1275,35 @@ async function driveList(id, key, folderName, out, depth = 0, path = '') {
     const data = await r.json();
     SP.seen += (data.files || []).filter(f => f.mimeType === FOLDER && depth < 6).length; SP.files += (data.files || []).filter(f => f.mimeType !== FOLDER).length; syncProg();
     for (const f of data.files || []) {
-      if (f.mimeType === FOLDER) { if (depth < 6) { try { await driveList(f.id, key, f.name, out, depth + 1, path ? path + '/' + f.name : f.name); } catch (e) { out.failed = (out.failed || 0) + 1; out.failErr = e.message; } } }
-      else if (/\.(pdf|epub|cbz|zip|cbr|rar)$/i.test(f.name) || OKMIME.test(f.mimeType || '')) out.push({ ...f, folder: depth ? folderName : '', path });
-      else out.skipped = (out.skipped || 0) + 1;
+      if (f.mimeType === FOLDER) { if (depth < 6) res.subs.push({ id: f.id, name: f.name, depth: depth + 1, path: path ? path + '/' + f.name : f.name }); }
+      else if (/\.(pdf|epub|cbz|zip|cbr|rar)$/i.test(f.name) || OKMIME.test(f.mimeType || '')) res.files.push({ ...f, folder: depth ? folderName : '', path });
+      else res.skipped++;
     }
     token = data.nextPageToken;
   } while (token);
-  SP.done++; syncProg();
+  return res;
+}
+// lê as pastas em largura (primeiro as de cima), 4 de cada vez; cada pasta lida já entrega seus arquivos (out.onFiles)
+async function driveList(id, key, folderName, out) {
+  const queue = [{ id, name: folderName, depth: 0, path: '' }];
+  let active = 0, rootErr = null;
+  await new Promise(resolve => {
+    const pump = () => {
+      if (!active && !queue.length) { resolve(); return; }
+      while (active < 4 && queue.length) {
+        const it = queue.shift(); active++;
+        driveFolder(it.id, key, it.name, it.depth, it.path)
+          .then(async res => {
+            out.push(...res.files); out.skipped = (out.skipped || 0) + res.skipped; queue.push(...res.subs);
+            if (out.onFiles && res.files.length) { try { await out.onFiles(res.files); } catch (e) { console.warn(e); } }
+          })
+          .catch(e => { if (it.depth === 0) { rootErr = e; queue.length = 0; } else { out.failed = (out.failed || 0) + 1; out.failErr = e.message; } })
+          .finally(() => { active--; SP.done++; syncProg(); pump(); });
+      }
+    };
+    pump();
+  });
+  if (rootErr) throw rootErr;
   return out;
 }
 // progresso da sincronização: pílula discreta no canto + fio no topo
@@ -1380,7 +1403,16 @@ async function syncDrive({ quiet = false } = {}) {
     for (const link of S.glinks) {
       const id = folderId(link.url); if (!id) continue;
       let list;
-      try { list = await driveList(id, S.gkey, '', []); }
+      const acc = [], skip0 = new Set(S.skip || []), tA = Date.now(); let kA = 0, lastPaint = 0;
+      acc.onFiles = async files => {
+        for (const f of [...files].sort((a, b) => natural(a.name, b.name))) {
+          if (have.has(f.id) || skip0.has(f.id)) continue;
+          have.add(f.id); fresh++;
+          await saveBook(remoteBook(f, tA - kA++));
+        }
+        if (Date.now() - lastPaint > 1200) { lastPaint = Date.now(); scheduleRender(); }
+      };
+      try { list = await driveList(id, S.gkey, '', acc); }
       catch (e) { bad++; toast(e.message, 7000); link.err = e.message; saveS(); renderLinks(); continue; }
       if (!list.length) {
         const why = await driveFolderCheck(id, S.gkey);
