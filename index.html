@@ -487,6 +487,18 @@ body:has(.top.over:not(.solid))::before { background: transparent; }
 .serhead .sh-t { flex: 1; min-width: 0; }
 #serOff.on { border-color: var(--accent); color: var(--accent); }
 .appver { color: var(--muted); font-size: 11.5px; margin-left: 8px; margin-right: auto; align-self: center; font-variant-numeric: tabular-nums; }
+.syncline { position: fixed; left: 0; right: 0; top: 0; height: 2px; z-index: 200; pointer-events: none; background: var(--seal); transform-origin: left; transform: scaleX(var(--p, 0)); opacity: 0; transition: transform .4s ease, opacity .3s; }
+.syncline.on { opacity: .9; }
+.syncpill { position: fixed; left: max(14px, env(safe-area-inset-left)); bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 70; display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 4px 8px; min-width: 210px; max-width: min(320px, calc(100vw - 28px)); padding: 9px 12px 10px; border-radius: 12px; background: color-mix(in srgb, var(--surface) 92%, transparent); border: 1px solid var(--line); box-shadow: 0 8px 28px rgba(0,0,0,.35); backdrop-filter: blur(10px); font-size: 12.5px; color: var(--muted); pointer-events: none; opacity: 0; transform: translateY(8px); transition: opacity .25s, transform .25s; }
+.syncpill.on { opacity: 1; transform: none; }
+.syncpill .i { width: 15px; height: 15px; color: var(--seal); animation: spin 1.2s linear infinite; }
+.syncpill b { color: var(--ink); font-variant-numeric: tabular-nums; font-size: 13px; }
+.syncpill span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+.syncpill .sb { grid-column: 1 / -1; height: 3px; border-radius: 3px; background: color-mix(in srgb, var(--ink) 12%, transparent); overflow: hidden; }
+.syncpill .sb i { display: block; height: 100%; width: 0; background: var(--seal); transition: width .3s ease; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .syncpill .i { animation: none; } }
+body:has(#reader:not([hidden])) .syncpill { display: none; }
 .netbar { position: sticky; top: var(--toph, 64px); z-index: 20; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 16px; background: color-mix(in srgb, var(--mark) 18%, var(--surface)); color: var(--ink); font-size: 13.5px; border-bottom: 1px solid var(--line); }
 .netbar .i { width: 16px; height: 16px; flex: none; }
 body.nonet .book:has(.m .i[aria-label="No Drive"]) .art { filter: grayscale(.8) brightness(.6); }
@@ -599,6 +611,8 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
   <div class="hero-in" id="heroIn"></div>
 </section>
 <div class="netbar" id="netBar" hidden><svg class="i"><use href="#i-cloud"/></svg><span>Sem internet. Os volumes com <b>Offline</b> abrem normalmente.</span></div>
+<div class="syncline" id="syncLine" aria-hidden="true"></div>
+<div class="syncpill" id="syncPill" hidden role="status" aria-live="polite"><svg class="i"><use href="#i-sync"/></svg><b id="syncPct">0%</b><span id="syncTxt">Lendo o Drive</span><i class="sb"><i id="syncBar"></i></i></div>
 <main id="main">
   <div id="rows" hidden></div>
   <section id="libSec" hidden>
@@ -679,7 +693,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 25.11 · 4</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 1</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -810,7 +824,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
     <div><div class="lb">Deslizar o dedo para virar</div><div class="seg" id="oSwipe"><button data-v="lados">Para os lados</button><button data-v="vertical">Para cima e baixo</button><button data-v="ambos">Os dois</button></div></div>
     <div class="cOpt bubOpt"><div class="lb">Ampliar balões</div><div class="seg" id="oBub"><button data-v="on">Ligado</button><button data-v="off">Desligado</button></div></div>
     <div class="cOpt bubOpt" id="oBubMore"><div class="lb">Detecção do balão</div><div class="seg" id="oBubSens"><button data-v="baixa">Só balões claros</button><button data-v="normal">Normal</button><button data-v="alta">Mais solta</button></div></div>
-    <div class="cOpt bubOpt" id="oBubMore2"><div class="lb">Tamanho do zoom</div><div class="seg" id="oBubZoom"><button data-v="2">Médio</button><button data-v="2.8">Grande</button><button data-v="4">Máximo</button></div></div>
+    <div class="cOpt bubOpt" id="oBubMore2"><div class="lb">Tamanho do balão ampliado</div><div class="seg" id="oBubZoom"><button data-v="2">Médio</button><button data-v="2.8">Grande</button><button data-v="4">Máximo</button></div></div>
     <div class="cOpt"><div class="lb">Fundo</div><div class="seg" id="oBg"><button data-v="preto">Preto</button><button data-v="grafite">Grafite</button><button data-v="papel">Papel</button></div></div>
     <div class="bOpt"><div class="lb">Tamanho da letra</div><div class="sz"><button class="rbtn" id="bkMinus" aria-label="Diminuir letra">A−</button><span id="bkSizeTxt">19</span><button class="rbtn" id="bkPlus" aria-label="Aumentar letra">A+</button></div></div>
     <div class="bOpt"><div class="lb">Fonte</div><div class="seg" id="bkFont"><button data-v="serif">Clássica</button><button data-v="sans">Moderna</button></div></div>
@@ -943,11 +957,24 @@ function nice(b) {
   const num = numM ? String(parseInt(numM[1], 10)) : '';
   return num ? `${ser} #${num.padStart(2, '0')}` : ser;
 }
+// número da edição a partir do nome do arquivo.
+// "v2"/"V.2" é o volume da SÉRIE (Espetacular Homem-Aranha v2), não a edição; anos "(2003)" também não contam.
+function volFrom(base) {
+  const t = String(base || '').replace(/\.[a-z0-9]{2,4}$/i, '').replace(/_/g, ' ');
+  const pick = (re, src = t) => { const m = src.match(re); return m ? { v: String(parseInt(m[1], 10)), m } : null; };
+  const blank = x => ' '.repeat(x.length); // mesmo tamanho, para a posição servir no nome original
+  const clean = t.replace(/\([^)]*\)|\[[^\]]*\]/g, blank).replace(/\bv(?:ol)?\.?\s*\d{1,2}\b(?=\s+\d)/gi, blank);
+  return pick(/#\s*(\d{1,4})\b/)
+    || pick(/\b(?:n[ºo°]|ed(?:i[cç][aã]o)?|cap(?:[ií]tulo)?|ch(?:apter)?|tomo|parte|volume|vol)\.?\s*(\d{1,4})\b/i, clean)
+    || pick(/^\s*(\d{1,4})\b(?!\s*[-–]\s*\d)/, clean)
+    || pick(/(?:^|\s|-)(\d{1,4})\s*$/, clean.trimEnd())
+    || pick(/\b(\d{1,3})\b(?!.*\b\d{1,3}\b)/, clean)
+    || { v: '', m: null };
+}
 function parseName(name, folder = '') {
   let base = name.replace(/\.[^.]+$/, '').replace(/[_]+/g, ' ').replace(/\s+/g, ' ').trim();
-  let volume = '';
-  const m = base.match(/(?:\b(?:v|vol|volume|tomo|ed|edi[cç][aã]o|#)\.?\s*)(\d{1,4})\b/i) || base.match(/\b(\d{1,4})\s*$/);
-  if (m) volume = String(parseInt(m[1], 10));
+  const vm = volFrom(base), m = vm.m;
+  const volume = vm.v;
   let series = folder || '';
   if (!series && m) series = base.slice(0, m.index).replace(/[-–—:,.(\[\s]+$/, '').trim();
   return { title: base, series, volume };
@@ -1245,6 +1272,7 @@ async function driveList(id, key, folderName, out, depth = 0, path = '') {
       throw new Error(`O Google respondeu ${r.status}. ${detail}`);
     }
     const data = await r.json();
+    SP.seen += (data.files || []).filter(f => f.mimeType === FOLDER && depth < 6).length; SP.files += (data.files || []).filter(f => f.mimeType !== FOLDER).length; syncProg();
     for (const f of data.files || []) {
       if (f.mimeType === FOLDER) { if (depth < 6) { try { await driveList(f.id, key, f.name, out, depth + 1, path ? path + '/' + f.name : f.name); } catch (e) { out.failed = (out.failed || 0) + 1; out.failErr = e.message; } } }
       else if (/\.(pdf|epub|cbz|zip|cbr|rar)$/i.test(f.name) || OKMIME.test(f.mimeType || '')) out.push({ ...f, folder: depth ? folderName : '', path });
@@ -1252,7 +1280,23 @@ async function driveList(id, key, folderName, out, depth = 0, path = '') {
     }
     token = data.nextPageToken;
   } while (token);
+  SP.done++; syncProg();
   return out;
+}
+// progresso da sincronização: pílula discreta no canto + fio no topo
+const SP = { on: false, seen: 0, done: 0, files: 0, i: 0, n: 0, phase: 'list' };
+let spT = 0;
+function syncProg(final) {
+  const el = $('#syncPill'); if (!el) return;
+  if (!SP.on) { el.classList.remove('on'); clearTimeout(spT); spT = setTimeout(() => { if (!SP.on) el.hidden = true; }, 400); $('#syncLine').style.setProperty('--p', 0); $('#syncLine').classList.remove('on'); return; }
+  const listP = SP.seen ? Math.min(1, SP.done / SP.seen) : 0;
+  const saveP = SP.n ? SP.i / SP.n : 0;
+  const pct = Math.round((SP.phase === 'list' ? listP * .8 : .8 + saveP * .2) * 100);
+  el.hidden = false; requestAnimationFrame(() => el.classList.add('on'));
+  $('#syncPct').textContent = Math.min(99, pct) + '%';
+  $('#syncTxt').textContent = SP.phase === 'list' ? `Lendo o Drive · ${SP.done}/${SP.seen} pastas` : `Organizando · ${SP.i.toLocaleString('pt-BR')}/${SP.n.toLocaleString('pt-BR')}`;
+  $('#syncBar').style.width = pct + '%';
+  const line = $('#syncLine'); line.classList.add('on'); line.style.setProperty('--p', pct / 100);
 }
 const driveURL = id => `https://www.googleapis.com/drive/v3/files/${id}?alt=media&supportsAllDrives=true&acknowledgeAbuse=true&key=${encodeURIComponent(S.gkey)}`;
 const bigThumb = u => String(u || '').replace(/=s\d+$/, '=s600');
@@ -1329,12 +1373,12 @@ async function syncDrive({ quiet = false } = {}) {
   if (syncing) { toast('Já estou buscando no Drive.'); return; }
   if (!S.gkey || !S.glinks.length) { if (!quiet) { toast('Primeiro configure a chave e uma pasta do Drive.'); openSettings(); } return; }
   syncing = true; S.gtry = Date.now(); saveS();
+  Object.assign(SP, { on: true, seen: S.glinks.length, done: 0, files: 0, i: 0, n: 0, phase: 'list' }); syncProg();
   const have = new Set(books.filter(b => b.source?.type === 'drive').map(b => b.source.fileId));
   let found = 0, fresh = 0, bad = 0;
   try {
     for (const link of S.glinks) {
       const id = folderId(link.url); if (!id) continue;
-      if (!quiet) toast('Procurando arquivos no Drive…');
       let list;
       try { list = await driveList(id, S.gkey, '', []); }
       catch (e) { bad++; toast(e.message, 7000); link.err = e.message; saveS(); renderLinks(); continue; }
@@ -1359,7 +1403,9 @@ async function syncDrive({ quiet = false } = {}) {
       if (moved) scheduleRender();
       const skip = new Set(S.skip || []);
       const t0 = Date.now(); let k = 0;
+      SP.phase = 'save'; SP.n = list.length; SP.i = 0; syncProg();
       for (const f of list.sort((a, b) => natural(a.name, b.name))) {
+        if (++SP.i % 40 === 0) syncProg();
         const old = books.find(b => b.source?.type === 'drive' && b.source.fileId === f.id);
         if (old) { if (old.remote && f.thumbnailLink) { old.thumb = bigThumb(f.thumbnailLink); if (!old.size && f.size) old.size = +f.size; await saveBook(old); } continue; }
         if (have.has(f.id) || skip.has(f.id)) continue;
@@ -1371,7 +1417,7 @@ async function syncDrive({ quiet = false } = {}) {
     S.glast = Date.now(); saveS(); renderLinks();
     if (fresh || (!quiet && !bad)) toast(fresh ? `${fresh} volume${fresh > 1 ? 's' : ''} novo${fresh > 1 ? 's' : ''} na estante. Cada um baixa quando você abrir.` : (found ? 'Tudo em dia. Nada novo no Drive.' : 'Não achei PDF, CBZ, CBR ou EPUB nessas pastas.'));
     ensurePersist();
-  } finally { syncing = false; }
+  } finally { syncing = false; SP.on = false; syncProg(); }
 }
 
 /* ---------------- volume de exemplo ---------------- */
@@ -2251,7 +2297,7 @@ function gestureEnd(el, x, y, dx, dy, dt, target, scrolled) {
       if (xr < .3) bkStep(-1); else if (xr > .7) bkStep(1); else toggleChrome();
       return true;
     }
-    if (bubbleOn() && target.tagName === 'IMG') { const bb = bubbleAt(target, x, y); if (bb) { showBubble(target, bb); return true; } }
+    if (bubbleOn() && target.tagName === 'IMG') { bubbleAt.why = ''; const bb = bubbleAt(target, x, y); if (bb) { showBubble(target, bb); return true; } console.debug('balão:', bubbleAt.why); }
     if (el.id === 'vscroll') { toggleChrome(); return true; }
     const xr = x / innerWidth;
     if (xr < .3) visualStep('left'); else if (xr > .7) visualStep('right'); else toggleChrome();
@@ -2400,9 +2446,11 @@ function bubbleAt(img, cx, cy) {
     const c = document.createElement('canvas'); c.width = w; c.height = h;
     const x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(img, 0, 0, w, h);
     const d = x.getImageData(0, 0, w, h).data;
-    const thr = { baixa: 225, normal: 205, alta: 180 }[S.bubSens] || 205;
-    const L = new Uint8Array(w * h);
-    for (let i = 0, j = 0; i < L.length; i++, j += 4) L[i] = (d[j] * .3 + d[j + 1] * .59 + d[j + 2] * .11) > thr ? 1 : 0;
+    // cada nível muda de verdade o quanto a área precisa parecer um balão de fala
+    const CF = ({ baixa: { thr: 220, line: .62, solid: .55, ink: 105, area: .06 }, normal: { thr: 200, line: .45, solid: .45, ink: 130, area: .08 }, alta: { thr: 178, line: .25, solid: .32, ink: 160, area: .12 } })[S.bubSens] || { thr: 200, line: .45, solid: .45, ink: 130, area: .08 };
+    const thr = CF.thr;
+    const L = new Uint8Array(w * h), LUM = new Uint8Array(w * h);
+    for (let i = 0, j = 0; i < L.length; i++, j += 4) { const v = d[j] * .3 + d[j + 1] * .59 + d[j + 2] * .11; LUM[i] = v; L[i] = v > thr ? 1 : 0; }
     const px = Math.round((cx - r.left) / r.width * w), py = Math.round((cy - r.top) / r.height * h);
     // o dedo pode cair em cima de uma letra (ou dentro do "o"): testa pontos claros ao redor até achar uma área de verdade
     const seen = new Uint16Array(w * h), stack = [];
@@ -2434,8 +2482,24 @@ function bubbleAt(img, cx, cy) {
     // as letras pequenas que já visitamos não fazem parte do balão
     const bw = x1 - x0 + 1, bh = y1 - y0 + 1;
     if (n < w * h * .0012 || bw < w * .05 || bh < h * .02 || bw > w * .8 || bh > h * .6) { bubbleAt.why = 'size ' + [n, bw, bh, w, h]; return null; }
-    if (n / (bw * bh) < .28) { bubbleAt.why = 'fill'; return null; }
-    if (bw * bh > w * h * .08) { bubbleAt.why = 'area'; return null; } // grande demais: é um quadro, não um balão
+    if (bw * bh > w * h * CF.area) { bubbleAt.why = 'area'; return null; } // grande demais: é um quadro, não um balão
+    // forma: balão é "cheio" (oval/retângulo); fundo de quadro recortado pela arte é irregular
+    {
+      let filled = 0; const colA = new Int32Array(bw).fill(-1), colB = new Int32Array(bw).fill(-1), rowA = [], rowB = [];
+      for (let Y = y0; Y <= y1; Y++) {
+        let a = -1, b = -1; const row = Y * w;
+        for (let X = x0; X <= x1; X++) if (seen[row + X] === lab) { if (a < 0) a = X; b = X; const c = X - x0; if (colA[c] < 0) colA[c] = Y; colB[c] = Y; }
+        if (a >= 0) { filled += b - a + 1; rowA.push([a, Y]); rowB.push([b, Y]); }
+      }
+      if (filled / (bw * bh) < CF.solid) { bubbleAt.why = 'forma ' + (filled / (bw * bh)).toFixed(2); return null; }
+      // contorno: logo fora da borda do balão costuma haver a linha escura do desenho do balão
+      let tot = 0, dark = 0;
+      const probe = (X, Y, dx, dy) => { for (let k = 1; k <= 3; k++) { const XX = X + dx * k, YY = Y + dy * k; if (XX < 0 || YY < 0 || XX >= w || YY >= h) return; if (LUM[YY * w + XX] < 110) { dark++; return; } } };
+      for (const [X, Y] of rowA) { tot++; probe(X, Y, -1, 0); }
+      for (const [X, Y] of rowB) { tot++; probe(X, Y, 1, 0); }
+      for (let c = 0; c < bw; c++) if (colA[c] >= 0) { tot += 2; probe(x0 + c, colA[c], 0, -1); probe(x0 + c, colB[c], 0, 1); }
+      if (tot && dark / tot < CF.line) { bubbleAt.why = 'contorno ' + (dark / tot).toFixed(2); return null; }
+    } // grande demais: é um quadro, não um balão
     // máscara: o balão inteiro (com as letras), um pouco engordado para pegar o contorno
     const R = Math.max(2, Math.round(w / 260)), mw = bw + R * 2, mh = bh + R * 2;
     let m = new Uint8Array(mw * mh), holes = 0;
@@ -2471,6 +2535,8 @@ function bubbleAt(img, cx, cy) {
         if (area >= 2 && hh <= bh * .45) small++;
       }
       if (small < 3 || bigA > n * .12 || bigH > bh * .5) { bubbleAt.why = 'nao-texto ' + [small, bigA, n, bigH, bh]; return null; }
+      let ink = 0, inkN = 0; for (let i = 0; i < inside.length; i++) if (inside[i]) { inkN++; const Y = y0 + ((i / bw) | 0), X = x0 + i % bw; if (LUM[Y * w + X] < CF.ink) ink++; }
+      if (inkN && ink / inkN < .45) { bubbleAt.why = 'tinta ' + (ink / inkN).toFixed(2); return null; }
     }
     const dil = (src, dx, dy) => { const o = new Uint8Array(mw * mh); for (let Y = 0; Y < mh; Y++) for (let X = 0; X < mw; X++) { if (!src[Y * mw + X]) continue; for (let k = -R; k <= R; k++) { const XX = X + k * dx, YY = Y + k * dy; if (XX >= 0 && YY >= 0 && XX < mw && YY < mh) o[YY * mw + XX] = 1; } } return o; };
     m = dil(dil(m, 1, 0), 0, 1);
@@ -2491,7 +2557,9 @@ function showBubble(img, bb) {
   x.globalCompositeOperation = 'destination-in'; x.imageSmoothingEnabled = true; x.drawImage(mc, 0, 0, cw, ch);
   const r = img.getBoundingClientRect(), k0 = r.width / bb.w;
   const from = { l: r.left + bb.x0 * k0, t: r.top + bb.y0 * k0, w: bb.mw * k0, h: bb.mh * k0 };
-  const k = Math.max(1, Math.min(+S.bubZoom || 2.8, innerWidth * .94 / from.w, innerHeight * .74 / from.h));
+  // Médio / Grande / Máximo = quanto da tela o balão ampliado ocupa (antes o limite da tela deixava os três iguais)
+  const frac = ({ 2: .5, 2.8: .72, 4: .94 })[+S.bubZoom] || .72;
+  const k = Math.max(1.15, Math.min(innerWidth * frac / from.w, innerHeight * frac * .8 / from.h));
   const fw = from.w * k, fh = from.h * k, fl = (innerWidth - fw) / 2, ft = (innerHeight - fh) / 2;
   Object.assign(out.style, { left: fl + 'px', top: ft + 'px', width: fw + 'px', height: fh + 'px' });
   const box = $('#bub'); $$('canvas', box).forEach(c => c.remove()); box.prepend(out); box.hidden = false; bubAt = Date.now();
@@ -2697,6 +2765,15 @@ bindGestures($('#bkview'));
     toast('Este navegador não deixou guardar arquivos. Fora da aba anônima deve funcionar.', 8000);
   }
   // uma vez só: tudo que entrou como mangá por engano vira HQ (ainda não havia mangás de verdade)
+  // uma vez só: refaz o número de cada volume do Drive (antes "v2" no nome virava edição 2 em todos)
+  if (!S.volFix2) {
+    S.volFix2 = true; saveS();
+    if (db) for (const b of books) {
+      const src = b.source?.name; if (!src) continue;
+      const v = volFrom(src.replace(/\.[^.]+$/, '')).v;
+      if (v && v !== String(b.volume || '')) { b.volume = v; await saveBook(b).catch(() => {}); }
+    }
+  }
   if (!S.kindFix1) {
     S.kindFix1 = true; saveS();
     if (db) for (const b of books) if (b.kind === 'manga') { b.kind = 'hq'; await saveBook(b).catch(() => {}); }
