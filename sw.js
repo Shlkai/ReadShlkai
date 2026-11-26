@@ -1,5 +1,5 @@
 // Shikai: guarda o app e as bibliotecas para abrir sem internet.
-const CACHE = 'shikai-v3';
+const CACHE = 'shikai-v4';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './lib/unrar.bundle.js',
   'lib/pdf.min.js',
   'lib/pdf.worker.min.js',

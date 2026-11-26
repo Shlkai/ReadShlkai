@@ -693,7 +693,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 2</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 3</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -732,6 +732,9 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
         <button class="btn" id="gAdd" style="align-self:end">Adicionar pasta</button></div>
       <div class="links" id="gLinks"></div>
       <label class="check" for="gAuto"><input type="checkbox" id="gAuto"> Buscar novidades sempre que eu abrir o app</label>
+      <label class="check" for="gCovers"><input type="checkbox" id="gCovers"> Baixar as capas de tudo (só a capa; a revista baixa quando você abre)</label>
+      <label class="check" for="gCoversCell"><input type="checkbox" id="gCoversCell"> Baixar capas também no 4G</label>
+      <p class="hint" id="gCovTxt"></p>
       <div class="row"><button class="btn primary" data-act="sync"><svg class="i"><use href="#i-sync"/></svg>Sincronizar agora</button><span class="hint" id="gLast"></span></div>
     </div>
     <div class="group">
@@ -954,30 +957,74 @@ function nice(b) {
   const ns = normT(ser), nt = normT(t);
   if (ns && (nt.includes(ns) || (nt.length > 6 && ns.includes(nt)))) return t;
   const numM = b.volume ? [0, b.volume] : (t.match(/(?:cap[ií]tulo|cap\.?|ch(?:apter)?|edi[cç][aã]o|ed\.|n[ºo°]\.?|#)\s*(\d{1,4})/i) || t.match(/^(\d{1,4})\b/));
-  const num = numM ? String(parseInt(numM[1], 10)) : '';
-  return num ? `${ser} #${num.padStart(2, '0')}` : ser;
+  const num = b.volume ? String(b.volume) : numM ? String(parseInt(numM[1], 10)) : '';
+  return num ? `${ser} #${num.replace(/^(\d)(?!\d)/, '0$1')}` : ser;
 }
 // número da edição a partir do nome do arquivo.
 // "v2"/"V.2" é o volume da SÉRIE (Espetacular Homem-Aranha v2), não a edição; anos "(2003)" também não contam.
+// Aceita meia edição ("70.5"); "70.0" vira "70".
+const numStr = x => { const n = parseFloat(String(x).replace(',', '.')); return isNaN(n) ? '' : String(n); };
+const N = String.raw`(\d{1,4}(?:[.,]\d{1,2})?)`;
+// "VOL. 03 (13-18) - Invencível 15" e "Volume 2 - Capítulo 01": o volume do começo é o encadernado, não a edição
+const LEAD_VOL = /^\s*vol(?:ume)?\.?\s*\d{1,3}\s*(?:\([^)]*\))?\s*[-–—:]\s*/i;
 function volFrom(base) {
-  const t = String(base || '').replace(/\.[a-z0-9]{2,4}$/i, '').replace(/_/g, ' ');
-  const pick = (re, src = t) => { const m = src.match(re); return m ? { v: String(parseInt(m[1], 10)), m } : null; };
+  const t = String(base || '').replace(/\.(cbr|cbz|pdf|zip|rar|epub)(\.(cbr|cbz|pdf|zip|rar))?$/i, '').replace(/_/g, ' ').replace(/(?<!\d)\.(?=\d)|(?<=\d)\.(?!\d)|(?<=[a-zà-ú]{2})\.(?=[a-zà-ú]{2})/gi, ' ');
   const blank = x => ' '.repeat(x.length); // mesmo tamanho, para a posição servir no nome original
-  const clean = t.replace(/\([^)]*\)|\[[^\]]*\]/g, blank).replace(/\bv(?:ol)?\.?\s*\d{1,2}\b(?=\s+\d)/gi, blank);
-  return pick(/#\s*(\d{1,4})\b/)
-    || pick(/\b(?:n[ºo°]|ed(?:i[cç][aã]o)?|cap(?:[ií]tulo)?|ch(?:apter)?|tomo|parte|volume|vol)\.?\s*(\d{1,4})\b/i, clean)
-    || pick(/^\s*(\d{1,4})\b(?!\s*[-–]\s*\d)/, clean)
-    || pick(/(?:^|\s|-)(\d{1,4})\s*$/, clean.trimEnd())
-    || pick(/\b(\d{1,3})\b(?!.*\b\d{1,3}\b)/, clean)
-    || { v: '', m: null };
+  const lead = t.match(LEAD_VOL);
+  const body = lead ? blank(lead[0]) + t.slice(lead[0].length) : t;
+  // i = onde começa o número (o que vem antes dele é o nome da série)
+  const pick = (re, src = body, g) => { const m = src.match(new RegExp(re.source, re.flags.replace('d', '') + 'd')); return m ? { v: numStr(m[1]), m, i: g ? m.indices[1][0] : m.index } : null; };
+  const clean = body.replace(/\([^)]*\)|\[[^\]]*\]/g, blank).replace(/\bv(?:ol)?\.?\s*\d{1,2}\b(?=\s+\d)/gi, blank);
+  return pick(/(?:^|[\s-])(\d{1,3})\s*[ºª°]\s*(?:arco|parte|edi|vol|cap)/i, clean)
+    || pick(new RegExp(String.raw`\b(?:cap[ií]tulo|cap\.|ch(?:apter)?|n[ºo°]|ed(?:i[cç][aã]o)?)\.?\s*` + N + String.raw`(?![\d])`, 'i'), clean)
+    // "Jovens Vingadores #1 (2005 - 2006) - 03": o #1 é a fase; a edição é o número do fim
+    || (/#\s*\d/.test(clean) ? pick(new RegExp(String.raw`[-–]\s*` + N + String.raw`\s*$`), clean.trimEnd()) : null)
+    // "Invasão 04 - Mulher-Maravilha V2 025", "Batman 03 - Dan Jurgens": o número logo antes do primeiro traço é a ordem de leitura
+    || pick(/^[^\d#()]{2,40}?\s(\d{1,3})\s+[-–]\s+\S/, clean, 1)
+    || pick(new RegExp(String.raw`\b` + N + String.raw`\s*de\s*\d{1,4}\b`, 'i'), clean)
+    || pick(new RegExp(String.raw`#\s*` + N + String.raw`(?![\d])`))
+    || pick(new RegExp(String.raw`\b(?:tomo|parte|volume|vol)\.?\s*` + N + String.raw`(?![\d])`, 'i'), clean)
+    || pick(/^\s*(\d{1,4})\b(?!\s*[-–]\s*\d)(?!\s*[-–]\s*cap)/i, clean)
+    || pick(new RegExp(String.raw`(?:^|\s|-)` + N + String.raw`\s*$`), clean.trimEnd())
+    || pick(/\b(\d{1,3})[ab]?\b(?!.*\b\d{1,3}[ab]?\b)/i, clean)
+    || (lead ? pick(/(\d{1,3})/, lead[0]) : null)
+    || { v: '', m: null, i: -1 };
 }
 function parseName(name, folder = '') {
-  let base = name.replace(/\.[^.]+$/, '').replace(/[_]+/g, ' ').replace(/\s+/g, ' ').trim();
-  const vm = volFrom(base), m = vm.m;
+  let base = name.replace(/\.(cbr|cbz|pdf|zip|rar|epub)(\.(cbr|cbz|pdf|zip|rar))?$/i, '').replace(/\.[a-z][a-z0-9]{1,3}$/i, '').replace(/[_]+/g, ' ').replace(/\s+/g, ' ').trim();
+  const vm = volFrom(base);
   const volume = vm.v;
   let series = folder || '';
-  if (!series && m) series = base.slice(0, m.index).replace(/[-–—:,.(\[\s]+$/, '').trim();
+  if (!series && vm.m) series = base.slice(0, vm.i).replace(/[-–—:,.(\[\s#]+$/, '').trim();
   return { title: base, series, volume };
+}
+// o que vem antes do número: "2018 - Capítulo 03" -> "2018"; "Mestre do Kung Fu - Capítulo 01" -> "Mestre do Kung Fu"
+function nameKey(name) {
+  const base = parseName(name).title, vm = volFrom(base);
+  let k = vm.m ? base.slice(0, vm.i) : base;
+  k = k.replace(LEAD_VOL, '').replace(/(^|[^#\d])\b\d{1,3}\b(?![\d)])/g, '$1').replace(/\s+/g, ' ').replace(/[-–—:,.(\[\s#]+$/, '').trim();
+  return k;
+}
+const kNorm = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+// série de um arquivo que divide a pasta com outras fases: "Homem-Aranha" + "2018" -> "Homem-Aranha (2018)"
+function subSeries(folder, key) {
+  if (/[A-ZÀ-Ú]{3}/.test(key) && key === key.toUpperCase()) key = key.toLowerCase().replace(/(^|[\s(-])(\p{L})/gu, (m, a, c) => a + c.toUpperCase()); // TUDO MAIÚSCULO vira Normal
+  const nf = kNorm(folder), nk = kNorm(key);
+  if (!nk || nk === nf || nf.includes(nk) || /^(extras?|tie-?ins?|especiais?)$/.test(nk)) return folder;
+  if (/^(\d{4}(\s*[-–]\s*\d{2,4})?|vol(ume)?\.?\s*\d+|fase\s*\d+|v\d+)$/i.test(key.trim())) return `${folder} (${key.trim()})`;
+  const g = key.match(/^(extras?|tie-?ins?|especiais?|extra)\s*[-–:]\s*(.+)$/i);
+  if (g) return `${folder}: ${g[2].trim()}`;
+  return key;
+}
+// numa pasta só, números repetidos querem dizer séries diferentes juntas: separa pelo que vem antes do número
+function nameFolder(files, folder) {
+  const ps = files.map(f => ({ f, p: parseName(f.name, folder) }));
+  const cnt = new Map(); let dup = false;
+  for (const x of ps) if (x.p.volume) { if (cnt.has(x.p.volume)) dup = true; cnt.set(x.p.volume, 1); }
+  const sub = folder && dup ? ps.map(x => subSeries(folder, nameKey(x.f.name))) : null;
+  const split = sub && new Set(sub).size > 1; // só separa se houver mesmo mais de uma série na pasta
+  ps.forEach((x, i) => { x.f.vol = x.p.volume; x.f.ser = split ? sub[i] : x.p.series; });
+  return files;
 }
 // editora e série a partir das pastas do Drive (ex.: HQs/Marvel/Homem-Aranha)
 const KIND_DIR = /^(shikai|acervo|minhas?|hqs?|quadrinhos|comics?|gibis?|mang[aá]s?|livros?|e-?books?|biblioteca)$/i;
@@ -1281,6 +1328,8 @@ async function driveFolder(id, key, folderName, depth = 0, path = '') {
     }
     token = data.nextPageToken;
   } while (token);
+  const pub = pubFromPath(path);
+  nameFolder(res.files, depth && folderName !== pub ? folderName : '');
   return res;
 }
 // lê as pastas em largura (primeiro as de cima), 4 de cada vez; cada pasta lida já entrega seus arquivos (out.onFiles)
@@ -1326,6 +1375,7 @@ const bigThumb = u => String(u || '').replace(/=s\d+$/, '=s600');
 function remoteBook(f, at) {
   const pub = pubFromPath(f.path), isEpub = /\.epub$/i.test(f.name) || /epub/.test(f.mimeType || '');
   const p = parseName(f.name, f.folder && f.folder !== pub ? f.folder : '');
+  if (f.ser !== undefined) { p.series = f.ser; p.volume = f.vol; }
   return {
     id: uid(), title: p.title, series: p.series, volume: p.volume,
     kind: isEpub ? 'livro' : guessKind(f.name, (f.path || '') + ' ' + (f.folder || '')), author: '', tags: [], fav: false, pos: 0,
@@ -1422,7 +1472,7 @@ async function syncDrive({ quiet = false } = {}) {
       link.err = list.failed ? `${list.failed} subpasta${list.failed > 1 ? 's' : ''} não abriu agora. Sincronize de novo daqui a pouco. (${list.failErr})` : ''; link.count = list.length; saveS(); renderLinks();
       if (list.failed) { bad++; toast(link.err, 7000); }
       found += list.length;
-      let moved = 0;
+      let moved = 0, renamed = 0;
       for (const f of list) {
         const old = books.find(b => b.source?.type === 'drive' && b.source.fileId === f.id);
         if (old && (old.path || '') !== (f.path || '')) {
@@ -1439,17 +1489,204 @@ async function syncDrive({ quiet = false } = {}) {
       for (const f of list.sort((a, b) => natural(a.name, b.name))) {
         if (++SP.i % 40 === 0) syncProg();
         const old = books.find(b => b.source?.type === 'drive' && b.source.fileId === f.id);
-        if (old) { if (old.remote && f.thumbnailLink) { old.thumb = bigThumb(f.thumbnailLink); if (!old.size && f.size) old.size = +f.size; await saveBook(old); } continue; }
+        if (old) {
+          let ch = false;
+          if (old.remote && f.thumbnailLink) { old.thumb = bigThumb(f.thumbnailLink); if (!old.size && f.size) old.size = +f.size; ch = true; }
+          // nome e número lidos de novo com as regras novas (não mexe no que o Vitor editou à mão)
+          if (f.ser !== undefined && !old.metaSet && (old.series !== f.ser || String(old.volume || '') !== f.vol)) {
+            const fold = f.folder && f.folder !== pubFromPath(f.path) ? f.folder : '';
+            if (old.series === fold || old.series === f.ser || !fold) { old.series = f.ser; old.volume = f.vol; ch = true; renamed++; }
+          }
+          if (ch) await saveBook(old);
+          continue;
+        }
         if (have.has(f.id) || skip.has(f.id)) continue;
         have.add(f.id); fresh++;
         await saveBook(remoteBook(f, t0 - k++));
       }
-      if (fresh) scheduleRender();
+      if (fresh || renamed) scheduleRender();
     }
     S.glast = Date.now(); saveS(); renderLinks();
     if (fresh || (!quiet && !bad)) toast(fresh ? `${fresh} volume${fresh > 1 ? 's' : ''} novo${fresh > 1 ? 's' : ''} na estante. Cada um baixa quando você abrir.` : (found ? 'Tudo em dia. Nada novo no Drive.' : 'Não achei PDF, CBZ, CBR ou EPUB nessas pastas.'));
     ensurePersist();
-  } finally { syncing = false; SP.on = false; syncProg(); }
+  } finally { syncing = false; SP.on = false; syncProg(); setTimeout(fetchCovers, 800); }
+}
+
+/* ---------------- capas do Drive ---------------- */
+// Baixa só a capa (a primeira página) de cada volume do Drive que ainda não tem uma. Usa a miniatura do Drive quando dá;
+// senão lê só o pedaço do arquivo onde está a capa: PDF por partes, CBZ pelo índice do zip, CBR até o fim da primeira imagem.
+// A revista inteira continua baixando só quando o Vitor abre.
+async function rangeGet(id, a, b) { // bytes [a, b)
+  const ctl = new AbortController();
+  const r = await gfetch(driveURL(id), { headers: { Range: `bytes=${a}-${b - 1}` }, signal: ctl.signal });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const skip = r.status === 206 ? 0 : a, need = b - a; // se o servidor ignorar o pedaço pedido, corta a conexão depois do necessário
+  const out = new Uint8Array(need); let got = 0, pos = 0; const rd = r.body.getReader();
+  while (got < need) {
+    const { done, value } = await rd.read(); if (done) break;
+    let v = value; if (pos < skip) { const c = Math.min(v.length, skip - pos); pos += c; v = v.subarray(c); }
+    const n = Math.min(v.length, need - got); out.set(v.subarray(0, n), got); got += n;
+  }
+  rd.cancel().catch(() => {}); ctl.abort();
+  CV.bytes += got;
+  return out.subarray(0, got);
+}
+function rangeReader(id, size) {
+  const W = 65536, win = new Map();
+  return {
+    async bytes(a, n) {
+      if (a < 0) a = 0; if (size) n = Math.min(n, size - a);
+      const out = new Uint8Array(Math.max(0, n)); let k = 0;
+      while (k < n) {
+        const w = Math.floor((a + k) / W);
+        if (!win.has(w)) win.set(w, await rangeGet(id, w * W, size ? Math.min(size, (w + 1) * W) : (w + 1) * W));
+        const c = win.get(w), off = a + k - w * W; if (off >= c.length) break;
+        const m = Math.min(c.length - off, n - k); out.set(c.subarray(off, off + m), k); k += m;
+      }
+      return out.subarray(0, k);
+    }
+  };
+}
+const td = new TextDecoder();
+const imgName = n => IMG_RE.test(n) && !/(^|\/)(__MACOSX|\.)/.test(n);
+// RAR: anda pelos cabeçalhos até a primeira imagem e diz onde ela termina (RAR 4 e RAR 5)
+async function rarCoverEnd(rd) {
+  const sig = await rd.bytes(0, 8), v5 = sig[6] === 1;
+  let pos = v5 ? 8 : 7;
+  for (let i = 0; i < 5000; i++) {
+    const h = await rd.bytes(pos, 1100); if (h.length < 7) return 0;
+    const dv = new DataView(h.buffer, h.byteOffset, h.byteLength);
+    if (!v5) {
+      const type = h[2], flags = dv.getUint16(3, true), size = dv.getUint16(5, true);
+      if (size < 7) return 0;
+      let add = flags & 0x8000 ? dv.getUint32(7, true) : 0;
+      if (type === 0x74) {
+        const big = flags & 0x100, nl = dv.getUint16(26, true), no = 32 + (big ? 8 : 0);
+        if (big) add += dv.getUint32(32, true) * 2 ** 32;
+        const name = td.decode(h.subarray(no, no + nl)).split('\0')[0], dir = (flags & 0xE0) === 0xE0;
+        if (!dir && imgName(name)) return pos + size + add;
+      } else if (type === 0x7b) return 0;
+      pos += size + add;
+    } else {
+      let p = 4;
+      const vint = () => { let x = 0, m = 1, c; do { c = h[p++]; x += (c & 0x7f) * m; m *= 128; } while (c & 0x80 && p < h.length); return x; };
+      const hs = vint(), start = pos + p, type = vint(), flags = vint();
+      if (flags & 1) vint();
+      const data = flags & 2 ? vint() : 0, next = start + hs + data;
+      if (type === 4 || type === 5 || !hs) return 0; // com senha, ou acabou
+      if (type === 2) {
+        const ff = vint(); vint(); vint(); if (ff & 2) p += 4; if (ff & 4) p += 4; vint(); vint();
+        const nl = vint(), name = td.decode(h.subarray(p, p + nl));
+        if (!(ff & 1) && imgName(name)) return next;
+      }
+      pos = next;
+    }
+  }
+  return 0;
+}
+async function rarCover(id, rd) {
+  const end = await rarCoverEnd(rd);
+  if (!end || end > 40e6) return null;
+  const data = await rangeGet(id, 0, end);
+  await loadUnrar();
+  if (!rarWasm) rarWasm = Uint8Array.from(atob(window.ShikaiUnrarWasm), c => c.charCodeAt(0)).buffer;
+  const ex = await ShikaiUnrar.createExtractorFromData({ data: data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength), wasmBinary: rarWasm.slice(0) });
+  const names = []; try { for (const h of ex.getFileList().fileHeaders) if (!h.flags.directory && imgName(h.name)) names.push(h.name); } catch (e) {}
+  if (!names.length) return null;
+  for (const f of ex.extract({ files: [names[0]] }).files) if (f.extraction) {
+    const ext = f.fileHeader.name.split('.').pop().toLowerCase();
+    return new Blob([f.extraction], { type: MIME[ext] || 'image/jpeg' });
+  }
+  return null;
+}
+// CBZ: lê o índice no fim do zip e baixa só a primeira página
+async function zipCover(id, rd, size) {
+  const n = Math.min(size, 65558), tail = await rd.bytes(size - n, n);
+  const dv = new DataView(tail.buffer, tail.byteOffset, tail.byteLength);
+  let e = -1; for (let i = tail.length - 22; i >= 0; i--) if (dv.getUint32(i, true) === 0x06054b50) { e = i; break; }
+  if (e < 0) return null;
+  const cdSize = dv.getUint32(e + 12, true), cdOff = dv.getUint32(e + 16, true);
+  if (cdOff === 0xffffffff || cdOff + cdSize > size) return null;
+  const cd = await rd.bytes(cdOff, cdSize), cv = new DataView(cd.buffer, cd.byteOffset, cd.byteLength), list = [];
+  for (let p = 0; p + 46 <= cd.length && cv.getUint32(p, true) === 0x02014b50;) {
+    const nl = cv.getUint16(p + 28, true), el = cv.getUint16(p + 30, true), cl = cv.getUint16(p + 32, true);
+    const name = td.decode(cd.subarray(p + 46, p + 46 + nl));
+    if (imgName(name)) list.push({ name, method: cv.getUint16(p + 10, true), csize: cv.getUint32(p + 20, true), off: cv.getUint32(p + 42, true) });
+    p += 46 + nl + el + cl;
+  }
+  const f = list.sort((a, b) => natural(a.name, b.name))[0];
+  if (!f || f.csize > 40e6 || (f.method !== 0 && f.method !== 8)) return null;
+  const lh = await rd.bytes(f.off, 30), lv = new DataView(lh.buffer, lh.byteOffset, lh.byteLength);
+  if (lv.getUint32(0, true) !== 0x04034b50) return null;
+  const at = f.off + 30 + lv.getUint16(26, true) + lv.getUint16(28, true);
+  const raw = await rangeGet(id, at, at + f.csize);
+  const type = MIME[f.name.split('.').pop().toLowerCase()] || 'image/jpeg';
+  if (f.method === 0) return new Blob([raw], { type });
+  return new Blob([await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer()], { type });
+}
+// PDF: o leitor de PDF pede só os pedaços que a primeira página usa
+async function pdfCover(id, size) {
+  if (!window.pdfjsLib) return null;
+  const head = await rangeGet(id, 0, Math.min(size, 131072));
+  const tr = new pdfjsLib.PDFDataRangeTransport(size, head);
+  let spent = 0;
+  tr.requestDataRange = (a, b) => { spent += b - a; if (spent > 30e6) return; rangeGet(id, a, b).then(d => tr.onDataRange(a, d)).catch(() => {}); };
+  const pdf = await Promise.race([pdfjsLib.getDocument({ range: tr, disableAutoFetch: true, disableStream: true, rangeChunkSize: 131072 }).promise, new Promise((_, no) => setTimeout(() => no(new Error('demorou')), 60000))]);
+  try {
+    const p = await Promise.race([pdf.getPage(1), new Promise((_, no) => setTimeout(() => no(new Error('demorou')), 60000))]);
+    const v1 = p.getViewport({ scale: 1 }), vp = p.getViewport({ scale: Math.min(4, 420 / v1.width) });
+    const c = document.createElement('canvas'); c.width = Math.round(vp.width); c.height = Math.round(vp.height);
+    const ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+    await Promise.race([p.render({ canvasContext: ctx, viewport: vp }).promise, new Promise((_, no) => setTimeout(() => no(new Error('demorou')), 90000))]);
+    const out = await new Promise(r => c.toBlob(r, 'image/jpeg', .85)); c.width = c.height = 0;
+    return out;
+  } finally { pdf.destroy(); }
+}
+async function thumbBlob(u) {
+  const r = await fetch(u, { mode: 'cors', credentials: 'omit', referrerPolicy: 'no-referrer' });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const b = await r.blob(); if (!/^image\//.test(b.type) || b.size < 2000) throw new Error('sem imagem');
+  return b;
+}
+async function coverFor(b) {
+  const id = b.source.fileId;
+  let blob = b.thumb ? await thumbBlob(b.thumb).catch(() => null) : null;
+  if (!blob) {
+    const size = +b.size || 0; if (!size) return null;
+    const rd = rangeReader(id, size), sig = await rd.bytes(0, 8);
+    const is = s => s.split('').every((c, i) => sig[i] === c.charCodeAt(0));
+    if (is('%PDF')) blob = await pdfCover(id, size);
+    else if (is('PK')) blob = await zipCover(id, rd, size);
+    else if (is('Rar!')) blob = await rarCover(id, rd);
+  }
+  return blob ? await downscale(blob) : null;
+}
+const CV = { on: false, bytes: 0, done: 0 };
+// sem capa no arquivo: tenta de novo em 7 dias; erro de rede: no dia seguinte
+const coverWanted = b => b.remote && !b.cover && b.source?.type === 'drive' && b.format !== 'epub' && !(b.coverTry > Date.now() - 7 * 864e5) && !(b.coverErr > Date.now() - 864e5);
+async function fetchCovers() {
+  if (CV.on || !S.gkey || !navigator.onLine || S.covers === false) return;
+  const c = navigator.connection; if (c && (c.saveData || (c.type === 'cellular' && !S.coversCell))) return;
+  CV.on = true;
+  try {
+    // primeiro as que estão na tela, depois as mais novas
+    const seen = new Set([...document.querySelectorAll('[data-open]')].map(x => x.dataset.open));
+    const list = books.filter(coverWanted).sort((a, b) => (seen.has(b.id) - seen.has(a.id)) || (b.addedAt || 0) - (a.addedAt || 0));
+    let last = Date.now(), errs = 0;
+    const work = async () => {
+      while (list.length && navigator.onLine && S.covers !== false && errs < 8) {
+        const b = list.shift(); if (!coverWanted(b)) continue;
+        try {
+          const blob = await coverFor(b);
+          if (blob) { b.cover = blob; delete b.coverTry; delete b.coverErr; CV.done++; } else b.coverTry = Date.now();
+          await saveBook(b); errs = 0;
+        } catch (e) { errs++; console.warn('capa', b.source?.name, e); if (navigator.onLine) { b.coverErr = Date.now(); await saveBook(b).catch(() => {}); } }
+        if (Date.now() - last > 2500) { last = Date.now(); scheduleRender(); }
+      }
+    };
+    await Promise.all([work(), work(), work()]);
+    scheduleRender();
+  } finally { CV.on = false; }
 }
 
 /* ---------------- volume de exemplo ---------------- */
@@ -1871,7 +2108,7 @@ function syncOffBtn() {
   const sb = $('#serOff'); if (sb && serie) { const l = books.filter(x => x.series === serie); const k = l.filter(saved).length; sb.classList.toggle('on', k === l.length); }
 }
 function netState() { $('#netBar').hidden = navigator.onLine; document.body.classList.toggle('nonet', !navigator.onLine); }
-addEventListener('online', () => { netState(); render(); }); addEventListener('offline', () => { netState(); render(); });
+addEventListener('online', () => { netState(); render(); setTimeout(fetchCovers, 3000); }); addEventListener('offline', () => { netState(); render(); });
 setTimeout(netState, 0);
 async function toggleFav(id) {
   const b = books.find(x => x.id === id); if (!b) return;
@@ -1930,6 +2167,7 @@ function openEdit(id) {
 $('#editForm').onsubmit = async e => {
   e.preventDefault(); if (!editing) return;
   if ($('#eTitle').value.trim() && $('#eTitle').value.trim() !== nice(editing)) editing.titleSet = true;
+  if ($('#eSerie').value.trim() !== (editing.series || '') || $('#eVol').value.trim() !== String(editing.volume || '')) editing.metaSet = true;
   Object.assign(editing, { title: $('#eTitle').value.trim() || editing.title, series: $('#eSerie').value.trim(), volume: $('#eVol').value.trim(), kind: segVal($('#eKind')) || editing.kind, author: $('#eAuthor').value.trim(), publisher: (v => v === pubFromPath(editing.path) ? '' : v)($('#ePub').value.trim()), tags: [...new Set($('#eTags').value.split(',').map(t => t.trim()).filter(Boolean).map(t => t[0].toUpperCase() + t.slice(1)))] });
   await saveBook(editing); $('#editDlg').close(); render(); toast('Salvo.');
 };
@@ -1969,7 +2207,7 @@ $('#eDelYes').onclick = async () => {
 /* ---------------- configurações ---------------- */
 function openSettings(focusDrive) {
   segSet($('#themeSeg'), S.theme); segSet($('#mangaDirSeg'), S.mangaDir); segSet($('#hqDirSeg'), S.hqDir); segSet($('#kindSeg'), S.kind);
-  $('#gkey').value = S.gkey; $('#gAuto').checked = S.gauto; $('#sBub').checked = S.bubble; segSet($('#sSwipe'), S.swipe || 'ambos'); $('#sAwake').checked = S.awake; $('#sWheel').checked = S.wheel !== false; $('#sCalm').checked = S.autoCalm; $('#sNext').checked = S.nextPrompt; $('#wipeConfirm').hidden = true;
+  $('#gkey').value = S.gkey; $('#gAuto').checked = S.gauto; $('#gCovers').checked = S.covers !== false; $('#gCoversCell').checked = !!S.coversCell; covTxt(); $('#sBub').checked = S.bubble; segSet($('#sSwipe'), S.swipe || 'ambos'); $('#sAwake').checked = S.awake; $('#sWheel').checked = S.wheel !== false; $('#sCalm').checked = S.autoCalm; $('#sNext').checked = S.nextPrompt; $('#wipeConfirm').hidden = true;
   renderLinks(); updateUsage();
   $('#setDlg').showModal();
   if (focusDrive) setTimeout(() => (S.gkey ? $('#glink') : $('#gkey')).focus(), 50);
@@ -1981,6 +2219,12 @@ segBind($('#hqDirSeg'), v => { S.hqDir = v; saveS(); });
 segBind($('#kindSeg'), v => { S.kind = v; saveS(); });
 $('#gkey').addEventListener('change', e => { S.gkey = e.target.value.trim(); saveS(); });
 $('#gAuto').onchange = e => { S.gauto = e.target.checked; saveS(); };
+$('#gCovers').onchange = e => { S.covers = e.target.checked; saveS(); if (S.covers) fetchCovers(); };
+$('#gCoversCell').onchange = e => { S.coversCell = e.target.checked; saveS(); if (S.coversCell) fetchCovers(); };
+function covTxt() {
+  const d = books.filter(b => b.source?.type === 'drive' && b.format !== 'epub'), w = d.filter(b => b.cover || !b.remote).length;
+  $('#gCovTxt').textContent = d.length ? `Capas no aparelho: ${w.toLocaleString('pt-BR')} de ${d.length.toLocaleString('pt-BR')}${CV.on ? ' · baixando…' : ''}` : '';
+}
 segBind($('#sSwipe'), v => { S.swipe = v; saveS(); });
 $('#sBub').onchange = e => { S.bubble = e.target.checked; saveS(); };
 $('#sAwake').onchange = e => { S.awake = e.target.checked; saveS(); };
@@ -2813,7 +3057,11 @@ bindGestures($('#bkview'));
   render();
   checkInvite();
   // busca automática no máximo a cada 3 horas (cada busca percorre todas as pastas; muitas seguidas fazem o Google bloquear por um tempo)
-  if (S.gauto && S.gkey && S.glinks.length && navigator.onLine && Date.now() - (S.gtry || 0) > 3 * 3600e3) setTimeout(() => syncDrive({ quiet: true }), 1500);
+  // nomes e números novos (v2): relê o Drive uma vez para corrigir as séries já na estante
+  const reName = S.nameV !== 2 && S.gkey && S.glinks.length;
+  if (reName) { S.nameV = 2; saveS(); }
+  if (S.gkey && S.glinks.length && navigator.onLine && (reName || (S.gauto && Date.now() - (S.gtry || 0) > 3 * 3600e3))) setTimeout(() => syncDrive({ quiet: true }), 1500);
+  else setTimeout(fetchCovers, 2500);
 })();
 if ('serviceWorker' in navigator && document.querySelector('link[rel="manifest"]')) {
   addEventListener('load', () => navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(r => { r.update().catch(() => {}); }).catch(() => {}));
