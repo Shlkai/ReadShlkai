@@ -12,7 +12,11 @@ jobs:
     timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get install -y -qq poppler-utils libarchive-tools imagemagick p7zip-full p7zip-rar mupdf-tools >/dev/null
+      - run: |
+          sudo apt-get update -qq >/dev/null
+          sudo apt-get install -y -qq poppler-utils libarchive-tools imagemagick mupdf-tools >/dev/null
+          sudo apt-get install -y -qq 7zip >/dev/null || sudo apt-get install -y -qq p7zip-full >/dev/null || true
+          which 7zz 7z || true
       - run: python3 tools/hq.py
         env: { MINUTES: '${{ inputs.minutes }}', TRIES: '3' }
       - if: always()

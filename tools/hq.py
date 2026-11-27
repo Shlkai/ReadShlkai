@@ -1,6 +1,6 @@
 # Capa de cada HQ (1ª página do arquivo no Drive público) -> covers/hq/<id>.jpg + covers/hq/index.json
 # Roda no GitHub Actions. Lista a pasta HQs pela página pública do Drive (sem chave).
-import json, os, re, subprocess, sys, time, html, urllib.request, tempfile, shutil
+import json, os, shutil as _sh, re, subprocess, sys, time, html, urllib.request, tempfile, shutil
 ROOT = '11wvXlT24OPcZqQ_Oz3KlAtHecXCxUlgq'
 UA = {'User-Agent': 'Mozilla/5.0 ShikaiCovers'}
 OUT = 'covers/hq'; os.makedirs(OUT, exist_ok=True)
@@ -42,11 +42,12 @@ def first_img(a, tmp):
         p = os.path.join(tmp, names[0])
         if os.path.exists(p) and os.path.getsize(p) > 2000: return p, ''
     # 7-Zip lê RAR5 e arquivos que o bsdtar recusa
-    r = subprocess.run(['7z', 'l', '-slt', '-ba', a], capture_output=True)
+    Z = _sh.which('7zz') or _sh.which('7z') or '7z'
+    r = subprocess.run([Z, 'l', '-slt', '-ba', a], capture_output=True)
     names = sorted([l[7:] for l in r.stdout.decode('utf-8', 'replace').split('\n') if l.startswith('Path = ') and IMG.search(l)], key=nat)
     if names:
         os.makedirs(tmp + '/x', exist_ok=True)
-        subprocess.run(['7z', 'e', '-y', '-o' + tmp + '/x', a, names[0]], capture_output=True)
+        subprocess.run([Z, 'e', '-y', '-o' + tmp + '/x', a, names[0]], capture_output=True)
         xs = [os.path.join(tmp, 'x', x) for x in os.listdir(tmp + '/x')]
         if xs and os.path.getsize(xs[0]) > 2000: return xs[0], ''
     return None, (r.stderr.decode('utf-8', 'replace')[-120:] or 'sem imagens na lista')
