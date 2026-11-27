@@ -11,7 +11,33 @@
   "key": "re zero",
   "anilist": "Re:Zero kara Hajimeru Isekai Seikatsu Daisanshou: Truth of Zero",
   "mangadex": "",
-  "mode": "none"
+  "mode": "volumes",
+  "parts": [
+   {
+    "mangadex": "Re:Zero kara Hajimeru Isekai Seikatsu Daiisshou",
+    "must": "daiisshou",
+    "files": [
+     1,
+     2
+    ]
+   },
+   {
+    "mangadex": "Re:Zero kara Hajimeru Isekai Seikatsu Dainishou",
+    "must": "dainishou",
+    "files": [
+     3,
+     6
+    ]
+   },
+   {
+    "mangadex": "Re:Zero kara Hajimeru Isekai Seikatsu Daisanshou Truth of Zero",
+    "must": "truth of zero",
+    "files": [
+     7,
+     17
+    ]
+   }
+  ]
  },
  {
   "key": "saint seiya the lost canvas",

@@ -34,6 +34,24 @@ def wiki_chapters(txt):
                 cv.append([float(nxt), v]); nxt += 1
             if re.match(r'\|\s*Summary\s*=', l): break
     return sorted(cv)
+RANK = lambda l: {'ja': 0, 'en': 1, 'pt-br': 2}.get(l, 3)
+def md_covers(mid):
+    best = {}
+    for off in range(0, 400, 100):
+        c = js(f'https://api.mangadex.org/cover?manga[]={mid}&limit=100&offset={off}&order[volume]=asc')
+        for x in c.get('data') or []:
+            v = (x['attributes'].get('volume') or '').strip()
+            if not v: continue
+            try: v = str(int(float(v))) if float(v) == int(float(v)) else v
+            except: pass
+            if v not in best or RANK(x['attributes'].get('locale')) < RANK(best[v][1]): best[v] = (x['attributes']['fileName'], x['attributes'].get('locale'))
+        if len(c.get('data') or []) < 100: break
+        time.sleep(0.5)
+    return best
+def md_titles(x):
+    a = x['attributes']; out = list((a.get('title') or {}).values())
+    for t in a.get('altTitles') or []: out += list(t.values())
+    return ' | '.join(out).lower()
 out, log = {}, []
 for s in json.load(open('covers/series.json')):
     k = s['key']; d = 'covers/' + slug(k); os.makedirs(d, exist_ok=True)
@@ -82,6 +100,18 @@ for s in json.load(open('covers/series.json')):
                         except: pass
                 e['chVol'] = sorted(cv)
             log.append(f"  MangaDex {mid} {t} -> {len(e['vols'])} volumes, {len(e['chVol'])} capitulos mapeados")
+        time.sleep(1)
+    # obra dividida em partes (ex.: Re Zero em arcos): arquivo N -> volume da parte certa
+    for pt in s.get('parts') or []:
+        r = js('https://api.mangadex.org/manga?' + urllib.parse.urlencode({'title': pt['mangadex'], 'limit': 10, 'order[relevance]': 'desc'}))
+        must = pt.get('must', '').lower()
+        hit = [x for x in r.get('data') or [] if must in md_titles(x)]
+        if not hit: log.append(f"  parte {pt['mangadex']} -> NAO ACHEI"); continue
+        x = hit[0]; best = md_covers(x['id']); a, z = pt['files']; ok = 0
+        for n in range(a, z + 1):
+            v = str(n - a + pt.get('start', 1))
+            if v in best and save(f'{d}/v{n}.jpg', f"https://uploads.mangadex.org/covers/{x['id']}/{best[v][0]}.512.jpg"): e['vols'][str(n)] = f'{d}/v{n}.jpg'; ok += 1
+        log.append(f"  parte {list(x['attributes']['title'].values())[0]} arquivos {a}-{z} -> {ok} capas")
         time.sleep(1)
     if s.get('wiki'):
         # capítulo -> volume pela lista de capítulos da Wikipédia
