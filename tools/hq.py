@@ -59,13 +59,15 @@ def cover(f):
             b = get(DL.format(f['id']), rng)
             if not b: why = 'download falhou'; continue
             open(a, 'wb').write(b)
-            if b[:15].lstrip().startswith(b'<'): return 'Drive mandou pagina HTML (%d bytes)' % len(b)
+            if b[:15].lstrip().startswith(b'<'):
+                t = re.search(rb'<title>(.*?)</title>', b, re.S); return 'Drive mandou pagina HTML (%d bytes) %s' % (len(b), t and t.group(1)[:80])
             if pdf or b[:5] == b'%PDF-':
-                subprocess.run(['pdftoppm', '-f', '1', '-l', '1', '-jpeg', '-scale-to', '900', a, tmp + '/p'], capture_output=True)
+                r1 = subprocess.run(['pdftoppm', '-f', '1', '-l', '1', '-jpeg', '-scale-to', '900', a, tmp + '/p'], capture_output=True)
                 pg = [x for x in os.listdir(tmp) if x.startswith('p')]
-                if not pg: subprocess.run(['mutool', 'draw', '-o', tmp + '/p1.png', '-w', '900', a, '1'], capture_output=True); pg = [x for x in os.listdir(tmp) if x.startswith('p')]
+                r2 = None
+                if not pg: r2 = subprocess.run(['mutool', 'draw', '-o', tmp + '/p1.png', '-w', '900', a, '1'], capture_output=True); pg = [x for x in os.listdir(tmp) if x.startswith('p')]
                 if pg and shrink(tmp + '/' + pg[0], dst): return None
-                why = 'pdf sem 1a pagina (%d bytes, %r)' % (len(b), b[:8])
+                why = 'pdf sem 1a pagina (%d bytes, %r) pg=%s pdftoppm=%s mutool=%s' % (len(b), b[:8], pg, r1.stderr[-150:], r2 and r2.stderr[-150:])
             else:
                 p, why = first_img(a, tmp)
                 if p and shrink(p, dst): return None
