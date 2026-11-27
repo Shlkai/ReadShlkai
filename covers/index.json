@@ -43,36 +43,7 @@
    "37": "covers/black-clover/v37.jpg",
    "38": "covers/black-clover/v38.jpg"
   },
-  "chVol": [
-   [
-    271.0,
-    "27"
-   ],
-   [
-    272.0,
-    "27"
-   ],
-   [
-    273.0,
-    "28"
-   ],
-   [
-    274.0,
-    "28"
-   ],
-   [
-    275.0,
-    "28"
-   ],
-   [
-    276.0,
-    "28"
-   ],
-   [
-    277.0,
-    "28"
-   ]
-  ],
+  "chVol": [],
   "main": "covers/black-clover/obra.jpg"
  },
  "re zero": {
@@ -85,7 +56,33 @@
  "saint seiya the lost canvas": {
   "mode": "volumes",
   "force": false,
-  "vols": {},
+  "vols": {
+   "1": "covers/saint-seiya-the-lost-canvas/v1.jpg",
+   "2": "covers/saint-seiya-the-lost-canvas/v2.jpg",
+   "3": "covers/saint-seiya-the-lost-canvas/v3.jpg",
+   "4": "covers/saint-seiya-the-lost-canvas/v4.jpg",
+   "5": "covers/saint-seiya-the-lost-canvas/v5.jpg",
+   "6": "covers/saint-seiya-the-lost-canvas/v6.jpg",
+   "7": "covers/saint-seiya-the-lost-canvas/v7.jpg",
+   "8": "covers/saint-seiya-the-lost-canvas/v8.jpg",
+   "9": "covers/saint-seiya-the-lost-canvas/v9.jpg",
+   "10": "covers/saint-seiya-the-lost-canvas/v10.jpg",
+   "11": "covers/saint-seiya-the-lost-canvas/v11.jpg",
+   "12": "covers/saint-seiya-the-lost-canvas/v12.jpg",
+   "13": "covers/saint-seiya-the-lost-canvas/v13.jpg",
+   "14": "covers/saint-seiya-the-lost-canvas/v14.jpg",
+   "15": "covers/saint-seiya-the-lost-canvas/v15.jpg",
+   "16": "covers/saint-seiya-the-lost-canvas/v16.jpg",
+   "17": "covers/saint-seiya-the-lost-canvas/v17.jpg",
+   "18": "covers/saint-seiya-the-lost-canvas/v18.jpg",
+   "19": "covers/saint-seiya-the-lost-canvas/v19.jpg",
+   "20": "covers/saint-seiya-the-lost-canvas/v20.jpg",
+   "21": "covers/saint-seiya-the-lost-canvas/v21.jpg",
+   "22": "covers/saint-seiya-the-lost-canvas/v22.jpg",
+   "23": "covers/saint-seiya-the-lost-canvas/v23.jpg",
+   "24": "covers/saint-seiya-the-lost-canvas/v24.jpg",
+   "25": "covers/saint-seiya-the-lost-canvas/v25.jpg"
+  },
   "chVol": [],
   "main": "covers/saint-seiya-the-lost-canvas/obra.jpg"
  },
@@ -138,7 +135,42 @@
  "enen no shouboutai": {
   "mode": "volumes",
   "force": false,
-  "vols": {},
+  "vols": {
+   "1": "covers/enen-no-shouboutai/v1.jpg",
+   "2": "covers/enen-no-shouboutai/v2.jpg",
+   "3": "covers/enen-no-shouboutai/v3.jpg",
+   "4": "covers/enen-no-shouboutai/v4.jpg",
+   "5": "covers/enen-no-shouboutai/v5.jpg",
+   "6": "covers/enen-no-shouboutai/v6.jpg",
+   "7": "covers/enen-no-shouboutai/v7.jpg",
+   "8": "covers/enen-no-shouboutai/v8.jpg",
+   "9": "covers/enen-no-shouboutai/v9.jpg",
+   "10": "covers/enen-no-shouboutai/v10.jpg",
+   "11": "covers/enen-no-shouboutai/v11.jpg",
+   "12": "covers/enen-no-shouboutai/v12.jpg",
+   "13": "covers/enen-no-shouboutai/v13.jpg",
+   "14": "covers/enen-no-shouboutai/v14.jpg",
+   "15": "covers/enen-no-shouboutai/v15.jpg",
+   "16": "covers/enen-no-shouboutai/v16.jpg",
+   "17": "covers/enen-no-shouboutai/v17.jpg",
+   "18": "covers/enen-no-shouboutai/v18.jpg",
+   "19": "covers/enen-no-shouboutai/v19.jpg",
+   "20": "covers/enen-no-shouboutai/v20.jpg",
+   "21": "covers/enen-no-shouboutai/v21.jpg",
+   "22": "covers/enen-no-shouboutai/v22.jpg",
+   "23": "covers/enen-no-shouboutai/v23.jpg",
+   "24": "covers/enen-no-shouboutai/v24.jpg",
+   "25": "covers/enen-no-shouboutai/v25.jpg",
+   "26": "covers/enen-no-shouboutai/v26.jpg",
+   "27": "covers/enen-no-shouboutai/v27.jpg",
+   "28": "covers/enen-no-shouboutai/v28.jpg",
+   "29": "covers/enen-no-shouboutai/v29.jpg",
+   "30": "covers/enen-no-shouboutai/v30.jpg",
+   "31": "covers/enen-no-shouboutai/v31.jpg",
+   "32": "covers/enen-no-shouboutai/v32.jpg",
+   "33": "covers/enen-no-shouboutai/v33.jpg",
+   "34": "covers/enen-no-shouboutai/v34.jpg"
+  },
   "chVol": [],
   "main": "covers/enen-no-shouboutai/obra.jpg"
  },
