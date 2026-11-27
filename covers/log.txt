@@ -21,3 +21,5 @@ nana: AniList 30028 NANA -> ok
 death note: AniList 30021 DEATH NOTE -> ok
 vagabond: AniList 30656 Vagabond -> ok
 berserk: AniList 30002 Berserk -> ok
+bleach: AniList 30012 BLEACH -> ok
+  MangaDex 239d6260-d71f-43b0-afff-074e3619e3de {'en': 'Bleach'} -> 74 volumes, 0 capitulos mapeados
