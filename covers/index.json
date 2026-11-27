@@ -1,0 +1,248 @@
+{
+ "black clover": {
+  "mode": "chapters",
+  "force": true,
+  "vols": {
+   "1": "covers/black-clover/v1.jpg",
+   "2": "covers/black-clover/v2.jpg",
+   "3": "covers/black-clover/v3.jpg",
+   "4": "covers/black-clover/v4.jpg",
+   "5": "covers/black-clover/v5.jpg",
+   "6": "covers/black-clover/v6.jpg",
+   "7": "covers/black-clover/v7.jpg",
+   "8": "covers/black-clover/v8.jpg",
+   "9": "covers/black-clover/v9.jpg",
+   "10": "covers/black-clover/v10.jpg",
+   "11": "covers/black-clover/v11.jpg",
+   "12": "covers/black-clover/v12.jpg",
+   "13": "covers/black-clover/v13.jpg",
+   "14": "covers/black-clover/v14.jpg",
+   "15": "covers/black-clover/v15.jpg",
+   "16": "covers/black-clover/v16.jpg",
+   "16.5": "covers/black-clover/v16.5.jpg",
+   "17": "covers/black-clover/v17.jpg",
+   "18": "covers/black-clover/v18.jpg",
+   "19": "covers/black-clover/v19.jpg",
+   "20": "covers/black-clover/v20.jpg",
+   "21": "covers/black-clover/v21.jpg",
+   "22": "covers/black-clover/v22.jpg",
+   "23": "covers/black-clover/v23.jpg",
+   "24": "covers/black-clover/v24.jpg",
+   "25": "covers/black-clover/v25.jpg",
+   "26": "covers/black-clover/v26.jpg",
+   "27": "covers/black-clover/v27.jpg",
+   "28": "covers/black-clover/v28.jpg",
+   "29": "covers/black-clover/v29.jpg",
+   "30": "covers/black-clover/v30.jpg",
+   "31": "covers/black-clover/v31.jpg",
+   "32": "covers/black-clover/v32.jpg",
+   "33": "covers/black-clover/v33.jpg",
+   "34": "covers/black-clover/v34.jpg",
+   "35": "covers/black-clover/v35.jpg",
+   "36": "covers/black-clover/v36.jpg",
+   "37": "covers/black-clover/v37.jpg",
+   "38": "covers/black-clover/v38.jpg"
+  },
+  "chVol": [
+   [
+    271.0,
+    "27"
+   ],
+   [
+    272.0,
+    "27"
+   ],
+   [
+    273.0,
+    "28"
+   ],
+   [
+    274.0,
+    "28"
+   ],
+   [
+    275.0,
+    "28"
+   ],
+   [
+    276.0,
+    "28"
+   ],
+   [
+    277.0,
+    "28"
+   ]
+  ],
+  "main": "covers/black-clover/obra.jpg"
+ },
+ "re zero": {
+  "mode": "none",
+  "force": false,
+  "vols": {},
+  "chVol": [],
+  "main": "covers/re-zero/obra.jpg"
+ },
+ "saint seiya the lost canvas": {
+  "mode": "volumes",
+  "force": false,
+  "vols": {},
+  "chVol": [],
+  "main": "covers/saint-seiya-the-lost-canvas/obra.jpg"
+ },
+ "saint seiya": {
+  "mode": "none",
+  "force": false,
+  "vols": {},
+  "chVol": [],
+  "main": "covers/saint-seiya/obra.jpg"
+ },
+ "dragon ball super": {
+  "mode": "volumes",
+  "force": false,
+  "vols": {
+   "1": "covers/dragon-ball-super/v1.jpg",
+   "2": "covers/dragon-ball-super/v2.jpg",
+   "3": "covers/dragon-ball-super/v3.jpg",
+   "4": "covers/dragon-ball-super/v4.jpg",
+   "5": "covers/dragon-ball-super/v5.jpg",
+   "6": "covers/dragon-ball-super/v6.jpg",
+   "7": "covers/dragon-ball-super/v7.jpg",
+   "8": "covers/dragon-ball-super/v8.jpg",
+   "9": "covers/dragon-ball-super/v9.jpg",
+   "10": "covers/dragon-ball-super/v10.jpg",
+   "11": "covers/dragon-ball-super/v11.jpg",
+   "12": "covers/dragon-ball-super/v12.jpg",
+   "13": "covers/dragon-ball-super/v13.jpg",
+   "14": "covers/dragon-ball-super/v14.jpg",
+   "15": "covers/dragon-ball-super/v15.jpg",
+   "16": "covers/dragon-ball-super/v16.jpg",
+   "17": "covers/dragon-ball-super/v17.jpg",
+   "18": "covers/dragon-ball-super/v18.jpg",
+   "19": "covers/dragon-ball-super/v19.jpg",
+   "20": "covers/dragon-ball-super/v20.jpg",
+   "21": "covers/dragon-ball-super/v21.jpg",
+   "22": "covers/dragon-ball-super/v22.jpg",
+   "23": "covers/dragon-ball-super/v23.jpg",
+   "24": "covers/dragon-ball-super/v24.jpg"
+  },
+  "chVol": [],
+  "main": "covers/dragon-ball-super/obra.jpg"
+ },
+ "dragon ball": {
+  "mode": "none",
+  "force": false,
+  "vols": {},
+  "chVol": [],
+  "main": "covers/dragon-ball/obra.jpg"
+ },
+ "enen no shouboutai": {
+  "mode": "volumes",
+  "force": false,
+  "vols": {},
+  "chVol": [],
+  "main": "covers/enen-no-shouboutai/obra.jpg"
+ },
+ "tokyo revengers": {
+  "mode": "volumes",
+  "force": false,
+  "vols": {
+   "1": "covers/tokyo-revengers/v1.jpg",
+   "1.1": "covers/tokyo-revengers/v1.1.jpg",
+   "2": "covers/tokyo-revengers/v2.jpg",
+   "2.1": "covers/tokyo-revengers/v2.1.jpg",
+   "3": "covers/tokyo-revengers/v3.jpg",
+   "3.1": "covers/tokyo-revengers/v3.1.jpg",
+   "4": "covers/tokyo-revengers/v4.jpg",
+   "4.1": "covers/tokyo-revengers/v4.1.jpg",
+   "5": "covers/tokyo-revengers/v5.jpg",
+   "6": "covers/tokyo-revengers/v6.jpg",
+   "7": "covers/tokyo-revengers/v7.jpg",
+   "8": "covers/tokyo-revengers/v8.jpg",
+   "9": "covers/tokyo-revengers/v9.jpg",
+   "10": "covers/tokyo-revengers/v10.jpg",
+   "11": "covers/tokyo-revengers/v11.jpg",
+   "12": "covers/tokyo-revengers/v12.jpg",
+   "13": "covers/tokyo-revengers/v13.jpg",
+   "14": "covers/tokyo-revengers/v14.jpg",
+   "15": "covers/tokyo-revengers/v15.jpg",
+   "16": "covers/tokyo-revengers/v16.jpg",
+   "17": "covers/tokyo-revengers/v17.jpg",
+   "18": "covers/tokyo-revengers/v18.jpg",
+   "19": "covers/tokyo-revengers/v19.jpg",
+   "20": "covers/tokyo-revengers/v20.jpg",
+   "21": "covers/tokyo-revengers/v21.jpg",
+   "22": "covers/tokyo-revengers/v22.jpg",
+   "23": "covers/tokyo-revengers/v23.jpg",
+   "24": "covers/tokyo-revengers/v24.jpg",
+   "25": "covers/tokyo-revengers/v25.jpg",
+   "26": "covers/tokyo-revengers/v26.jpg",
+   "27": "covers/tokyo-revengers/v27.jpg",
+   "28": "covers/tokyo-revengers/v28.jpg",
+   "29": "covers/tokyo-revengers/v29.jpg",
+   "30": "covers/tokyo-revengers/v30.jpg",
+   "31": "covers/tokyo-revengers/v31.jpg"
+  },
+  "chVol": [],
+  "main": "covers/tokyo-revengers/obra.jpg"
+ },
+ "chainsaw man": {
+  "mode": "volumes",
+  "force": false,
+  "vols": {
+   "1": "covers/chainsaw-man/v1.jpg",
+   "2": "covers/chainsaw-man/v2.jpg",
+   "3": "covers/chainsaw-man/v3.jpg",
+   "4": "covers/chainsaw-man/v4.jpg",
+   "5": "covers/chainsaw-man/v5.jpg",
+   "6": "covers/chainsaw-man/v6.jpg",
+   "7": "covers/chainsaw-man/v7.jpg",
+   "8": "covers/chainsaw-man/v8.jpg",
+   "9": "covers/chainsaw-man/v9.jpg",
+   "10": "covers/chainsaw-man/v10.jpg",
+   "11": "covers/chainsaw-man/v11.jpg",
+   "12": "covers/chainsaw-man/v12.jpg",
+   "13": "covers/chainsaw-man/v13.jpg",
+   "14": "covers/chainsaw-man/v14.jpg",
+   "15": "covers/chainsaw-man/v15.jpg",
+   "16": "covers/chainsaw-man/v16.jpg",
+   "17": "covers/chainsaw-man/v17.jpg",
+   "18": "covers/chainsaw-man/v18.jpg",
+   "19": "covers/chainsaw-man/v19.jpg",
+   "20": "covers/chainsaw-man/v20.jpg",
+   "21": "covers/chainsaw-man/v21.jpg",
+   "22": "covers/chainsaw-man/v22.jpg",
+   "23": "covers/chainsaw-man/v23.jpg",
+   "24": "covers/chainsaw-man/v24.jpg"
+  },
+  "chVol": [],
+  "main": "covers/chainsaw-man/obra.jpg"
+ },
+ "nana": {
+  "mode": "none",
+  "force": false,
+  "vols": {},
+  "chVol": [],
+  "main": "covers/nana/obra.jpg"
+ },
+ "death note": {
+  "mode": "none",
+  "force": false,
+  "vols": {},
+  "chVol": [],
+  "main": "covers/death-note/obra.jpg"
+ },
+ "vagabond": {
+  "mode": "none",
+  "force": false,
+  "vols": {},
+  "chVol": [],
+  "main": "covers/vagabond/obra.jpg"
+ },
+ "berserk": {
+  "mode": "none",
+  "force": false,
+  "vols": {},
+  "chVol": [],
+  "main": "covers/berserk/obra.jpg"
+ }
+}

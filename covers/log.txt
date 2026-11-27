@@ -1,0 +1,18 @@
+black clover: AniList 114652 Black Clover -> ok
+  MangaDex e7eabe96-aa17-476f-b431-2497d5e9d060 {'ja-ro': 'Black Clover'} -> 39 volumes, 7 capitulos mapeados
+re zero: AniList 87259 Re:Zero kara Hajimeru Isekai Seikatsu: Dai-3 Shou - Truth of Zero -> ok
+saint seiya the lost canvas: AniList 31047 Saint Seiya: THE LOST CANVAS - Meiou Shinwa -> ok
+saint seiya: AniList 31045 Saint Seiya -> ok
+dragon ball super: AniList 86508 Dragon Ball Super -> ok
+  MangaDex 37b87be0-b1f4-4507-affa-06c99ebb27f8 {'ja-ro': 'Dragon Ball Super'} -> 24 volumes, 0 capitulos mapeados
+dragon ball: AniList 30042 Dragon Ball -> ok
+enen no shouboutai: AniList 86310 Enen no Shouboutai -> ok
+  MangaDex 5e6fc7ba-5af9-4f74-b439-9c487b6f635b {'en': 'Enen no Shouboutai (Fan Colored)'} -> 0 volumes, 0 capitulos mapeados
+tokyo revengers: AniList 102988 Tokyo卍Revengers -> ok
+  MangaDex 59b36734-f2d6-46d7-97c0-06cfd2380852 {'ja-ro': 'Toukyou 卍 Revengers'} -> 35 volumes, 0 capitulos mapeados
+chainsaw man: AniList 105778 Chainsaw Man -> ok
+  MangaDex a77742b1-befd-49a4-bff5-1ad4e6b0ef7b {'ja-ro': 'Chainsaw Man'} -> 24 volumes, 0 capitulos mapeados
+nana: AniList 30028 NANA -> ok
+death note: AniList 30021 DEATH NOTE -> ok
+vagabond: AniList 30656 Vagabond -> ok
+berserk: AniList 30002 Berserk -> ok
