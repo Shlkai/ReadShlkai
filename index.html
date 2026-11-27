@@ -587,7 +587,8 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
   .hide-sm { display: none; }
   .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
   .filters::-webkit-scrollbar { display: none; }
-  .filters .chip, .filters select { flex: none; }
+  .filters .chip, .filters select, .filters .pills, .filters .btn { flex: none; }
+  .filters .pills { flex-wrap: nowrap; }
   .filters .sp { display: none; }
   .reader[data-layout="dupla"] { --maxw: 50vw; }
 }
@@ -715,7 +716,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 16</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 17</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -939,6 +940,9 @@ const coverURL = new Map();
 let SCI = {};
 try { SCI = JSON.parse(localStorage.getItem('shikai.covers') || '{}') || {}; } catch (e) {}
 fetch('covers/index.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).then(j => { if (!j) return; SCI = j; try { localStorage.setItem('shikai.covers', JSON.stringify(j)); } catch (e) {} if (typeof scheduleRender === 'function') scheduleRender(); }).catch(() => {});
+// mangá por volume (pasta com "Volume 01" ou série marcada como volumes nas capas) diz Vol., capítulo avulso diz Cap.
+function unitOf(b) { return b && b.kind === 'manga' && !/\b(vol|volume|tomo)\b/i.test(b.title || '') && (sciOf(b) || {}).mode !== 'volumes' ? 'Cap. ' : 'Vol. '; }
+function unitsOf(l) { return l.some(b => unitOf(b) === 'Cap. ') ? (l.some(b => unitOf(b) === 'Vol. ') ? 'capítulos/volumes' : 'capítulos') : 'volumes'; }
 function sciOf(b) { return b && b.kind === 'manga' ? SCI[kNorm(seriesName(b))] || null : null; }
 function webFor(b) {
   const e = sciOf(b); if (!e) return '';
@@ -2027,8 +2031,8 @@ function progress(b) { if (!b.pages) return 0; if (b.format === 'epub') return M
 function state(b) { return b.finished ? 'lidos' : (b.lastReadAt ? 'lendo' : 'novos'); }
 function metaLine(b) {
   const bits = [];
-  if (b.remote && !b.pages) { if (b.volume) bits.push((b.kind === 'manga' ? 'Cap. ' : 'Vol. ') + b.volume); bits.push(b.size ? fmtSize(b.size) : 'No Drive'); return bits.join(' · '); }
-  if (b.volume) bits.push((b.kind === 'manga' ? 'Cap. ' : 'Vol. ') + b.volume);
+  if (b.remote && !b.pages) { if (b.volume) bits.push(unitOf(b) + b.volume); bits.push(b.size ? fmtSize(b.size) : 'No Drive'); return bits.join(' · '); }
+  if (b.volume) bits.push(unitOf(b) + b.volume);
   if (b.format === 'epub') { if (b.author) bits.unshift(b.author); bits.push(b.lastReadAt && !b.finished ? `${Math.round(progress(b) * 100)}% lido` : `${b.pages} cap.`); }
   else if (b.lastReadAt && !b.finished) bits.push(`p. ${b.page + 1} de ${b.pages}`); else bits.push(`${b.pages} p.`);
   return bits.join(' · ');
@@ -2123,7 +2127,7 @@ function renderHome() {
   const lastOf = l => l.reduce((m, x) => Math.max(m, x.lastReadAt || x.addedAt || 0), 0);
   [...bySerie.entries()].filter(([, l]) => l.length > 1)
     .map(e => [e[0], e[1], lastOf(e[1])]).sort((a, b) => b[2] - a[2]).slice(0, 10)
-    .forEach(([name, l]) => { l.sort((a, b) => (+a.volume || 0) - (+b.volume || 0) || natural(a.title, b.title)); rows.push({ t: name, sub: `${l.length} ${l[0].kind === 'manga' ? 'capítulos/volumes' : 'volumes'}`, prog: seriesProgress(l), list: l }); });
+    .forEach(([name, l]) => { l.sort((a, b) => (+a.volume || 0) - (+b.volume || 0) || natural(a.title, b.title)); rows.push({ t: name, sub: `${l.length} ${unitsOf(l)}`, prog: seriesProgress(l), list: l }); });
   const favs = newest.filter(b => b.fav);
   if (favs.length) rows.splice(reading.length ? 1 : 0, 0, { t: 'Favoritos', list: favs });
   const kinds = [['manga', 'Mangás'], ['hq', 'HQs'], ['livro', 'Livros']].map(([k, t]) => ({ t, list: newest.filter(b => b.kind === k) })).filter(r => r.list.length);
@@ -2159,7 +2163,7 @@ function showHero(i) {
   if (cover(b)) { bg.classList.remove('tone'); bg.style.backgroundImage = `url("${cover(b)}")`; } else { bg.style.backgroundImage = ''; bg.classList.add('tone'); }
   const reading = b.lastReadAt && !b.finished;
   const eyebrow = heroWhy[b.id] || (reading ? 'Continue de onde parou' : b.finished ? 'Para ler de novo' : 'Recomendado para você');
-  const meta = [KL[b.kind], pubOf(b), b.author || '', b.series && b.series !== b.title && !nice(b).startsWith(cleanTitle(serParts(b.series).name)) ? cleanTitle(serParts(b.series).name) : '', b.volume ? (b.kind === 'manga' ? 'Cap. ' : 'Vol. ') + b.volume : '', !b.pages ? (b.size ? fmtSize(b.size) + ' no Drive' : 'No Drive') : b.format === 'epub' ? `${b.pages} capítulos` : `${b.pages} páginas`].filter(Boolean);
+  const meta = [KL[b.kind], pubOf(b), b.author || '', b.series && b.series !== b.title && !nice(b).startsWith(cleanTitle(serParts(b.series).name)) ? cleanTitle(serParts(b.series).name) : '', b.volume ? unitOf(b) + b.volume : '', !b.pages ? (b.size ? fmtSize(b.size) + ' no Drive' : 'No Drive') : b.format === 'epub' ? `${b.pages} capítulos` : `${b.pages} páginas`].filter(Boolean);
   $('#heroIn').innerHTML = `<div class="hero-txt">
       <span class="eyebrow">${eyebrow}</span>
       <h1>${(() => { const t = nice(b), m = t.match(/^(.*?)(\s*(?:#|n[ºo°]\.?)\s*\d+)$/i); return m ? `${esc(m[1])} <span class="hn">${esc(m[2].trim().replace(/^#\s+/, '#'))}</span>` : esc(t); })()}</h1>
@@ -2287,7 +2291,7 @@ function renderGrid() {
   $('#noRes').hidden = list.length > 0;
   $('#serHead').hidden = !serie || !list.length;
   $('#serWeb').hidden = !serie || list[0]?.kind !== 'manga';
-  if (serie) { const l = list; const all = books.filter(x => x.series === serie), k = all.filter(saved).length; $('#serOff').classList.toggle('on', k === all.length); $('#serOff span').textContent = k === all.length ? 'Série salva offline' : k ? `Salvar o resto offline (${k}/${all.length})` : 'Salvar série offline'; $('#serOff use').setAttribute('href', k === all.length ? '#i-saved' : '#i-dl'); $('#serHeadT').textContent = cleanTitle(serParts(serie).name); $('#serHeadM').textContent = [pubOf(l[0] || {}), `${l.length} ${l[0]?.kind === 'manga' ? 'capítulos/volumes' : 'volumes'}`, seriesProgress(l)].filter(Boolean).join(' · '); }
+  if (serie) { const l = list; const all = books.filter(x => x.series === serie), k = all.filter(saved).length; $('#serOff').classList.toggle('on', k === all.length); $('#serOff span').textContent = k === all.length ? 'Série salva offline' : k ? `Salvar o resto offline (${k}/${all.length})` : 'Salvar série offline'; $('#serOff use').setAttribute('href', k === all.length ? '#i-saved' : '#i-dl'); $('#serHeadT').textContent = cleanTitle(serParts(serie).name); $('#serHeadM').textContent = [pubOf(l[0] || {}), `${l.length} ${unitsOf(l)}`, seriesProgress(l)].filter(Boolean).join(' · '); }
   const cardOf = ({ b, s: sn, l, vh, ch, vol }) => {
     if (vh) return vh.obra ? `<div class="vhead"><img src="${vh.url}" alt="" loading="lazy"><div><b>${esc(vh.obra)}</b><small>${isFinite(vh.a) ? `Volumes ${vh.a} a ${vh.z} · ` : ''}${vh.n} arquivo${vh.n > 1 ? 's' : ''}</small></div></div>` : `<div class="vhead">${vh.url ? `<img src="${vh.url}" alt="" loading="lazy">` : ''}<div><b>${vh.v ? 'Volume ' + esc(vh.v) : 'Capítulos novos'}</b><small>${isFinite(vh.a) ? (vh.a === vh.z ? `Capítulo ${vh.a}` : `Capítulos ${vh.a} a ${vh.z}`) : ''} · ${vh.n} arquivo${vh.n > 1 ? 's' : ''}</small></div></div>`;
     if (sn) {
@@ -2907,7 +2911,7 @@ function startComic(b, doc) {
   showChapters(doc);
   if (b.format === 'pdf' && !doc.stream && R.doc.count <= 600) Promise.all(Array.from({ length: R.doc.count }, (_, i) => R.doc.ratio(i))).then(r => { R.ratios = r; }).catch(() => {});
   $('#rTitle').textContent = nice(b);
-  $('#rSub').textContent = [b.series && b.series !== b.title && !nice(b).startsWith(cleanTitle(b.series)) ? cleanTitle(b.series) : '', b.volume ? (b.kind === 'manga' ? 'Cap. ' : 'Vol. ') + b.volume : '', KL[b.kind]].filter(Boolean).join(' · '); syncFavBtn();
+  $('#rSub').textContent = [b.series && b.series !== b.title && !nice(b).startsWith(cleanTitle(b.series)) ? cleanTitle(b.series) : '', b.volume ? unitOf(b) + b.volume : '', KL[b.kind]].filter(Boolean).join(' · '); syncFavBtn();
   rd.hidden = false; $('#endCard').hidden = true; $('#rOpts').hidden = true; $('#rOptBtn').setAttribute('aria-pressed', 'false');
   document.body.style.overflow = 'hidden';
   R.page = b.finished ? 0 : Math.min(b.page || 0, R.doc.count - 1);
