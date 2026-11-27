@@ -23,3 +23,5 @@ vagabond: AniList 30656 Vagabond -> ok
 berserk: AniList 30002 Berserk -> ok
 bleach: AniList 30012 BLEACH -> ok
   Drive -> 26 de 26 capas da 1a pagina
+jujutsu kaisen: AniList 101517 Jujutsu Kaisen -> ok
+  Drive -> 31 de 31 capas da 1a pagina
