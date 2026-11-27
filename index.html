@@ -212,6 +212,8 @@ body.sidelock { overflow: hidden; }
 .perbar button.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 16%, transparent); }
 .perbar button.on small { color: inherit; }
 .perbar .more { color: var(--muted); }
+.perbar .lbl { flex: none; align-self: center; font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-right: 2px; }
+#perBar:not([hidden]) + #eqBar { margin-top: -10px; }
 
 /* ---------- grade ---------- */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 26px 18px; }
@@ -643,7 +645,8 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
             <option value="serie">Série e volume</option>
           </select>
         </div>
-        <div class="perbar" id="perBar" role="toolbar" aria-label="Personagens e equipes" hidden></div>
+        <div class="perbar" id="perBar" role="toolbar" aria-label="Personagens" hidden></div>
+        <div class="perbar" id="eqBar" role="toolbar" aria-label="Equipes" hidden></div>
     <div class="serhead" id="serHead" hidden><button class="btn icon ghost" id="serBack" aria-label="Voltar para todas"><svg class="i"><use href="#i-back"/></svg></button><div class="sh-t"><b id="serHeadT"></b><small id="serHeadM"></small></div><button class="btn sm" id="serOff"><svg class="i"><use href="#i-dl"/></svg><span>Salvar série offline</span></button></div>
     <div class="grid" id="grid"></div>
     <div class="gridmore" id="gridMore" hidden aria-hidden="true"></div>
@@ -701,7 +704,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 4</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 5</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -1744,7 +1747,7 @@ async function makeSample() {
 
 /* ---------------- estante ---------------- */
 let F = 'tudo', serie = '', query = '';
-const SEL = { kind: new Set(), pub: new Set(), ser: new Set(), per: new Set(), tag: new Set(), st: new Set(), loc: new Set() };
+const SEL = { kind: new Set(), pub: new Set(), ser: new Set(), per: new Set(), eq: new Set(), tag: new Set(), st: new Set(), loc: new Set() };
 // personagens e equipes: procurados no caminho da pasta, na série e no nome do arquivo (inclusive nomes abreviados dos scans)
 const PERS = [
   ['Homem-Aranha', 'homem aranha|spider man|amigao da vizinhanca|espetacular aranha|espetacular ha'], ['Miles Morales', 'miles morales'], ['Mulher-Aranha', 'mulher aranha|spider woman|spider gwen|gwen aranha'],
@@ -1767,6 +1770,8 @@ const PERS = [
   ['Sociedade da Justiça', 'sociedade da justica|justice society'], ['Patrulha do Destino', 'patrulha do destino|doom patrol']
 ].map(([n, re]) => [n, new RegExp(String.raw`(?:^|\s)(?:${re})(?=\s|$)`)]);
 const perMemo = new WeakMap();
+const TEAMS = new Set(['X-Men', 'X-Force', 'Vingadores', 'Jovens Vingadores', 'Supremos', 'Guardiões da Galáxia', 'Quarteto Fantástico', 'Illuminati', 'Esquadrão Supremo', 'Defensores', 'Inumanos', 'Eternos', 'Liga da Justiça', 'Titãs', 'Esquadrão Suicida', 'Sociedade da Justiça', 'Patrulha do Destino', 'Tartarugas Ninja', 'Transformers']);
+const charsOf = b => persOf(b).filter(v => !TEAMS.has(v)), teamsOf = b => persOf(b).filter(v => TEAMS.has(v));
 function persOf(b) {
   if (b.kind !== 'hq') return [];
   const key = (b.path || '') + '|' + (b.series || '') + '|' + (b.title || '') + '|' + (b.source?.name || '');
@@ -1947,7 +1952,8 @@ function renderGrid() {
     { k: 'kind', t: 'Tipo', of: b => [b.kind], lab: v => ({ manga: 'Mangás', hq: 'HQs', livro: 'Livros' })[v], show: F === 'tudo' || F === 'fav' },
     { k: 'pub', t: 'Editora', of: b => [pubOf(b)], lab: v => v || 'Sem editora', search: 'editora', top: 8 },
     { k: 'ser', t: 'Série', of: b => [b.series || ''], lab: v => v || 'Volumes avulsos', search: 'série', top: 12, thumbs: true },
-    { k: 'per', t: 'Personagem e equipe', of: persOf, lab: v => v, search: 'personagem', top: 12, show: F === 'hq' || F === 'tudo' || F === 'fav' },
+    { k: 'per', t: 'Personagem', of: charsOf, lab: v => v, search: 'personagem', top: 12, show: F === 'hq' || F === 'tudo' || F === 'fav' },
+    { k: 'eq', t: 'Equipe', of: teamsOf, lab: v => v, search: 'equipe', top: 12, show: F === 'hq' || F === 'tudo' || F === 'fav' },
     { k: 'tag', t: 'Categoria', of: b => b.tags || [], lab: v => v },
     { k: 'st', t: 'Leitura', of: b => [state(b)], lab: v => ({ novos: 'Não lidos', lendo: 'Lendo', lidos: 'Lidos' })[v], order: ['lendo', 'novos', 'lidos'] },
     { k: 'loc', t: 'Ler offline', of: b => [saved(b) ? 'salvo' : b.remote ? 'nuvem' : 'aparelho'], lab: v => ({ salvo: 'Salvos para offline', aparelho: 'Baixados (temporário)', nuvem: 'Só no Drive' })[v], order: ['salvo', 'aparelho', 'nuvem'] }
@@ -1964,7 +1970,7 @@ function renderGrid() {
     let vals = [...cnt.keys()];
     if (vals.length < 2 && !SEL[f.k].size) continue;
     vals.sort(f.order ? (a, b) => f.order.indexOf(a) - f.order.indexOf(b) : f.k === 'ser' ? (a, b) => (a === '') - (b === '') || natural(a, b) : (a, b) => (a === '') - (b === '') || cnt.get(b) - cnt.get(a) || natural(a, b));
-    SEL[f.k].forEach(v => { active++; if (f.k === 'per' && F === 'hq') return; pills.push(`<button class="pill" data-unf="${f.k}" data-v="${esc(v)}">${esc(f.k === 'ser' && v ? serParts(v).name : f.lab(v))}<svg class="i"><use href="#i-x"/></svg></button>`); });
+    SEL[f.k].forEach(v => { active++; if ((f.k === 'per' || f.k === 'eq') && F === 'hq') return; pills.push(`<button class="pill" data-unf="${f.k}" data-v="${esc(v)}">${esc(f.k === 'ser' && v ? serParts(v).name : f.lab(v))}<svg class="i"><use href="#i-x"/></svg></button>`); });
     // marcados primeiro; o resto na ordem do grupo
     vals = [...vals.filter(v => SEL[f.k].has(v)), ...vals.filter(v => !SEL[f.k].has(v))];
     const q = (fQ[f.k] || '').trim().toLowerCase();
@@ -1992,12 +1998,14 @@ function renderGrid() {
   $('#side').scrollTop = keepScroll; $('#facetBox').scrollTop = keepBox;
   if (hadFocus) { const i = document.getElementById(hadFocus); if (i) { i.focus({ preventScroll: true }); i.setSelectionRange(i.value.length, i.value.length); } }
   $('#pills').innerHTML = pills.join('');
-  // atalhos de personagem/equipe na aba HQs (deslizar para o lado)
-  { const pc = new Map(); if (F === 'hq' && !q) base.forEach(b => { if (pass(b, 'per')) persOf(b).forEach(v => pc.set(v, (pc.get(v) || 0) + 1)); });
+  // atalhos de personagem e de equipe na aba HQs (deslizar para o lado)
+  for (const [k, of, el, lbl] of [['per', charsOf, '#perBar', 'Personagens'], ['eq', teamsOf, '#eqBar', 'Equipes']]) {
+    const pc = new Map(); if (F === 'hq' && !q) base.forEach(b => { if (pass(b, k)) of(b).forEach(v => pc.set(v, (pc.get(v) || 0) + 1)); });
     const top = [...pc.keys()].sort((a, b) => pc.get(b) - pc.get(a) || natural(a, b));
-    const sel = [...SEL.per], show = [...sel, ...top.filter(v => !SEL.per.has(v))].slice(0, Math.max(18, sel.length));
-    $('#perBar').hidden = F !== 'hq' || !!q || top.length < 2;
-    $('#perBar').innerHTML = $('#perBar').hidden ? '' : `<button data-per="" class="${SEL.per.size ? '' : 'on'}">Todos</button>` + show.map(v => `<button data-per="${esc(v)}" class="${SEL.per.has(v) ? 'on' : ''}" aria-pressed="${SEL.per.has(v)}">${esc(v)} <small>${pc.get(v) || 0}</small></button>`).join('') + (top.length > show.length ? `<button class="more" data-per-more>Mais ${top.length - show.length}…</button>` : ''); }
+    const sel = [...SEL[k]], show = [...sel, ...top.filter(v => !SEL[k].has(v))].slice(0, Math.max(18, sel.length));
+    const bar = $(el); bar.hidden = F !== 'hq' || !!q || (top.length < 2 && !sel.length);
+    bar.innerHTML = bar.hidden ? '' : `<span class="lbl">${lbl}</span><button data-pk="${k}" data-per="" class="${SEL[k].size ? '' : 'on'}">Todos</button>` + show.map(v => `<button data-pk="${k}" data-per="${esc(v)}" class="${SEL[k].has(v) ? 'on' : ''}" aria-pressed="${SEL[k].has(v)}">${esc(v)} <small>${pc.get(v) || 0}</small></button>`).join('') + (top.length > show.length ? `<button class="more" data-pk="${k}" data-per-more>Mais ${top.length - show.length}…</button>` : '');
+  }
   $('#fCount').hidden = !active; $('#fCount').textContent = active; $('#fClear').hidden = !active;
   serie = SEL.ser.size === 1 ? [...SEL.ser][0] : '';
   let list = base.filter(b => pass(b));
@@ -2113,12 +2121,13 @@ $('#facetBox').addEventListener('click', e => {
   const le = e.target.closest('[data-less]'); if (le) { fAll.delete(le.dataset.less); render(); le.closest('.fset')?.scrollIntoView({ block: 'nearest' }); }
 });
 $('#pills').addEventListener('click', e => { const p = e.target.closest('[data-unf]'); if (!p) return; SEL[p.dataset.unf].delete(p.dataset.v); render(); });
-$('#perBar').addEventListener('click', e => {
-  const m = e.target.closest('[data-per-more]'); if (m) { openFacets.add('per'); fAll.add('per'); render(); $('#sideBtn').click(); return; }
-  const p = e.target.closest('[data-per]'); if (!p) return;
-  const v = p.dataset.per; if (!v) SEL.per.clear(); else if (SEL.per.has(v)) SEL.per.delete(v); else { SEL.per.clear(); SEL.per.add(v); }
+const perClick = e => {
+  const p = e.target.closest('[data-pk]'); if (!p) return; const k = p.dataset.pk;
+  if (p.hasAttribute('data-per-more')) { openFacets.add(k); fAll.add(k); render(); $('#sideBtn').click(); return; }
+  const v = p.dataset.per; if (!v) SEL[k].clear(); else if (SEL[k].has(v)) SEL[k].delete(v); else { SEL[k].clear(); SEL[k].add(v); }
   SEL.ser.clear(); render(); scrollTo({ top: Math.min(scrollY, $('#libSec').offsetTop - 70), behavior: 'smooth' });
-});
+};
+$('#perBar').addEventListener('click', perClick); $('#eqBar').addEventListener('click', perClick);
 $('#serBack').onclick = () => { SEL.ser.clear(); render(); };
 $('#serOff').onclick = () => serie && saveSeriesOffline(books.filter(x => x.series === serie).sort((a, b) => (+a.volume || 0) - (+b.volume || 0)));
 $('#grid').addEventListener('click', e => { const sc = e.target.closest('[data-series]'); if (sc) { SEL.ser.clear(); SEL.ser.add(sc.dataset.series); render(); $('#libSec').scrollIntoView({ block: 'start' }); } });
