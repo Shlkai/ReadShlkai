@@ -76,14 +76,18 @@ for s in json.load(open('covers/series.json')):
         txt = wiki(s['wiki'])
         for sub in re.findall(r'\{\{\s*:\s*([^}|]+)', txt):  # listas divididas em subpáginas
             txt += '\n' + wiki(sub.strip()); time.sleep(0.5)
-        print('wiki', len(txt), txt.count('Graphic novel list'), repr(txt[txt.find('Graphic novel list'):][:1200]))
-        cv = []
-        for blk in re.split(r'\{\{\s*Graphic novel list', txt, flags=re.I)[1:]:
+        cv, blocks = [], []
+        for blk in re.split(r'\{\{\s*Graphic novel list(?!/)', txt, flags=re.I)[1:]:
             vm = re.search(r'\|\s*VolumeNumber\s*=\s*(\d+)', blk)
-            cl = re.search(r'\|\s*ChapterList\s*=(.*?)(?:\n\s*\|\s*\w+\s*=|\Z)', blk, re.S)
-            if not vm or not cl: continue
-            for ch in re.findall(r'^\s*\*\s*(?:Page|Chapter|Ch\.?)?\s*(\d{1,3}(?:\.\d)?)', cl.group(1), re.M | re.I):
-                cv.append([float(ch), str(int(vm.group(1)))])
+            cl = re.search(r'\|\s*ChapterList\s*=(.*?)(?:\n\s*\|\s*(?:Summary|ChapterListCol2|LicensedRelDate|LicensedISBN)\s*=|\Z)', blk, re.S)
+            if vm and cl: blocks.append((int(vm.group(1)), cl.group(1)))
+        n = 0
+        for v, body in sorted(blocks):
+            nums = re.findall(r'^\s*\*\s*(?:Chapter\s*)?(\d{1,3}(?:\.\d)?)\b', body, re.M | re.I)
+            if nums:
+                for ch in nums: cv.append([float(ch), str(v)]); n = max(n, int(float(ch)))
+            else:
+                for _ in re.findall(r'^#(?![#:*])', body, re.M): n += 1; cv.append([float(n), str(v)])
         e['chVol'] = sorted(cv)
         log.append(f"  Wikipedia {s['wiki']} -> {len(cv)} capitulos mapeados, volumes {len(set(v for _, v in cv))}")
     out[k] = e
