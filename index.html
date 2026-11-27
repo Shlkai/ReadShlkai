@@ -707,7 +707,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 8</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 9</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -925,7 +925,25 @@ const dbDel = (n, k) => rq(st(n, 'readwrite').delete(k));
 
 let books = [];
 const coverURL = new Map();
+// capas baixadas pelo site (covers/index.json): capa da obra e de cada volume dos mangás
+let SCI = {};
+try { SCI = JSON.parse(localStorage.getItem('shikai.covers') || '{}') || {}; } catch (e) {}
+fetch('covers/index.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).then(j => { if (!j) return; SCI = j; try { localStorage.setItem('shikai.covers', JSON.stringify(j)); } catch (e) {} if (typeof scheduleRender === 'function') scheduleRender(); }).catch(() => {});
+function sciOf(b) { return b && b.kind === 'manga' ? SCI[kNorm(seriesName(b))] || null : null; }
+function webFor(b) {
+  const e = sciOf(b); if (!e) return '';
+  if (b.cover && !e.force) return '';
+  const n = parseFloat(b.volume); let v = '';
+  if (!isNaN(n) && e.mode === 'volumes') v = String(n);
+  if (!isNaN(n) && e.mode === 'chapters' && e.chVol?.length) {
+    for (const [c, vv] of e.chVol) { if (c <= n) v = vv; else break; }
+    if (!v) v = e.chVol[0][1];
+    if (n > e.chVol[e.chVol.length - 1][0] + 1) v = '';
+  }
+  return (v && e.vols?.[v]) || e.main || '';
+}
 function cover(b) {
+  const w = webFor(b); if (w) return w;
   if (!b.cover) return b.webCover || b.thumb || '';
   if (!coverURL.has(b.id)) coverURL.set(b.id, URL.createObjectURL(b.cover));
   return coverURL.get(b.id);
@@ -1011,6 +1029,7 @@ function parseName(name, folder = '') {
   let vm = volFrom(base);
   const rg = base.match(/cap[ií]tulos?\s*(\d{1,4})\s*(?:a|ao|até|-|–)\s*\d{1,4}/i);
   if (rg) vm = { v: String(+rg[1]), m: rg, i: rg.index };
+  const dec = base.match(/^(\d{1,4}\.\d{1,2})\s*[-–]\s/); if (dec) vm = { v: String(+dec[1]), m: dec, i: 0 };
   const volume = vm.v;
   let series = folder || '';
   if (!series && vm.m) series = base.slice(0, vm.i).replace(/[-–—:,.(\[\s#]+$/, '').trim();
@@ -1804,14 +1823,14 @@ async function aniCover(name) {
   return c ? (c.extraLarge || c.large || '') : '';
 }
 // séries cujas capas do arquivo são ruins (página de créditos do scan): troca uma vez pelas da internet
-const WEB_FORCE = ['black clover'];
+const WEB_FORCE = [];
 async function webCovers() {
   if (WC.on || !navigator.onLine || S.covers === false || S.webCovers === false) return;
   WC.on = true;
   try {
     const groups = new Map(); S.webDone = S.webDone || {};
     const add = b => { const n = seriesName(b); if (n.length < 2) return; if (!groups.has(n)) groups.set(n, []); groups.get(n).push(b); };
-    books.filter(webWanted).forEach(add);
+    books.filter(b => webWanted(b) && !sciOf(b)).forEach(add);
     for (const b of books) { if (b.kind !== 'manga' || b.webCover) continue; const n = seriesName(b); if (WEB_FORCE.includes(kNorm(n)) && !(b.webTry > Date.now() - 7 * 864e5)) add(b); }
     for (const [name, list] of groups) {
       if (!navigator.onLine) break;
@@ -2163,7 +2182,7 @@ function renderGrid() {
       const done = l.filter(x => x.finished).length, cur = l.find(x => x.lastReadAt && !x.finished), c = l.find(x => cover(x)) || l[0];
       return `<div class="book pile">
       <button class="cv" data-series="${esc(sn)}" aria-label="Abrir a série ${esc(sn)}, ${l.length} volumes">
-        <div class="art">${cover(c) ? `<img src="${cover(c)}" alt="" loading="lazy">` : phCover(c, cleanTitle(serParts(sn).name))}
+        <div class="art">${sciOf(c)?.main ? `<img src="${sciOf(c).main}" alt="" loading="lazy">` : cover(c) ? `<img src="${cover(c)}" alt="" loading="lazy">` : phCover(c, cleanTitle(serParts(sn).name))}
           <span class="badge cnt">${l.length} vol.</span>
           ${done ? `<div class="prog"><i style="width:${done / l.length * 100}%"></i></div>` : ''}
         </div>
