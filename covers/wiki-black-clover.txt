@@ -1,0 +1,985 @@
+{{short description|None}}
+{{DISPLAYTITLE:List of ''Black Clover'' chapters}}
+[[File:Black Clover, volume 1.jpg|thumb|right|alt=Manga cover, with three characters|First volume of ''Black Clover'', released in Japan by Shueisha on June&nbsp;4, 2015]]
+''[[Black Clover]]'' is a Japanese [[manga]] series written and illustrated by [[Yūki Tabata]] which has been translated into a number of languages and become a [[media franchise]]. It follows the adventures of fifteen-year-old orphan Asta, who, despite being born without the ability to use magic, has dreams of becoming the next Wizard King. In Japan, the series has been published by [[Shueisha]] in the ''[[Shōnen manga|shōnen]]'' [[manga]] anthology ''[[Weekly Shōnen Jump]]'' since February&nbsp;16, 2015,<ref>{{cite web|last=Valdez|first=Kiara|title=Shonen Jump to Launch 4 Manga, Including Detective Story by Psyren's Iwashiro|url=http://www.animenewsnetwork.com/news/2015-01-29/shonen-jump-to-launch-4-manga-including-detective-story-by-psyren-iwashiro/.83790|website=[[Anime News Network]]|date=January 29, 2015|access-date=June 10, 2016|archive-date=February 29, 2016|archive-url=https://web.archive.org/web/20160229042043/http://www.animenewsnetwork.com/news/2015-01-29/shonen-jump-to-launch-4-manga-including-detective-story-by-psyren-iwashiro/.83790|url-status=live|df=mdy-all}}</ref> and later collected in {{transliteration|ja|tankōbon}} format (collected volumes comprising 7 to 12 chapters) since June&nbsp;4, 2015.<ref name="Vol1"/>
+
+On February 9, 2015, [[Viz Media]] announced that they would publish the first three chapters of the series in their ''[[Weekly Shonen Jump (American magazine)|Weekly Shonen Jump]]'' digital magazine as part of their "[[Weekly Shonen Jump (American magazine)#Jump Start series|Jump Start]]" program in North America.<ref name="Jump Start">{{cite web|title=Viz's Shonen Jump to Add Yūki Tabata's Black Clover Fantasy Manga (Update)|url=http://www.animenewsnetwork.com/news/2015-02-09/viz-shonen-jump-to-add-yuki-tabata-black-clover-fantasy-manga/.84250|website=[[Anime News Network]]|date=February 9, 2015|access-date=June 10, 2016|archive-date=July 15, 2016|archive-url=https://web.archive.org/web/20160715035933/http://www.animenewsnetwork.com/news/2015-02-09/viz-shonen-jump-to-add-yuki-tabata-black-clover-fantasy-manga/.84250|url-status=live|df=mdy-all}}</ref>  On March&nbsp;30, 2015, they announced that the series would join their weekly lineup, beginning with chapter&nbsp;4 on April&nbsp;6, and would be published at an accelerated rate until the chapters were current with Japan.<ref>{{cite web|last=Lynzee|first=Loveridge|title=Viz's Shonen Jump Adds Yūki Tabata's Black Clover Fantasy Manga to Regular Line-Up|url=http://www.animenewsnetwork.com/news/2015-03-30/viz-shonen-jump-adds-yuki-tabata-black-clover-fantasy-manga-to-regular-line-up/.86536|website=[[Anime News Network]]|date=March 30, 2015|access-date=June 10, 2016|archive-date=April 16, 2016|archive-url=https://web.archive.org/web/20160416084318/https://www.animenewsnetwork.com/news/2015-03-30/viz-shonen-jump-adds-yuki-tabata-black-clover-fantasy-manga-to-regular-line-up/.86536|url-status=live|df=mdy-all}}</ref><ref>{{cite web|last=Green|first=Scott|title="Black Clover" to Join English "Shonen Jump"|url=http://www.crunchyroll.com/anime-news/2015/03/31-1/black-clover-to-join-english-shonen-jump|website=[[Crunchyroll]]|date=March 31, 2015|access-date=June 11, 2016|archive-date=April 26, 2016|archive-url=https://web.archive.org/web/20160426043637/http://www.crunchyroll.com/anime-news/2015/03/31-1/black-clover-to-join-english-shonen-jump|url-status=live|df=mdy-all}}</ref> Plans to release the series in print were announced during their panel at [[New York Comic Con]] on October&nbsp;9, 2015.<ref>{{cite web|last=Hodgkins|first=Crystalyn|title=Viz Media Adds Kuroko's Basketball, Haikyu!!, Yona of the Dawn Manga|url=http://www.animenewsnetwork.com/news/2015-10-09/viz-media-adds-kuroko-basketball-haikyu-yona-of-the-dawn-manga/.93970|website=[[Anime News Network]]|date=October 9, 2015|access-date=June 10, 2016|archive-date=June 1, 2016|archive-url=https://web.archive.org/web/20160601073211/http://www.animenewsnetwork.com/news/2015-10-09/viz-media-adds-kuroko-basketball-haikyu-yona-of-the-dawn-manga/.93970|url-status=live|df=mdy-all}}</ref>
+__TOC__
+{{Clear}}
+
+== Volumes ==
+{{Graphic novel list/header
+| Language        = Japanese
+| SecondLanguage  = English
+| LineColor       = EEC591
+}}
+{{Graphic novel list
+| VolumeNumber    = 1
+| RelDate         = June 4, 2015<ref name="Vol1">{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880416-3|script-title=ja:ブラッククローバー 1|trans-title=''Black Clover'' 1|publisher=[[Shueisha]]|access-date=June 11, 2016|language=ja|archive-date=September 9, 2017|archive-url=https://web.archive.org/web/20170909232908/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880416-3|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-880416-3
+| LicensedRelDate = June 7, 2016<ref>{{cite web|url=https://www.viz.com/read/manga/product/12247|title=Black Clover, Volume 1|publisher=[[Viz Media]]|access-date=June 11, 2016|archive-date=May 30, 2016|archive-url=https://web.archive.org/web/20160530055827/http://www.viz.com/read/manga/product/12247|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-4215-8718-9
+| ChapterList     = 
+#{{Nihongo4|"The Boy's Vow"|少年の誓い|Shōnen no Chikai}}
+#{{Nihongo4|"The Magic Knights Entrance Exam"|魔法騎士団入団試験|Mahō Kishi-dan Nyūdan Shiken}}
+#{{Nihongo4|"The Road to the Wizard King"|魔法帝への道|Mahōtei E no Michi}}
+#{{Nihongo4|"The Black Bulls"|黒の暴牛|Kuro no Hōgyū}}
+| ChapterListCol2 =
+{{Numbered list|start=5
+| {{Nihongo4|"The Other New Member"|もう一人の新入団者|Mōhitori no Shin Nyūdan-sha}}
+| {{Nihongo4|"Go! Go! First Mission"|ゴーゴー初任務|Gō Gō Hatsu Ninmu}}
+| {{Nihongo4|"Beast"|獣|Kemono}}
+}}
+| LineColor       = EEC591
+| Summary = Asta and Yuno are two teenagers from a rural village in the Clover Kingdom. Both desire to become the next Wizard King, the most powerful wizard in the realm. Yuno acquires a rare [[four-leaf clover]] [[grimoire]], but during an ordeal with a former magic knight attempting to steal it, Asta summons a damaged black grimoire with a five-leaf clover that bestows him an anti-magic sword, with which he defeats the thief. Asta and Yuno eventually travel to the capital to attend the magic knight selection exam. While Yuno is placed in the prestigious Golden Dawn squad, Asta earns Yami Sukehiro's respect and becomes a member of the Black Bulls – the worst magic knight squad in the kingdom. Asta also meets Noelle Silva, a noblewoman and fellow newcomer to the team. Accompanied by Magna Swing, Asta and Noelle travel to Saussy on their first mission, only to find Heath Grice attacking the village while they try to acquire a magic stone.
+}}
+{{Graphic novel list
+| VolumeNumber    = 2
+| RelDate         = August 4, 2015<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880452-1|script-title=ja:ブラッククローバー 2|trans-title=''Black Clover'' 2|publisher=[[Shueisha]]|access-date=June 11, 2016|language=ja|archive-date=January 18, 2016|archive-url=https://web.archive.org/web/20160118095604/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880452-1|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-880452-1
+| LicensedRelDate = August 2, 2016<ref>{{cite web|url=https://www.viz.com/read/manga/product/12249|title=Black Clover, Volume 2|publisher=[[Viz Media]]|access-date=June 11, 2016|archive-date=June 18, 2016|archive-url=https://web.archive.org/web/20160618132341/http://www.viz.com/read/manga/product/12249|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-4215-8719-6
+| ChapterList     = 
+{{Numbered list|start=8
+| {{Nihongo4|"Those Who Protect"|護る者|Mamoru Mono}}
+| {{Nihongo4|"The Boy's Vow: Part 2"|少年の誓い2|Shōnen no Chikai Tsū}}
+| {{Nihongo4|"What Happened One Day in the Castle Town"|とある日の城下町での出来事|Toaru Hi no Jōkamachi de no Dekigoto}}
+| {{Nihongo4|"Dungeon"|魔宮|Danjon}}
+| {{Nihongo4|"Reunion"|再会|Saikai}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=13
+| {{Nihongo4|"The Diamond Mage"|ダイヤモンドの魔道士|Daiyamondo no Madōshi}}
+| {{Nihongo4|"Friends"|仲間|Nakama}}
+| {{Nihongo4|"Three"|三人|Sannin}}
+| {{Nihongo4|"Mortal Combat"|死闘|Shitō}}
+}}
+| LineColor       = EEC591
+| Summary = Though Asta and his friends save Saussy, acquiring a magic stone found by the anti-bird accompanying Asta, they are unable to prevent Heath Grice from using a spell to kill himself and his men to conceal the nature of their mission. After Asta and Noelle receive their first payment, they are taken by their drunken senior Vanessa Enoteca to the black market. They are observed by the disguised Wizard King Julius Novachrono, who then follows Yuno and his Golden Dawn teammates Klaus Lunette and Mimosa Vermillion. When a dungeon appears, Julius arranges for Asta, Noelle, and Luck Voltia to investigate it for treasure. Asta's group and Yuno's group meet while dealing with the dungeon's defences and a group from the neighboring Diamond Kingdom. This group is commanded by Lotus Whomalt; Yuno battles their mage Mars, who uses powerful crystal magic.
+}}
+{{Graphic novel list
+| VolumeNumber    = 3
+| RelDate         = October 3, 2015<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880489-7|script-title=ja:ブラッククローバー 3|trans-title=''Black Clover'' 3|publisher=[[Shueisha]]|access-date=June 11, 2016|language=ja|archive-date=January 15, 2016|archive-url=https://web.archive.org/web/20160115021254/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880489-7|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-880489-7
+| LicensedRelDate = October 4, 2016<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-vol-3/12248|title=Black Clover, Volume 3|publisher=[[Viz Media]]|access-date=July 25, 2016|archive-date=August 27, 2016|archive-url=https://web.archive.org/web/20160827151024/https://www.viz.com/read/manga/black-clover-vol-3/12248|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-4215-8720-2
+| ChapterList     = 
+{{Numbered list|start=17
+| {{Nihongo4|"Destroyer"|破壊者|Hakaisha}}
+| {{Nihongo4|"Inside the Treasure Hall"|宝物殿その奥|Hōmotsuden Sono Oku}}
+| {{Nihongo4|"Memories of You"|追憶の君|Tsuioku no Kimi}}
+| {{Nihongo4|"One Instant"|刹那|Setsuna}}
+| {{Nihongo4|"Destruction and Salvation"|崩壊と救済|Hōkai to Kyūsai}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=22
+| {{Nihongo4|"Assembly at the Royal Capital"|王都集結|Ōto Shūketsu}}
+| {{Nihongo4|"The Distinguished Service Ceremony"|戦功叙勲式|Senkō Jokun-shiki}}
+| {{Nihongo4|"Capital Riot"|王都騒乱|Ōto Sōran}}
+| {{Nihongo4|"March of the Dead"|屍の行軍|Shi no Kōgun}}
+}}
+| LineColor       = EEC591
+| Summary = Asta's group force Lotus away, then join Yuno's group. Klaus recognizes Mars as one of the Diamond Kingdom's experimental super soldiers. Asta duels with Mars while Yuno accidentally acquires a Sylph elemental spirit. In a flashback, a young Mars accidentally kills a fire mage girl named Fana during the final experiment's battle royale. In the present, Mars heals himself with fire magic before knocking Asta into a secret treasure room; Asta acquires a second anti-magic sword, and defeats Mars with help from Yuno. The dungeon collapses when Lotus removes the corner piece treasure, saving Mars who regains his memory that Fana forced him to kill her so he could see the outside world. A week later, Asta, Noelle, and Yuno's group meet Julius who allows them to attend a knight-promotion ceremony for Noelle's older siblings Solid and Nebra Silva, senior Golden Dawn members, and the Blue Roses' Sol Marron. However, the capital is suddenly attacked by an army of zombies summoned by the former magic knight Rades Spirito.
+}}
+{{Graphic novel list
+| VolumeNumber    = 4
+| RelDate         = December 4, 2015<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880567-2|script-title=ja:ブラッククローバー 4|trans-title=''Black Clover'' 4|publisher=[[Shueisha]]|access-date=June 11, 2016|language=ja|archive-date=January 7, 2016|archive-url=https://web.archive.org/web/20160107135527/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880567-2|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-880567-2
+| LicensedRelDate = December 6, 2016<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-4/product/4976|title=Black Clover, Volume 4|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=December 8, 2022|archive-url=https://web.archive.org/web/20221208151407/https://www.viz.com/read/manga/black-clover-volume-4/product/4976|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-4215-9023-3
+| ChapterList     = 
+{{Numbered list|start=26
+| {{Nihongo4|"Wild Magic Dance"|魔法乱舞|Mahō Ranbu}}
+| {{Nihongo4|"We Can Get Stronger"|強くなれる|Tsuyoku Nareru}}
+| {{Nihongo4|"Blackout"|ブラックアウト|Burakkuauto}}
+| {{Nihongo4|"Bad Loser"|負けず嫌い|Makezugirai}}
+| {{Nihongo4|"A New Rival"|新たなるライバル|Aratanaru Raibaru}}
+}}
+| ChapterListCol2 =
+{{Numbered list|start=31
+| {{Nihongo4|"The Crimson Lion King"|紅蓮の獅子王|Guren no Shishiō}}
+| {{Nihongo4|"The One Who Waits Deep in the Darkness"|闇の奥で待つ者|Yami no Oku de Matsu Mono}}
+| {{Nihongo4|"Adversity"|逆境|Gyakkyō}}
+| {{Nihongo4|"Wounded Beasts"|手負いの獣|Teoi no Kemono}}
+}}
+| LineColor       = EEC591
+| Summary = King Augustus Kira Clover&nbsp;XIII hides within his castle as the battle unfolds. The magic knight squads proceed to completely destroy the zombies, though confused at how the invasion happened. Asta confronts Rades and his {{abbr|No.|number}}&nbsp;4 zombie Jimmy. At Fuegoleon's insistence to overcome the complex that Nozel and their siblings placed on her, Noelle joins Leoppold in supporting Asta as they defeat Rades' remaining top zombies before being restrained by Fuegoleon. The invasion is later revealed to be a diversion for an attack on Fuegoleon himself. As most of the magic knights are teleported out of the city, Yuno defeats a youth-draining witch named Catherine with unexpected help from the Black Bulls' foodie Charmy Papittoson, who earlier sneaked into the palace kitchen and fell in love with Yuno. Fuegoleon is briefly teleported to another location by Valtos, and returned with his arm severed. When Rades's allies assemble, Asta and Leopold battle the magicians while Noelle uses her shield to prevent further harm to a dying Fuegoleon.
+}}
+{{Graphic novel list
+| VolumeNumber    = 5
+| RelDate         = March 4, 2016<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880630-3|script-title=ja:ブラッククローバー 5|trans-title=''Black Clover'' 5|publisher=[[Shueisha]]|access-date=June 11, 2016|language=ja|archive-date=March 13, 2016|archive-url=https://web.archive.org/web/20160313083254/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880630-3|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-880630-3
+| LicensedRelDate = February 7, 2017<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-5/product/5033|title=Black Clover, Volume 5|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=December 8, 2022|archive-url=https://web.archive.org/web/20221208161248/https://www.viz.com/read/manga/black-clover-volume-5/product/5033|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-4215-9125-4
+| ChapterList     = 
+{{Numbered list|start=35
+| {{Nihongo4|"The Strongest Guy"|最強の男|Saikyō no Otoko}}
+| {{Nihongo4|"Light"|光|Hikari}}
+| {{Nihongo4|"Next Time We Meet"|次合う時は|Tsugi au Toki wa}}
+| {{Nihongo4|"The One I've Set My Heart On"|心に決めた人|Kokoro ni Kimeta Hito}}
+| {{Nihongo4|"The Mirror Mage"|鏡の魔道士|Kagami no Madōshi}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=40
+| {{Nihongo4|"Pursuit over the Snow"|雪上の追跡|Setsujō no Tsuigeki}}
+| {{Nihongo4|"Flash"|一閃|Issen}}
+| {{Nihongo4|"Three-Leaf Sprouts"|三つ葉の芽|Mitsuba no Me}}
+| {{Nihongo4|"Explosion of Malice"|凶気暴乱|Kyōki Bōran}}
+| {{Nihongo4|"Siblings"|兄妹|Kyōdai}}
+}}
+| LineColor       = EEC591
+| Summary = Asta and his friends are overwhelmed by the Eye of the Midnight Sun, until the other magic knights use a collaboration spell to teleport back to the city. The enemy mages flee while abducting Asta, whom their member Sally wanted to dissect, motivated by a passionate scientific obsession with his anti-magic. The Midnight Sun are intercepted by Julius, who uses his time magic to kill two and capture the others. Julius becomes interested in a nearby stone tablet inlaid with jewels like the one from Saussy. A mysterious magician appears and blinds everyone with light magic; after a brief clash with Julius, he withdraws with the sephirah{{clarify|date=May 2019}} and most of his subordinates, while Julius and Asta return to the city with their one remaining prisoner. Julius believes the invasion was enabled by a traitor within the magic knights. While Asta and Luck are recruited by their senior Finral Roulacase for a mixer, Asta meets Rebecca and develops a crush on her while protecting her from a drunk. With Noelle following him due to her own feelings, Asta visits Rebecca's village. Asta's senior Gauche is visiting his young sister, whose crush on Asta provokes Gauche to make attempts on Asta's life, until the orphanage's mother superior Theresa Rapual stops him. The following day, after a strange snowstorm, the children disappear; Asta, Gauche, and Theresa follow the trail while Noelle calls reinforcements. Asta's group find the children had been abducted by a rogue mage named Baro to drain their mana. After Marie is saved, Baro is revealed to be working for Sally; she used him in an experiment that turns him into a monster, while Gauche abandons everyone else to get Marie to safety.
+}}
+{{Graphic novel list
+| VolumeNumber    = 6
+| RelDate         = May 2, 2016<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880672-3|script-title=ja:ブラッククローバー 6|trans-title=''Black Clover'' 6|publisher=[[Shueisha]]|access-date=June 11, 2016|language=ja|archive-date=April 30, 2016|archive-url=https://web.archive.org/web/20160430080155/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880672-3|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-880672-3
+| LicensedRelDate = April 4, 2017<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-6/product/5099|title=Black Clover, Volume 6|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=January 30, 2023|archive-url=https://web.archive.org/web/20230130111002/https://www.viz.com/read/manga/black-clover-volume-6/product/5099|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-4215-9158-2
+| ChapterList     = 
+{{Numbered list|start=45
+| {{Nihongo4|"To Help Somebody Someday"|いつか誰かの為になる|Itsuka Dareka no Tame ni naru}}
+| {{Nihongo4|"The Man Who Cuts Death"|死をカット男|shiwo katto otoko}}
+| {{Nihongo4|"Light Magic vs. Dark Magic"|光魔法VS闇魔法|Hikari Mahō Bāsasu Yami Mahō}}
+| {{Nihongo4|"Ki"|氣|Ki}}
+| {{Nihongo4|"Sin for Sin"|罪には罪を|Tsumi niwa Tsumi o}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=50
+| {{Nihongo4|"The Light of Judgement"|裁きの光|Sabaki no Hikari}}
+| {{Nihongo4|"Three Eyes"|三つの眼|Mittsu no Me}}
+| {{Nihongo4|"The One with No Magic"|魔力無き者|Maryoku Naki Mono}}
+| {{Nihongo4|"They're Not Yours"|オマエのモノじゃない|Omae no Mono Janai}}
+}}
+| LineColor       = EEC591
+| Summary = As Theresa gets the children to safety, Marie spurs Gauche to help Asta's group and Neige defeat Baro. Sally is wounded but Midnight Sun's leader Licht appears with Valtos and states his intent to destroy the sinful Clover Kingdom and reclaim what Asta stole. Yami arrives and reveals himself as a user of dark magic and a foreigner who came to the Clover Kingdom as a child. A battle ensues, and Licht tries to seal them in the cave while Yami teaches Asta his gi-sensing technique. Finral returns the children to their parents while Theresa and Gauche are healed; seeing he has changed, Theresa gives Gauche some of her mana. Finral teleports Gauche to Yami, where Gauche uses a spell to reflect Licht's attack and defeat him. Licht is freed from Yami's binds by Midnight Sun members The Third Eye: Rhya the Disloyal, Fana the Hatred, and Vetto the Despair. The Third Eye overpower Yami until Nozel arrives with Blue Rose captain Charlotte Rosary and Green Mantises captain Jack the Ripper, who battle them while Asta lands a hit on Licht that causes his vast mana to leak out. Licht denounces Asta a thief for stealing his master's grimoire and swords, while the Third Eye quickly cast a sealing spell on Licht before taking him and their wounded to safety.
+}}
+{{Graphic novel list
+| VolumeNumber    = 7
+| RelDate         = August 4, 2016<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880751-5&mode=1|script-title=ja:ブラッククローバー 7|trans-title=''Black Clover'' 7|publisher=[[Shueisha]]|access-date=June 28, 2016|language=ja|archive-date=October 26, 2016|archive-url=https://web.archive.org/web/20161026064900/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880751-5&mode=1|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-880751-5
+| LicensedRelDate = June 6, 2017<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-7/product/5163|title=Black Clover, Volume 7|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=December 9, 2022|archive-url=https://web.archive.org/web/20221209083031/https://www.viz.com/read/manga/black-clover-volume-7/product/5163|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-4215-9432-3
+| ChapterList     = 
+{{Numbered list|start=54
+| {{Nihongo4|"The Magic Knight Captains Conference"|魔法騎士団団長会議|Mahō Kishi-dan Danchō Kaigi}}
+| {{Nihongo4|"The Captains and the Peasant Boy"|団長と下民の少年|Danchō to Kamin no Shōnen}}
+| {{Nihongo4|"Three-Leaf Salute"|三つ葉の敬礼|Mitsuba no Keirei}}
+| {{Nihongo4|"A Black Beach Story"|黒の海岸物語|Kuro no Kaigan Monogatari}}
+| {{Nihongo4|"The Water Girl Grows Up"|水の娘成長物語|Mizu no Ko Seichō Monogatari}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=59
+| {{Nihongo4|"The Underwater Temple"|海底神殿|Kaitei Shinden}}
+| {{Nihongo4|"The High Priest's Game"|大司祭の戯れ|Dai Shisai no Tawamure}}
+| {{Nihongo4|"Temple Battle Royale"|神殿バトルロワイヤル|Shinden Batoru Rowaiyaru}}
+| {{Nihongo4|"Rule of the Strong"|強者君臨|Kyōsha Kunrin}}
+}}
+| LineColor       = EEC591
+| Summary = Yami attends a meeting of the squad captains while Asta <!--brought by Julius's advisor Marx Francois--> uses his anti-magic on imprisoned Midnight Sun members<!-- Catherine and George-->. Julius confirms that the traitor who brought down the capital's barrier is Purple Orca captain Gueldre Poizot, who is arrested while attempting to escape. Julius confides to Yami that the other squads may also be compromised; he entrusts the Black Bulls to find the remaining four magic stones sought by the Midnight Suns<!--to regain their "original forms"-->. One stone is in the Underwater Temple, which is difficult to reach due to its strong magic. On the beach, a series of misadventures take place, which include a mysterious singing girl named Kahono. Yami instructs Noelle to develop the Sea Dragon's Cradle spell, which allows them to enter the temple during the full moon. Eccentric high priest Gifso pits the Black Bulls against his warrior priests, including his grandchildren Kahono and Kiato, who were promised to travel the land to live their dreams if they win. They are interrupted when Vetto leads a Midnight Sun group to attack the temple.
+}}
+{{Graphic novel list
+| VolumeNumber    = 8
+| RelDate         = October 4, 2016<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880792-8|script-title=ja:ブラッククローバー 8|trans-title=''Black Clover'' 8|publisher=[[Shueisha]]|access-date=September 19, 2016|language=ja|archive-date=October 14, 2016|archive-url=https://web.archive.org/web/20161014201314/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880792-8|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-880792-8
+| LicensedRelDate = August 1, 2017<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-8/product/5223|title=Black Clover, Volume 8|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=February 8, 2023|archive-url=https://web.archive.org/web/20230208231427/https://www.viz.com/read/manga/black-clover-volume-8/product/5223|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-4215-9517-7
+| ChapterList     =
+{{Numbered list|start=63
+| {{Nihongo4|"A Game with Lives at Stake"|命を懸けたゲーム|Inochi o Kaketa Gēmu}}
+| {{Nihongo4|"The Pointlessly Direct Fireball and the Wild Lightning"|愚直な火球と奔放な稲光|Guchokuna Kakyū to Honpōna Inazuma}}
+| {{Nihongo4|"The Guy Who Doesn't Know When to Quit"|諦めの悪い男|Akirame no Warui Otoko}}
+| {{Nihongo4|"True Form"|本当の姿|Hontō no Sugata}}
+| {{Nihongo4|"Bonds"|絆|Kizuna}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=68
+| {{Nihongo4|"Awakening"|覚醒|Kakusei}}
+| {{Nihongo4|"The Only Weapon"|唯一の武器|Yuiitsu no Buki}}
+| {{Nihongo4|"Despair vs. Hope"|絶望VS希望|Zetsubō Bāsasu Kibō}}
+| {{Nihongo4|"Slice Open Destiny"|運命を切り拓く|Unmei o Kiri Hiraku}}
+}}
+| LineColor       = EEC591
+| Summary = Gifso and Yami are trapped in Abari's barrier and watch Vetto defeat Gifso's son Gio, Magna and Luck. Vetto nearly breaks Asta's arm, and Kahono and Kiato combine their song-and-dance magic to stop Vetto, but he severs Kiato's leg and crushes Kahono's throat. Vetto states his intent to drag every human into despair for stealing his people's hopes and dreams. 
+Noelle uses her Sea Dragon's Roar to destroy Vetto's body, but he sprouts a third eye while regenerating and Yami realizes the Midnight Sun are more than a terrorist organization. Noelle is reminded of a story about a demon race that threatened the Clover Kingdom long ago. She is saved by Asta, who was healed with the last of Kahono's magic. Vanessa and Finral aid Asta, whose anti-magic wounds Vetto, though Vetto adapts to the attack. Gauche, Charmy, and transformation mage Grey<!--, in her true form as a shy young girl,--> arrive and distract Vetto, allowing Asta to stab him in the chest with the Demon Dweller Sword.
+}}
+{{Graphic novel list
+| VolumeNumber    = 9
+| RelDate         = December 2, 2016<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880823-9|script-title=ja:ブラッククローバー 9|trans-title=''Black Clover'' 9|publisher=[[Shueisha]]|access-date=November 21, 2016|language=ja|archive-date=September 4, 2017|archive-url=https://web.archive.org/web/20170904061941/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-880823-9|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-880823-9
+| LicensedRelDate = November 7, 2017<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-9/product/5314|title=Black Clover, Volume 9|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=January 30, 2023|archive-url=https://web.archive.org/web/20230130042109/https://www.viz.com/read/manga/black-clover-volume-9/product/5314|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-4215-9646-4
+| ChapterList     =
+{{Numbered list|start=72
+| {{Nihongo4|"Beyond Limits"|限界の先|Genkai no Saki}}
+| {{Nihongo4|"End of the Battle, End of Despair"|戦いの果て、絶望の終わり|Tatakai no Hate, Zetsubō no Owari}}
+| {{Nihongo4|"Proof of Rightness"|正しさの証明|Tadashi-sa no Shōmei}}
+| {{Nihongo4|"The Kiten War"|キテン戦役|Kiten Sen'eki}}
+| {{Nihongo4|"The Strongest Brigade"|最強の団|Saikyō no Dan}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=77
+| {{Nihongo4|"Whoever's Strongest Wins"|強い方が勝つ|Tsuyoi Hōga Katsu}}
+| {{Nihongo4|"The Underdog's Declaration"|弱者の宣言|Jakusha no Sengen}}
+| {{Nihongo4|"Behind the Mask"|仮面の奥|Kamen no Oku}}
+| {{Nihongo4|"Never Again"|もう二度と|Mōnidoto}}
+}}
+| LineColor       = EEC591
+| Summary = Vetto tries to crush Asta's arms with a curse, believing he has trapped Asta, but Asta maintains control of the Demon Dweller Sword in his determination to defeat Vetto. Vetto falters as he realizes that Asta is not human. The Black Bulls begin to celebrate, but Vetto, awakening from a dream of himself and Licht as children, tries to use the last of his magic to annihilate himself, the temple, and everyone in it. Yami breaks free from Abari's barrier, defeats Abari and kills Vetto. Gifso is grateful but knows nothing of the magic stone, which Nero retrieves and gives to Julius. Learning that the Diamond Kingdom has attacked the city of Kiten, Yami travels there with Finral, Asta and Charmy to fight Vangeance. They defeat the enemy generals, and Yami confronts Vangeance over his likeness to Licht; Vangeance reveals his scarred face and past, and Yami backs down. The Black Bulls discover that the curse Vetto placed on Asta is beyond their healers' skills; Noelle and Finral turn to old friend Fanzel Kruger for a cure.
+}}
+{{Graphic novel list
+| VolumeNumber    = 10
+| RelDate         = March 3, 2017<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881023-2|script-title=ja:ブラッククローバー 10|trans-title=''Black Clover'' 10|publisher=[[Shueisha]]|access-date=January 30, 2017|language=ja|archive-date=June 14, 2017|archive-url=https://web.archive.org/web/20170614174405/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881023-2|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-881023-2
+| LicensedRelDate = February 6, 2018<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-10/product/5403|title=Black Clover, Volume 10|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=January 30, 2023|archive-url=https://web.archive.org/web/20230130055617/https://www.viz.com/read/manga/black-clover-volume-10/product/5403|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-4215-9763-8
+| ChapterList     =
+{{Numbered list|start=81
+| {{Nihongo4|"Because He's Like That"|そんなアイツが|Son'na Aitsu ga}}
+| {{Nihongo4|"The Forest of Witches"|魔女の森|Majo no Mori}}
+| {{Nihongo4|"Infiltration"|潜入|Sen'nyū}}
+| {{Nihongo4|"Battlefield Decision"|戦場の決断|Senjō no Ketsudan}}
+| {{Nihongo4|"The Raging Bulls Charge"|暴れ牛奮迅|Abare Ushi Funjin}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=86
+| {{Nihongo4|"Flames of Hatred"|憎悪の炎|Zōo no Honō}}
+| {{Nihongo4|"Not A Failure"|出来損ないじゃない|Dekisokonai Janai}}
+| {{Nihongo4|"Devastating Thrust"|必殺の一突き|Hissatsu no Hitotsuki}}
+| {{Nihongo4|"Defectors' Atonement"|離反者の贖罪|Rihan-sha no Shokuzai}}
+| {{Nihongo4|"Students"|教え子|Oshiego}}
+}}
+| LineColor       = EEC591
+| Summary = Noelle visits former Diamond Kingdom commander Fanzell Kruger, his fiancé Dominante Code, and Fanzell's apprentice Mariella. Dominante believe that the Witch Queen can cure Asta, though witches like her and Vanessa are considered criminals since they already left the forest. Meanwhile, Vanessa offers her freedom to the Queen to cure Asta, but is seriously injured. Noelle's group take Asta to the forest and barge into the Queen's manor after they are discovered. Fana leads a Midnight Sun invasion of the forest while a Diamond Kingdom platoon attacks from the opposite side. Noelle persuades the Queen to heal Asta <!--with her blood magic--> so he can help fight the invaders. The Black Bulls engage Fana while Fanzell's group engage the Diamond mages under his former students Mars and Ladros. Ladros explains that they want the secret of the Queen's immortality to cure their dying king Morris. But Mars, having changed since the labyrinth, joins forces with Fanzell and lures Ladros to Asta, whose group defeated Fana's elemental spirit Salamander.
+}}
+{{Graphic novel list
+| VolumeNumber    = 11
+| RelDate         = May 2, 2017<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881073-7|script-title=ja:ブラッククローバー 11|trans-title=''Black Clover'' 11|publisher=[[Shueisha]]|access-date=April 3, 2017|language=ja|archive-date=June 12, 2017|archive-url=https://web.archive.org/web/20170612205926/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881073-7|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-881073-7
+| LicensedRelDate = May 1, 2018<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-11/product/5491|title=Black Clover, Volume 11|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=January 30, 2023|archive-url=https://web.archive.org/web/20230130044838/https://www.viz.com/read/manga/black-clover-volume-11/product/5491|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-4215-9818-5
+| ChapterList     =
+{{Numbered list|start=91
+| {{Nihongo4|"Explosive Enthusiasm"|狂熱爆発|Kyōnetsu Bakuhatsu}}
+| {{Nihongo4|"Won't Let You Die"|死なせない|Shinasenai}}
+| {{Nihongo4|"The Promised World"|約束の世界|Yakusoku no Sekai}}
+| {{Nihongo4|"The Tables Turn"|一変|Ippen}}
+| {{Nihongo4|"Those Who Boost Each Other Up"|高め合う存在|Takame Au Sonzai}}
+}}
+| ChapterListCol2     = 
+{{Numbered list|start=96
+| {{Nihongo4|"Transformation"|変貌|Henbō}}
+| {{Nihongo4|"It's Nothing"|何でも無い|Nandemonai}}
+| {{Nihongo4|"He's Himself"|アイツはアイツ|Aitsu wa Aitsu}}
+| {{Nihongo4|"Family"|家族|Kazoku}}
+| {{Nihongo4|"The Red Thread of Fate"|運命の赤い糸|Unmei no Akai Ito}}
+}}
+| LineColor       = EEC591
+| Summary = After Mars realizes that Fana is the childhood friend he thought he had killed, Fana attempts to kill herself, but Asta thwarts her. In a flashback, a young Fana is shown possessed by a female elf whose hatred is derived from the slaughter of her people by humans on the day of Licht's wedding to the sister of a trusted human friend. In the present, the Witch Queen awakens Asta's powers and Ladros is struck down. However, the Witch Queen tricks Asta into killing his friends over Vanessa's objections. In a flashback, a young Vanessa is detained in a birdcage as the queen tries to have her improve her Thread Magic. However, Yami Sukehiro inadvertently destroys part of her cage, resulting in Vanessa fleeing the forest to join the Black Bulls. In the present, Vanessa, outraged at her mother's actions, uses her grimoire's powerful spell, the Red Thread of Fate, to stop Asta from killing Noelle and Finral, and easily defeats the queen.
+}}
+{{Graphic novel list
+| VolumeNumber    = 12
+| RelDate         = August 4, 2017<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881192-5|script-title=ja:ブラッククローバー 12|trans-title=''Black Clover'' 12|publisher=[[Shueisha]]|access-date=June 27, 2017|language=ja|archive-date=October 2, 2017|archive-url=https://web.archive.org/web/20171002193255/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881192-5|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-881192-5
+| LicensedRelDate = August 7, 2018<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-12/product/5587|title=Black Clover, Volume 12|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=January 30, 2023|archive-url=https://web.archive.org/web/20230130052222/https://www.viz.com/read/manga/black-clover-volume-12/product/5587|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-0040-0
+| ChapterList     =
+{{Numbered list|start=101
+| {{Nihongo4|"I'm Home"|ただいま|Tadaima}}
+| {{Nihongo4|"Asta's Day Off"|アスタの休日|Asuta no Kyūjitsu}}
+| {{Nihongo4|"A Fun Festival Double Date"|楽しいお祭りWデート|Tanoshī o Matsuri Daburu Dēto}}
+| {{Nihongo4|"The Briar Maiden's Melancholy"|荊乙女の憂鬱|Ibara Otome no Yūutsu}}
+| {{Nihongo4|"Two New Stars"|二つの新星|Futatsu no Shinsei}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=106
+| {{Nihongo4|"We Got This Far"|ここまで来た|Koko Made Kita}}
+| {{Nihongo4|"The King of the Clover Kingdom"|クローバー王国国王|Kurōbā Ōkoku Kokuō}}
+| {{Nihongo4|"The Uncrowned, Undefeated Lioness"|無冠無敗の女獅子|Mukan Muhai no Onna Shishi}}
+| {{Nihongo4|"The Yultim Volcano Trail"|ユルティム火山 登山道|Yurutimu Kazan Tozandō}}
+| {{Nihongo4|"Saint Elmo's Fire"|セントエルモの火|Sento Erumo no Hi}}
+}}
+| LineColor       = EEC591
+| Summary = Accepting defeat, the Witch Queen gives her magic stone to Asta along with information: both Vetto and the possessed Fana used forbidden magic from the long-dead Elf tribe, and that Asta's grimoire and swords belonged to the Elves' leader. The queen also gives Asta and Mars vials of her blood, Mars intends to use it to end Morris's tyranny while Fana remains with Fanzell's group. Asta uses the queen's blood to heal Kahono and Kiato during the Star Festival. The Black Bulls learn that their progress has placed them second to the Golden Dawn, much to everyone's shock. King Augustus declares the formation of the Royal Knights to attack the Midnight Sun's recently discovered base. Soon after, Asta joins the training session of the new Crimson Lion captain Mereoleona Vermillion, Fuegoleon's older sister.
+}}
+{{Graphic novel list
+| VolumeNumber    = 13
+| RelDate         = October 4, 2017<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881210-6|script-title=ja:ブラッククローバー 13|trans-title=''Black Clover'' 13|publisher=[[Shueisha]]|access-date=August 28, 2017|language=ja|archive-date=October 14, 2017|archive-url=https://web.archive.org/web/20171014094743/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881210-6|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-881210-6
+| LicensedRelDate = November 6, 2018<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-13/product/5719|title=Black Clover, Volume 13|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=January 30, 2023|archive-url=https://web.archive.org/web/20230130054751/https://www.viz.com/read/manga/black-clover-volume-13/product/5719|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-0104-9
+| ChapterList     =
+{{Numbered list|start=111
+| {{Nihongo4|"Into the Hot Spring"|いざ入浴|Iza Nyūyoku}}
+| {{Nihongo4|"The Royal Knights Selection Test"|王撰騎士団選抜試験|Roiyaru Naitsu Senbatsu Shiken}}
+| {{Nihongo4|"The Magic Crystal Destruction Battle Tournament"|魔晶石破壊バトルトーナメント|Kurisutaru Hakai Batoru Tōnamento}}
+| {{Nihongo4|"Flower of Resolution"|誓いの花|Chikai no Hana}}
+| {{Nihongo4|"Hopeless"|しょーもねー|Shō Monē}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=116
+| {{Nihongo4|"The Vice Captain of the Coral Peacocks"|珊瑚の孔雀副団長|Sango no Kujaku Fuku-danchō}}
+| {{Nihongo4|"The Two Spatial Magic Users"|二人の空間魔法使い|Futari no Kūkan Mahōtsukai}}
+| {{Nihongo4|"Mage X"|魔道士X|Madōshi Ekkusu}}
+| {{Nihongo4|"More"|もっと|Motto}}
+| {{Nihongo4|"Bad Blood"|因縁|In'nen}}
+}}
+| LineColor       = EEC591
+| Summary = Following Mereoleona's training session, the Royal Knight exam commences in a series of team battles. Asta wins the first match with Mimosa and Zora Ideale, a mage who assumed the identity of the Purple Orcas' vice-captain Xerx Lugner. Magna and Sol win their match through the strategy of their teammate Kirsch Vermilion, Mimosa's older brother and member of the Coral Peacocks. Finral helps Leopold Vermilion and the Golden Dawn's Hamon win their match. Langris relies on his own skills to win rather than work with his teammates. The Aqua Deers' captain Rill Boismortier, who entered under a false identity, wins his match. Klaus, Luck, and the Blue Roses' Puli Angel also advance. Teamed with the Green Mantises' En Ringard, Noelle and Yuno face and defeat the former's older brother Solid and the latter's Golden Dawn superior Alecdora Sandler.
+}}
+{{Graphic novel list
+| VolumeNumber    = 14
+| RelDate         = December 4, 2017<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881287-8|script-title=ja:ブラッククローバー 14|trans-title=''Black Clover'' 14|publisher=[[Shueisha]]|access-date=November 23, 2017|language=ja|archive-date=December 1, 2017|archive-url=https://web.archive.org/web/20171201043020/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881287-8|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-881287-8
+| LicensedRelDate = February 5, 2019<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-14/product/5803|title=Black Clover, Volume 14|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=January 30, 2023|archive-url=https://web.archive.org/web/20230130041334/https://www.viz.com/read/manga/black-clover-volume-14/product/5803|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-0221-3
+| ChapterList     =
+{{Numbered list|start=121
+| {{Nihongo4|"Thrash Him"|ブチのめす|Buchinomesu}}
+| {{Nihongo4|"My Way"|オレのやり方|Ore no Yarikata}}
+| {{Nihongo4|"Peasant Trap"|下民の罠|Gemin no Wana}}
+| {{Nihongo4|"Mister Delinquent vs. Muscle Runt"|ヤンキー先輩VS筋肉チビ|Yankī Senpai Bāsasu Kin'niku Chibi}}
+| {{Nihongo4|"It Was Beautiful"|美しかった|Utsukushikatta}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=126
+| {{Nihongo4|"Special Little Brother vs. Failed Big Brother"|優等生の弟VS不出来の兄|Yūtōsei no Otōto Bāsasu Fudeki no Ani}}
+| {{Nihongo4|"Gold and Black Sparks"|金と黒の火花|Kin to Kuro no Hibana}}
+| {{Nihongo4|"The One Who Wins Till the End..."|最後まで勝ち続けた者が|Saigomade Kachi Tsuzuketa Mono ga}}
+| {{Nihongo4|"The Life of a Certain Man"|ある一人の男の生き方|Aru Hitori no Otoko no Ikikata}}
+| {{Nihongo4|"Burn It into You"|今焼き付ける|Ima Yakitsukeru}}
+}}
+| LineColor       = EEC591
+| Summary = Yuno's team and Asta's team reach the second round as the latter faces Kirsch's team, with Asta and Zora butting heads over the latter refusal to be a team player and agreeing remembering his father. They and Mimosa manage to defeat Kisrch's team, with Kirsch humbling himself to Asta. The next match is Finral's team against Langris' team, which ends with the latter's victory. However, as Finral held his own, a furious Langris nearly kills his older brother out of frustration of being loved by others despite having their parents' affection. This infuriates Asta as Julius allows their teams to fight in the semi-finals, with the Wizard King assuming Langris might be the spy within the Magic Knight due to his behavior. The match ends in a draw with both teams eliminated, with Yuno's team facing Rill's team after they defeat Luck's team.
+}}
+{{Graphic novel list
+| VolumeNumber    = 15
+| RelDate         = March 2, 2018<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881358-5|script-title=ja:ブラッククローバー 15|trans-title=''Black Clover'' 15|publisher=[[Shueisha]]|access-date=January 24, 2018|language=ja|archive-date=January 24, 2018|archive-url=https://web.archive.org/web/20180124135831/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881358-5|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-881358-5
+| LicensedRelDate = May 7, 2019<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-15/product/5897/paperback|title=Black Clover, Vol. 15|publisher=[[Viz Media]]|access-date=February 8, 2019|archive-date=February 9, 2019|archive-url=https://web.archive.org/web/20190209232232/https://www.viz.com/read/manga/black-clover-volume-15/product/5897/paperback|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-0454-5
+| ChapterList     =
+{{Numbered list|start=131
+| {{Nihongo4|"Going On Ahead"|先に|Sakini}}
+| {{Nihongo4|"The Victors"|勝者|Shōsha}}
+| {{Nihongo4|"Formation of the Royal Knights"|王撰騎士団ロイヤルナイツ結成|Roiyaru Naitsu Kessei}}
+| {{Nihongo4|"Dream"|夢|Yume}}
+| {{Nihongo4|"Storming the Eye of the Midnight Sun's Hideout!!!"|白夜の魔眼アジト 突入!!!|Byakuya no Magan Ajito Totsunyū}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=136
+| {{Nihongo4|"A Surging Advance"|怒涛の進軍|Dotō no Shingun}}
+| {{Nihongo4|"Mereoleona vs. Raia the Disloyal"|メレオレオナVS不実のライア|Mereoreona Bāsasu Fujitsu no Raia}}
+| {{Nihongo4|"Assault"|襲撃|Shūgeki}}
+| {{Nihongo4|"The Black Bulls Hideout"|黒の暴牛アジト|Kuro no Bōgyū Ajito}}
+| {{Nihongo4|"You Probably Don't Know, But..."|君達は知らないだろうけど|Kimitachi wa Shiranaidaroukedo}}
+}}
+| LineColor       = EEC591
+| Summary = After Yuno defeats Rill's team in the finals by revealing his ability to absorb Sylph to increase his power, Julius meets up with Zora and reveals himself as a friend of his father Zara while making Zora a Royal Knight. Zora joins the other Royal Knights: Asta, Noelle, Yuno, Luck, Klaus, Mimosa, Kirch, Nils Ragus, En Ringard, Puli Angel, Rill Boismortier, Fragil Tormenta, Hamon Caseus with Mereoleona as their captain while some failing mages like Nozel were made members due to their magic. Mereoleona decides to attack the Midnight Sun's base days in advance, teaming up with Asta and Zora as they split up once at their destination. As Yuno from one Midnight Night member that the time of assuming their true forms is near, Mereoleona's group encounters Rhya as he hints Licht is elsewhere while fighting them. As Mereoleona overpowers Rhya, Yuno's group find an elf floating within a sphere of light. Meanwhile as Yami leaves to meet up with Vangeance, Gauche, Grey and Gordon remain behind as they question their base's constant rearranging before being attacked by Rades, Sally, and Valtos with orders not to harm Gauche as Rades' zombies swarm into the base as a blue-haired mage appears in response to Grey and Gordon determined to protect their home.
+}}
+{{Graphic novel list
+| VolumeNumber    = 16
+| RelDate         = May 2, 2018<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881513-8|script-title=ja:ブラッククローバー 16|trans-title=''Black Clover'' 16|publisher=[[Shueisha]]|access-date=April 9, 2018|language=ja|archive-date=April 10, 2018|archive-url=https://web.archive.org/web/20180410072302/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881513-8|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-881513-8
+| LicensedRelDate = July 2, 2019<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-16/product/5951|title=Black Clover, Vol. 16|publisher=[[Viz Media]]|access-date=August 5, 2019|archive-date=June 5, 2023|archive-url=https://web.archive.org/web/20230605065514/https://www.viz.com/read/manga/black-clover-volume-16/product/5951|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-0513-9
+| ChapterList     =
+{{Numbered list|start=141
+| {{Nihongo4|"Crazy Magic Battle"|ムチャクチャな魔法戦|Muchakucha na Mahōsen}}
+| {{Nihongo4|"Twilight"|黄昏|Tasogare}}
+| {{Nihongo4|"The Wizard King Vs. The Leader of the Eye of the Midnight Sun"|魔法帝VS白夜の魔眼頭首|Mahōtei Bāsasu Byakuya no Magan Tōshu}}
+| {{Nihongo4|"This Man is...!"|この男は|Kono Otoko wa}}
+| {{Nihongo4|"Julius Novachrono"|ユリウス・ノヴァクロノ|Yuriusu Novakurono}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=146
+| {{Nihongo4|"New Future"|新しい未来|Atarashii Mirai}}
+| {{Nihongo4|"An End and a Beginning"|終わりと始まり|Owari to Hajimari}}
+| {{Nihongo4|"Until Now"|これまで|Koremade}}
+| {{Nihongo4|"Reincarnation"|転生|Tensei}}
+| {{Nihongo4|"Collapse"|瓦解|Gakai}}
+}}
+| LineColor       = EEC591
+| Summary = The Black Bulls are joined in fending off Midnight Sun mages by their rarely seen member Henry Legolant, the owner of the Black Bulls' hideout, before their enemies to fall back once Valtos acquires the magic stone Asta found in Saussy Village. Meanwhile, Julius is approached by a conflicted Vangeance who reveals himself as a willing host body for Licht, who explains to have come for the two magic stones in Julius' possession. Julius reveals the extent of his power as he battles Licht while trying to injure Vangeance's body, remembering how Zara's death inspired him to become a Wizard King to end the Clover Kingdom's discrimination practices. But Licht fatally wounds Julius and escapes, with Julius entrusting the Clover Kingdom's future to Yami and the others. Licht reaches the Wizard King memorial outside Hage Village and receives the final stone. "Licht" is then revealed to be an elf named Patry, who was concerned for Licht marrying a human girl named Tetia who is bearing Licht's half-elf child. When the elves were slaughtered, Patry assumed Tetia's brother, the first Wizard King, betrayed them and that Licht used the last of his power to reincarnate the elves into human bodies. Patry assumed the real Licht's identity due to Vangeance's resemblance to his leader and revived the Third Eye to find the Magic Stones. As Patry performs the ritual, he expresses his disdain for his human subordinates while revealing they are all sacrifices to resurrect his true allies. Meanwhile, as Yuno approaches the elf, Asta stops Rhya's suicide spell with the Third Eye member touched by the Magic's Knight's attempt in understanding what drives the Midnight Sun's hatred toward humans. But Rhya senses Patry enacting the ritual with all their human followers sacrificed as he and Yuno are along those transform into elves while the sealed elf awakens.
+}}
+{{Graphic novel list
+| VolumeNumber    = 17
+| RelDate         = August 3, 2018<ref>{{cite web|url=http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881567-1|script-title=ja:ブラッククローバー 17|trans-title=''Black Clover'' 17|publisher=[[Shueisha]]|access-date=July 2, 2018|language=ja|archive-date=July 2, 2018|archive-url=https://web.archive.org/web/20180702180227/http://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=978-4-08-881567-1|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-881567-1
+| LicensedRelDate = September 3, 2019<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-17/product/6018|title=Black Clover, Vol. 17|publisher=[[Viz Media]]|access-date=August 5, 2019|archive-date=April 13, 2023|archive-url=https://web.archive.org/web/20230413022042/https://www.viz.com/read/manga/black-clover-volume-17/product/6018|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-0616-7
+| ChapterList     =
+{{Numbered list|start=151
+| {{Nihongo4|"Overwhelming Disadvantage"|圧倒的劣勢|Attō-teki Ressei}}
+| {{Nihongo4|"Troublesome Woman"|メンドーな女|Mendō na On'na}}
+| {{Nihongo4|"The Desperate Path Toward Survival"|命懸けの生きる道|Inochigake no Ikiru Michi}}
+| {{Nihongo4|"Golden Wind"|金色の風|Konjiki no Kaze}}
+| {{Nihongo4|"We Won't Lose to You"|オマエには負けない|Omaeni wa Makenai}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=156
+| {{Nihongo4|"True Form, True Power"|本来の姿 本来の力|Honrai no Sugata Honrai no Chikara}}
+| {{Nihongo4|"Fall, or Save the Kingdom"|滅亡か救国か|Metsubō ka Kyūkoku ka}}
+| {{Nihongo4|"The Lives of the Village in the Sticks"|最果ての村の命|Saihate no Mura no Inochi}}
+| {{Nihongo4|"Release from Misfortune"|因果解放|Inga Kaihō}}
+| {{Nihongo4|"You Probably Don't Know"|知らねーだろ|Shiranēdaro}}
+}}
+| LineColor       = EEC591
+| Summary = As the Midnight Sun's human members are sacrificed, various Clover Kingdom residents are subverted by the resurrected elves. This included Magic Knights as Noelle and Kirsch are overpowered by a possessed-Luck. Rhya laments he cannot trust Asta's resolve as he joined by his comrade Lira after he took over Rill's body, explaining that anti-magic cannot stop them now and their intent to reclaim the real Licht's Grimoire and swords from Asta. Despite Mereoleona ordering them to leave, Asta and Zora return to her aid to defeat the elves before Rhya grabs Asta to take him to Licht. They arrive as Mimosa is captured by the elves possessing Klaus and Hamon, Rhya using her as a bargaining chip as Yuno reveals to have control over himself despite being turned into an Elf. Though Asta and Yuno knock out Klaus and Hamon, they find themselves fighting a fully revived Licht as he reclaims only of his swords with Asta and some of the Royal Knights escaping as the fortress advances to the capital. The Royal Knights question how to dispatch their possessed-comrades as they end up in Hage village they deal with an elf using the body of Magic Knight Digit to attack the orphanage, with Asta learning the sword he took from Licht allows him to remove the possessing elf soul and restore the host body to normal. The group then reach another village where Magna and Vanessa are fighting the possessed Luck.
+}}
+{{Graphic novel list
+| VolumeNumber    = 18
+| RelDate         = November 2, 2018<ref>{{cite web|url=http://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-881686-9|script-title=ja:ブラッククローバー 18|trans-title=''Black Clover'' 18|publisher=[[Shueisha]]|access-date=September 24, 2018|language=ja|archive-date=September 25, 2018|archive-url=https://web.archive.org/web/20180925025637/http://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-881686-9|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-881686-9
+| LicensedRelDate = November 5, 2019<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-18/product/6079|title=Black Clover, Vol. 18|publisher=[[Viz Media]]|access-date=August 5, 2019|archive-date=April 13, 2023|archive-url=https://web.archive.org/web/20230413015034/https://www.viz.com/read/manga/black-clover-volume-18/product/6079|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-0741-6
+| ChapterList     =
+{{Numbered list|start=161
+| {{Nihongo4|"Human Bonds"|人間の絆|Ningen no Kizuna}}
+| {{Nihongo4|"Lightning of Rage vs. Friends"|怒りの雷VS仲間|Ikari no Ikazuchi Bāsasu Nakama}}
+| {{Nihongo4|"Smiles, Tears"|笑顔 涙|Egao Namida}}
+| {{Nihongo4|"The Good-For-Nothings Rise Up!!"|ならず者共 奮起!!|Narazumonodomo Funki!!}}
+| {{Nihongo4|"The Black Bulls Charge"|黒の暴牛 爆進!!!|Kuro no Bōgyū Bakushin!!!}}
+| {{Nihongo4|"The Resurrected Avenger"|蘇り復讐者|Yomigaeri Fukushū-sha}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=167
+| {{Nihongo4|"Path of Revenge, Path of Atonement"|復讐の道 償いの道|Fukushū no Michi Tsugunai no Michi}}
+| {{Nihongo4|"A Fight Between Those Who Swore Loyalty to the Same Man"|VS同じ男に忠義を誓った者達|Bāsasu Onaji Otoko ni Chūgi o Chikatta-sha-tachi}}
+| {{Nihongo4|"The Black Bulls Captain vs. the Crimson Wild Rose"|黒の暴牛団長VS真紅の野薔薇|Kuro no Bōgyū Danchō Bāsasu Shinku no Nobara}}
+| {{Nihongo4|"The Fallen Make Their Move"|転落者 動き出す|Tenraku-sha Ugokidasu}}
+| {{Nihongo4|"The Sleeping Lion"|眠れる獅子|Nemureru Shishi}}
+| {{Nihongo4|"Rebirth"|新生|Shinsei}}
+}}
+| LineColor       = EEC591
+| Summary = The possessed Luck formally introduces himself as Rufel as he battles Vanessa and Magna, insisting Luck is no more despite his shedding tears convincing Magna that their comrade is still in there. Though Vanessa using the last of Rogue's ability, Asta arrives at the last second to save Magna and manages to reach Luck while exorcising Rufel with Asta realizing the elves are suffering as he resolves to free them. The gang which the Black Bulls' base and learn Gauche is also possess as Charmy restores their magic so Henry can reconfigure their base into a vehicle to reach the capital. Meanwhile, after Patry leaves to see Licht after paying respects to Vangeance, Rades suddenly resurrects as the result of gaining a new spell at the time of his death. He resurrects Sally and Valtos with the trio ending up joining forces with the Black Bulls. At the capital, Yami faces a possessed Charlotte while Gueldre Poizot and Revchi Salik, a former subordinate who attempted to steal Yuno's grimoire when he first got it, escape their prison during the chaos. Both Fuegoleon and Finral awaken to join the fight, the former having acquired Fana's Salamander while the latter wants to free Langris from being possessed by Patry's cousin Ratri.
+}}
+{{Graphic novel list
+| VolumeNumber    = 19
+| RelDate         = January 4, 2019<ref>{{cite web|url=http://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-881693-7|script-title=ja:ブラッククローバー 19|trans-title=''Black Clover'' 19|publisher=[[Shueisha]]|access-date=November 20, 2018|language=ja|archive-date=November 21, 2018|archive-url=https://web.archive.org/web/20181121021819/http://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-881693-7|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-881693-7
+| LicensedRelDate = January 7, 2020<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-19/product/6137|title=Black Clover, Vol. 19|publisher=[[Viz Media]]|access-date=October 20, 2019|archive-date=April 16, 2023|archive-url=https://web.archive.org/web/20230416223229/https://www.viz.com/read/manga/black-clover-volume-19/product/6137|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-0878-9
+| ChapterList     =
+{{Numbered list|start=173
+| {{Nihongo4|"The Battle for Clover Castle"|決戦 クローバー城|Kessen Kurōbā-jō}}
+| {{Nihongo4|"Flying In"|飛来|Hirai}}
+| {{Nihongo4|"The Silvas' Battle"|シルヴァ家の戦い|Shiruva-ke no Tatatkai}}
+| {{Nihongo4|"Siblings"|きょうだい|Kyōdai}}
+| {{Nihongo4|"Battlefield Dancer"|戦場の舞姫|Senjō no Maihime}}
+| {{Nihongo4|"Human Magic"|人間の魔法|Ningen no Mahō}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=179
+| {{Nihongo4|"Battle for the Royal Chamber"|王の間の戦い|Ō no Ma no Tatakai}}
+| {{Nihongo4|"Sharpened Blades"|研ぎ澄ます刃|Togisumasu Yaiba}}
+| {{Nihongo4|"Spatial Mage Brothers"|空間魔道士の兄弟|Kūkan Madōshi no Kyōdai}}
+| {{Nihongo4|"The Apostles of Sephira"|セフィラの徒|Sefira no To}}
+| {{Nihongo4|"The Raging Bull Joins the Showdown!!"|暴れ牛 頂上決戦参戦!!|Abare Ushi Chōjō Kessen Sansen!!}}
+}}
+| LineColor       = EEC591
+| Summary = Ratri leads the elves possessing the Golden Dawn members in storming the three royal castles to kill the royal families, with Ratri easily defeating King Clover before Finral intervenes as Yami and Jack gets his parents and the king to safety before helping distract Ratri long enough for Finral to land a hit as he and Langris mentally reconcile. Meanwhile, Nozel comes to aid Solid and Nebra when an elf named Kivn is among those attacking House Silva. The three older siblings then shocked to see Noelle able to defeat Kivn, with Nozel revealing his spite towards her was a cover to keep his little sister save from harm as he and Zora join her in dispatching the other elves. Patry arrives at the floating dungeon where he meets with Rhya, who had placed Vetto and Fana's souls in artificial bodies, alongside Drowa and Eclat, the elves possessing Gauche and his sister Marie. The gathered members of the Apostles of Sephira, ten elves capable of receiving divine revelations, proceed to the Shadow Palace in the underworld and use the stone on Yuno's necklace to make the reincarnations permanent with every human in the Clover Kingdom killed in the process. The Black Bulls arrive with Patry sending his fellow apostle Reve, possessing Coral Peacock Captain Dorothy Unsworth, to remove Vanessa, Luck, Magna, Charmy and Sally from the field while Gauche and Patry destroy their base. As Yami, Jack, Rades and Valtos chase after Patry and the apostles, the rest remain behind to face Drowa and Eclat as the former identifies Asta's new sword as Licht's Demon-Destroyer Sword.
+}}
+{{Graphic novel list
+| VolumeNumber    = 20
+| RelDate         = April 4, 2019<ref>{{cite web|url=https://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-881757-6|script-title=ja:ブラッククローバー 20|trans-title=''Black Clover'' 20|publisher=[[Shueisha]]|access-date=February 20, 2019|language=ja|archive-date=February 21, 2019|archive-url=https://web.archive.org/web/20190221054716/https://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-881757-6|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-881757-6
+| LicensedRelDate = March 3, 2020<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-20/product/6194|title=Black Clover, Vol. 20|publisher=[[Viz Media]]|access-date=December 31, 2019|archive-date=April 17, 2023|archive-url=https://web.archive.org/web/20230417222911/https://www.viz.com/read/manga/black-clover-volume-20/product/6194|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-1017-1
+| ChapterList     =
+{{Numbered list|start=184
+| {{Nihongo4|"Dream World"|夢想の世界|Musō no Sekai}}
+| {{Nihongo4|"Dream Encounter"|夢幻の邂逅|Mugen no Kaikō}}
+| {{Nihongo4|"The Eyes in the Mirror"|鏡の中の瞳|Kagami no Naka no Hitomi}}
+| {{Nihongo4|"Battle in the Space Between Heaven and Earth"|天地の間の攻防|Tenchi no Hazama no Kōbō}}
+| {{Nihongo4|"Why I Lived This Long"|これまで生きてきた意味|Koremade Ikite kita Imi}}
+| {{Nihongo4|"Humans Who Can Be Trusted"|信じられる人間|Shinjirareru Ningen}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=190
+| {{Nihongo4|"Go!!!!"|行く!!!!|Ike!!!!}}
+| {{Nihongo4|"Storming the Shadow Palace"|突入 影の王宮|Totsunyū Kage no Ōkyū}}
+| {{Nihongo4|"Two Crimson Fists"|二つの紅蓮の拳|Futatsu no Guren no Kobushi}}
+| {{Nihongo4|"The Final Invaders"|最後の入城者|Saigo no Nyūjō-sha}}
+| {{Nihongo4|"Outrage"|業腹|Gōhara}}
+}}
+| LineColor       = EEC591
+| Summary = Within the dream world, Reve overpowers Vanessa's group until Sally learns that whatever the Elf imagines comes into being regardless of it being unintentional. With this in mind, after a failed attempt to trick Reve into imagining exits, the group get the Elf to accidentally dream up Dorothy Unsworth. Dorothy, revealed to be cheerful, engages the Elf Apostle in a metaphysical battle that destroys her dimension. This forces everyone back into the real world as Reve is quickly defeated by Luck and Magna. Meanwhile, Gordon, Gray, and Henry support Asta while keeping him safe as Drowa uses his Mirror Magic to reflect Eclat's paralyzing Eye Magic. Henry attempts to sacrifice everything he has to enable Asta to defeat the Elves, only for Asta act of saving Henry making Drowa realize that he and his friends are nothing like the humans who killed them. Drowa allows himself and Eclat to be exorcised from Gauche and Marie, the group joined by the others soon after. While the other Black Bulls battle the remaining elves before Yuno arrived with reinforcements, Asta and Noelle join Mimosa, Nozel, Fuegoleon and Mereoleona into entering the Shadow Place after the remaining Apostles of the Sephira. The group get separated with Noelle facing Fana, Fuegoleon battle Vetto while Mereoleona confront the elf possessing the new Purple Orca captain Kaiser Granvoka. Asta and Mimosa encounter Lira before they are joined by Charmy, who accompanied Yuno into the Shadow Palace. When Lira destroys the food she offered to him, an enraged Charmy learns of her lineage and powers as a half-dwarf.
+}}
+{{Graphic novel list
+| VolumeNumber    = 21
+| RelDate         = July 4, 2019<ref>{{cite web|url=https://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-881840-5|script-title=ja:ブラッククローバー 21|trans-title=''Black Clover'' 21|publisher=[[Shueisha]]|access-date=June 6, 2019|language=ja|archive-date=February 21, 2019|archive-url=https://web.archive.org/web/20190221054716/https://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-881757-6|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-881840-5
+| LicensedRelDate = June 2, 2020<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-21/product/6287|title=Black Clover, Vol. 21|publisher=[[Viz Media]]|access-date=March 3, 2020|archive-date=June 8, 2023|archive-url=https://web.archive.org/web/20230608193347/https://www.viz.com/read/manga/black-clover-volume-21/product/6287|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-1476-6
+| ChapterList     =
+{{Numbered list|start=195
+| {{Nihongo4|"Transformation"|一変|Ippen}}
+| {{Nihongo4|"Mastermind"|黒幕|Kuromaku}}
+| {{Nihongo4|"False Hope"|まやかしの希望|Mayakashi no Kibō}}
+| {{Nihongo4|"The Five-Leaf Grimoire"|五つ葉の魔道書グリモワール|Itsutsuba no Gurimowāru}}
+| {{Nihongo4|"The Ultimate Natural Enemy"|最強の天敵|Saikyō no Tenteki}}
+| {{Nihongo4|"World of Light"|光の世界|Hikari no Sekai}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=201
+| {{Nihongo4|"The Top Level of the Shadow Palace"|影の王宮 最上階|Kage no Ōkyū Saijōkai}}
+| {{Nihongo4|"From Another World"|異なる世界の|Kotonaru Sekai no}}
+| {{Nihongo4|"Breaking the Seal"|今封を切る時|Ima Fū o Kiru Toki}}
+| {{Nihongo4|"Last Wish"|終焉の望み|Shūen no Nozomi}}
+| {{Nihongo4|"The Truth of 500 Years"|500年の真実|500-Nen no Shinjitsu}}
+}}
+| LineColor       = EEC591
+| Summary = As Charmy holds Rila at bay so Asta and Mimosa can move on, Noelle receives help from Jack against Fana. Yuno ends up alone against Rhya, Patry and another elf, Ronne, who steals Yuno's necklace as it is revealed to be the final stone. Rhya, having known that their slaughter was not the first Wizard King's doing, is mortally wounded by Ronne upon realizing he is not himself. Ronne is revealed to be possessed by a demon who uses the stones to summon his body to the mortal plane, the demon revealing himself to masterminded the elves' massacre by the royals along with his ability to manipulate reality with his Word Soul Magic. After Asta arrives to join Yuno in fighting the monster, the demon breaks Patolli by revealing that he used him and the Midnight Sun to regain his body. This causes Patoli to fall into despair, causing him to transform into a dark elf while his four-leaf grimoire turns into a five-leaf grimoire. The demon takes Patoli's grimoire to complete his plans while leaving the dark elf to kill everyone for him. But Nozel defeats Patoli while Mimosa heals Rhya, Asta restoring Patry while letting him use Vangeance's body long so he can help the magic knights defeat the demon as Licht attacks himself with support from Yami and Charla, the elf possessing Charlotte. Outside, Finral is awaken by Nero who reveals her ability to speak while demanding to be taken to the remains of the dead demon near Hage village. At Nero's instructions, Finral uses the magic stone to reanimate the petrified statue of the first wizard king Lumiere Silvamillion Clover. Five centuries earlier, Lumiere was attend his sister's marriage to Licht when he was impeded by the demon who had sent the nobles to kill the elves. By the time Lumiere arrived, he found everyone but Licht dead as the latter beseeches the mage to kill him after being forced to prevent the demon from possessing him by turning himself into the monster that Lumiere killed. The demon escaped by using a spell to transport him and the elves' souls into the future, Lumiere has his attendant Secre Swallowtail turn him to stone until their enemy resurfaces while she spent the following centuries as the anti bird called Nero. The revived Lumiere is joined by a restored Secre as they proceed to the Shadow Palace to join the battle.
+}}
+{{Graphic novel list
+| VolumeNumber    = 22
+| RelDate         = October 4, 2019<ref>{{cite web|url=https://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-882049-1|script-title=ja:ブラッククローバー 22|trans-title=''Black Clover'' 22|publisher=[[Shueisha]]|access-date=September 15, 2019|language=ja|archive-date=September 15, 2019|archive-url=https://web.archive.org/web/20190915215315/https://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-882049-1|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-882049-1
+| LicensedRelDate = August 4, 2020<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-22/product/6357|title=Black Clover, Vol. 22|publisher=[[Viz Media]]|access-date=May 18, 2020|archive-date=June 10, 2023|archive-url=https://web.archive.org/web/20230610224219/https://www.viz.com/read/manga/black-clover-volume-22/product/6357|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-1501-5
+| ChapterList     =
+{{Numbered list|start=206
+| {{Nihongo4|"A Reunion Across Time and Space"|時空を超えた再会|Jikū o Koeta Saikai}}
+| {{Nihongo4|"Ultimate Magic"|究極のマジック|Kyūkyoku Mahō}}
+| {{Nihongo4|"Swords"|剣|Tsurugi}}
+| {{Nihongo4|"Wish"|お願い|Onegai}}
+| {{Nihongo4|"On the Brink"|瀬戸際|Setogiwa}}
+| {{Nihongo4|"The Final Attack"|終わりの一撃|Owari no Ichigeki}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=212
+| {{Nihongo4|"Destiny's End"|因縁の最後|In'nen no Saigo}}
+| {{Nihongo4|"The Great Soul Tree"|魂の大樹|Tamashī no Taiju}}
+| {{Nihongo4|"Dawn"|夜明け|Yoake}}
+| {{Nihongo4|"Three Problems"|3つの困ったこと|3-Tsu no Komattakoto}}
+| {{Nihongo4|"Power Balance"|パワーバランス|Pawā Baransu}}
+| {{Nihongo4|"The Scales of Justice"|正義の天秤|Seigi no Tenbin}}
+}}
+| LineColor       = EEC591
+| Summary = Secre completely awakens Licht's soul. As everyone starts fighting, the demon realizes that Asta's Anti-magic can stop his attacks. Licht casts a spell, using the power of all remaining elves to unlock the true potential of the Demons Dweller Sword and destroys the demon. Unfortunately, the monster's heart survives and regenerates, revealing that no spell of their size can kill it. Asta understands that the Demon Slayer Sword also has a hidden power and must unlock it. With the help of Yuno and Yami, who casts a powerful spell from a distance cutting the demon in half, Asta manages to destroy the demon's heart. With the destruction of the demon, however, his magic does not disappear and everyone is forced to flee from the destroying Shadow Palace. Once outside, Asta purifies Patry from William's body, so that William can, together with Licth and Asta, purify the souls of the other elves and bring the possessed to normal. Rhya, Vetto and Fana, however, remain tied to their bodies and greet Licht and the others, while Rades resurrects Patry in Licht's artificial body. Even Lumiere, after saying goodbye to Secre, vanishes, while Yami and William, who went to Julius' burial site, find him alive, but with the appearance of a thirteen year old. Julius, after explaining that he came back to life after sealing his time with a spell, reveals to Asta that the source of his anti-magic is a demonic power, and that therefore Clover's Parliament of Magic intends to judge him. A few days later, after going to the parliament building, Asta and Secre are put on trial by the head of the organization, Damnatio Kira, who intends to accuse them of the recent events that have hit the kingdom.
+}}
+{{Graphic novel list
+| VolumeNumber    = 23
+| RelDate         = January 4, 2020<ref>{{cite web|url=https://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-882176-4|script-title=ja:ブラッククローバー 23|trans-title=''Black Clover'' 23|publisher=[[Shueisha]]|access-date=November 23, 2019|language=ja|archive-date=November 14, 2022|archive-url=https://web.archive.org/web/20221114104325/https://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-882176-4|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-882049-1
+| LicensedRelDate = November 3, 2020<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-23/product/6478|title=Black Clover, Vol. 23|publisher=[[Viz Media]]|access-date=August 1, 2020|archive-date=June 8, 2023|archive-url=https://web.archive.org/web/20230608200411/https://www.viz.com/read/manga/black-clover-volume-23/product/6478|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-1810-8
+| ChapterList     =
+{{Numbered list|start=218
+| {{Nihongo4|"The Worst of the Worst"|最低最悪|Saitei Saiaku}}
+| {{Nihongo4|"As Pitch Black as It Gets"|真っ黒けっけ|Makurokke Kke}}
+| {{Nihongo4|"Visits"|見舞い|Mimai}}
+| {{Nihongo4|"The Blue Rose's Confession"|碧薔薇の告白|Aobara no Kokuhaku}}
+| {{Nihongo4|"Just Between Us"|ここだけの話|Kokodake no Hanashi}}
+| {{Nihongo4|"The Agrippa Family"|アグリッパ家|Agurippa-ke}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=224
+| {{Nihongo4|"You Are Cursed"|オマエは呪われている|Omae wa Norowareteiru}}
+| {{Nihongo4|"The Heart Kingdom|ハート王国|Hāto Ōkoku}}
+| {{Nihongo4|"The Spirit Guardian's Magic"|精霊守の魔法|Seirei no Kami no Mahō}}
+| {{Nihongo4|"The All-Knowing Priestess"|全智の巫女|Zenchi no Miko}}
+| {{Nihongo4|"Arcane Stage Mages"|冥域の魔道士|Meiiki no Madōshi}}
+}}
+| LineColor       = EEC591 
+| Summary = The Black Bull raid the Asta and Secre process, and she is officially accepted as a member of the team. Before the situation escalates, Fuegoleon and Nozel intervene and through a decree by Julius, they explain that Asta will be placed in the custody of the Black Bull, and that the team has been commissioned by Julius to investigate demonic phenomena. In search of clues, Yami talks to Charlotte, while Noelle learns from Dorothy that her mother's death was caused by a demon called Megicula. Gordon asks for help from his family, who reveals to him that a powerful source of demonic energy is present in the nearby Heart Kingdom. Asta, Noelle, Mimosa, Finral and Secre travel to Heart, but once there, Asta is kidnapped by the local princess and the spirit of the Undine water. After a short struggle, the princess explains to Asta and her companions that Megicula has cursed her and will die within a year. He also explains that the demon took up residence in the Spade Kingdom, which began to expand by conquering neighboring kingdoms, including Diamond. To cope with the threat, Heart and Clover form an alliance, following which the group of Asta plus other wizards with spells capable of fighting demons (including Charmy, Rill, Luck and Leopold) will have to stay and train at Heart for about half year.
+}}
+{{Graphic novel list
+| VolumeNumber    = 24
+| RelDate         = April 3, 2020<ref>{{cite web|url=https://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-882254-9|script-title=ja:ブラッククローバー 24|trans-title=''Black Clover'' 24|publisher=[[Shueisha]]|access-date=February 16, 2020|language=ja|archive-date=November 14, 2022|archive-url=https://web.archive.org/web/20221114104310/https://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-882254-9|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-882254-9
+| LicensedRelDate = January 5, 2021<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-24/product/6535|title=Black Clover, Vol. 24|publisher=[[Viz Media]]|access-date=October 4, 2020|archive-date=June 10, 2023|archive-url=https://web.archive.org/web/20230610182453/https://www.viz.com/read/manga/black-clover-volume-24/product/6535|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-2000-2
+| ChapterList     = 
+{{Numbered list|start=229
+| {{Nihongo4|"The Beginning of Hope and Despair"|希望と絶望の幕開け|Kibō to Zetsubō no Makuake}}
+| {{Nihongo4|"I'll Crush You"|叩き潰してやる|Tataki Tsubushite Yaru}}
+| {{Nihongo4|"The Dark Triad"|漆黒の三極性|Dāku Toraiado}}
+| {{Nihongo4|"Quiet Lakes and Forest Shadows"|静かな湖と森の影|Shizukana Mizuumi to Mori no Kage}}
+| {{Nihongo4|"Fate Begins to Move"|動き出す運命|Ugokidasu Unmei}}
+| {{Nihongo4|"The Messenger from the Spade Kingdom"|スペード王国の使者|Supēdo Ōkoku no Shisha}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=235
+| {{Nihongo4|"Dark Disciples"|漆黒の使徒|Dāku Disaipuru}}
+| {{Nihongo4|"There's No Way We're The Same"|同じなワケねーだろ|Onaji Na Wake Nē Daro}}
+| {{Nihongo4|"Sheer Obstinacy"|たた頑なに|Tata Katakuna ni}}
+| {{Nihongo4|"Zeno's Power"|ゼノンの力|Zenon no Chikara}}
+| {{Nihongo4|"Budding of Yggdrasil"|ユグドラシルの芽吹き|Yugudorashiru no Mebuki}}
+}}
+| LineColor       = EEC591 
+| Summary = After six months of training in the Heart Kingdom, Asta and his companions attack a mobile base in the Spade Kingdom, defeating the occupants and freeing the prisoners. Yuno, now the second-in-command of the Golden Dawn, travels to Hage, where the orphanage has rescued a man from Spade. He reveals his name is Ralph and that he is a servant of the former royal family of Spade, the Grynberryall family, which was overthrown by a trio of wizard known as the Dark Triad, who draw their powers from demons, and that Yuno is the son of the previous king of Spade. Meanwhile, the Golden Dawn headquarters is attacked by Zenon of the Dark Triad and his men, who are looking for William. Yuno goes to help his companions, but both he and the others are defeated by Zenon when he releases fifty percent of his devil power. Thanks to a spell cast by William, Yuno and most of the squad members manage to survive. Elsewhere, the other two members of the Yriad, Vanica and Dante, make their move: the first preparing to attack Heart, while the latter is interested in Yami.
+}}
+{{Graphic novel list
+| VolumeNumber    = 25
+| RelDate         = July 3, 2020<ref>{{cite web|url=https://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-882346-1|script-title=ja:ブラッククローバー 25|trans-title=''Black Clover'' 25|publisher=[[Shueisha]]|access-date=June 4, 2020|language=ja|archive-date=November 14, 2022|archive-url=https://web.archive.org/web/20221114104317/https://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-882346-1|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-882346-1
+| LicensedRelDate = May 4, 2021<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-25/product/6662|title=Black Clover, Vol. 25|publisher=[[Viz Media]]|access-date=January 30, 2021|archive-date=June 5, 2023|archive-url=https://web.archive.org/web/20230605062328/https://www.viz.com/read/manga/black-clover-volume-25/product/6662|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-2181-8
+| ChapterList     = 
+{{Numbered list|start=240
+| {{Nihongo4|"The Great War Breaks Out"|大戦勃発|Taisen Boppatsu}}
+| {{Nihongo4|"Super Midair Battle"|超空中戦|Chō Kūchū-sen}}
+| {{Nihongo4|"Humans and Evil"|人間と悪|Ningen to Aku}}
+| {{Nihongo4|"Devil Host vs. Devil Host"|悪魔憑きVS悪魔憑き|Akumatsuki Bāsasu Akumatsuki}}
+| {{Nihongo4|"Cinderella Grey"|シンデレラグレイ|Shinderera Gurei}}
+| {{Nihongo4|"Dante vs. the Captain of the Black Bulls"|ダンテVS黒の暴牛団長|Dante Bāsasu Kuro no Bōgyū Danchō}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=246
+| {{Nihongo4|"The Tree of Qliphoth"|クリフォトの樹|Kurifoto no Ki}}
+| {{Nihongo4|"Battlefield: Heart Kingdom"|戦場 ハート王国|Senjō Hāto Ōkoku}}
+| {{Nihongo4|"Luck vs. Svenkin"|ラックVSスヴェンキン|Rakku Bāsasu Suvenkin}}
+| {{Nihongo4|"Leopold vs. Sivoir"|レオポルドVSシーヴワル|Reoporudo Bāsasu Shīvuwaru}}
+| {{Nihongo4|"Charmy vs. Halbet"|チャーミーVSハールベート|Chāmī Bāsasu Hārubēto}}
+}}
+| LineColor       = EEC591 
+| Summary = Dante attacks the Black Bull's base in search of Yami, but is confronted by Asta, Vanessa, Gauche, Grey, and Henry. Asta is the first to attack, but is overwhelmed by the enemy's magic. When Dante injures Gauche, Asta becomes enraged and unleashes a greater amount of devil power, but is still knocked out by his opponent, who is able to use sixty percent of the power of his devil, Lucifero. Yami arrives to help his subordinates and manages to corner Dante, who reveals that the Dark Triad's goal is to open a magical portal to the devil world using Yami and William's magic. In the Heart Kingdom, Vanica's followers attack the civilians after defeating several Spirit Guardians, but are stopped and defeated by Luck, Leopold, and Charmy.
+}}
+{{Graphic novel list
+| VolumeNumber    = 26
+| RelDate         = October 2, 2020<ref>{{cite web|url=https://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-882422-2|script-title=ja:ブラッククローバー 26|trans-title=''Black Clover'' 26|publisher=[[Shueisha]]|access-date=August 27, 2020|language=ja|archive-date=November 14, 2022|archive-url=https://web.archive.org/web/20221114104318/https://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-882422-2|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-882422-2
+| LicensedRelDate = August 3, 2021<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-26/product/6757|title=Black Clover, Vol. 26|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=April 17, 2023|archive-url=https://web.archive.org/web/20230417161851/https://www.viz.com/read/manga/black-clover-volume-26/product/6757|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-2337-9
+| ChapterList     = 
+{{Numbered list|start=251
+| {{Nihongo4|"The Curse Devil"|呪いの悪魔|Noroi no Akuma}}
+| {{Nihongo4|"Water Crusade"|水の聖戦|Mizu no Seisen}}
+| {{Nihongo4|"Bloodshed"|血潮|Chishio}}
+| {{Nihongo4|"Power Differential"|力の差|Chikara no Sa}}
+| {{Nihongo4|"Exploding Life"|爆発する命|Bōhatsusuru Inochi}}
+| {{Nihongo4|"A Captain's Duty"|団長の勤め|Danchō no Tsutome}}
+}}
+| ChapterListCol2 =
+{{Numbered list|start=257
+| {{Nihongo4|"Rise to Action"|奮起|Funki}}
+| {{Nihongo4|"Black Oath"|黒の誓い|Kuro no Chikai}}
+| {{Nihongo4|"Raging Bull Unison"|暴れ牛のユニゾン|Abare Ushi no Yunizon}}
+| {{Nihongo4|"Darkout"|ダークアウト|Dākuauto}}
+| {{Nihongo4|"Shadows of Night"|夜の影|Yoru no Kage}}
+}}
+| LineColor       = EEC591 
+| Summary = Vanica attacks the royal palace of Heart and reveals that she has placed a curse on her disciples that prohibits them from dying as long as she controls them. As a result, everyone gets up and continues fighting. Supported by Loropechka and Undine, Noelle confronts Vanica, having learned that she is using Megicula's power. Although Secrè manages to seal her opponent, the sorceresses are nevertheless overwhelmed by Megicula's power. Impressed by Noelle's strength, Vanica begs Megicula to spare her, deciding instead to kidnap Loropechka to motivate Noelle to become even stronger. She then uses a spell to unleash her followers' devil power, devastating the kingdom. Meanwhile, Yami continues to battle Dante, who has unleashed his devil power to its fullest. Inspired by Yami, Asta gets up and continues the fight. Asta makes a deal with his devil, allowing him to control his right arm in exchange for more power, which allows him to use Yami's katana to defeat Dante. Soon after, however, Zenon appears at the scene of the battle, rescuing Dante and capturing Yami easily, before fleeing. As the team returns to Clover to heal the wounded, Asta is approached by an individual who introduces himself as Nacth, the Black Bull's vice commander, who offers to help him control his devil.
+}}
+{{Graphic novel list
+| VolumeNumber    = 27
+| RelDate         = January 4, 2021<ref>{{cite web|url=https://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-882529-8|script-title=ja:ブラッククローバー 27|trans-title=''Black Clover'' 27|publisher=[[Shueisha]]|access-date=November 21, 2020|language=ja|archive-date=November 14, 2022|archive-url=https://web.archive.org/web/20221114105844/http://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-882529-8|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-882529-8
+| LicensedRelDate = November 2, 2021<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-27/product/6854|title=Black Clover, Vol. 27|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=May 30, 2023|archive-url=https://web.archive.org/web/20230530090216/https://www.viz.com/read/manga/black-clover-volume-27/product/6854|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-2514-4
+| ChapterList     = 
+{{Numbered list|start=262
+| {{Nihongo4|"A Turbulent Conference"|波乱会議|Haran Kaigi}}
+| {{Nihongo4|"Shadow Intel"|影の情報|Kage no Jōhō}}
+| {{Nihongo4|"Stirrings of the Strongest"|最強の胎動|Saikyō no Taidō}}
+| {{Nihongo4|"Elysia"|エリュシア|Eryushia}}
+| {{Nihongo4|"Dark Garden Invitation"|暗い園の誘い|Kurai Sono no Izanai}}
+| {{Nihongo4|"The Devil-Binding Ritual"|従魔の儀|Jūma no Gi}}
+}}
+| ChapterListCol2 =
+{{Numbered list|start=268
+| {{Nihongo4|"Devil"|悪魔|Akuma}}
+| {{Nihongo4|"The One Who Can't Use Magic"|魔法が使えないヤツ|Mahō ga Tsukaenai Yatsu}}
+| {{Nihongo4|"Together"|二人|Futari}}
+| {{Nihongo4|"Union"|同化|Dōka}}
+| {{Nihongo4|"Dark Prison Hunting Ground"|暗獄の狩り場|Angoku no Kariba}}
+}}
+| LineColor       = EEC591 
+| Summary = Asta and Nacht appear at a meeting held by the captains and Yuno. Nacht explains the Triad's plans, and that it will take three days for the portal to the devil world to open. During this time, he offers to strengthen Asta, whose anti-magic is deemed an essential weapon, and to build an elite force to mount an assault against Spade. Elsewhere, Noelle awakens to find that she and her companions have been rescued by elves, who have taken them to their hidden village. Noelle asks the elves to help them grow stronger, and Patry offers to teach him their tribe's ultimate magic. Nacht takes Asta to an abandoned house and, through a ritual, brings out his devil so that Asta can completely subjugate it. Asta notes that the devil has no evil intentions, and states that just because it's a devil doesn't mean it's a bad person. Asta's words stun the devil and remind him of a woman who said those exact words. The devil remembers how he came to the human world as a young man and was taken in and raised by a woman named Richita, who gave him the name Liebe. When Richita was killed by Lucifero while attempting to enter the human world, she used her magic to confine Liebe in the grimoire, which would later be passed on to Asta. Asta eventually subdues Liebe, who realizes that Asta is Richita's son and agrees to be his friend. As the final part of their training, Asta and Liebe must learn to unite and fight against Nacht and his devil Gimodelo. After two days of trying, Asta succeeds.
+}}
+{{Graphic novel list
+| VolumeNumber    = 28
+| RelDate         = April 2, 2021<ref>{{cite web|url=http://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-882594-6|script-title=ja:ブラッククローバー 28|trans-title=''Black Clover'' 28|publisher=[[Shueisha]]|access-date=February 20, 2021|language=ja|archive-date=November 14, 2022|archive-url=https://web.archive.org/web/20221114105841/http://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-882594-6|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-882594-6
+| LicensedRelDate = February 1, 2022<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-28/product/6966|title=Black Clover, Vol. 28|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=April 16, 2023|archive-url=https://web.archive.org/web/20230416222048/https://www.viz.com/read/manga/black-clover-volume-28/product/6966|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-2718-6
+| ChapterList     = 
+{{Numbered list|start=273
+| {{Nihongo4|"Day of Destiny"|運命の日|Unmei no Hi}}
+| {{Nihongo4|"The Battle Begins"|開戦|Kaisen}}
+| {{Nihongo4|"Hellfire Incarnate"|業火の化身|Gōka no Keshin}}
+| {{Nihongo4|"Boreas"|ボレアス|Boreasu}}
+| {{Nihongo4|"The Vice Captain of the Golden Dawn"|金色の夜明け副団長|Konjiki no Yoake Fuku-danchō}}
+}}
+| ChapterListCol2 =
+{{Numbered list|start=278
+| {{Nihongo4|"Undying Bodies"|死なない体|Shinanai Tai}}
+| {{Nihongo4|"The Door to Hell"|地獄への扉|Jigoku e no Tobira}}
+| {{Nihongo4|"Surging Disaster"|押し寄せる厄災|Oshiyoseru Yakusai}}
+| {{Nihongo4|"Assault on the Kingdom"|王国への強襲|Ōkoku e no Kyōshū}}
+| {{Nihongo4|"Black Guardian"|黒き守護者|Kuroki Shugosha}}
+}}
+| LineColor       = EEC591 
+| Summary = Since Asta hasn't fully mastered the bond with Liebe, Nacht decides not to let them participate in the mission. On the day of the ritual, a team composed of Yuno, Nacht, Langris, several captains, and former members of the Midnight Sun invade Spade, with the resistance acting as bait. Zenon unleashes a gigantic demon against them, which Mereoleona confronts. Inside the castle, Rill and Charlotte face Vanica, Yuno and Langris face Zenon, and Jack and Nacht face Dante. Although Clover's mages initially manage to prevail over their enemies, Morris, a magic scholar from Diamond allied with the Triad, uses the knowledge extracted from Loropechka as a means to accelerate Qlipoth's growth. The devils thus begin to invade the human world, while the Triad members become able of using their devil power to its fullest extent. Clover is attacked by a second giant demon that Julius and the rest of the knights are unable to stop, but which is destroyed by Asta, who has managed to master the union.
+}}
+{{Graphic novel list
+| VolumeNumber    = 29
+| RelDate         = July 2, 2021<ref>{{cite web|url=http://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-882712-4|script-title=ja:ブラッククローバー 29|trans-title=''Black Clover'' 29|publisher=[[Shueisha]]|access-date=June 14, 2021|language=ja|archive-date=November 14, 2022|archive-url=https://web.archive.org/web/20221114104327/https://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-882712-4|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-882712-4
+| LicensedRelDate = June 7, 2022<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-29/product/7083|title=Black Clover, Vol. 29|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=March 23, 2023|archive-url=https://web.archive.org/web/20230323174302/https://www.viz.com/read/manga/black-clover-volume-29/product/7083|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-3002-5
+| ChapterList     = 
+{{Numbered list|start=283
+| {{Nihongo4|"A Huge Melee"|大混戦|Dai Konsen}}
+| {{Nihongo4|"Ultimate Magic"|究極魔法|Kyūkyoku Mahō}}
+| {{Nihongo4|"A Hellish Game of Tag"|地獄の鬼ごっこ|Jigoku no Onigokko}}
+| {{Nihongo4|"A Night With No Morning"|朝が来ない夜|Asa ga Konai Yoru}}
+| {{Nihongo4|"Day of Atonement"|贖罪の日|Shokuzai no Hi}}
+}}
+| ChapterListCol2 =
+{{Numbered list|start=288
+| {{Nihongo4|"Manifest"|顕|Arawa}}
+| {{Nihongo4|"Freezing Sun"|凍える太陽|Kogoeru Taiyō}}
+| {{Nihongo4|"The Highest vs. the Lowest"|最上VS最低|Saijō Bāsasu Saitei}}
+| {{Nihongo4|"A Duel with a Distant Inferior"|遥か格下の決闘|Haruka Kakushita no Kettō}}
+| {{Nihongo4|"Knowing"|識るということ|Shiru Toiu Koto}}
+}}
+| LineColor       = EEC591 
+| Summary = In Spade, the resistance and Clover's mages confront the escaped devils, and Noelle's group, along with the Spirit Guardians and the elves, come to their aid. Nacht faces the first two high-ranking devils to emerge from the underworld, Lilith and Naath, and despite his efforts, is defeated. Before the two devils can kill him, he is saved by Asta. Using the union, Asta confronts the two devils, who merge into a single entity and unleash a powerful spell. While the union wears off, Asta and Liebe manage to counteract the spell and destroy the two devils once and for all. Jack is about to be killed by Dante, but is saved by Magna and Zora. Thanks to a new spell developed with Zora, Magna manages to steal some of Dante's magical power, bringing the fight to a draw.
+}}
+{{Graphic novel list
+| VolumeNumber    = 30
+| RelDate         = October 4, 2021<ref>{{cite web|url=http://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-882795-7|script-title=ja:ブラッククローバー 30|trans-title=''Black Clover'' 30|publisher=[[Shueisha]]|access-date=August 13, 2021|language=ja|archive-date=November 14, 2022|archive-url=https://web.archive.org/web/20221114104328/http://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-882795-7|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-882795-7
+| LicensedRelDate = September 6, 2022<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-30/product/7173|title=Black Clover, Vol. 30|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=March 21, 2023|archive-url=https://web.archive.org/web/20230321085011/https://www.viz.com/read/manga/black-clover-volume-30/product/7173|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-3231-9
+| ChapterList     = 
+{{Numbered list|start=293
+|{{Nihongo4|"Smash Injustice"|理不尽をぶん殴る|Rifujin o Bun'naguru}}
+|{{Nihongo4|"As Promised"|約束通り|Yakusoku-dōri}}
+|{{Nihongo4|"Revenge Match"|リベンジマッチ|Ribenji Matchi}}
+|{{Nihongo4|"The Sacred Valkyrie"|聖なる戦乙女|Seinaru Ikusaotome}}
+|{{Nihongo4|"Advent"|降臨|Kōrin}}|{{Nihongo4|"Transient Life"|無常|Mujō}}
+}}
+| ChapterListCol2 =
+{{Numbered list|start=299
+|{{Nihongo4|"The Sound of The End"|死の音|Shūen no Oto}}
+|{{Nihongo4|"Beyond Tenacity"|不諦の先|Futei no Saki}}
+|{{Nihongo4|"Those Feelings"|その感情を|Sono Kanjō o}}
+|{{Nihongo4|"Convergence of Hope"|希望の集束|Kibō no Shūsoku}}
+|{{Nihongo4|"Glad Tidings"|福音|Fukuin}}
+}}
+| LineColor       = EEC591 
+| Summary = Magna and Dante continue to fight until their magical power is exhausted, allowing Magna to defeat his opponent. While Jack deals the final blow to Dante, Vanica manipulates Loropechka against Charlotte and Rill, until Noelle and Gaja intervene. Thanks to the union with Undine, Noelle manages to defeat Vanica, but Megicula emerges from her body, taking complete possession of Vanica and further corrupting Loropechka, intending to use the two women's souls to manifest in the human world. Noelle's companions are defeated, while the union spell dissolves. Gaja tries to sacrifice his own life in an attempt to kill the devil, but to no avail. When Megicula prepares to detonate Loropechka, Asta intervenes, saving the princess's life. Reinvigorated by his intervention, Rill, Charlotte, and Noelle resume their fight, and Luck and Nozel come to their aid. Nozel manages to destroy Megicula's body, thus allowing Noelle to destroy his heart.
+}}
+{{Graphic novel list
+| VolumeNumber    = 31
+| RelDate         = January 4, 2022<ref>{{cite web|url=http://books.shueisha.co.jp/items/contents.html?isbn=978-4-08-882878-7|script-title=ja:ブラッククローバー 31|trans-title=''Black Clover'' 31|publisher=[[Shueisha]]|access-date=November 19, 2021|language=ja|archive-date=November 14, 2022|archive-url=https://web.archive.org/web/20221114104328/http://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-882878-7|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-882878-7
+| LicensedRelDate = December 6, 2022<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-31/product/7278|title=Black Clover, Vol. 31|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=March 25, 2023|archive-url=https://web.archive.org/web/20230325182337/https://www.viz.com/read/manga/black-clover-volume-31/product/7278|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-3436-8
+| ChapterList     = 
+{{Numbered list|start=304
+|{{Nihongo4|"Reality and Magic"|現実と魔法|Genjitsu to Mahō}}
+|{{Nihongo4|"The Vice-Captain of the Golden Dawn"|〝金色の夜明け〟副団長|"Konjiki no Yoake" Fuku-danchō}}
+|{{Nihongo4|"Boundary"|境界|Kyōkai}}
+|{{Nihongo4|"A Devil's Heart"|悪魔の心臓|Akuma no Shinzō}}
+|{{Nihongo4|"Yuno Grinberryall"|ユノ・グリンベリオール|Yuno Gurinberiōru}}
+|{{Nihongo4|"Blink"|瞬き|Mabataki}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=310
+|{{Nihongo4|"Unyielding Right and Wrong"|正邪の恒心|Seija no Kōshin}}
+|{{Nihongo4|"Make it Home Alive"|生きて帰る|Ikite Kaeru}}
+|{{Nihongo4|"Before the Door of Hell"|地獄の扉のその前で|Jigoku no Tobira no Sono Mae de}}
+|{{Nihongo4|"The Captain of the Black Bulls"|黒の暴牛団長|Kuro no Bōgyū Danchō}}
+|{{Nihongo4|"The Mass"|集合体|Shūgōtai}}
+}}
+| LineColor       = EEC591 
+| Summary = Nacth and Mimosa arrive at the scene of the battle, and she uses her magic to heal the wounded, including Gaja, who confesses her feelings to Loropechka. Meanwhile, Yuno and Langris continue to battle Zenon. With Langris's help, Yuno manages to pierce his enemy's body. Zenon thus completely surrenders his soul to his devil Beelzebub, becoming a devil and defeating the two. Finral arrives to his brother's aid, and the two battle Zenon. When the two are defeated, Yuno awakens the power derived from being a descendant of the former royal house of Spade, gaining a new grimoire and a spell called star magic, which allows him to compete with Zenon. Thanks to Bell, Yuno finally manages to destroy Zenon's heart, defeating him. Despite the Triad's defeat, Qliphot's growth continues, as Morris has used his magic enhanced by Lucifero to restructure the tree so it can function even without the Triad. Morris easily defeats both Dorothy and Lotus, but before he can finish them off, Black Bull bursts onto the scene, determined to save Yami. Although they manage to defeat Morris, the next Qliphot portal opens anyway. Lucifero takes control of all the escaped devils and gathers them into a single body to fight in his stead. Black Bull thus joins forces to face the monster.
+}}
+{{Graphic novel list
+| VolumeNumber    = 32
+| RelDate         = April 4, 2022<ref>{{cite web|url=https://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-883071-1|script-title=ja:ブラッククローバー 32|trans-title=''Black Clover'' 32|publisher=[[Shueisha]]|access-date=February 22, 2022|language=ja|archive-date=November 14, 2022|archive-url=https://web.archive.org/web/20221114104316/http://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-883071-1|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-883071-1
+| LicensedRelDate = March 7, 2023<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-32/product/7363|title=Black Clover, Vol. 32|publisher=[[Viz Media]]|access-date=September 21, 2023|archive-date=March 21, 2023|archive-url=https://web.archive.org/web/20230321082248/https://www.viz.com/read/manga/black-clover-volume-32/product/7363|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-3625-6
+| ChapterList     = 
+{{Numbered list|start=315
+|{{Nihongo4|"Ultra Giant Showdown"|超巨大決戦|Chōkyodai Kessen}}
+|{{Nihongo4|"Slash of the Unchosen"|選ばれなかった者の一太刀|Eraba Renakatta Mono no Hitotachi}}
+|{{Nihongo4|"Change"|改変|Kaihen}}
+|{{Nihongo4|"In the Presence of the Devil King"|魔王の御前|Maō no Gozen}}
+|{{Nihongo4|"Grand Magic Knights vs. King of Devils"|大魔法騎士VS魔王|Dai Mahō Kishi Bāsasu Maō}}
+|{{Nihongo4|"The Cause of All This"|元凶|Genkyō}}
+}}
+| ChapterListCol2 =
+{{Numbered list|start=321 
+|{{Nihongo4|"Excuses"|言い訳|Iiwake}}
+|{{Nihongo4|"The Vice-Captain of the Black Bulls"|黒の暴牛副団長|Kuro no Bōgyū Fuku-danchō}}
+|{{Nihongo4|"Partner"|相棒|Aibō}}
+|{{Nihongo4|"Kids' Playground"|ガキの遊び場|Gaki no Asobiba}}
+|{{Nihongo4|"Dark, Starry Night"|星 闇夜|Hoshi Yamiyo}}
+}}
+| LineColor       = EEC591 
+| Summary = The Black Bull members continue to fight Lucifero's manifestation to allow Asta to prepare. Thanks to his assimilation with Liebe, Asta manages to defeat the monster's body and free Yami and William. While everyone celebrates the victory, Adramellech, the second devil of the Qliphot, appears, followed by Lucifero, who has also managed to manifest, albeit in an incomplete form. Lucifero manages to overpower Asta easily, but the captains arrive to aid the boy. Not even the combined effort of Asta and the captains, however, can overpower Lucifero. Yuno and Nacht arrive to Asta's aid, along with Yami, who has recovered and is equipped with a new sword provided to him by William. Combining their magic, Yami and Nacht manage to wound Lucifero, who recognizes the strength of humans and decides to fight with his full power. Asta and Yuno thus join the fight.
+}}
+{{Graphic novel list
+| VolumeNumber    = 33
+| RelDate         = November 4, 2022<ref>{{cite web|url=https://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-883195-4|script-title=ja:ブラッククローバー 33|trans-title=''Black Clover'' 33|publisher=[[Shueisha]]|access-date=September 20, 2022|language=ja|archive-date=November 5, 2022|archive-url=https://web.archive.org/web/20221105113357/https://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-883195-4|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-883195-4
+| LicensedRelDate = November 7, 2023<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-33/product/7627|title=Black Clover, Volume 33|publisher=[[Viz Media]]|access-date=August 1, 2023|archive-date=August 1, 2023|archive-url=https://web.archive.org/web/20230801124634/https://www.viz.com/read/manga/black-clover-volume-33/product/7627|url-status=live|df=mdy-all}}</ref>
+| LicensedISBN    = 978-1-9747-4071-0 
+| ChapterList     = 
+{{Numbered list|start=326
+|{{Nihongo4|"Brothers"|兄弟|Kyōdai}}
+|{{Nihongo4|"Anti Magic"|反魔法|Anchi Mahō}}
+|{{Nihongo4|"Always"|ずっと|Zutto}}
+|{{Nihongo4|"The King of Devils and the Boys with No Magic"|悪魔の王と魔力無き少年|Akuma no Ō to Maryokunaki Shōnen}}
+|{{Nihongo4|"Declaration to the Shadows"|闇影に告げる|An'ei ni Tsugeru}}
+|"And Time Starts to Move"
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=332
+|{{Nihongo4|"Final Declaration"|最終宣言|Saishū Sengen}}
+|{{Nihongo4|"The World's Savior and Its Flaw"|世界の救世主と欠陥|Sekai no Kyūseishu to Kekkan}}
+|{{Nihongo4|"Fragile Soul"|脆い魂|Moroi Tamashī}}
+|{{Nihongo4|"Severance"|断絶|Danzetsu}}
+|{{Nihongo4|"The Final Enemy"|最後の敵|Saigo no Teki}}
+}}
+| LineColor       = EEC591 
+| Summary = When his companions are defeated, Asta enters Liebe's memory, making him realize he is no longer alone, and the two enter a new stage of devil union, where they manage to tear Lucifero to pieces. The devil attempts to escape, but is thwarted by Yami and Yuno, who allow Asta to deliver the final blow. Adramelech leaves the battlefield with Lucifero's heart, while Mimosa and other Black Bull members rescue Yami and Nacht. The resistance demands that Yuno remain Spade, but he declares that he still needs to fulfill the promise he made to Asta. In Clover, Damnatio confronts Julius and reveals that he has discovered that the time demon Astaroth has been missing from the demon world for twenty years, and that he is the sole possessor of time magic. Julius then reverts to adulthood and neutralizes him, while Adramelech appears and addresses him as Lucius Zogratis. A year and three months later, the Magic Knights hold an awards ceremony for Asta, who then proposes to Sister Lily, but she refuses. Lucius appears on the scene and attacks him. Having been born with two souls, one of which is Julius, he believes himself to be the savior of the world, and therefore wants to kill Asta, whom he believes is a flaw that cannot be allowed to exist in his world. Lucius explains the mechanics of his magic, which allows him to manipulate the souls of anyone he touches, and transforms Lily with the power of the purified devil. Taking advantage of Asta's shock, Lucius strikes him. Noelle, Mimosa, and Secre arrive to help him, but are stopped by Lily, who makes Asta disappear. Lucius then abandons the battlefield when the captains arrive, stating that judgment will be carried out in seven days. Yuno vows to defeat Lucius, while Lucius decides to eliminate him, believing him to be an obstacle to his plans. Asta, meanwhile, finds himself on a beach, where he is found by a man.
+}}
+{{Graphic novel list
+| VolumeNumber    = 34
+| RelDate         = March 3, 2023<ref>{{cite web|url=https://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-883410-8|script-title=ja:ブラッククローバー 34|trans-title=''Black Clover'' 34|publisher=[[Shueisha]]|access-date=January 19, 2023|language=ja|archive-date=April 24, 2023|archive-url=https://web.archive.org/web/20230424095537/http://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-883410-8|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-883410-8
+| LicensedRelDate = March 5, 2024<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-34/product/7764|title=Black Clover, Volume 34|publisher=[[Viz Media]]|access-date=November 23, 2023}}</ref>
+| LicensedISBN    = 978-1-9747-4335-3
+| ChapterList     = 
+{{Numbered list|start=337
+|{{Nihongo4|"Whereabouts"|行方|Yukue}}
+|{{Nihongo4|"Trouble on a Foreign Road"|委細巨細異国道中|Iza-koza Ikoku Dōchū}}
+|{{Nihongo4|"Zetten"|絶天|Zetten}}
+|{{Nihongo4|"Opening"|隙|Suki}}
+|{{Nihongo4|"Hazy"|朧|Oboro}}
+|{{Nihongo4|"Watch the Night"|夜を見る|Yoru o Miru}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=343
+|{{Nihongo4|"Black Clash"|黒と黒の衝突|Kuro to Kuro no Shōtotsu}}
+|{{Nihongo4|"Writhing Sacred Pulse"|蠢く聖脈|Ugomeku Sei Myaku}}
+|{{Nihongo4|"Unprepared"|不覚|Fukaku}}
+|{{Nihongo4|"Five Zetten"|五天|Goten}}
+|{{Nihongo4|"Truth in the Lie"|まやかしの中の真相|Mayakashi no Naka no Shinsō}}
+}}
+| LineColor       = EEC591 
+| Summary = Nacht informs the rest of the team of what has happened, and together they all set out to find Asta. When he awakens, Asta discovers that he is in the Land of the Rising Sun, Yami's hometown, and that the man who saved him is Ryudo Ryuya, the nation's shogun. Knowing his past, Ryuya states that Asta is too weak to return, and invites him to stay in the country to strengthen himself. Asta also meets a girl named Ichika, who turns out to be Yami's younger sister and a member of the Seven Ryuzen, the strongest fighters in the country. Asta decides to stay in the country to learn a technique called "Zetten", which allows to use ki to enhance the physical and magical power, but in the following days he is unable to defeat either Ichika or the other Ryuzen. One evening, Ichika reveals to Asta that she hates Yami, accusing him of killing their own clan. Asta doesn't believe the girl's words, and she decides to face him again. The battle between the two is interrupted by Ryuya, who senses the arrival of Lily and two other paladins in the village. Five Ryuzen line up against them, while the other two train Asta. The Ryuzen manage to face the gigantic five-headed dragon summoned by the paladins, but ultimately succumb to their powers, until Asta intervenes to their aid.
+}}
+{{Graphic novel list
+| VolumeNumber    = 35
+| RelDate         = June 2, 2023<ref>{{cite web|url=http://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-883557-0|script-title=ja:ブラッククローバー 35|trans-title=''Black Clover'' 35|publisher=[[Shueisha]]|access-date=April 19, 2023|language=ja|archive-date=June 2, 2023|archive-url=https://web.archive.org/web/20230602071633/http://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-883557-0|url-status=live|df=mdy-all}}</ref>
+| ISBN            = 978-4-08-883557-0
+| LicensedRelDate = May 7, 2024<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-35/product/7830|title=Black Clover, Volume 35|publisher=[[Viz Media]]|access-date=January 20, 2024}}</ref>
+| LicensedISBN    = 978-1-9747-4594-4
+| ChapterList     = 
+{{Numbered list|start=348
+|{{Nihongo4|"Determined"|覚悟|Kakugo}}
+|{{Nihongo4|"Asta vs. Sister Lily"|アスタVSシスターリリー|Asuta Bāsasu Shisutā Rirī}}
+|{{Nihongo4|"The Holy Woman's Confession"|聖女の懺悔|Seijo no Zange}}
+|{{Nihongo4|"With the Shogun of the Land of the Sun"|日ノ国将軍と|Hino Kuni Shōgun to}}
+|{{Nihongo4|"Well Done"|天晴れ|Appare}}
+|{{Nihongo4|"Banquet in Full Swing"|宴も酣|Enmo Takenawa}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=354
+|{{Nihongo4|"Judgment Day"|審判の日|Shinpan no Hi}}
+|{{Nihongo4|"The Star Prince"|星の王子|Hoshi no Ōji}}
+|{{Nihongo4|"Neverland"|ネバーランド|Nebārando}}
+|{{Nihongo4|"The Final Slash"|最後の裂断|Saigo no Retsudan}}
+|{{Nihongo4|"Flame Burial"|炎葬|Ensō}}
+}}
+| LineColor       = EEC591 
+| Summary = Asta manages to defeat one of the paladins, Yoru, and restore Lily to her normal self. While the strongest Ryuzen, Yosuga, defeats the paladin Heat, the rest of the Ryuzen rise, encouraged by Ryudo, and with Asta's help, they finally defeat the dragon. Ryudo reveals to Asta that the only way he can return to Clover is to wait for his companions to retrieve it, and after celebrating their victory, they decide to spend the remaining time training. Three days later, Lucius and his paladins launch their attack on Clover, thus initiating "Judgment Day." As the attack begins, Lucius and the resurrected Morgen Faust appear in the city and confront Yuno, William, Jack, Yami, and Charlotte. Morgen then severely wounds Jack, while the resurrected Morris and Acier Silva face the Crimson Lion and the Silver Eagle, respectively, and a myriad of flying figures circle in the air above the nation, confronting the rest of the magic knigths. Yuno begins to fight against Lucius, using his spell to empower the other knights. Jack uses his last strength to launch a powerful slash that disperses Morgen's attack, and several members of the Crimson Lion sacrifice themselves to allow Mereoleona to strike Morris.
+}}
+{{Graphic novel list
+| VolumeNumber    = 36
+| RelDate         = February 2, 2024<ref>{{cite web|url=http://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-883665-2|script-title=ja:ブラッククローバー 36|trans-title=''Black Clover'' 36|publisher=[[Shueisha]]|access-date=December 20, 2023|language=ja}}</ref>
+| ISBN            = 978-4-08-883665-2
+| LicensedRelDate = January 7, 2025<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-36/product/8148|title=Black Clover, Volume 36|publisher=[[Viz Media]]|access-date=September 22, 2024}}</ref>
+| LicensedISBN    = 978-1-9747-5268-3
+| ChapterList     = 
+{{Numbered list|start=359
+|{{Nihongo4|"The Dancing Princess of the Battlefield Returns"|戦場の舞姫再び|Senjō no Maihime Futatabi}}
+|{{Nihongo4|"Unreadable World"|見えない世界|Mienai Sekai}}
+|{{Nihongo4|"The Final Force"|終末の軍勢|Shūmatsu no Gunzei}}
+|{{Nihongo4|"Transmission"|伝播|Denpa}}
+|{{Nihongo4|"In the Way"|とおせんぼ|Tōsenbo}}
+|{{Nihongo4|"Do or Die"|決死|Kesshi}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=365
+|{{Nihongo4|"Five Hundred Years of Solitude"|500年の孤独|500-Nen no Kodoku}}
+|{{Nihongo4|"Headliner"|真打|Shin'uchi}}
+|{{Nihongo4|"Black Bond"|黒い絆|Kuroi Kizuna}}
+|{{Nihongo4|"Just Getting Started"|こっからだ|Kokkarada}}
+|{{Nihongo4|"A United Front"|共闘戦線|Kyōtō Sensen}}
+}}
+| LineColor       = EEC591 
+| Summary = Noelle comes to her siblings aid against Acier, revealing a new spell she received after subduing the sea deity Leviathan. Lucius begins to notice discrepancies in his predictions, and realizes that Asta's very existence has interfered with his ability to see the future. Yuno seemingly manages to kill Lucius, but discovers that the one he fought was a duplicate, while the real Lucius sends an army of duplicates to attack the kingdom. At the Witches' Forest, the Witch Queen warns the Black Bull that Asta is alive, and that summoning him requires the combined power of the three most powerful witches: herself, Vanessa, and Dorothy. However, the forest is attacked by Damnatio, who has also been transformed into a paladin by Lucius, and is confronted by the Black Bulls. Damnatio manages to subdue everyone, but Finral finally manages to reach Asta. Asta arrives on the battlefield alongside Ichika and easily defeats Damnatio. The Witch Queen heals everyone, but due to the strain, she loses much of her power and hands over her role to Dorothy. Asta puts into practice what he learned during his training and shares his anti-magic with his companions. The Black Bull members then arrive in the capital, and while Nacht and Ichika go to Yami's aid, Asta joins Yuno against Lucius and his clones. Thanks to the anti-magic and their combined efforts, Magna and Luck manage to destroy a clone of Lucius.
+}}
+{{Graphic novel list
+| VolumeNumber    = 37
+| RelDate         = September 4, 2025<ref>{{cite web|url=http://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-884682-8|script-title=ja:ブラッククローバー 37|trans-title=''Black Clover'' 37|publisher=[[Shueisha]]|access-date=July 17, 2025|language=ja}}</ref>
+| ISBN            = 978-4-08-884682-8
+| LicensedRelDate = August 4, 2026<ref>{{cite web|url=https://www.viz.com/read/manga/black-clover-volume-37/product/8938|title=Black Clover, Volume 37|publisher=[[Viz Media]]|access-date=May 5, 2026}}</ref>
+| LicensedISBN    = 978-1-9747-1672-2
+| ChapterList     = 
+{{Numbered list|start=370
+|{{Nihongo4|"Demolition Charge"|崩壊出撃|Hōkai Shutsugeki}}
+|{{Nihongo4|"Indestructible Souls"|不滅の魂|Fumetsu no Tamashī}}
+|{{Nihongo4|"Wretched"|惨め|Mijime}}
+|{{Nihongo4|"The Silva Siblings"|シルヴァ家の兄妹|Shiruva-ke no Kyōdai}}
+|{{Nihongo4|"Demon-God"|鬼神|Kijin}}
+|{{Nihongo4|"Strafe (Punishment)"|シュトラーフェ |Shutorāfe}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=376
+|{{Nihongo4|"Sühne (Atonement)"|ズューネ|Zyūne}}
+|{{Nihongo4|"Clash"|衝突|Shōtotsu}}
+|{{Nihongo4|"Friction"|相克|Sōkoku}}
+|{{Nihongo4|"Absolute Messiah"|絶対的救世主|Zetsutaiteki Kyūseishu}}
+|{{Nihongo4|"The Brink of Despair"|絶望の際|Zetsubō no Kiwa}}
+}}
+| Summary = Lucius begins lifting parts of the Clover Kingdom as chaos erupts and Asta and Yuno push toward his true body while the Magic Knights struggle against Paladins and Lucius clones. The Silva siblings overcome their family-linked Paladin foe, and Yami is healed by Ichika's demon-soul pill, allowing him to rejoin the fight. As Asta and Yuno ascend, the Magic Knights defeat the last Paladins and clones, and the two heroes confront Lucius, rejecting his vision of a "perfect" world. Though they seemingly destroy him with a coordinated Anti-Magic and Wind/Star attack, Lucius resurrects in a far stronger form after linking all grimoire towers and absorbing the magic of every deceased mage, instantly killing several knights and sealing Yuno with stolen spells. He then resurrects all fallen Paladins as monstrous chimeras and weaponizes Asta's mother Licita, shattering Asta and Liebe's Devil Union and nearly killing them both. As despair spreads across the kingdom, Yuno intervenes, wounds Lucius, and stands ready for the next round, while Asta stirs back to life with his Anti-Magic sword.
+| LineColor       = EEC591 
+}}
+{{Graphic novel list
+| VolumeNumber    = 38
+| RelDate         = August 4, 2026<ref>{{cite web|url=http://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-885136-5|script-title=ja:ブラッククローバー 38|trans-title=''Black Clover'' 38|publisher=[[Shueisha]]|access-date=June 17, 2026|language=ja}}</ref>
+| ISBN            = 978-4-08-885136-5
+| LicensedRelDate = —
+| LicensedISBN    = 
+| ChapterList     = 
+{{Numbered list|start=381
+|{{Nihongo4|"The Ultimate Mage"|究極の魔道士|Kyūkyoku no Madō-shi}}
+|{{Nihongo4|"Former Enemies"|かつて敵だった者達|Katsute Tekidatta Monotachi}}
+|{{Nihongo4|"Yearning"|渇望|Katsubō}}
+|{{Nihongo4|"Inspire Spirit"|インスパイアスピリット|Insupaia Supiritto}}
+|{{Nihongo4|"Foolish Gambler"|愚かなギャンブラー|Orokana Gyanburā}}
+|{{Nihongo4|"Voltage"|ボルテージ|Borutēji}}
+}}
+| ChapterListCol2 = 
+{{Numbered list|start=387
+|{{Nihongo4|"Limit Breakers"|リミットブレイカーズ|Rimitto Bureikāzu}}
+|{{Nihongo4|"The Hour of Judgement"|審判の刻|Shinpan no Toki}}
+|{{Nihongo4|"The Ultimate Achievement"|最高の実績|Saikō no Jisseki}}
+|{{Nihongo4|"The Promised Showdown"| 誓いの決戦|Chikai no Kessen}}
+|{{Nihongo4|"A Conclusion Reached"| 辿り着いた決着|Tadori Tsuita Ketchaku}}
+|{{Nihongo4|"Beyond Not Giving Up"| 不諦の果て|Futei no Hate}}
+}}
+| Summary = 
+| LineColor       = EEC591 
+}}
+{{Graphic novel list/footer}}
+
+== References ==
+{{Reflist}}
+
+{{Black Clover}}
+
+{{DEFAULTSORT:Black Clover chapters}}
+[[Category:Black Clover]]
+[[Category:Lists of manga volumes and chapters|Black Clover]]
