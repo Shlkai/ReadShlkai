@@ -32,7 +32,7 @@ DL = 'https://drive.usercontent.google.com/download?id={}&export=download&confir
 IMG = re.compile(r'\.(jpe?g|png|webp|gif|bmp)$', re.I)
 def nat(s): return [int(t) if t.isdigit() else t.lower() for t in re.split(r'(\d+)', s)]
 def shrink(src, dst):
-    r = subprocess.run(['convert', src + '[0]', '-resize', '400x600>', '-quality', '82', dst], capture_output=True)
+    r = subprocess.run(['convert', src + '[0]', '-resize', '300x450>', '-strip', '-quality', '78', dst], capture_output=True)
     return r.returncode == 0 and os.path.exists(dst) and os.path.getsize(dst) > 2000
 def cover(f):
     tmp = tempfile.mkdtemp(); a = tmp + '/a'; dst = f"{OUT}/{f['id']}.jpg"
@@ -62,15 +62,19 @@ files = []
 crawl(ROOT, [], files)
 print(len(files), 'arquivos de HQ')
 json.dump(files, open(OUT + '/inventario.json', 'w'), ensure_ascii=False, indent=0)
-done = 0
-for f in files:
-    if time.time() - T0 > LIMIT: print('tempo esgotado'); break
-    if f['id'] in idx['files']: continue
-    if idx['fail'].get(f['id'], {}).get('n', 0) >= 2: continue
+import threading
+from concurrent.futures import ThreadPoolExecutor
+lock = threading.Lock(); done = [0]
+def work(f):
+    if time.time() - T0 > LIMIT: return
     err = cover(f)
-    if err is None: idx['files'][f['id']] = f"{OUT}/{f['id']}.jpg"; idx['fail'].pop(f['id'], None); done += 1
-    else:
-        fl = idx['fail'].setdefault(f['id'], {'n': 0}); fl['n'] += 1; fl['err'] = err; fl['name'] = f['path'] + '/' + f['name']; print('  falhou', f['name'], err)
-    if done % 25 == 0: json.dump(idx, open(IDX, 'w'), ensure_ascii=False, indent=0)
+    with lock:
+        if err is None: idx['files'][f['id']] = f"{OUT}/{f['id']}.jpg"; idx['fail'].pop(f['id'], None); done[0] += 1
+        else:
+            fl = idx['fail'].setdefault(f['id'], {'n': 0}); fl['n'] += 1; fl['err'] = err; fl['name'] = f['path'] + '/' + f['name']; print('  falhou', f['name'], err)
+        if done[0] % 100 == 0: json.dump(idx, open(IDX, 'w'), ensure_ascii=False, indent=0); print('  ...', len(idx['files']), flush=True)
+todo = [f for f in files if f['id'] not in idx['files'] and idx['fail'].get(f['id'], {}).get('n', 0) < 2]
+print(len(todo), 'a fazer')
+with ThreadPoolExecutor(8) as ex: list(ex.map(work, todo))
 json.dump(idx, open(IDX, 'w'), ensure_ascii=False, indent=0)
 print('capas', len(idx['files']), 'de', len(files), '| falhas', len(idx['fail']))
