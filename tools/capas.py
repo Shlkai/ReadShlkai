@@ -34,6 +34,21 @@ def wiki_chapters(txt):
                 cv.append([float(nxt), v]); nxt += 1
             if re.match(r'\|\s*Summary\s*=', l): break
     return sorted(cv)
+def drive_cover(path, fid):
+    # baixa o arquivo público do Drive e renderiza a 1ª página (pdftoppm); guarda só a capa
+    if os.path.exists(path) and os.path.getsize(path) > 3000: return True
+    import subprocess, tempfile
+    tmp = tempfile.mkdtemp(); f = tmp + '/a.pdf'
+    try:
+        subprocess.run(['curl', '-sL', '--retry', '3', '-m', '900', '-o', f, f'https://drive.usercontent.google.com/download?id={fid}&export=download&confirm=t'], check=False)
+        head = open(f, 'rb').read(5) if os.path.exists(f) else b''
+        if head != b'%PDF-': print('  drive: nao e PDF', fid, head, os.path.getsize(f) if os.path.exists(f) else 0); return False
+        subprocess.run(['pdftoppm', '-f', '1', '-l', '1', '-jpeg', '-jpegopt', 'quality=88', '-scale-to', '1000', f, tmp + '/c'], check=False)
+        out = [x for x in os.listdir(tmp) if x.startswith('c') and x.endswith('.jpg')]
+        if not out: return False
+        os.replace(tmp + '/' + out[0], path); return True
+    finally:
+        subprocess.run(['rm', '-rf', tmp])
 RANK = lambda l: {'ja': 0, 'en': 1, 'pt-br': 2}.get(l, 3)
 def md_covers(mid):
     best = {}
@@ -116,7 +131,7 @@ for s in json.load(open('covers/series.json')):
     # capa tirada da 1ª página do próprio arquivo no Drive (edições sem capa na internet, ex.: Bleach REMIX)
     for v, fid in (s.get('drive') or {}).items():
         p = f'{d}/v{v}.jpg'
-        if save(p, f'https://drive.google.com/thumbnail?id={fid}&sz=w1000'): e['vols'][v] = p
+        if drive_cover(p, fid): e['vols'][v] = p
     if s.get('drive'): log.append(f"  Drive -> {sum(1 for v in s['drive'] if v in e['vols'])} de {len(s['drive'])} capas da 1a pagina")
     if s.get('wiki'):
         # capítulo -> volume pela lista de capítulos da Wikipédia
