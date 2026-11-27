@@ -715,7 +715,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 10</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 11</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -2197,14 +2197,18 @@ function renderGrid() {
       items.push({ vh: { v, url: (v && sce.vols?.[v]) || sce.main || '', a: Math.min(...nums), z: Math.max(...nums), n: l.length } });
       l.forEach(b => items.push({ b, ch: true }));
     }
+  } else if (sce && sce.main && list.some(b => cover(b) === sce.main)) {
+    // obra em volumes sem todas as capas: mesmo jeito do Black Clover, capa da obra no topo e os volumes sem capa em blocos numerados
+    const nums = list.map(b => parseFloat(b.volume)).filter(n => !isNaN(n));
+    items = [{ vh: { v: '', obra: cleanTitle(serParts(serie).name), url: sce.main, a: Math.min(...nums), z: Math.max(...nums), n: list.length } }, ...list.map(b => ({ b, ch: cover(b) === sce.main, vol: true }))];
   }
   $('#libCount').textContent = `${books.length} volume${books.length === 1 ? '' : 's'}`;
   $('#noRes').hidden = list.length > 0;
   $('#serHead').hidden = !serie || !list.length;
   $('#serWeb').hidden = !serie || list[0]?.kind !== 'manga';
   if (serie) { const l = list; const all = books.filter(x => x.series === serie), k = all.filter(saved).length; $('#serOff').classList.toggle('on', k === all.length); $('#serOff span').textContent = k === all.length ? 'Série salva offline' : k ? `Salvar o resto offline (${k}/${all.length})` : 'Salvar série offline'; $('#serOff use').setAttribute('href', k === all.length ? '#i-saved' : '#i-dl'); $('#serHeadT').textContent = cleanTitle(serParts(serie).name); $('#serHeadM').textContent = [pubOf(l[0] || {}), `${l.length} ${l[0]?.kind === 'manga' ? 'capítulos/volumes' : 'volumes'}`, seriesProgress(l)].filter(Boolean).join(' · '); }
-  const cardOf = ({ b, s: sn, l, vh, ch }) => {
-    if (vh) return `<div class="vhead">${vh.url ? `<img src="${vh.url}" alt="" loading="lazy">` : ''}<div><b>${vh.v ? 'Volume ' + esc(vh.v) : 'Capítulos novos'}</b><small>${isFinite(vh.a) ? (vh.a === vh.z ? `Capítulo ${vh.a}` : `Capítulos ${vh.a} a ${vh.z}`) : ''} · ${vh.n} arquivo${vh.n > 1 ? 's' : ''}</small></div></div>`;
+  const cardOf = ({ b, s: sn, l, vh, ch, vol }) => {
+    if (vh) return vh.obra ? `<div class="vhead"><img src="${vh.url}" alt="" loading="lazy"><div><b>${esc(vh.obra)}</b><small>${isFinite(vh.a) ? `Volumes ${vh.a} a ${vh.z} · ` : ''}${vh.n} arquivo${vh.n > 1 ? 's' : ''}</small></div></div>` : `<div class="vhead">${vh.url ? `<img src="${vh.url}" alt="" loading="lazy">` : ''}<div><b>${vh.v ? 'Volume ' + esc(vh.v) : 'Capítulos novos'}</b><small>${isFinite(vh.a) ? (vh.a === vh.z ? `Capítulo ${vh.a}` : `Capítulos ${vh.a} a ${vh.z}`) : ''} · ${vh.n} arquivo${vh.n > 1 ? 's' : ''}</small></div></div>`;
     if (sn) {
       const done = l.filter(x => x.finished).length, cur = l.find(x => x.lastReadAt && !x.finished), c = l.find(x => cover(x)) || l[0];
       return `<div class="book pile">
@@ -2221,7 +2225,7 @@ function renderGrid() {
     const s = state(b);
     return `<div class="book${ch ? ' ch' : ''}">
       <button class="cv" data-open="${b.id}" aria-label="Ler ${esc(nice(b))}">
-        <div class="art">${ch ? `<span class="chn"><small>Cap.</small>${esc(String(b.volume || '?'))}</span>` : coverArt(b)}
+        <div class="art">${ch ? `<span class="chn"><small>${vol ? 'Vol.' : 'Cap.'}</small>${esc(String(b.volume || '?'))}</span>` : coverArt(b)}
           ${s === 'novos' ? '<span class="badge">Novo</span>' : s === 'lidos' ? '<span class="badge done">Lido</span>' : `<div class="prog"><i style="width:${progress(b) * 100}%"></i></div>`}
         </div>
         <div class="t">${esc(nice(b))}</div>
