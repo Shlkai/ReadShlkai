@@ -1858,7 +1858,7 @@
  },
  "bleach": {
   "mode": "volumes",
-  "force": false,
+  "force": true,
   "vols": {
    "1": "covers/bleach/v1.jpg",
    "2": "covers/bleach/v2.jpg",
