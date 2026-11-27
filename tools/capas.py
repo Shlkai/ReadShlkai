@@ -19,6 +19,21 @@ def save(path, url):
     b = get(url)
     if not b or len(b) < 3000: return False
     open(path, 'wb').write(b); time.sleep(0.3); return True
+def wiki_chapters(txt):
+    cv, nxt = [], 1
+    for blk in re.split(r'\{\{\s*Graphic novel list(?!/)', txt, flags=re.I)[1:]:
+        vm = re.search(r'\|\s*VolumeNumber\s*=\s*(\d+)', blk)
+        if not vm: continue
+        v = str(int(vm.group(1))); inl = False
+        for line in blk.split('\n'):
+            l = line.strip()
+            m = re.match(r'\{\{\s*Numbered list\s*\|\s*start\s*=\s*(\d+)', l, re.I)
+            if m: nxt = int(m.group(1)); inl = True; continue
+            if inl and l == '}}': inl = False; continue
+            if (inl and re.match(r'\|\s*\{\{', l)) or re.match(r'#(?![#:*])', l):
+                cv.append([float(nxt), v]); nxt += 1
+            if re.match(r'\|\s*Summary\s*=', l): break
+    return sorted(cv)
 out, log = {}, []
 for s in json.load(open('covers/series.json')):
     k = s['key']; d = 'covers/' + slug(k); os.makedirs(d, exist_ok=True)
@@ -76,20 +91,8 @@ for s in json.load(open('covers/series.json')):
         txt = wiki(s['wiki'])
         for sub in re.findall(r'\{\{\s*:\s*([^}|]+)', txt):  # listas divididas em subpáginas
             txt += '\n' + wiki(sub.strip()); time.sleep(0.5)
-        open('covers/wiki-' + slug(k) + '.txt', 'w').write(txt)
-        cv, blocks = [], []
-        for blk in re.split(r'\{\{\s*Graphic novel list(?!/)', txt, flags=re.I)[1:]:
-            vm = re.search(r'\|\s*VolumeNumber\s*=\s*(\d+)', blk)
-            cl = re.search(r'\|\s*ChapterList\s*=(.*?)(?:\n\s*\|\s*(?:Summary|ChapterListCol2|LicensedRelDate|LicensedISBN)\s*=|\Z)', blk, re.S)
-            if vm and cl: blocks.append((int(vm.group(1)), cl.group(1)))
-        n = 0
-        for v, body in sorted(blocks):
-            nums = re.findall(r'^\s*\*\s*(?:Chapter\s*)?(\d{1,3}(?:\.\d)?)\b', body, re.M | re.I)
-            if nums:
-                for ch in nums: cv.append([float(ch), str(v)]); n = max(n, int(float(ch)))
-            else:
-                for _ in re.findall(r'^#(?![#:*])', body, re.M): n += 1; cv.append([float(n), str(v)])
-        e['chVol'] = sorted(cv)
+        cv = wiki_chapters(txt)
+        e['chVol'] = cv
         log.append(f"  Wikipedia {s['wiki']} -> {len(cv)} capitulos mapeados, volumes {len(set(v for _, v in cv))}")
     out[k] = e
 json.dump(out, open('covers/index.json', 'w'), ensure_ascii=False, indent=1)
