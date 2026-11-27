@@ -76,6 +76,7 @@ for s in json.load(open('covers/series.json')):
         txt = wiki(s['wiki'])
         for sub in re.findall(r'\{\{\s*:\s*([^}|]+)', txt):  # listas divididas em subpáginas
             txt += '\n' + wiki(sub.strip()); time.sleep(0.5)
+        open('covers/wiki-' + slug(k) + '.txt', 'w').write(txt)
         cv, blocks = [], []
         for blk in re.split(r'\{\{\s*Graphic novel list(?!/)', txt, flags=re.I)[1:]:
             vm = re.search(r'\|\s*VolumeNumber\s*=\s*(\d+)', blk)
