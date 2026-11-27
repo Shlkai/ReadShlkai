@@ -103,9 +103,9 @@ for s in json.load(open('covers/series.json')):
         time.sleep(1)
     # obra dividida em partes (ex.: Re Zero em arcos): arquivo N -> volume da parte certa
     for pt in s.get('parts') or []:
-        r = js('https://api.mangadex.org/manga?' + urllib.parse.urlencode({'title': pt['mangadex'], 'limit': 10, 'order[relevance]': 'desc'}))
-        must = pt.get('must', '').lower()
-        hit = [x for x in r.get('data') or [] if must in md_titles(x)]
+        r = js('https://api.mangadex.org/manga?' + urllib.parse.urlencode({'title': pt['mangadex'], 'limit': 30, 'order[relevance]': 'desc'}))
+        musts = [m.strip() for m in pt.get('must', '').lower().split('|')]
+        hit = [x for x in r.get('data') or [] if any(m in md_titles(x) for m in musts)]
         if not hit: log.append(f"  parte {pt['mangadex']} -> NAO ACHEI"); continue
         x = hit[0]; best = md_covers(x['id']); a, z = pt['files']; ok = 0
         for n in range(a, z + 1):

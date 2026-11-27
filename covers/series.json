@@ -14,16 +14,16 @@
   "mode": "volumes",
   "parts": [
    {
-    "mangadex": "Re:Zero kara Hajimeru Isekai Seikatsu Daiisshou",
-    "must": "daiisshou",
+    "mangadex": "Re:Zero kara Hajimeru Isekai Seikatsu",
+    "must": "1-shou|dai 1 shou|ichinichi|daiisshou",
     "files": [
      1,
      2
     ]
    },
    {
-    "mangadex": "Re:Zero kara Hajimeru Isekai Seikatsu Dainishou",
-    "must": "dainishou",
+    "mangadex": "Re:Zero kara Hajimeru Isekai Seikatsu",
+    "must": "2-shou|dai 2 shou|isshuukan|dainishou",
     "files": [
      3,
      6
