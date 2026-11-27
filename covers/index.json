@@ -1608,9 +1608,21 @@
   "main": "covers/black-clover/obra.jpg"
  },
  "re zero": {
-  "mode": "none",
+  "mode": "volumes",
   "force": false,
-  "vols": {},
+  "vols": {
+   "7": "covers/re-zero/v7.jpg",
+   "8": "covers/re-zero/v8.jpg",
+   "9": "covers/re-zero/v9.jpg",
+   "10": "covers/re-zero/v10.jpg",
+   "11": "covers/re-zero/v11.jpg",
+   "12": "covers/re-zero/v12.jpg",
+   "13": "covers/re-zero/v13.jpg",
+   "14": "covers/re-zero/v14.jpg",
+   "15": "covers/re-zero/v15.jpg",
+   "16": "covers/re-zero/v16.jpg",
+   "17": "covers/re-zero/v17.jpg"
+  },
   "chVol": [],
   "main": "covers/re-zero/obra.jpg"
  },
