@@ -715,7 +715,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 13</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 16</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -754,6 +754,8 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
         <button class="btn" id="gAdd" style="align-self:end">Adicionar pasta</button></div>
       <div class="links" id="gLinks"></div>
       <label class="check" for="gAuto"><input type="checkbox" id="gAuto"> Buscar novidades sempre que eu abrir o app</label>
+      <div class="row"><button class="btn" id="gTest" type="button">Testar o Drive</button><span class="hint">Mostra se o Google está respondendo e a velocidade.</span></div>
+      <pre id="gTestOut" class="hint" hidden style="white-space:pre-wrap;font-size:12.5px;margin:6px 0 0"></pre>
       <label class="check" for="gCovers"><input type="checkbox" id="gCovers"> Baixar as capas de tudo (só a capa; a revista baixa quando você abre)</label>
       <label class="check" for="gCoversCell"><input type="checkbox" id="gCoversCell"> Baixar capas também no 4G</label>
       <p class="hint" id="gCovTxt"></p>
@@ -1147,6 +1149,7 @@ async function openPdfStream(b) {
   const id = b.source.fileId, size = +b.size;
   const head = await rangeGet(id, 0, Math.min(size, 262144));
   if (String.fromCharCode(...head.subarray(0, 4)) !== '%PDF') throw new Error('não é PDF');
+  await rangeGet(id, size - 1024, size); // confere se o Google entrega pedaços do fim do arquivo
   const tr = new pdfjsLib.PDFDataRangeTransport(size, head);
   const get = (a, e, k = 0) => rangeGet(id, a, e).then(d => tr.onDataRange(a, d)).catch(err => { if (k < 3) setTimeout(() => get(a, e, k + 1), 1500 * (k + 1)); else console.warn('pedaço do PDF', err); });
   tr.requestDataRange = (a, e) => get(a, e);
@@ -1201,6 +1204,28 @@ function renderJobs() {
     $('#jobList').innerHTML = jobs.slice().reverse().map(j => `<li class="${j.state}"><div class="nm"><span>${esc(j.name)}</span><span class="st">${esc(j.msg)}</span></div>${j.state === 'run' ? `<div class="meter"><i style="width:${Math.round(j.pct * 100)}%"></i></div>` : ''}</li>`).join('');
   });
 }
+// teste do Drive: diz o que o Google responde (para achar o motivo quando nada baixa)
+$('#gTest').onclick = async () => {
+  const out = $('#gTestOut'); out.hidden = false; out.textContent = ''; const log = t => { out.textContent += t + '\n'; };
+  if (!S.gkey) { log('Falta a chave do Google.'); return; }
+  const b = books.find(x => x.source?.type === 'drive' && x.remote && +x.size > 2e6) || books.find(x => x.source?.type === 'drive');
+  if (!b) { log('Nenhum volume do Drive na estante ainda.'); return; }
+  const id = b.source.fileId; log(`Arquivo: ${b.source.name || b.title} (${fmtSize(+b.size || 0)})`);
+  const t = async (label, url, init = {}, read = 0) => {
+    const t0 = performance.now(), c = new AbortController(), to = setTimeout(() => c.abort(), 20000);
+    try {
+      const r = await fetch(url, { ...init, signal: c.signal }); let extra = '';
+      if (!r.ok) extra = ' · ' + (await gReason(r) || 'erro');
+      else if (read) { const rd = r.body.getReader(); let n = 0; while (n < read) { const { done, value } = await rd.read(); if (done) break; n += value.length; } rd.cancel().catch(() => {}); extra = ` · ${fmtSize(n)} em ${((performance.now() - t0) / 1000).toFixed(1)} s`; }
+      log(`${label}: ${r.status}${extra} (${Math.round(performance.now() - t0)} ms)`);
+    } catch (e) { log(`${label}: ${c.signal.aborted ? 'sem resposta em 20 s' : 'falhou (' + e.message + ')'}`); }
+    finally { clearTimeout(to); c.abort(); }
+  };
+  await t('Informações do arquivo', `https://www.googleapis.com/drive/v3/files/${id}?fields=id,name,size&supportsAllDrives=true&key=${encodeURIComponent(S.gkey)}`);
+  await t('Pedaço pequeno (esperado 206)', driveURL(id), { headers: { Range: 'bytes=0-65535' } }, 65536);
+  await t('Velocidade (2 MB)', driveURL(id), {}, 2e6);
+  log('Pronto. Se algo falhou, mande um print desta tela.');
+};
 $('#jobsClose').onclick = () => {
   // o X cancela os downloads em andamento e fecha o aviso
   for (let i = jobs.length - 1; i >= 0; i--) { const j = jobs[i]; if (j.state === 'run' && j.abort) { try { j.abort(); } catch (e) {} } if (j.state !== 'wait' || j.abort) jobs.splice(i, 1); }
@@ -1303,30 +1328,44 @@ function importFiles(list, picked = false) {
 }
 async function ensurePersist() { try { if (navigator.storage?.persist) await navigator.storage.persist(); } catch (e) {} }
 
-// arquivo grande do Drive: baixa em pedaços de 4 MB, 4 de cada vez (um pedido único de 300 MB travava no celular)
-async function driveChunked(id, size, j) {
-  const ctl = new AbortController(); j.abort = () => ctl.abort();
-  const CH = 4 * 1024 * 1024, n = Math.ceil(size / CH), parts = new Array(n); let next = 0, got = 0;
-  const one = async k => {
-    const a = k * CH, b = Math.min(size, a + CH);
-    for (let t = 0; ; t++) {
-      if (ctl.signal.aborted) throw Object.assign(new Error('cancelado'), { cancel: true });
+// motivo do erro do Google (vem em JSON), para mostrar e para o teste do Drive
+async function gReason(r) { try { const j = await r.clone().json(); const e = j.error || {}; return (e.errors && e.errors[0] && e.errors[0].reason) || e.status || e.message || ''; } catch (e) { return ''; } }
+// Download do Drive que não trava: se ficar 30 s sem receber nada, corta e continua de onde parou (até 6 vezes)
+async function driveDownload(id, size, j, ctl) {
+  const chunks = []; let got = 0, tries = 0; const t0 = Date.now();
+  const wait = setInterval(() => { if (!got && j.state === 'run') upd(j, { msg: `Esperando o Google… ${Math.round((Date.now() - t0) / 1000)}s` }); }, 1000);
+  try {
+    for (;;) {
+      const c2 = new AbortController(), stop = () => c2.abort(); ctl.signal.addEventListener('abort', stop);
+      let idle; const arm = () => { clearTimeout(idle); idle = setTimeout(stop, 30000); };
+      arm();
       try {
-        const r = await fetch(driveURL(id), { headers: { Range: `bytes=${a}-${b - 1}` }, signal: ctl.signal });
-        if (r.status === 403 || r.status === 404) { const e = new Error('HTTP ' + r.status); e.status = r.status; throw e; }
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        const buf = new Uint8Array(await r.arrayBuffer());
-        if (r.status === 200 && buf.length > b - a) parts[k] = buf.subarray(a, b); else parts[k] = buf;
-        got += parts[k].length; upd(j, { pct: Math.min(.88, got / size * .88), msg: `${fmtSize(got)} de ${fmtSize(size)}` });
-        return;
-      } catch (e) { if (e.status || ctl.signal.aborted || t >= 4) { if (ctl.signal.aborted) e.cancel = true; throw e; } await new Promise(r => setTimeout(r, 1500 * (t + 1))); }
+        const r = await fetch(driveURL(id), { headers: got ? { Range: `bytes=${got}-` } : {}, signal: c2.signal });
+        if (!r.ok) { const e = new Error('HTTP ' + r.status); e.status = r.status; e.reason = await gReason(r); throw e; }
+        if (got && r.status !== 206) { chunks.length = 0; got = 0; } // o Google não continuou: recomeça do zero
+        const total = size || (+r.headers.get('content-length') || 0) + got;
+        const rd = r.body.getReader();
+        for (;;) {
+          const { done, value } = await rd.read(); if (done) break;
+          arm(); chunks.push(value); got += value.length;
+          const sec = Math.max(1, (Date.now() - t0) / 1000);
+          upd(j, { pct: total ? Math.min(.88, got / total * .88) : .4, msg: `${fmtSize(got)}${total ? ' de ' + fmtSize(total) : ''} · ${fmtSize(got / sec)}/s` });
+        }
+        clearTimeout(idle);
+        if (size && got < size) throw new Error('incompleto');
+        return new Blob(chunks);
+      } catch (e) {
+        clearTimeout(idle);
+        if (ctl.signal.aborted) throw Object.assign(new Error('cancelado'), { cancel: true });
+        if (e.status && e.status !== 429 && e.status < 500) throw e;
+        if (++tries > 6) { e.net = e.net || !e.status; throw e; }
+        upd(j, { msg: `A conexão parou${got ? ' em ' + fmtSize(got) : ''}. Tentando de novo (${tries} de 6)…` });
+        await new Promise(r => setTimeout(r, 1500 * tries));
+      } finally { ctl.signal.removeEventListener('abort', stop); }
     }
-  };
-  const work = async () => { while (next < n) await one(next++); };
-  await Promise.all([work(), work(), work(), work()]);
-  return new Blob(parts);
+  } finally { clearInterval(wait); }
 }
-async function fetchWithProgress(url, j, init) {
+async function fetchWithProgress(url, j, init, onByte) {
   const r = await gfetch(url, init);
   if (!r.ok) { const err = new Error(`HTTP ${r.status}`); err.status = r.status; throw err; }
   const total = +r.headers.get('content-length') || 0;
@@ -1334,7 +1373,7 @@ async function fetchWithProgress(url, j, init) {
   const reader = r.body.getReader(); const chunks = []; let got = 0;
   for (;;) {
     const { done, value } = await reader.read(); if (done) break;
-    chunks.push(value); got += value.length;
+    chunks.push(value); got += value.length; onByte && onByte();
     upd(j, { pct: total ? Math.min(.88, got / total * .88) : .4, msg: total ? `${fmtSize(got)} de ${fmtSize(total)}` : fmtSize(got) });
   }
   return new Blob(chunks);
@@ -1527,7 +1566,9 @@ function ensureLocal(b) {
     toast(`Baixando ${nice(b)}${b.size ? ' (' + fmtSize(b.size) + ')' : ''}…`, 4000);
     try {
       upd(j, { msg: 'Conectando ao Google…' });
-      const blob = +b.size > 20e6 ? await driveChunked(b.source.fileId, +b.size, j) : await fetchWithProgress(driveURL(b.source.fileId), j);
+      const ctl = new AbortController(); j.abort = () => ctl.abort();
+      const blob = await driveDownload(b.source.fileId, +b.size || 0, j, ctl);
+      j.abort = null; upd(j, { msg: 'Preparando as páginas…', pct: .9 });
       let r;
       try { r = await importBlob(blob, b.source.name || b.title, { into: b }, j); }
       catch (e) { r = null; }
@@ -1538,7 +1579,7 @@ function ensureLocal(b) {
       return true;
     } catch (e) {
       if (e.cancel) { upd(j, { state: 'err', msg: 'Cancelado.' }); clearInterval(tick); unpaint(); return false; }
-      upd(j, { state: 'err', msg: e.status === 403 ? 'O Google não liberou o download (sem permissão ou limite do dia). Tente mais tarde.' : e.status === 404 ? 'Arquivo não encontrado no Drive.' : e.net ? e.message : 'O download falhou. Confira a internet.' });
+      upd(j, { state: 'err', msg: e.status === 403 ? `O Google não liberou o download${e.reason ? ' (' + e.reason + ')' : ''}. ${/quota|rate|limit/i.test(e.reason || '') ? 'É limite do Google: tente de novo em alguns minutos.' : 'Confira se a pasta continua compartilhada.'}` : e.status === 404 ? 'Arquivo não encontrado no Drive.' : e.net ? e.message : 'O download falhou. Confira a internet.' });
       clearInterval(tick); unpaint();
       toast('Não consegui baixar este volume. Veja o aviso na lista de envios.', 5000);
       return false;
@@ -1622,20 +1663,29 @@ async function syncDrive({ quiet = false } = {}) {
 // Baixa só a capa (a primeira página) de cada volume do Drive que ainda não tem uma. Usa a miniatura do Drive quando dá;
 // senão lê só o pedaço do arquivo onde está a capa: PDF por partes, CBZ pelo índice do zip, CBR até o fim da primeira imagem.
 // A revista inteira continua baixando só quando o Vitor abre.
-async function rangeGet(id, a, b) { // bytes [a, b)
-  const ctl = new AbortController();
+async function rangeGet(id, a, b, k = 0) { // bytes [a, b); desiste do pedido se ficar 20 s parado e tenta de novo
+  try { return await rangeGet1(id, a, b); }
+  catch (e) { if (e.status || k >= 2) throw e; await new Promise(r => setTimeout(r, 1000 * (k + 1))); return rangeGet(id, a, b, k + 1); }
+}
+async function rangeGet1(id, a, b) {
+  const ctl = new AbortController(); let idle; const arm = () => { clearTimeout(idle); idle = setTimeout(() => ctl.abort(), 20000); };
+  arm();
+  try {
   const r = await gfetch(driveURL(id), { headers: { Range: `bytes=${a}-${b - 1}` }, signal: ctl.signal });
-  if (!r.ok) throw new Error('HTTP ' + r.status);
+  if (!r.ok) { const e = new Error('HTTP ' + r.status); e.status = r.status; e.reason = await gReason(r); throw e; }
+  // o Google mandou o arquivo inteiro em vez do pedaço: longe do começo isso seria baixar tudo de novo a cada página
+  if (r.status === 200 && a > 1048576) { r.body?.cancel?.().catch(() => {}); const e = new Error('sem pedaços'); e.status = 'norange'; throw e; }
   const skip = r.status === 206 ? 0 : a, need = b - a; // se o servidor ignorar o pedaço pedido, corta a conexão depois do necessário
   const out = new Uint8Array(need); let got = 0, pos = 0; const rd = r.body.getReader();
   while (got < need) {
     const { done, value } = await rd.read(); if (done) break;
-    let v = value; if (pos < skip) { const c = Math.min(v.length, skip - pos); pos += c; v = v.subarray(c); }
+    arm(); let v = value; if (pos < skip) { const c = Math.min(v.length, skip - pos); pos += c; v = v.subarray(c); }
     const n = Math.min(v.length, need - got); out.set(v.subarray(0, n), got); got += n;
   }
   rd.cancel().catch(() => {}); ctl.abort();
   CV.bytes += got;
   return out.subarray(0, got);
+  } finally { clearTimeout(idle); }
 }
 function rangeReader(id, size) {
   const W = 65536, win = new Map();
@@ -1692,7 +1742,7 @@ async function rarCoverEnd(rd) {
 }
 async function rarCover(id, rd) {
   const end = await rarCoverEnd(rd);
-  if (!end || end > 40e6) return null;
+  if (!end || end > 12e6) return null;
   const data = await rangeGet(id, 0, end);
   await loadUnrar();
   if (!rarWasm) rarWasm = Uint8Array.from(atob(window.ShikaiUnrarWasm), c => c.charCodeAt(0)).buffer;
@@ -1721,7 +1771,7 @@ async function zipCover(id, rd, size) {
     p += 46 + nl + el + cl;
   }
   const f = list.sort((a, b) => natural(a.name, b.name))[0];
-  if (!f || f.csize > 40e6 || (f.method !== 0 && f.method !== 8)) return null;
+  if (!f || f.csize > 12e6 || (f.method !== 0 && f.method !== 8)) return null;
   const lh = await rd.bytes(f.off, 30), lv = new DataView(lh.buffer, lh.byteOffset, lh.byteLength);
   if (lv.getUint32(0, true) !== 0x04034b50) return null;
   const at = f.off + 30 + lv.getUint16(26, true) + lv.getUint16(28, true);
@@ -1736,7 +1786,7 @@ async function pdfCover(id, size) {
   const head = await rangeGet(id, 0, Math.min(size, 131072));
   const tr = new pdfjsLib.PDFDataRangeTransport(size, head);
   let spent = 0;
-  tr.requestDataRange = (a, b) => { spent += b - a; if (spent > 30e6) return; rangeGet(id, a, b).then(d => tr.onDataRange(a, d)).catch(() => {}); };
+  tr.requestDataRange = (a, b) => { spent += b - a; if (spent > 8e6) return; rangeGet(id, a, b).then(d => tr.onDataRange(a, d)).catch(() => {}); };
   const pdf = await Promise.race([pdfjsLib.getDocument({ range: tr, disableAutoFetch: true, disableStream: true, rangeChunkSize: 131072 }).promise, new Promise((_, no) => setTimeout(() => no(new Error('demorou')), 60000))]);
   try {
     const p = await Promise.race([pdf.getPage(1), new Promise((_, no) => setTimeout(() => no(new Error('demorou')), 60000))]);
@@ -1769,7 +1819,7 @@ async function coverFor(b) {
 }
 const CV = { on: false, bytes: 0, done: 0 };
 // sem capa no arquivo: tenta de novo em 7 dias; erro de rede: no dia seguinte
-const coverWanted = b => b.remote && !b.cover && !b.webCover && b.source?.type === 'drive' && b.format !== 'epub' && !(b.coverTry > Date.now() - 7 * 864e5) && !(b.coverErr > Date.now() - 864e5);
+const coverWanted = b => b.remote && !b.cover && !b.webCover && !webFor(b) && b.source?.type === 'drive' && b.format !== 'epub' && !(b.coverTry > Date.now() - 7 * 864e5) && !(b.coverErr > Date.now() - 864e5);
 async function fetchCovers() {
   if (CV.on || !S.gkey || !navigator.onLine || S.covers === false) return;
   const c = navigator.connection; if (c && (c.saveData || (c.type === 'cellular' && !S.coversCell))) return;
@@ -1781,6 +1831,8 @@ async function fetchCovers() {
     let last = Date.now(), errs = 0;
     const work = async () => {
       while (list.length && navigator.onLine && S.covers !== false && errs < 8) {
+        // não disputa a internet com o que o Vitor está baixando ou lendo
+        while ((fetching.size || (R.book && !rd.hidden)) && navigator.onLine) await new Promise(r => setTimeout(r, 3000));
         const b = list.shift(); if (!coverWanted(b)) continue;
         try {
           const blob = await coverFor(b);
@@ -2797,13 +2849,14 @@ async function zipIndex(id, size) {
 }
 async function openArchiveStream(b) {
   const id = b.source.fileId, size = +b.size, sig = await rangeGet(id, 0, 8);
+  await rangeGet(id, size - 1024, size); // confere se o Google entrega pedaços do fim do arquivo
   let list = null;
   if (sig[0] === 0x50 && sig[1] === 0x4B) list = await zipIndex(id, size);
   else if (String.fromCharCode(...sig.subarray(0, 4)) === 'Rar!') {
     if (b.arcIdx && b.arcIdx.size === size) list = b.arcIdx.list;
     else {
       const j = job(nice(b)); upd(j, { state: 'run', msg: 'Preparando as páginas…', pct: .05 });
-      try { list = await rarIndex(id, size, n => upd(j, { msg: `Achei ${n} páginas…`, pct: Math.min(.95, .05 + n / 250) })); }
+      try { list = await Promise.race([rarIndex(id, size, n => upd(j, { msg: `Achei ${n} páginas…`, pct: Math.min(.95, .05 + n / 250) })), new Promise(r => setTimeout(() => r(null), 60000))]); }
       finally { upd(j, { state: 'ok', msg: list ? `${list.length} páginas` : 'Precisa baixar inteiro', pct: 1 }); }
       if (list && list.length) { b.arcIdx = { size, list }; saveBook(b).catch(() => {}); }
     }
@@ -2832,7 +2885,7 @@ async function openReader(id) {
     try {
       const doc = b.format === 'pdf' ? await openPdfStream(b) : await openArchiveStream(b);
       if (doc) return startComic(b, doc);
-    } catch (e) { console.warn('abrir aos poucos', e); }
+    } catch (e) { console.warn('abrir aos poucos', e); if (e.status === 403) { toast(`O Google não liberou este arquivo${e.reason ? ' (' + e.reason + ')' : ''}.`, 6000); } }
   }
   if (b.remote && !(await ensureLocal(b))) return;
   let rec = await dbGet('files', id);
