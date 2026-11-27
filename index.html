@@ -548,6 +548,8 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 .toc button { text-align: left; border: 0; background: transparent; color: #cfd5d2; padding: 7px 8px; border-radius: 8px; font-size: 13.5px; }
 .toc button:hover { background: rgba(255,255,255,.08); }
 .toc button.cur { color: var(--mark); font-weight: 600; }
+.toc button.sub { padding-left: 22px; font-size: 12.5px; }
+.toc button small { opacity: .55; margin-left: 6px; font-size: 11.5px; }
 .sz { display: flex; align-items: center; gap: 8px; }
 .sz span { min-width: 44px; text-align: center; font-variant-numeric: tabular-nums; color: #dfe4e1; font-size: 13.5px; }
 .ropts { max-height: calc(100dvh - 140px); overflow: auto; }
@@ -704,7 +706,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 5</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 6</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -826,12 +828,14 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
   <div class="rtop rchrome">
     <button class="rbtn" id="rClose" aria-label="Voltar à estante"><svg class="i"><use href="#i-back"/></svg></button>
     <div class="tt"><b id="rTitle"></b><small id="rSub"></small></div>
+    <button class="rbtn" id="rCh" aria-label="Capítulos" hidden><svg class="i"><use href="#i-list"/></svg></button>
     <button class="rbtn" id="rOff" aria-label="Salvar para ler offline" aria-pressed="false"><svg class="i"><use href="#i-dl"/></svg></button>
     <button class="rbtn" id="rFav" aria-label="Favoritar"><svg class="i"><use href="#i-heart"/></svg></button>
     <button class="rbtn" id="rFull" aria-label="Tela cheia"><svg class="i"><use href="#i-full"/></svg></button>
     <button class="rbtn" id="rOptBtn" aria-label="Opções de leitura" aria-pressed="false"><svg class="i"><use href="#i-sliders"/></svg></button>
   </div>
   <div class="ropts rchrome" id="rOpts" hidden>
+    <div class="cOpt" id="chWrap" hidden><div class="lb">Capítulos deste volume</div><div class="toc" id="chList"></div></div>
     <div class="cOpt"><div class="lb">Páginas</div><div class="seg" id="oLayout"><button data-v="unica">Uma</button><button data-v="dupla">Duas</button><button data-v="rolagem">Rolagem contínua</button></div></div>
     <div class="cOpt"><div class="lb">Sentido</div><div class="seg" id="oDir"><button data-v="rtl">Mangá (← direita)</button><button data-v="ltr">HQ (esquerda →)</button></div></div>
     <div class="cOpt" id="oFitWrap"><div class="lb">Tamanho</div><div class="seg" id="oFit"><button data-v="tela">Caber na tela</button><button data-v="largura">Largura</button><button data-v="altura">Altura</button></div></div>
@@ -921,7 +925,7 @@ const dbDel = (n, k) => rq(st(n, 'readwrite').delete(k));
 let books = [];
 const coverURL = new Map();
 function cover(b) {
-  if (!b.cover) return b.thumb || '';
+  if (!b.cover) return b.thumb || b.webCover || '';
   if (!coverURL.has(b.id)) coverURL.set(b.id, URL.createObjectURL(b.cover));
   return coverURL.get(b.id);
 }
@@ -929,7 +933,7 @@ function cover(b) {
 document.addEventListener('error', e => {
   const im = e.target; if (im.tagName !== 'IMG' || !im.closest('.art, .hero-cover')) return;
   const id = im.closest('[data-open]')?.dataset.open || im.closest('.book')?.querySelector('[data-open]')?.dataset.open;
-  const b = books.find(x => x.id === id); if (b) b.thumb = '';
+  const b = books.find(x => x.id === id); if (b) { if (b.webCover && im.src === b.webCover) b.webCover = ''; else b.thumb = ''; }
   const t = document.createElement('template'); t.innerHTML = b ? phCover(b) : '<div class="ph"></div>'; im.replaceWith(t.content.firstElementChild);
 }, true);
 // capa desenhada para volumes sem imagem: cor da série, editora no topo, número grande, retícula
@@ -1071,8 +1075,25 @@ async function openDoc(format, blob) {
   if (format === 'pdf') {
     if (!window.pdfjsLib) throw new Error('O leitor de PDF não carregou. Verifique a internet na primeira abertura.');
     const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(await blob.arrayBuffer()) }).promise;
+    return pdfWrap(pdf);
+  }
+  if (format === 'cbz') {
+    if (!window.JSZip) throw new Error('O leitor de CBZ não carregou. Verifique a internet na primeira abertura.');
+    const zip = await JSZip.loadAsync(blob);
+    const files = Object.values(zip.files).filter(f => !f.dir && IMG_RE.test(f.name) && !/(^|\/)(__MACOSX|\.)/.test(f.name)).sort((a, b) => natural(a.name, b.name));
+    if (!files.length) throw new Error('Esse arquivo compactado não tem imagens dentro.');
     return {
-      count: pdf.numPages,
+      count: files.length,
+      async ratio() { return null; },
+      async image(i) { const f = files[i]; const ext = f.name.split('.').pop().toLowerCase(); const b = await f.async('blob'); return new Blob([b], { type: MIME[ext] || 'image/jpeg' }); },
+      close() {}
+    };
+  }
+  throw new Error('Formato não suportado.');
+}
+function pdfWrap(pdf, stream) {
+    return {
+      count: pdf.numPages, stream: !!stream, chapters: () => pdfChapters(pdf),
       async ratio(i) { const p = await pdf.getPage(i + 1); const v = p.getViewport({ scale: 1 }); return v.height / v.width; },
       async image(i, targetW) {
         const p = await pdf.getPage(i + 1);
@@ -1088,20 +1109,34 @@ async function openDoc(format, blob) {
       },
       close() { pdf.destroy(); }
     };
+}
+// PDF grande que ainda não está no aparelho: abre direto do Drive, baixando só os pedaços das páginas que aparecem
+async function openPdfStream(b) {
+  if (!window.pdfjsLib) throw new Error('O leitor de PDF não carregou. Verifique a internet na primeira abertura.');
+  const id = b.source.fileId, size = +b.size;
+  const head = await rangeGet(id, 0, Math.min(size, 262144));
+  if (String.fromCharCode(...head.subarray(0, 4)) !== '%PDF') throw new Error('não é PDF');
+  const tr = new pdfjsLib.PDFDataRangeTransport(size, head);
+  const get = (a, e, k = 0) => rangeGet(id, a, e).then(d => tr.onDataRange(a, d)).catch(err => { if (k < 3) setTimeout(() => get(a, e, k + 1), 1500 * (k + 1)); else console.warn('pedaço do PDF', err); });
+  tr.requestDataRange = (a, e) => get(a, e);
+  const pdf = await Promise.race([pdfjsLib.getDocument({ range: tr, disableAutoFetch: true, disableStream: true, rangeChunkSize: 262144 }).promise, new Promise((_, no) => setTimeout(() => no(new Error('demorou')), 45000))]);
+  return pdfWrap(pdf, true);
+}
+// capítulos do PDF (os marcadores do arquivo), com a página onde cada um começa
+async function pdfChapters(pdf) {
+  const out = await pdf.getOutline().catch(() => null); if (!out || !out.length) return [];
+  const flat = []; const walk = (l, d) => { for (const o of l) { flat.push({ t: o.title, dest: o.dest, d }); if (d < 1 && o.items?.length) walk(o.items, d + 1); } };
+  walk(out, 0);
+  const res = [];
+  for (const o of flat.slice(0, 400)) {
+    try {
+      let dest = o.dest; if (typeof dest === 'string') dest = await pdf.getDestination(dest);
+      if (!Array.isArray(dest)) continue;
+      const i = typeof dest[0] === 'number' ? dest[0] : await pdf.getPageIndex(dest[0]);
+      if (i >= 0) res.push({ t: String(o.t || '').trim() || `Página ${i + 1}`, i, d: o.d });
+    } catch (e) {}
   }
-  if (format === 'cbz') {
-    if (!window.JSZip) throw new Error('O leitor de CBZ não carregou. Verifique a internet na primeira abertura.');
-    const zip = await JSZip.loadAsync(blob);
-    const files = Object.values(zip.files).filter(f => !f.dir && IMG_RE.test(f.name) && !/(^|\/)(__MACOSX|\.)/.test(f.name)).sort((a, b) => natural(a.name, b.name));
-    if (!files.length) throw new Error('Esse arquivo compactado não tem imagens dentro.');
-    return {
-      count: files.length,
-      async ratio() { return null; },
-      async image(i) { const f = files[i]; const ext = f.name.split('.').pop().toLowerCase(); const b = await f.async('blob'); return new Blob([b], { type: MIME[ext] || 'image/jpeg' }); },
-      close() {}
-    };
-  }
-  throw new Error('Formato não suportado.');
+  return res.length > 1 || (res.length === 1 && res[0].i > 0) ? res : [];
 }
 async function makeCover(doc) { return downscale(await doc.image(0, 420)); }
 async function downscale(src) {
@@ -1698,6 +1733,43 @@ async function fetchCovers() {
     await Promise.all([work(), work(), work()]);
     scheduleRender();
   } finally { CV.on = false; }
+  webCovers().catch(e => console.warn('capas da internet', e));
+}
+// Mangá sem capa no arquivo: busca a capa da série no AniList (grátis, sem chave). Uma busca por série, guardada.
+const webWanted = b => b.kind === 'manga' && !b.cover && !b.thumb && !b.webCover && (b.coverTry || !b.remote || b.format === 'epub') && !(b.webTry > Date.now() - 7 * 864e5);
+const WC = { on: false };
+async function aniCover(name) {
+  const q = 'query($s:String){Media(search:$s,type:MANGA){coverImage{extraLarge large}}}';
+  const r = await fetch('https://graphql.anilist.co', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ query: q, variables: { s: name } }) });
+  if (r.status === 404) return '';
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const j = await r.json(); const c = j?.data?.Media?.coverImage;
+  return c ? (c.extraLarge || c.large || '') : '';
+}
+async function webCovers() {
+  if (WC.on || !navigator.onLine || S.covers === false || S.webCovers === false) return;
+  WC.on = true;
+  try {
+    const groups = new Map();
+    for (const b of books.filter(webWanted)) { const n = cleanTitle(serParts(b.series || b.title).name || b.title).replace(/\s*[#nº]*\s*\d+\s*$/i, '').replace(/\b(mang[áa]|volume|vol)\b\.?/gi, ' ').replace(/\s+/g, ' ').trim(); if (n.length < 2) continue; if (!groups.has(n)) groups.set(n, []); groups.get(n).push(b); }
+    S.webC = S.webC || {};
+    for (const [name, list] of groups) {
+      if (!navigator.onLine) break;
+      let url = S.webC[name];
+      if (url === undefined || (url === '' && !(S.webCT?.[name] > Date.now() - 7 * 864e5))) {
+        try { url = await aniCover(name); } catch (e) { console.warn('AniList', name, e); break; }
+        S.webC[name] = url; S.webCT = S.webCT || {}; S.webCT[name] = Date.now(); saveS();
+        await new Promise(r => setTimeout(r, 900)); // o AniList aceita uns 30 pedidos por minuto
+      }
+      let blob = null;
+      if (url) blob = await thumbBlob(url).then(downscale).catch(() => null);
+      for (const b of list) {
+        if (blob) b.cover = blob; else if (url) b.webCover = url; else b.webTry = Date.now();
+        await saveBook(b).catch(() => {});
+      }
+      scheduleRender();
+    }
+  } finally { WC.on = false; }
 }
 
 /* ---------------- volume de exemplo ---------------- */
@@ -2464,6 +2536,7 @@ async function showPage(i, from) {
   saveProgress();
 }
 function updateBar() {
+  markChapter();
   const n = R.doc.count, pages = prefs().layout === 'rolagem' ? [R.page] : spreadOf(R.page);
   $('#rRange').max = n; $('#rRange').value = R.page + 1;
   $('#rPn').textContent = pages.length > 1 ? `${pages[0] + 1}–${pages[1] + 1} / ${n}` : `${R.page + 1} / ${n}`;
@@ -2535,8 +2608,16 @@ $('#vscroll').addEventListener('scroll', () => {
   if (v.scrollTop + v.clientHeight >= v.scrollHeight - 4 && !R.book.finished) { R.book.finished = true; saveBook(R.book); }
 }, { passive: true });
 
+const STREAM_MIN = 30e6; // PDF acima disso abre aos poucos, sem baixar tudo antes
+const canStream = b => b.remote && b.format === 'pdf' && !b.keep && +b.size > STREAM_MIN && b.source?.type === 'drive' && S.gkey && navigator.onLine && window.pdfjsLib;
 async function openReader(id) {
   const b = books.find(x => x.id === id); if (!b) return;
+  if (canStream(b)) {
+    closeDoc();
+    toast(`Abrindo ${nice(b)} aos poucos, sem baixar o arquivo inteiro…`, 3000);
+    try { const doc = await openPdfStream(b); return startComic(b, doc); }
+    catch (e) { console.warn('abrir aos poucos', e); }
+  }
   if (b.remote && !(await ensureLocal(b))) return;
   let rec = await dbGet('files', id);
   if (!rec && b.source?.type === 'drive') { b.remote = true; if (await ensureLocal(b)) rec = await dbGet('files', id); }
@@ -2544,12 +2625,18 @@ async function openReader(id) {
   if (!b.keep) makeRoom(b.id).catch(() => {});
   closeDoc();
   if (b.format === 'epub') { return openBookReader(b, rec.blob); }
+  let doc;
+  try { doc = await openDoc(b.format, rec.blob); }
+  catch (e) { toast(e.message || 'Não consegui abrir este arquivo.', 5000); return; }
+  startComic(b, doc);
+}
+function startComic(b, doc) {
   R.mode = 'comic'; rd.dataset.mode = 'comic'; $('#bkview').hidden = true;
   $$('.cOpt').forEach(x => x.hidden = false); $$('.bOpt').forEach(x => x.hidden = true);
-  R.book = b; R.ratios = [];
-  try { R.doc = await openDoc(b.format, rec.blob); }
-  catch (e) { toast(e.message || 'Não consegui abrir este arquivo.', 5000); return; }
-  if (b.format === 'pdf' && R.doc.count <= 600) Promise.all(Array.from({ length: R.doc.count }, (_, i) => R.doc.ratio(i))).then(r => { R.ratios = r; }).catch(() => {});
+  R.book = b; R.ratios = []; R.doc = doc;
+  if (doc.stream && b.pages !== doc.count) { b.pages = doc.count; saveBook(b); }
+  showChapters(doc);
+  if (b.format === 'pdf' && !doc.stream && R.doc.count <= 600) Promise.all(Array.from({ length: R.doc.count }, (_, i) => R.doc.ratio(i))).then(r => { R.ratios = r; }).catch(() => {});
   $('#rTitle').textContent = nice(b);
   $('#rSub').textContent = [b.series && b.series !== b.title && !nice(b).startsWith(cleanTitle(b.series)) ? cleanTitle(b.series) : '', b.volume ? (b.kind === 'manga' ? 'Cap. ' : 'Vol. ') + b.volume : '', KL[b.kind]].filter(Boolean).join(' · '); syncFavBtn();
   rd.hidden = false; $('#endCard').hidden = true; $('#rOpts').hidden = true; $('#rOptBtn').setAttribute('aria-pressed', 'false');
@@ -2567,7 +2654,39 @@ document.addEventListener('visibilitychange', () => { if (document.visibilitySta
 function syncFavBtn() { const f = $('#rFav'); if (!R.book) return; syncOffBtn(); f.setAttribute('aria-pressed', String(!!R.book.fav)); f.setAttribute('aria-label', R.book.fav ? 'Tirar dos favoritos' : 'Favoritar'); }
 $('#rFav').onclick = () => R.book && toggleFav(R.book.id);
 $('#rOff').onclick = () => R.book && toggleOff(R.book.id);
+// lista de capítulos (marcadores do PDF): aparece no botão de lista e no topo das opções
+let chTok = 0;
+function showChapters(doc) {
+  const tok = ++chTok; $('#chWrap').hidden = true; $('#rCh').hidden = true; $('#chList').innerHTML = ''; R.chapters = [];
+  if (!doc.chapters) return;
+  doc.chapters().then(list => {
+    if (tok !== chTok || R.doc !== doc || !list.length) return;
+    R.chapters = list;
+    $('#chList').innerHTML = list.map((c, k) => `<button data-ch="${k}" class="${c.d ? 'sub' : ''}">${esc(c.t)} <small>p. ${c.i + 1}</small></button>`).join('');
+    $('#chWrap').hidden = false; $('#rCh').hidden = false; markChapter();
+  }).catch(() => {});
+}
+function markChapter() {
+  if (!R.chapters?.length) return;
+  let cur = -1; R.chapters.forEach((c, k) => { if (c.i <= R.page) cur = k; });
+  $$('#chList button').forEach((x, k) => x.classList.toggle('cur', k === cur));
+}
+function goPage(i) {
+  if (prefs().layout === 'rolagem') { const el = $('#vscroll').children[i]; if (el) $('#vscroll').scrollTop = el.offsetTop; }
+  else showPage(i);
+}
+$('#chList').addEventListener('click', e => {
+  const x = e.target.closest('[data-ch]'); if (!x) return;
+  const c = R.chapters[+x.dataset.ch]; if (!c) return;
+  $('#rOpts').hidden = true; $('#rOptBtn').setAttribute('aria-pressed', 'false');
+  goPage(c.i); toast(c.t, 1800);
+});
+$('#rCh').onclick = () => {
+  const o = $('#rOpts'); o.hidden = false; $('#rOptBtn').setAttribute('aria-pressed', 'true'); rd.classList.remove('calm'); clearTimeout(R.calmT);
+  markChapter(); o.scrollTop = 0; ($('#chList .cur') || $('#chList button'))?.scrollIntoView({ block: 'nearest' });
+};
 function closeDoc() {
+  chTok++; R.chapters = []; $('#chWrap').hidden = true; $('#rCh').hidden = true;
   R.io && R.io.disconnect();
   for (const pr of R.cache.values()) pr.then(u => u && URL.revokeObjectURL(u));
   R.cache.clear();
@@ -2594,8 +2713,7 @@ $('#rRange').addEventListener('input', e => { if (R.mode === 'epub') { $('#rPn')
 $('#rRange').addEventListener('change', e => {
   if (R.mode === 'epub') { bkJump(+e.target.value / 1000); return; }
   const i = +e.target.value - 1;
-  if (prefs().layout === 'rolagem') { const el = $('#vscroll').children[i]; if (el) $('#vscroll').scrollTop = el.offsetTop; }
-  else showPage(i);
+  goPage(i);
 });
 function toggleChrome() {
   clearTimeout(R.calmT);
