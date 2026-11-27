@@ -715,7 +715,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 11</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 12</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -2711,15 +2711,99 @@ $('#vscroll').addEventListener('scroll', () => {
   if (v.scrollTop + v.clientHeight >= v.scrollHeight - 4 && !R.book.finished) { R.book.finished = true; saveBook(R.book); }
 }, { passive: true });
 
-const STREAM_MIN = 30e6; // PDF acima disso abre aos poucos, sem baixar tudo antes
-const canStream = b => b.remote && b.format === 'pdf' && !b.keep && +b.size > STREAM_MIN && b.source?.type === 'drive' && S.gkey && navigator.onLine && window.pdfjsLib;
+const STREAM_MIN = 30e6; // PDF, CBR ou CBZ acima disso abre aos poucos, sem baixar tudo antes
+const canStream = b => b.remote && b.format !== 'epub' && !b.keep && +b.size > STREAM_MIN && b.source?.type === 'drive' && S.gkey && navigator.onLine && (b.format !== 'pdf' || window.pdfjsLib);
+// CBR/CBZ grande: lê o índice do arquivo e baixa só a imagem de cada página quando ela aparece
+async function rarIndex(id, size, prog) {
+  const sig = await rangeGet(id, 0, 8), v5 = sig[6] === 1, out = [];
+  let pos = v5 ? 8 : 7;
+  for (let i = 0; i < 20000 && pos < size; i++) {
+    const h = await rangeGet(id, pos, Math.min(size, pos + 1100)); if (h.length < 7) break;
+    const dv = new DataView(h.buffer, h.byteOffset, h.byteLength);
+    if (!v5) {
+      const type = h[2], flags = dv.getUint16(3, true), hs = dv.getUint16(5, true);
+      if (hs < 7) break;
+      let add = flags & 0x8000 ? dv.getUint32(7, true) : 0;
+      if (type === 0x74) {
+        const big = flags & 0x100, nl = dv.getUint16(26, true), no = 32 + (big ? 8 : 0);
+        if (big) add += dv.getUint32(32, true) * 2 ** 32;
+        const name = td.decode(h.subarray(no, no + nl)).split('\0')[0], dir = (flags & 0xE0) === 0xE0;
+        if (!dir && imgName(name)) { if (h[25] !== 0x30 || (flags & 4)) return null; out.push({ name, at: pos + hs, size: add }); }
+      } else if (type === 0x7b) break;
+      pos += hs + add;
+    } else {
+      let p = 4;
+      const vint = () => { let x = 0, m = 1, c; do { c = h[p++]; x += (c & 0x7f) * m; m *= 128; } while (c & 0x80 && p < h.length); return x; };
+      const hsz = vint(), start = pos + p, type = vint(), flags = vint();
+      if (flags & 1) vint();
+      const data = flags & 2 ? vint() : 0, next = start + hsz + data;
+      if (type === 4 || !hsz) return null; // com senha
+      if (type === 5) break;
+      if (type === 2) {
+        const ff = vint(); vint(); vint(); if (ff & 2) p += 4; if (ff & 4) p += 4; const ci = vint(); vint();
+        const nl = vint(), name = td.decode(h.subarray(p, p + nl));
+        if (!(ff & 1) && imgName(name)) { if (((ci >> 7) & 7) !== 0) return null; out.push({ name, at: start + hsz, size: data }); }
+      }
+      pos = next;
+    }
+    if (prog && i % 10 === 0) prog(out.length);
+  }
+  return out;
+}
+async function zipIndex(id, size) {
+  const n = Math.min(size, 65558), tail = await rangeGet(id, size - n, size);
+  const dv = new DataView(tail.buffer, tail.byteOffset, tail.byteLength);
+  let e = -1; for (let i = tail.length - 22; i >= 0; i--) if (dv.getUint32(i, true) === 0x06054b50) { e = i; break; }
+  if (e < 0) return null;
+  const cdSize = dv.getUint32(e + 12, true), cdOff = dv.getUint32(e + 16, true);
+  if (cdOff === 0xffffffff || cdOff + cdSize > size) return null;
+  const cd = await rangeGet(id, cdOff, cdOff + cdSize), cv = new DataView(cd.buffer, cd.byteOffset, cd.byteLength), list = [];
+  for (let p = 0; p + 46 <= cd.length && cv.getUint32(p, true) === 0x02014b50;) {
+    const nl = cv.getUint16(p + 28, true), el = cv.getUint16(p + 30, true), cl = cv.getUint16(p + 32, true);
+    const name = td.decode(cd.subarray(p + 46, p + 46 + nl)), method = cv.getUint16(p + 10, true);
+    if (imgName(name)) { if (method !== 0 && method !== 8) return null; list.push({ name, zip: true, method, size: cv.getUint32(p + 20, true), off: cv.getUint32(p + 42, true) }); }
+    p += 46 + nl + el + cl;
+  }
+  return list;
+}
+async function openArchiveStream(b) {
+  const id = b.source.fileId, size = +b.size, sig = await rangeGet(id, 0, 8);
+  let list = null;
+  if (sig[0] === 0x50 && sig[1] === 0x4B) list = await zipIndex(id, size);
+  else if (String.fromCharCode(...sig.subarray(0, 4)) === 'Rar!') {
+    if (b.arcIdx && b.arcIdx.size === size) list = b.arcIdx.list;
+    else {
+      const j = job(nice(b)); upd(j, { state: 'run', msg: 'Preparando as páginas…', pct: .05 });
+      try { list = await rarIndex(id, size, n => upd(j, { msg: `Achei ${n} páginas…`, pct: Math.min(.95, .05 + n / 250) })); }
+      finally { upd(j, { state: 'ok', msg: list ? `${list.length} páginas` : 'Precisa baixar inteiro', pct: 1 }); }
+      if (list && list.length) { b.arcIdx = { size, list }; saveBook(b).catch(() => {}); }
+    }
+  }
+  if (!list || !list.length) return null;
+  list = [...list].sort((x, y) => natural(x.name, y.name));
+  return {
+    count: list.length, stream: true,
+    async ratio() { return null; },
+    async image(i) {
+      const f = list[i], type = MIME[f.name.split('.').pop().toLowerCase()] || 'image/jpeg';
+      if (!f.zip) return new Blob([await rangeGet(id, f.at, f.at + f.size)], { type });
+      if (f.at == null) { const lh = await rangeGet(id, f.off, f.off + 30), lv = new DataView(lh.buffer, lh.byteOffset, lh.byteLength); f.at = f.off + 30 + lv.getUint16(26, true) + lv.getUint16(28, true); }
+      const raw = await rangeGet(id, f.at, f.at + f.size);
+      if (f.method === 0) return new Blob([raw], { type });
+      return new Blob([await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer()], { type });
+    },
+    close() {}
+  };
+}
 async function openReader(id) {
   const b = books.find(x => x.id === id); if (!b) return;
   if (canStream(b)) {
     closeDoc();
     toast(`Abrindo ${nice(b)} aos poucos, sem baixar o arquivo inteiro…`, 3000);
-    try { const doc = await openPdfStream(b); return startComic(b, doc); }
-    catch (e) { console.warn('abrir aos poucos', e); }
+    try {
+      const doc = b.format === 'pdf' ? await openPdfStream(b) : await openArchiveStream(b);
+      if (doc) return startComic(b, doc);
+    } catch (e) { console.warn('abrir aos poucos', e); }
   }
   if (b.remote && !(await ensureLocal(b))) return;
   let rec = await dbGet('files', id);
