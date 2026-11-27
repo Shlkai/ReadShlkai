@@ -113,6 +113,11 @@ for s in json.load(open('covers/series.json')):
             if v in best and save(f'{d}/v{n}.jpg', f"https://uploads.mangadex.org/covers/{x['id']}/{best[v][0]}.512.jpg"): e['vols'][str(n)] = f'{d}/v{n}.jpg'; ok += 1
         log.append(f"  parte {list(x['attributes']['title'].values())[0]} arquivos {a}-{z} -> {ok} capas")
         time.sleep(1)
+    # capa tirada da 1ª página do próprio arquivo no Drive (edições sem capa na internet, ex.: Bleach REMIX)
+    for v, fid in (s.get('drive') or {}).items():
+        p = f'{d}/v{v}.jpg'
+        if save(p, f'https://drive.google.com/thumbnail?id={fid}&sz=w1000'): e['vols'][v] = p
+    if s.get('drive'): log.append(f"  Drive -> {sum(1 for v in s['drive'] if v in e['vols'])} de {len(s['drive'])} capas da 1a pagina")
     if s.get('wiki'):
         # capítulo -> volume pela lista de capítulos da Wikipédia
         def wiki(page):

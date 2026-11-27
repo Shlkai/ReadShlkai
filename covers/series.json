@@ -108,8 +108,35 @@
  {
   "key": "bleach",
   "anilist": "Bleach",
-  "mangadex": "Bleach",
   "mode": "volumes",
-  "force": true
+  "force": true,
+  "drive": {
+   "1": "1NXSWS_C31-W-kUS-Y2gYhi01PDJOvqr2",
+   "2": "1GFjEzoL4SGjqMmNFFqgX34JqA5E6qwjQ",
+   "3": "1vJ9O6nj6lby-nj4FkqFpCiqWBemrlifm",
+   "4": "1-jm4ZFdlX-4WmE3ksBjLSRPw22CHDfZt",
+   "5": "1p_Nea3_SYPaCV7Af65CPlMIBA7nEZLWD",
+   "6": "12IwqLbBxpKgl-cBWeV2Xny8OH7KR88KF",
+   "7": "1oEt2kyS-Dx9aOi6S0mOxce4EeunhDfDX",
+   "8": "1kRNRGa-FzMcIesBfdDvyWnZ6oEaFl58G",
+   "9": "1zVbRpaieYM5Ye3W9IyYpvEK91grYHEh-",
+   "10": "19yXk1CjFgwmpqkqjyZFjHANeOqRD_3rl",
+   "11": "1nf6TZDPB-6zBg4-Qgz1wELDYotoXa0aZ",
+   "12": "1Mc8wb8TtTbolj4kA-44FnYG43qkd4svC",
+   "13": "14PboMAElTh8Y-sqVmyL6OmKG9m-Tm8FX",
+   "14": "1_WRUnOtZ1EyxmFWQcB-LIoLtTqkSyV9R",
+   "15": "15PRziK7FUnW_0SxR9ThsZy9SV7MhFfU7",
+   "16": "1lGufszlvIay4h7uOIIDe5f6JrM4_ItFi",
+   "17": "1BeY3fXQwu7LuV1YYbYJrnyzc19wXnTmS",
+   "18": "15PJWwEKJqPmHJ1iU17T2p38mRvau6BwU",
+   "19": "1HlaCBcHb_7XHECrHTSlcZcJBaz0DdnTI",
+   "20": "1eWhmCdEmHbAW8G1JYvPfasG9X5eVy9pU",
+   "21": "1ET5868YNa_XF2hRMFVckh5l78BYEmF9i",
+   "22": "10xBPOubi_jLC8kIQ-PtSDG9WZ9wEbor2",
+   "23": "1daJfZk8s7jI4sC9GQdUPs2wHnNNeHbQ9",
+   "24": "1dtbGkXaS5_C0XmOCD_M-bG11Oqlrr8Zb",
+   "25": "18CjtIKQ__pQQb_inYgqItDRdMPU6c3EW",
+   "26": "1gkOEZe1ieYiKqRrg_k8AZLiYkUaPAGJG"
+  }
  }
 ]
