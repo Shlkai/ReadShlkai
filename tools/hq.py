@@ -73,6 +73,34 @@ def cover(f):
             if rng and len(b) < 8000000: break  # arquivo inteiro já veio
         return why or 'sem imagem'
     finally: shutil.rmtree(tmp, ignore_errors=True)
+def alt_pages(fid, name):
+    tmp = tempfile.mkdtemp(); a = tmp + '/a'; out = []
+    try:
+        b = get(DL.format(fid), 'bytes=0-30000000')
+        if not b: return out
+        open(a, 'wb').write(b)
+        if b[:5] == b'%PDF-':
+            if len(b) >= 30000000: b = get(DL.format(fid)); open(a, 'wb').write(b)
+            subprocess.run(['pdftoppm', '-f', '2', '-l', '4', '-jpeg', '-scale-to', '700', a, tmp + '/p'], capture_output=True)
+            pgs = sorted([x for x in os.listdir(tmp) if x.startswith('p')], key=nat)
+        else:
+            r = subprocess.run(['bsdtar', '-tf', a], capture_output=True)
+            names = sorted([n for n in r.stdout.decode('utf-8', 'replace').split('\n') if IMG.search(n) and '__MACOSX' not in n], key=nat)[1:4]
+            pgs = []
+            for i, n in enumerate(names):
+                subprocess.run(['bsdtar', '-xf', a, '-C', tmp, n], capture_output=True)
+                if os.path.exists(os.path.join(tmp, n)): os.replace(os.path.join(tmp, n), f'{tmp}/q{i}'); pgs.append(f'q{i}')
+        os.makedirs(OUT + '/alt', exist_ok=True)
+        for i, x in enumerate(pgs[:3]):
+            d = f'{OUT}/alt/{fid}_{i + 2}.jpg'
+            if shrink(os.path.join(tmp, x), d): out.append(d)
+        return out
+    finally: shutil.rmtree(tmp, ignore_errors=True)
+if os.environ.get('MODE') == 'alt':
+    want = json.load(open(OUT + '/alt.json'))
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(8) as ex: res = list(ex.map(lambda i: (i, alt_pages(i, '')), want))
+    print('alt', sum(1 for _, r in res if r), 'de', len(want)); sys.exit(0)
 files = []
 crawl(ROOT, [], files)
 print(len(files), 'arquivos de HQ')

@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       minutes: { description: 'Minutos de trabalho', default: '300' }
+      mode: { description: 'vazio ou alt', default: '' }
 permissions:
   contents: write
 concurrency: { group: hq-capas, cancel-in-progress: false }
@@ -18,7 +19,7 @@ jobs:
           sudo apt-get install -y -qq 7zip >/dev/null || sudo apt-get install -y -qq p7zip-full >/dev/null || true
           which 7zz 7z || true
       - run: python3 tools/hq.py
-        env: { MINUTES: '${{ inputs.minutes }}', TRIES: '3' }
+        env: { MINUTES: '${{ inputs.minutes }}', TRIES: '3', MODE: '${{ inputs.mode }}' }
       - if: always()
         run: |
           git config user.name "shikai-capas"
