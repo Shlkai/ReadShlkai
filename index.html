@@ -716,7 +716,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 17</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 18</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -1599,7 +1599,7 @@ async function syncDrive({ quiet = false } = {}) {
   syncing = true; S.gtry = Date.now(); saveS();
   Object.assign(SP, { on: true, seen: S.glinks.length, done: 0, files: 0, i: 0, n: 0, phase: 'list' }); syncProg();
   const have = new Set(books.filter(b => b.source?.type === 'drive').map(b => b.source.fileId));
-  let found = 0, fresh = 0, bad = 0;
+  let found = 0, fresh = 0, bad = 0; const seenIds = new Set(); let partial = false;
   try {
     for (const link of S.glinks) {
       const id = folderId(link.url); if (!id) continue;
@@ -1622,7 +1622,7 @@ async function syncDrive({ quiet = false } = {}) {
       }
       link.err = list.failed ? `${list.failed} subpasta${list.failed > 1 ? 's' : ''} não abriu agora. Sincronize de novo daqui a pouco. (${list.failErr})` : ''; link.count = list.length; saveS(); renderLinks();
       if (list.failed) { bad++; toast(link.err, 7000); }
-      found += list.length;
+      found += list.length; list.forEach(f => seenIds.add(f.id)); if (list.failed) partial = true;
       let moved = 0, renamed = 0;
       for (const f of list) {
         const old = books.find(b => b.source?.type === 'drive' && b.source.fileId === f.id);
@@ -1656,6 +1656,15 @@ async function syncDrive({ quiet = false } = {}) {
         await saveBook(remoteBook(f, t0 - k++));
       }
       if (fresh || renamed) scheduleRender();
+    }
+    // arquivo que saiu do Drive (ex.: versão trocada) sai da estante; só com a leitura completa e sem erro, nunca mais da metade, e nunca o que foi salvo offline
+    if (!bad && !partial && seenIds.size) {
+      const drv = books.filter(b => b.source?.type === 'drive'), gone = drv.filter(b => !seenIds.has(b.source.fileId) && !b.keep);
+      if (gone.length && gone.length < drv.length / 2) {
+        for (const b of gone) { await dbDel('files', b.id); await dbDel('books', b.id); if (coverURL.has(b.id)) { URL.revokeObjectURL(coverURL.get(b.id)); coverURL.delete(b.id); } }
+        const g = new Set(gone.map(b => b.id)); books = books.filter(b => !g.has(b.id)); scheduleRender(); updateUsage();
+        toast(`${gone.length} volume${gone.length > 1 ? 's' : ''} que saíram do Drive foram tirados da estante.`, 5000);
+      }
     }
     S.glast = Date.now(); saveS(); renderLinks();
     if (fresh || (!quiet && !bad)) toast(fresh ? `${fresh} volume${fresh > 1 ? 's' : ''} novo${fresh > 1 ? 's' : ''} na estante. Cada um baixa quando você abrir.` : (found ? 'Tudo em dia. Nada novo no Drive.' : 'Não achei PDF, CBZ, CBR ou EPUB nessas pastas.'));
