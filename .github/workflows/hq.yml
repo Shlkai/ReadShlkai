@@ -1,0 +1,24 @@
+name: Capas das HQs
+on:
+  workflow_dispatch:
+    inputs:
+      minutes: { description: 'Minutos de trabalho', default: '300' }
+permissions:
+  contents: write
+concurrency: { group: hq-capas, cancel-in-progress: false }
+jobs:
+  hq:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get install -y -qq poppler-utils libarchive-tools imagemagick >/dev/null
+      - run: python3 tools/hq.py
+        env: { MINUTES: '${{ inputs.minutes }}' }
+      - if: always()
+        run: |
+          git config user.name "shikai-capas"
+          git config user.email "actions@users.noreply.github.com"
+          git add covers/hq
+          git diff --cached --quiet || git commit -m "Capas das HQs"
+          git pull --rebase -q && git push
