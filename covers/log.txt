@@ -25,3 +25,5 @@ bleach: AniList 30012 BLEACH -> ok
   Drive -> 26 de 26 capas da 1a pagina
 jujutsu kaisen: AniList 101517 Jujutsu Kaisen -> ok
   Drive -> 31 de 31 capas da 1a pagina
+jujutsu kaisen modulo: AniList 198372 Jujutsu Kaisen Modulo -> ok
+  Drive -> 3 de 3 capas da 1a pagina

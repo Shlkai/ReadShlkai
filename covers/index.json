@@ -1928,5 +1928,16 @@
   },
   "chVol": [],
   "main": "covers/jujutsu-kaisen/obra.jpg"
+ },
+ "jujutsu kaisen modulo": {
+  "mode": "volumes",
+  "force": true,
+  "vols": {
+   "1": "covers/jujutsu-kaisen-modulo/v1.jpg",
+   "2": "covers/jujutsu-kaisen-modulo/v2.jpg",
+   "3": "covers/jujutsu-kaisen-modulo/v3.jpg"
+  },
+  "chVol": [],
+  "main": "covers/jujutsu-kaisen-modulo/obra.jpg"
  }
 }
