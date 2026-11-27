@@ -70,8 +70,13 @@ for s in json.load(open('covers/series.json')):
         time.sleep(1)
     if s.get('wiki'):
         # capítulo -> volume pela lista de capítulos da Wikipédia
-        w = js('https://en.wikipedia.org/w/api.php?' + urllib.parse.urlencode({'action': 'parse', 'page': s['wiki'], 'prop': 'wikitext', 'format': 'json', 'formatversion': 2}))
-        txt = (w.get('parse') or {}).get('wikitext') or ''
+        def wiki(page):
+            w = js('https://en.wikipedia.org/w/api.php?' + urllib.parse.urlencode({'action': 'parse', 'page': page, 'prop': 'wikitext', 'format': 'json', 'formatversion': 2, 'redirects': 1}))
+            return (w.get('parse') or {}).get('wikitext') or ''
+        txt = wiki(s['wiki'])
+        for sub in re.findall(r'\{\{\s*:\s*([^}|]+)', txt):  # listas divididas em subpáginas
+            txt += '\n' + wiki(sub.strip()); time.sleep(0.5)
+        print('wiki', len(txt), txt.count('Graphic novel list'), repr(txt[txt.find('Graphic novel list'):][:1200]))
         cv = []
         for blk in re.split(r'\{\{\s*Graphic novel list', txt, flags=re.I)[1:]:
             vm = re.search(r'\|\s*VolumeNumber\s*=\s*(\d+)', blk)
