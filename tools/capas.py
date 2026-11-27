@@ -33,9 +33,8 @@ for s in json.load(open('covers/series.json')):
     if s.get('mangadex') and e['mode'] != 'none':
         r = js('https://api.mangadex.org/manga?' + urllib.parse.urlencode({'title': s['mangadex'], 'limit': 5, 'order[relevance]': 'desc'}))
         data = r.get('data') or []
-        if data:
-            mid = data[0]['id']; t = data[0]['attributes']['title']
-            rank = lambda l: {'ja': 0, 'en': 1, 'pt-br': 2}.get(l, 3)
+        rank = lambda l: {'ja': 0, 'en': 1, 'pt-br': 2}.get(l, 3)
+        def covers_of(mid):
             best = {}
             for off in range(0, 400, 100):
                 c = js(f'https://api.mangadex.org/cover?manga[]={mid}&limit=100&offset={off}&order[volume]=asc')
@@ -47,10 +46,18 @@ for s in json.load(open('covers/series.json')):
                     if v not in best or rank(x['attributes'].get('locale')) < rank(best[v][1]): best[v] = (x['attributes']['fileName'], x['attributes'].get('locale'))
                 if len(c.get('data') or []) < 100: break
                 time.sleep(0.5)
+            return best
+        # entre os 5 primeiros resultados, fica com o que tem mais capas de volume (evita versões coloridas por fãs)
+        cand = []
+        for x in data[:5]:
+            cand.append((x, covers_of(x['id']))); time.sleep(0.5)
+        if cand:
+            x, best = max(cand, key=lambda c: len(c[1]))
+            mid = x['id']; t = x['attributes']['title']
             for v, (f, _) in best.items():
                 p = f'{d}/v{v}.jpg'
                 if save(p, f'https://uploads.mangadex.org/covers/{mid}/{f}.512.jpg'): e['vols'][v] = p
-            if e['mode'] == 'chapters':
+            if e['mode'] == 'chapters' and not s.get('wiki'):
                 ag = js(f'https://api.mangadex.org/manga/{mid}/aggregate')
                 cv = []
                 for v, o in (ag.get('volumes') or {}).items():
@@ -61,6 +68,19 @@ for s in json.load(open('covers/series.json')):
                 e['chVol'] = sorted(cv)
             log.append(f"  MangaDex {mid} {t} -> {len(e['vols'])} volumes, {len(e['chVol'])} capitulos mapeados")
         time.sleep(1)
+    if s.get('wiki'):
+        # capítulo -> volume pela lista de capítulos da Wikipédia
+        w = js('https://en.wikipedia.org/w/api.php?' + urllib.parse.urlencode({'action': 'parse', 'page': s['wiki'], 'prop': 'wikitext', 'format': 'json', 'formatversion': 2}))
+        txt = (w.get('parse') or {}).get('wikitext') or ''
+        cv = []
+        for blk in re.split(r'\{\{\s*Graphic novel list', txt, flags=re.I)[1:]:
+            vm = re.search(r'\|\s*VolumeNumber\s*=\s*(\d+)', blk)
+            cl = re.search(r'\|\s*ChapterList\s*=(.*?)(?:\n\s*\|\s*\w+\s*=|\Z)', blk, re.S)
+            if not vm or not cl: continue
+            for ch in re.findall(r'^\s*\*\s*(?:Page|Chapter|Ch\.?)?\s*(\d{1,3}(?:\.\d)?)', cl.group(1), re.M | re.I):
+                cv.append([float(ch), str(int(vm.group(1)))])
+        e['chVol'] = sorted(cv)
+        log.append(f"  Wikipedia {s['wiki']} -> {len(cv)} capitulos mapeados, volumes {len(set(v for _, v in cv))}")
     out[k] = e
 json.dump(out, open('covers/index.json', 'w'), ensure_ascii=False, indent=1)
 open('covers/log.txt', 'w').write('\n'.join(log) + '\n'); print('\n'.join(log))

@@ -1,15 +1,82 @@
 [
-  {"key": "black clover", "anilist": "Black Clover", "mangadex": "Black Clover", "mode": "chapters", "force": true},
-  {"key": "re zero", "anilist": "Re:Zero kara Hajimeru Isekai Seikatsu Daisanshou: Truth of Zero", "mangadex": "", "mode": "none"},
-  {"key": "saint seiya the lost canvas", "anilist": "Saint Seiya: The Lost Canvas - Meiou Shinwa", "mangadex": "Saint Seiya: The Lost Canvas - Meiou Shinwa", "mode": "volumes"},
-  {"key": "saint seiya", "anilist": "Saint Seiya", "mangadex": "", "mode": "none"},
-  {"key": "dragon ball super", "anilist": "Dragon Ball Super", "mangadex": "Dragon Ball Super", "mode": "volumes"},
-  {"key": "dragon ball", "anilist": "Dragon Ball", "mangadex": "", "mode": "none"},
-  {"key": "enen no shouboutai", "anilist": "Enen no Shouboutai", "mangadex": "Enen no Shouboutai", "mode": "volumes"},
-  {"key": "tokyo revengers", "anilist": "Tokyo Revengers", "mangadex": "Tokyo Revengers", "mode": "volumes"},
-  {"key": "chainsaw man", "anilist": "Chainsaw Man", "mangadex": "Chainsaw Man", "mode": "volumes"},
-  {"key": "nana", "anilist": "NANA", "mangadex": "", "mode": "none"},
-  {"key": "death note", "anilist": "Death Note", "mangadex": "", "mode": "none"},
-  {"key": "vagabond", "anilist": "Vagabond", "mangadex": "", "mode": "none"},
-  {"key": "berserk", "anilist": "Berserk", "mangadex": "", "mode": "none"}
+ {
+  "key": "black clover",
+  "anilist": "Black Clover",
+  "mangadex": "Black Clover",
+  "mode": "chapters",
+  "force": true,
+  "wiki": "List of Black Clover chapters"
+ },
+ {
+  "key": "re zero",
+  "anilist": "Re:Zero kara Hajimeru Isekai Seikatsu Daisanshou: Truth of Zero",
+  "mangadex": "",
+  "mode": "none"
+ },
+ {
+  "key": "saint seiya the lost canvas",
+  "anilist": "Saint Seiya: The Lost Canvas - Meiou Shinwa",
+  "mangadex": "The Lost Canvas",
+  "mode": "volumes"
+ },
+ {
+  "key": "saint seiya",
+  "anilist": "Saint Seiya",
+  "mangadex": "",
+  "mode": "none"
+ },
+ {
+  "key": "dragon ball super",
+  "anilist": "Dragon Ball Super",
+  "mangadex": "Dragon Ball Super",
+  "mode": "volumes"
+ },
+ {
+  "key": "dragon ball",
+  "anilist": "Dragon Ball",
+  "mangadex": "",
+  "mode": "none"
+ },
+ {
+  "key": "enen no shouboutai",
+  "anilist": "Enen no Shouboutai",
+  "mangadex": "Enen no Shouboutai",
+  "mode": "volumes"
+ },
+ {
+  "key": "tokyo revengers",
+  "anilist": "Tokyo Revengers",
+  "mangadex": "Tokyo Revengers",
+  "mode": "volumes"
+ },
+ {
+  "key": "chainsaw man",
+  "anilist": "Chainsaw Man",
+  "mangadex": "Chainsaw Man",
+  "mode": "volumes"
+ },
+ {
+  "key": "nana",
+  "anilist": "NANA",
+  "mangadex": "",
+  "mode": "none"
+ },
+ {
+  "key": "death note",
+  "anilist": "Death Note",
+  "mangadex": "",
+  "mode": "none"
+ },
+ {
+  "key": "vagabond",
+  "anilist": "Vagabond",
+  "mangadex": "",
+  "mode": "none"
+ },
+ {
+  "key": "berserk",
+  "anilist": "Berserk",
+  "mangadex": "",
+  "mode": "none"
+ }
 ]
