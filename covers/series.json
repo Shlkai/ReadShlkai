@@ -104,5 +104,11 @@
   "anilist": "Berserk",
   "mangadex": "",
   "mode": "none"
+ },
+ {
+  "key": "bleach",
+  "anilist": "Bleach",
+  "mangadex": "Bleach",
+  "mode": "volumes"
  }
 ]
