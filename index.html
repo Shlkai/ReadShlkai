@@ -205,6 +205,13 @@ body.sidelock { overflow: hidden; }
 @media (max-width: 560px) { .facet { flex-direction: column; align-items: stretch; gap: 4px; } .facet .fl { width: auto; } }
 .filters select { height: 34px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); padding: 0 12px; max-width: 200px; }
 .filters .sp { flex: 1; }
+.perbar { display: flex; gap: 8px; overflow-x: auto; margin: -8px 0 16px; padding: 2px 0 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.perbar::-webkit-scrollbar { display: none; }
+.perbar button { flex: none; height: 32px; padding: 0 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 13px; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; }
+.perbar button small { color: var(--muted); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.perbar button.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.perbar button.on small { color: inherit; }
+.perbar .more { color: var(--muted); }
 
 /* ---------- grade ---------- */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 26px 18px; }
@@ -636,6 +643,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
             <option value="serie">Série e volume</option>
           </select>
         </div>
+        <div class="perbar" id="perBar" role="toolbar" aria-label="Personagens e equipes" hidden></div>
     <div class="serhead" id="serHead" hidden><button class="btn icon ghost" id="serBack" aria-label="Voltar para todas"><svg class="i"><use href="#i-back"/></svg></button><div class="sh-t"><b id="serHeadT"></b><small id="serHeadM"></small></div><button class="btn sm" id="serOff"><svg class="i"><use href="#i-dl"/></svg><span>Salvar série offline</span></button></div>
     <div class="grid" id="grid"></div>
     <div class="gridmore" id="gridMore" hidden aria-hidden="true"></div>
@@ -693,7 +701,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 3</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 4</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -1736,7 +1744,37 @@ async function makeSample() {
 
 /* ---------------- estante ---------------- */
 let F = 'tudo', serie = '', query = '';
-const SEL = { kind: new Set(), pub: new Set(), ser: new Set(), tag: new Set(), st: new Set(), loc: new Set() };
+const SEL = { kind: new Set(), pub: new Set(), ser: new Set(), per: new Set(), tag: new Set(), st: new Set(), loc: new Set() };
+// personagens e equipes: procurados no caminho da pasta, na série e no nome do arquivo (inclusive nomes abreviados dos scans)
+const PERS = [
+  ['Homem-Aranha', 'homem aranha|spider man|amigao da vizinhanca|espetacular aranha|espetacular ha'], ['Miles Morales', 'miles morales'], ['Mulher-Aranha', 'mulher aranha|spider woman|spider gwen|gwen aranha'],
+  ['Venom', 'venom|venomverse|venomverso|venomizados'], ['Carnificina', 'carnificina|carnage'], ['Batman', 'batman|detective comics|detetive comics|dtctvcmcs|cavaleiro das trevas'],
+  ['Robin', 'robin'], ['Asa Noturna', 'asa noturna|nightwing|asntrn'], ['Batgirl', 'batgirl|btgrl'], ['Coringa', 'coringa|joker'], ['Arlequina', 'arlequina|harley quinn'],
+  ['Mulher-Gato', 'mulher gato|catwoman'], ['Capuz Vermelho', 'capuz vermelho|red hood'], ['Superman', 'superman|super homem|action comics'], ['Supergirl', 'supergirl'],
+  ['Mulher-Maravilha', 'mulher maravilha|wonder woman|mlhr mrvlh'], ['Flash', 'flash'], ['Lanterna Verde', 'lanterna verde|lanternas verdes|green lantern|lntrns vrd|lntrn vrd|lntvrd'],
+  ['Aquaman', 'aquaman'], ['Shazam', 'shazam'], ['Ciborgue', 'ciborgue|cyborg'], ['Arqueiro Verde', 'arqueiro verde|green arrow'], ['Constantine', 'constantine|hellblazer'],
+  ['Monstro do Pântano', 'monstro do pantano|swamp thing'], ['Adão Negro', 'adao negro|black adam'], ['Thor', 'thor|deus do trovao'], ['Loki', 'loki|crocodiloki'],
+  ['Hulk', '(?<!mulher )(?<!she )hulk'], ['Mulher-Hulk', 'mulher hulk|she hulk'], ['Homem de Ferro', 'homem de ferro|iron man'], ['Capitão América', 'capitao america|capamer|captain america'],
+  ['Capitã Marvel', 'capita marvel|captain marvel'], ['Ms. Marvel', 'ms marvel'], ['Wolverine', 'wolverine'], ['Deadpool', 'deadpool'], ['Demolidor', 'demolidor|daredevil'],
+  ['Justiceiro', 'justiceiro|punisher'], ['Pantera Negra', 'pantera negra|black panther'], ['Doutor Estranho', 'doutor estranho|dr estranho|doctor strange'],
+  ['Surfista Prateado', 'surfista prateado|silver surfer'], ['Thanos', 'thanos'], ['Galactus', 'galactus|galacta|o devorador'], ['Magneto', 'magneto'], ['Visão', 'visao'],
+  ['Feiticeira Escarlate', 'feiticeira escarlate|scarlet witch'], ['Shang-Chi', 'shang chi|mestre do kung fu'], ['Motoqueiro Fantasma', 'motoqueiro fantasma|ghost rider|espiritos da vinganca'],
+  ['Senhor das Estrelas', 'senhor das estrelas|star lord'], ['Drácula', 'dracula'], ['Invencível', 'invencivel|invincible'], ['Spawn', 'spawn'], ['Hellboy', 'hellboy'], ['Conan', 'conan'], ['Sandman', 'sandman'], ['Tartarugas Ninja', 'tartarugas ninja|tmnt'], ['Transformers', 'transformers'], ['Homem-Animal', 'homem animal|animal man'],
+  ['X-Men', 'x men|xmen|x m|xmdahm|fenix negra'], ['X-Force', 'x force'], ['Vingadores', 'vingadores|avengers'], ['Jovens Vingadores', 'jovens vingadores|young avengers'],
+  ['Supremos', 'supremos|ultimates'], ['Guardiões da Galáxia', 'guardioes da galaxia|guardians of the galaxy'], ['Quarteto Fantástico', 'quarteto fantastico|fantastic four'],
+  ['Illuminati', 'illuminati'], ['Esquadrão Supremo', 'esquadrao supremo'], ['Defensores', 'defensores|defenders'], ['Inumanos', 'inumanos|inhumans'], ['Eternos', 'eternos'],
+  ['Liga da Justiça', 'liga da justica|justice league'], ['Titãs', 'titas|titans|ttns'], ['Esquadrão Suicida', 'esquadrao suicida|suicide squad'],
+  ['Sociedade da Justiça', 'sociedade da justica|justice society'], ['Patrulha do Destino', 'patrulha do destino|doom patrol']
+].map(([n, re]) => [n, new RegExp(String.raw`(?:^|\s)(?:${re})(?=\s|$)`)]);
+const perMemo = new WeakMap();
+function persOf(b) {
+  if (b.kind !== 'hq') return [];
+  const key = (b.path || '') + '|' + (b.series || '') + '|' + (b.title || '') + '|' + (b.source?.name || '');
+  const m = perMemo.get(b); if (m && m.k === key) return m.v;
+  const hay = ' ' + kNorm(key.replace(/\|/g, ' ')) + ' ';
+  const v = PERS.filter(([, re]) => re.test(hay)).map(([n]) => n);
+  perMemo.set(b, { k: key, v }); return v;
+}
 const openFacets = new Set(['pub', 'ser']); const fAll = new Set(), fQ = {};
 const clearSel = () => { Object.values(SEL).forEach(x => x.clear()); fAll.clear(); for (const k in fQ) delete fQ[k]; };
 // nome de série vindo de pasta: "(2) X-Men (Novos X-men) - 114-156" -> nome limpo + detalhe
@@ -1909,6 +1947,7 @@ function renderGrid() {
     { k: 'kind', t: 'Tipo', of: b => [b.kind], lab: v => ({ manga: 'Mangás', hq: 'HQs', livro: 'Livros' })[v], show: F === 'tudo' || F === 'fav' },
     { k: 'pub', t: 'Editora', of: b => [pubOf(b)], lab: v => v || 'Sem editora', search: 'editora', top: 8 },
     { k: 'ser', t: 'Série', of: b => [b.series || ''], lab: v => v || 'Volumes avulsos', search: 'série', top: 12, thumbs: true },
+    { k: 'per', t: 'Personagem e equipe', of: persOf, lab: v => v, search: 'personagem', top: 12, show: F === 'hq' || F === 'tudo' || F === 'fav' },
     { k: 'tag', t: 'Categoria', of: b => b.tags || [], lab: v => v },
     { k: 'st', t: 'Leitura', of: b => [state(b)], lab: v => ({ novos: 'Não lidos', lendo: 'Lendo', lidos: 'Lidos' })[v], order: ['lendo', 'novos', 'lidos'] },
     { k: 'loc', t: 'Ler offline', of: b => [saved(b) ? 'salvo' : b.remote ? 'nuvem' : 'aparelho'], lab: v => ({ salvo: 'Salvos para offline', aparelho: 'Baixados (temporário)', nuvem: 'Só no Drive' })[v], order: ['salvo', 'aparelho', 'nuvem'] }
@@ -1925,7 +1964,7 @@ function renderGrid() {
     let vals = [...cnt.keys()];
     if (vals.length < 2 && !SEL[f.k].size) continue;
     vals.sort(f.order ? (a, b) => f.order.indexOf(a) - f.order.indexOf(b) : f.k === 'ser' ? (a, b) => (a === '') - (b === '') || natural(a, b) : (a, b) => (a === '') - (b === '') || cnt.get(b) - cnt.get(a) || natural(a, b));
-    SEL[f.k].forEach(v => { active++; pills.push(`<button class="pill" data-unf="${f.k}" data-v="${esc(v)}">${esc(f.k === 'ser' && v ? serParts(v).name : f.lab(v))}<svg class="i"><use href="#i-x"/></svg></button>`); });
+    SEL[f.k].forEach(v => { active++; if (f.k === 'per' && F === 'hq') return; pills.push(`<button class="pill" data-unf="${f.k}" data-v="${esc(v)}">${esc(f.k === 'ser' && v ? serParts(v).name : f.lab(v))}<svg class="i"><use href="#i-x"/></svg></button>`); });
     // marcados primeiro; o resto na ordem do grupo
     vals = [...vals.filter(v => SEL[f.k].has(v)), ...vals.filter(v => !SEL[f.k].has(v))];
     const q = (fQ[f.k] || '').trim().toLowerCase();
@@ -1953,6 +1992,12 @@ function renderGrid() {
   $('#side').scrollTop = keepScroll; $('#facetBox').scrollTop = keepBox;
   if (hadFocus) { const i = document.getElementById(hadFocus); if (i) { i.focus({ preventScroll: true }); i.setSelectionRange(i.value.length, i.value.length); } }
   $('#pills').innerHTML = pills.join('');
+  // atalhos de personagem/equipe na aba HQs (deslizar para o lado)
+  { const pc = new Map(); if (F === 'hq' && !q) base.forEach(b => { if (pass(b, 'per')) persOf(b).forEach(v => pc.set(v, (pc.get(v) || 0) + 1)); });
+    const top = [...pc.keys()].sort((a, b) => pc.get(b) - pc.get(a) || natural(a, b));
+    const sel = [...SEL.per], show = [...sel, ...top.filter(v => !SEL.per.has(v))].slice(0, Math.max(18, sel.length));
+    $('#perBar').hidden = F !== 'hq' || !!q || top.length < 2;
+    $('#perBar').innerHTML = $('#perBar').hidden ? '' : `<button data-per="" class="${SEL.per.size ? '' : 'on'}">Todos</button>` + show.map(v => `<button data-per="${esc(v)}" class="${SEL.per.has(v) ? 'on' : ''}" aria-pressed="${SEL.per.has(v)}">${esc(v)} <small>${pc.get(v) || 0}</small></button>`).join('') + (top.length > show.length ? `<button class="more" data-per-more>Mais ${top.length - show.length}…</button>` : ''); }
   $('#fCount').hidden = !active; $('#fCount').textContent = active; $('#fClear').hidden = !active;
   serie = SEL.ser.size === 1 ? [...SEL.ser][0] : '';
   let list = base.filter(b => pass(b));
@@ -2068,6 +2113,12 @@ $('#facetBox').addEventListener('click', e => {
   const le = e.target.closest('[data-less]'); if (le) { fAll.delete(le.dataset.less); render(); le.closest('.fset')?.scrollIntoView({ block: 'nearest' }); }
 });
 $('#pills').addEventListener('click', e => { const p = e.target.closest('[data-unf]'); if (!p) return; SEL[p.dataset.unf].delete(p.dataset.v); render(); });
+$('#perBar').addEventListener('click', e => {
+  const m = e.target.closest('[data-per-more]'); if (m) { openFacets.add('per'); fAll.add('per'); render(); $('#sideBtn').click(); return; }
+  const p = e.target.closest('[data-per]'); if (!p) return;
+  const v = p.dataset.per; if (!v) SEL.per.clear(); else if (SEL.per.has(v)) SEL.per.delete(v); else { SEL.per.clear(); SEL.per.add(v); }
+  SEL.ser.clear(); render(); scrollTo({ top: Math.min(scrollY, $('#libSec').offsetTop - 70), behavior: 'smooth' });
+});
 $('#serBack').onclick = () => { SEL.ser.clear(); render(); };
 $('#serOff').onclick = () => serie && saveSeriesOffline(books.filter(x => x.series === serie).sort((a, b) => (+a.volume || 0) - (+b.volume || 0)));
 $('#grid').addEventListener('click', e => { const sc = e.target.closest('[data-series]'); if (sc) { SEL.ser.clear(); SEL.ser.add(sc.dataset.series); render(); $('#libSec').scrollIntoView({ block: 'start' }); } });
