@@ -109,6 +109,7 @@
   "key": "bleach",
   "anilist": "Bleach",
   "mangadex": "Bleach",
-  "mode": "volumes"
+  "mode": "volumes",
+  "force": true
  }
 ]
