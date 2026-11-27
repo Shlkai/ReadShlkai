@@ -1,4 +1,4 @@
-black clover: AniList 114652 Black Clover -> ok
+black clover: AniList 86123 Black Clover -> ok
   MangaDex e7eabe96-aa17-476f-b431-2497d5e9d060 {'ja-ro': 'Black Clover'} -> 39 volumes, 0 capitulos mapeados
   Wikipedia List of Black Clover chapters -> 390 capitulos mapeados, volumes 38
 re zero: AniList 87259 Re:Zero kara Hajimeru Isekai Seikatsu: Dai-3 Shou - Truth of Zero -> ok
@@ -22,4 +22,4 @@ death note: AniList 30021 DEATH NOTE -> ok
 vagabond: AniList 30656 Vagabond -> ok
 berserk: AniList 30002 Berserk -> ok
 bleach: AniList 30012 BLEACH -> ok
-  MangaDex 239d6260-d71f-43b0-afff-074e3619e3de {'en': 'Bleach'} -> 74 volumes, 0 capitulos mapeados
+  Drive -> 0 de 26 capas da 1a pagina
