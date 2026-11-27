@@ -716,7 +716,7 @@ button.tag:hover { color: var(--ink); border-color: var(--muted); }
 
 <!-- Configurações -->
 <dialog id="setDlg" class="sheet">
-  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 18</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="dh"><h3>Configurações</h3><small class="appver" title="Versão do app">versão 26.11 · 19</small><button class="btn icon ghost" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="db">
     <div class="group">
       <h4>Aparência</h4>
@@ -943,8 +943,29 @@ fetch('covers/index.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : nu
 // mangá por volume (pasta com "Volume 01" ou série marcada como volumes nas capas) diz Vol., capítulo avulso diz Cap.
 function unitOf(b) { return b && b.kind === 'manga' && !/\b(vol|volume|tomo)\b/i.test(b.title || '') && (sciOf(b) || {}).mode !== 'volumes' ? 'Cap. ' : 'Vol. '; }
 function unitsOf(l) { return l.some(b => unitOf(b) === 'Cap. ') ? (l.some(b => unitOf(b) === 'Vol. ') ? 'capítulos/volumes' : 'capítulos') : 'volumes'; }
+// capas das HQs tiradas da 1ª página de cada arquivo no Drive (covers/hq/index.json) + trocas por capa oficial (hqfix em covers/index.json)
+let HQC = {}, HQP = {}, HQB = new Set();
+function hqLoad(j) { HQC = j.files || {}; HQP = j.pick || {}; HQB = new Set(j.bad || []); hqMemo.clear(); }
+const hqMemo = new Map();
+try { hqLoad(JSON.parse(localStorage.getItem('shikai.hqc') || '{}') || {}); } catch (e) {}
+fetch('covers/hq/index.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).then(j => { if (!j || !j.files) return; const k = { files: j.files, pick: j.pick, bad: j.bad }; hqLoad(k); try { localStorage.setItem('shikai.hqc', JSON.stringify(k)); } catch (e) {} if (typeof scheduleRender === 'function') scheduleRender(); }).catch(() => {});
+function hqId(b) { return b && b.kind !== 'manga' && b.source?.type === 'drive' ? b.source.fileId : ''; }
+// HQ cuja 1ª página não é capa (créditos do scan, página de dentro) e sem capa certa: usa a capa geral da série com o número por cima
+function hqBad(b) { const id = hqId(b); return !!id && HQB.has(id) && !HQP[id] && !SCI.hqfix?.[id]; }
+function hqOwn(b) { const id = hqId(b); if (!id) return ''; return SCI.hqfix?.[id] || HQP[id] || (HQB.has(id) ? '' : b.cover ? '' : HQC[id] || ''); }
+function hqSeriesCover(b) {
+  const k = b.series || b.title; if (hqMemo.has(k) && hqMemo.get(k).n === books.length) return hqMemo.get(k).u;
+  const l = books.filter(x => (x.series || x.title) === k && !hqBad(x)).sort((x, y) => (+x.volume || 0) - (+y.volume || 0));
+  let u = ''; for (const x of l) { u = hqOwn(x) || (x.cover ? cover(x) : '') || x.thumb || ''; if (u) break; }
+  hqMemo.set(k, { n: books.length, u }); return u;
+}
+function hqFor(b) {
+  if (!hqId(b)) return '';
+  return hqBad(b) ? hqSeriesCover(b) : hqOwn(b);
+}
 function sciOf(b) { return b && b.kind === 'manga' ? SCI[kNorm(seriesName(b))] || null : null; }
 function webFor(b) {
+  const h = hqFor(b); if (h) return h;
   const e = sciOf(b); if (!e) return '';
   if (b.cover && !e.force) return '';
   const n = parseFloat(b.volume); let v = '';
@@ -2072,7 +2093,7 @@ function recommend(n) {
 // capa do cartão; quando é a capa geral da obra (volume sem capa própria), mostra o número por cima
 function coverArt(b) {
   const u = cover(b); if (!u) return phCover(b);
-  const e = sciOf(b), over = e?.main && u === e.main && b.volume ? `<span class="volover">${e.mode === 'chapters' ? 'Cap.' : 'Vol.'} ${esc(String(b.volume))}</span>` : '';
+  const e = sciOf(b), over = (e?.main && u === e.main || hqBad(b)) && b.volume ? `<span class="volover">${e?.mode === 'chapters' ? 'Cap.' : 'Vol.'} ${esc(String(b.volume))}</span>` : '';
   return `<img src="${u}" alt="" loading="lazy">${over}`;
 }
 function bookCard(b) {
@@ -2291,6 +2312,10 @@ function renderGrid() {
       items.push({ vh: { v, url: (v && sce.vols?.[v]) || sce.main || '', a: Math.min(...nums), z: Math.max(...nums), n: l.length } });
       l.forEach(b => items.push({ b, ch: true }));
     }
+  } else if (serie && !q && list[0]?.kind !== 'manga' && list.some(hqBad) && hqSeriesCover(list[0])) {
+    // HQ com edições sem capa: capa geral da série no topo e essas edições em blocos numerados (mesmo jeito do Black Clover)
+    const nums = list.map(b => parseFloat(b.volume)).filter(n => !isNaN(n));
+    items = [{ vh: { v: '', obra: cleanTitle(serParts(serie).name), url: hqSeriesCover(list[0]), a: Math.min(...nums), z: Math.max(...nums), n: list.length } }, ...list.map(b => ({ b, ch: hqBad(b), vol: true }))];
   } else if (sce && sce.main && list.some(b => cover(b) === sce.main)) {
     // obra em volumes sem todas as capas: mesmo jeito do Black Clover, capa da obra no topo e os volumes sem capa em blocos numerados
     const nums = list.map(b => parseFloat(b.volume)).filter(n => !isNaN(n));
