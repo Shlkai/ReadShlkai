@@ -12,9 +12,9 @@ jobs:
     timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get install -y -qq poppler-utils libarchive-tools imagemagick >/dev/null
+      - run: sudo apt-get install -y -qq poppler-utils libarchive-tools imagemagick p7zip-full p7zip-rar mupdf-tools >/dev/null
       - run: python3 tools/hq.py
-        env: { MINUTES: '${{ inputs.minutes }}' }
+        env: { MINUTES: '${{ inputs.minutes }}', TRIES: '3' }
       - if: always()
         run: |
           git config user.name "shikai-capas"

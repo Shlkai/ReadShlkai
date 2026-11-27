@@ -34,29 +34,43 @@ def nat(s): return [int(t) if t.isdigit() else t.lower() for t in re.split(r'(\d
 def shrink(src, dst):
     r = subprocess.run(['convert', src + '[0]', '-resize', '300x450>', '-strip', '-quality', '78', dst], capture_output=True)
     return r.returncode == 0 and os.path.exists(dst) and os.path.getsize(dst) > 2000
+def first_img(a, tmp):
+    r = subprocess.run(['bsdtar', '-tf', a], capture_output=True)
+    names = sorted([n for n in r.stdout.decode('utf-8', 'replace').split('\n') if IMG.search(n) and '__MACOSX' not in n], key=nat)
+    if names:
+        subprocess.run(['bsdtar', '-xf', a, '-C', tmp, names[0]], capture_output=True)
+        p = os.path.join(tmp, names[0])
+        if os.path.exists(p) and os.path.getsize(p) > 2000: return p, ''
+    # 7-Zip lê RAR5 e arquivos que o bsdtar recusa
+    r = subprocess.run(['7z', 'l', '-slt', '-ba', a], capture_output=True)
+    names = sorted([l[7:] for l in r.stdout.decode('utf-8', 'replace').split('\n') if l.startswith('Path = ') and IMG.search(l)], key=nat)
+    if names:
+        os.makedirs(tmp + '/x', exist_ok=True)
+        subprocess.run(['7z', 'e', '-y', '-o' + tmp + '/x', a, names[0]], capture_output=True)
+        xs = [os.path.join(tmp, 'x', x) for x in os.listdir(tmp + '/x')]
+        if xs and os.path.getsize(xs[0]) > 2000: return xs[0], ''
+    return None, (r.stderr.decode('utf-8', 'replace')[-120:] or 'sem imagens na lista')
 def cover(f):
-    tmp = tempfile.mkdtemp(); a = tmp + '/a'; dst = f"{OUT}/{f['id']}.jpg"
+    tmp = tempfile.mkdtemp(); a = tmp + '/a'; dst = f"{OUT}/{f['id']}.jpg"; why = ''
     try:
         pdf = f['name'].lower().endswith('.pdf')
-        for rng in (['bytes=0-8000000', None] if not pdf else ['bytes=0-6000000', None]):
+        for rng in ('bytes=0-8000000', None):
             b = get(DL.format(f['id']), rng)
-            if not b: continue
+            if not b: why = 'download falhou'; continue
             open(a, 'wb').write(b)
-            if pdf:
-                if b[:5] != b'%PDF-': return 'nao e pdf (%r)' % b[:20]
+            if b[:15].lstrip().startswith(b'<'): return 'Drive mandou pagina HTML (%d bytes)' % len(b)
+            if pdf or b[:5] == b'%PDF-':
                 subprocess.run(['pdftoppm', '-f', '1', '-l', '1', '-jpeg', '-scale-to', '900', a, tmp + '/p'], capture_output=True)
                 pg = [x for x in os.listdir(tmp) if x.startswith('p')]
+                if not pg: subprocess.run(['mutool', 'draw', '-o', tmp + '/p1.png', '-w', '900', a, '1'], capture_output=True); pg = [x for x in os.listdir(tmp) if x.startswith('p')]
                 if pg and shrink(tmp + '/' + pg[0], dst): return None
+                why = 'pdf sem 1a pagina (%d bytes, %r)' % (len(b), b[:8])
             else:
-                r = subprocess.run(['bsdtar', '-tf', a], capture_output=True)
-                names = sorted([n for n in r.stdout.decode('utf-8', 'replace').split('\n') if IMG.search(n) and '__MACOSX' not in n], key=nat)
-                if names:
-                    subprocess.run(['bsdtar', '-xf', a, '-C', tmp, names[0]], capture_output=True)
-                    p = os.path.join(tmp, names[0])
-                    if os.path.exists(p) and os.path.getsize(p) > 2000 and shrink(p, dst): return None
-            if rng is None: break
-            if len(b) < 8000000 and rng: break  # arquivo inteiro já veio
-        return 'sem imagem'
+                p, why = first_img(a, tmp)
+                if p and shrink(p, dst): return None
+                why = '%s (%d bytes, %r)' % (why, len(b), b[:8])
+            if rng and len(b) < 8000000: break  # arquivo inteiro já veio
+        return why or 'sem imagem'
     finally: shutil.rmtree(tmp, ignore_errors=True)
 files = []
 crawl(ROOT, [], files)
@@ -73,7 +87,7 @@ def work(f):
         else:
             fl = idx['fail'].setdefault(f['id'], {'n': 0}); fl['n'] += 1; fl['err'] = err; fl['name'] = f['path'] + '/' + f['name']; print('  falhou', f['name'], err)
         if done[0] % 100 == 0: json.dump(idx, open(IDX, 'w'), ensure_ascii=False, indent=0); print('  ...', len(idx['files']), flush=True)
-todo = [f for f in files if f['id'] not in idx['files'] and idx['fail'].get(f['id'], {}).get('n', 0) < 2]
+todo = [f for f in files if f['id'] not in idx['files'] and idx['fail'].get(f['id'], {}).get('n', 0) < int(os.environ.get('TRIES', '2'))]
 print(len(todo), 'a fazer')
 with ThreadPoolExecutor(8) as ex: list(ex.map(work, todo))
 json.dump(idx, open(IDX, 'w'), ensure_ascii=False, indent=0)
